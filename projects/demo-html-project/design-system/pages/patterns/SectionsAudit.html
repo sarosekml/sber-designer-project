@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Patterns" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аудит разделов — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/ds-nav.css">
+<link rel="stylesheet" href="../../styles/ds-toc.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+body{margin:0;font-family:var(--font-text),system-ui,sans-serif;color:var(--text-primary);background:var(--bg-page);background-attachment:fixed;}
+.page{max-width:1460px;margin:0 auto;padding:clamp(40px,7vw,96px) clamp(24px,4vw,56px) 140px;}
+.masthead{border-bottom:1px solid var(--border-light);padding-bottom:30px;}
+.masthead .meta{font:var(--type-body-xs);color:var(--text-inactive);display:flex;gap:24px;margin:0 0 22px;flex-wrap:wrap;}
+.masthead .meta b{color:var(--text-secondary);font-weight:600;}
+.eyebrow{font:var(--type-button-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin:0 0 14px;}
+.masthead h1{font:var(--type-h1);margin:0 0 14px;color:var(--text-black);}
+@media(max-width:600px){.masthead h1{font-size:40px;line-height:48px;}}
+.masthead p.lead{font:var(--type-body-l);color:var(--text-secondary);margin:0;max-width:70ch;text-wrap:pretty;}
+.crumb{display:inline-flex;align-items:center;gap:7px;font:var(--type-body-s);color:var(--text-inactive);text-decoration:none;margin-bottom:20px;}
+.crumb:hover{color:var(--primary);}
+a{color:var(--link);} a:hover{color:var(--link-dark);}
+.section{margin-top:76px;}
+.section>h2{font:var(--type-h3-strong);margin:0 0 8px;color:var(--text-black);}
+.section>p.desc{font:var(--type-body-m);color:var(--text-secondary);margin:0 0 28px;max-width:82ch;text-wrap:pretty;}
+.panel{background:var(--bg-tile);border:1px solid var(--border-light);border-radius:16px;padding:32px 34px;}
+.panel+.panel{margin-top:16px;}
+.subhead{font:var(--type-body-m-strong);color:var(--text-black);margin:32px 0 14px;}
+.subhead:first-child{margin-top:0;}
+ul.bullets{margin:0 0 0 2px;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+ul.bullets li{position:relative;padding-left:18px;font:var(--type-body-m);color:var(--text-secondary);}
+ul.bullets li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--text-inactive);}
+ul.bullets li b{color:var(--text-primary);}
+code.tok{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;color:var(--primary);background:var(--primary-bg);padding:1px 6px;border-radius:5px;}
+
+/* ---- легенда ---- */
+.legend{display:flex;gap:26px;flex-wrap:wrap;margin:0 0 18px;font:var(--type-body-s);color:var(--text-secondary);align-items:center;}
+.legend .it{display:inline-flex;align-items:center;gap:8px;}
+
+/* ---- матрица ---- */
+.matrix-wrap{background:var(--bg-tile);border:1px solid var(--border-light);border-radius:16px;overflow:auto;max-height:78vh;}
+table.matrix{border-collapse:separate;border-spacing:0;width:100%;font:var(--type-body-s);}
+.matrix th,.matrix td{border-bottom:1px solid var(--border-light);padding:8px 10px;white-space:nowrap;}
+.matrix thead th{position:sticky;top:0;z-index:3;background:var(--bg-tile);font:600 12px/1.3 var(--font-text),sans-serif;color:var(--text-secondary);text-align:center;vertical-align:bottom;padding:12px 6px;border-bottom:1px solid var(--border-primary);}
+.matrix thead th.name{text-align:left;padding-left:18px;z-index:4;}
+.matrix thead th .v{writing-mode:vertical-rl;transform:rotate(180deg);display:inline-block;max-height:150px;line-height:1.1;}
+.matrix td.name{position:sticky;left:0;z-index:2;background:var(--bg-tile);font:var(--type-body-s);font-weight:600;color:var(--text-primary);padding-left:18px;}
+.matrix td.name a{color:var(--text-primary);text-decoration:none;}
+.matrix td.name a:hover{color:var(--primary);}
+.matrix thead th.name{left:0;}
+.matrix tr.cat-row td{background:color-mix(in srgb,var(--primary) 6%,#fff);font:600 11px/1 var(--font-text),sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--primary-dark);padding:9px 18px;position:sticky;left:0;}
+.matrix td.c{text-align:center;}
+.mark{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font:600 12px/1 var(--font-text),sans-serif;cursor:default;}
+.mark.ok{background:color-mix(in srgb,var(--success) 14%,#fff);color:var(--success-dark,#1E7B34);}
+.mark.syn{background:color-mix(in srgb,var(--warning,#F2A600) 16%,#fff);color:#9A6B00;}
+.mark.no{background:var(--c-cgrey-50,#F0F3F3);color:var(--text-inactive);}
+.matrix td.uniq{white-space:normal;min-width:260px;max-width:420px;}
+.uchip{display:inline-block;font:12px/1.5 var(--font-text),sans-serif;color:var(--text-secondary);background:var(--c-cgrey-50,#F0F3F3);border:1px solid var(--border-light);border-radius:999px;padding:1px 9px;margin:2px 3px 2px 0;}
+.uchip.var{background:color-mix(in srgb,var(--primary) 8%,#fff);border-color:color-mix(in srgb,var(--primary) 22%,#fff);color:var(--primary-dark);}
+.uchip.beh{background:color-mix(in srgb,#4C6FFF 8%,#fff);border-color:color-mix(in srgb,#4C6FFF 20%,#fff);color:#3554CC;}
+.matrix tr.wip td{color:var(--text-inactive);}
+.matrix tr.wip td.name{font-weight:400;}
+.stat{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 0;}
+.stat .card{background:var(--bg-tile);border:1px solid var(--border-light);border-radius:12px;padding:14px 20px;min-width:150px;}
+.stat .num{font:var(--type-h4-strong);color:var(--text-black);}
+.stat .lbl{font:var(--type-body-xs);color:var(--text-inactive);margin-top:2px;}
+
+/* ---- предложения ---- */
+.tpl-list{counter-reset:tpl;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;max-width:760px;}
+.tpl-list li{counter-increment:tpl;display:flex;gap:14px;align-items:baseline;font:var(--type-body-m);color:var(--text-secondary);border:1px solid var(--border-light);border-radius:10px;padding:10px 16px;background:var(--bg-tile);}
+.tpl-list li::before{content:counter(tpl,decimal-leading-zero);font:600 12px/1 ui-monospace,Menlo,monospace;color:var(--primary);flex:none;}
+.tpl-list li b{color:var(--text-primary);}
+.tpl-list li .opt{margin-left:auto;font:var(--type-body-xs);color:var(--text-inactive);flex:none;}
+table.map{border-collapse:collapse;width:100%;font:var(--type-body-s);}
+.map th,.map td{border-bottom:1px solid var(--border-light);padding:9px 14px;text-align:left;vertical-align:top;}
+.map th{font:600 12px/1.3 var(--font-text),sans-serif;color:var(--text-secondary);}
+.map td b{color:var(--text-primary);}
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="crumb" href="../../refs/imported-index.html">← Дизайн-система</a>
+  <header class="masthead">
+    <p class="eyebrow">Правила и паттерны</p>
+    <h1>Аудит разделов документации</h1>
+    <p class="meta"><span>Тип: <b>Аудит / RFC</b></span><span>Обновлено: <b>08.07.2026</b></span><span>Покрытие: <b>30 страниц компонентов</b></span></p>
+    <p class="lead">Сводная матрица разделов на страницах компонентов. Контракт из 12 канонических h2 внедрён на всех страницах: агент-сборщик может обращаться к разделу по фиксированному имени («открой раздел „Использование“») на любой странице. Контракт зафиксирован в CLAUDE.md и specs/_TEMPLATE.md.</p>
+  </header>
+
+  <!-- MATRIX -->
+  <section class="section" data-screen-label="Matrix">
+    <h2>Сводная таблица</h2>
+    <p class="desc">Миграция выполнена 08.07.2026: синонимы переименованы, уникальные разделы понижены до h3 внутри контейнеров «Варианты» и «Поведение», недостающие разделы добавлены (в т.ч. заглушками «Не применимо»). Матрица построена по актуальным h2 страниц. «Бэклог» — допустимый блок вне контракта.</p>
+    <div class="legend">
+      <span class="it"><span class="mark ok">✓</span> есть, название совпадает</span>
+      <span class="it"><span class="mark syn">≈</span> есть под другим названием</span>
+      <span class="it"><span class="mark no">—</span> раздела нет</span>
+      <span class="it"><span class="uchip var">…</span> кандидат в «Варианты»</span>
+      <span class="it"><span class="uchip beh">…</span> кандидат в «Поведение»</span>
+      <span class="it"><span class="uchip">…</span> прочее / решить отдельно</span>
+    </div>
+    <div class="matrix-wrap"><table class="matrix" id="matrix"></table></div>
+    <div class="stat" id="stat"></div>
+  </section>
+
+  <!-- PROPOSAL -->
+  <section class="section" data-screen-label="Proposal">
+    <h2>Предложение: единый шаблон страницы</h2>
+    <p class="desc">Так эту задачу решают зрелые дизайн-системы: у Carbon (IBM) каждая страница компонента — это фиксированные вкладки Usage / Style / Code / Accessibility, у Material — Overview / Specs / Guidelines / Accessibility. Набор разделов жёстко одинаковый, а всё уникальное живёт <b>внутри</b> разделов как подзаголовки. Уникальные разделы не удаляются — они понижаются до h3 внутри канонического h2.</p>
+
+    <div class="panel">
+      <p class="subhead">Канонический набор разделов (фиксированный порядок)</p>
+      <ol class="tpl-list">
+        <li><b>Конструктор</b> — интерактивный playground</li>
+        <li><b>Использование</b> — когда использовать / когда не использовать; сравнение с соседними компонентами («SegmentControl vs Tab») — подраздел здесь</li>
+        <li><b>Анатомия</b> — схема с маркерами</li>
+        <li><b>Варианты</b> — все оси конфигурации: типы, тоны, формы, ориентация, режимы («С бейджем», «Встроенный вариант», «Split Button», toggle…) — каждый как h3 <span class="opt">новый раздел</span></li>
+        <li><b>Размеры</b> — размерный ряд и redline-схемы</li>
+        <li><b>Контент</b> — правила текста, иконографики, переполнение текста</li>
+        <li><b>Поведение</b> — позиционирование, авто-разворот, стек, анимация, тайминги, адаптивность <span class="opt">новый раздел, опционален</span></li>
+        <li><b>Состояния</b> — Default / Hover / Pressed / Disabled / Error…</li>
+        <li><b>Доступность</b> — ARIA, клавиатура, область клика</li>
+        <li><b>Типографика</b> — используемые токены <code class="tok">--type-*</code></li>
+        <li><b>Цвета</b> — используемые семантические токены</li>
+        <li><b>Для разработчиков</b> — хендофф-пакет</li>
+      </ol>
+    </div>
+
+    <div class="panel">
+      <p class="subhead">Правила шаблона</p>
+      <ul class="bullets">
+        <li><b>Имена h2 — контракт.</b> Только слова из списка выше, без вариаций. Бейджи («Новое», «Расширение») — отдельным элементом внутри h2, не частью текста заголовка.</li>
+        <li><b>Обязательные разделы присутствуют всегда.</b> Если раздел неприменим (например, «Типографика» у IconButton — текста нет), он всё равно существует и содержит одну строку: «Не применимо: …». Агент никогда не получает «раздел не найден».</li>
+        <li><b>«Варианты» и «Поведение» — контейнеры.</b> Уникальные разделы конкретного компонента становятся их h3-подразделами. Список h3 свободный — контракт только на уровне h2.</li>
+        <li><b>Синонимы переименовываются</b>, контент не трогаем: «Когда использовать» → «Использование», «Текстовка» → «Контент», «Доступность и область клика» → «Доступность» (область клика — h3 внутри).</li>
+        <li><b>Спеки повторяют шаблон.</b> В <code class="tok">specs/&lt;Имя&gt;.md</code> — те же 12 разделов в том же порядке; агент-сборщик читает спеку, а не страницу.</li>
+        <li><b>«Что предлагаем добавить» / «Предложение»</b> — не раздел документации, а рабочий бэклог. Выносится в конец страницы отдельным блоком вне контракта (или в общий бэклог-файл).</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <p class="subhead">Куда попадают текущие «уникальные» разделы</p>
+      <table class="map">
+        <thead><tr><th>Было (примеры)</th><th>Станет</th></tr></thead>
+        <tbody>
+          <tr><td>«С бейджем», «Встроенный вариант», «Режим-переключатель», «Типы», «Тоны», «Форма», «Ориентация», «Стиль», «Split Button», «Ведущие элементы», «Бейдж», «Иконка», «Fullwidth»</td><td><b>Варианты</b> → h3</td></tr>
+          <tr><td>«Позиционирование и авто-разворот», «Стек и переполнение», «Анимация», «Тайминги», «Адаптивность», «Переполнение и перенос», «Триггеры и тайминги», «Поведение и ограничения», «Loader», «Загрузка и асинхронное действие»</td><td><b>Поведение</b> → h3</td></tr>
+          <tr><td>«Когда использовать», «Описание работы», «SegmentControl, Tab и ButtonGroup — в чём разница», «ToastBar и ToastLoader — в чём разница»</td><td><b>Использование</b> → h3</td></tr>
+          <tr><td>«Правила», «Рекомендации», «Корнер-кейсы»</td><td>распределить: контентные правила → <b>Контент</b>, поведенческие → <b>Поведение</b>, композиционные → <b>Использование</b></td></tr>
+          <tr><td>«Название чекбокса», «Заголовок группы», «Переполнение текста», «Label», «Helper»</td><td><b>Контент</b> → h3</td></tr>
+          <tr><td>«Отступы», «Спецификация», «Токены»</td><td><b>Размеры</b> (redline) и <b>Цвета</b> (токены) → h3</td></tr>
+          <tr><td>«В тулбаре», «Пример использования», «Свитч в строке настроек», «Используется в компонентах», «Композиция с родителем», «Компоненты подкачки поповера»</td><td><b>Использование</b> → h3 «Примеры в интерфейсе»</td></tr>
+          <tr><td>«Что предлагаем добавить»</td><td>вне контракта → блок «Бэклог» в конце страницы</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <p class="subhead">Порядок работ</p>
+      <ul class="bullets">
+        <li><b>1.</b> Утвердить набор и имена разделов (этот документ).</li>
+        <li><b>2.</b> Обновить CLAUDE.md и <code class="tok">specs/_TEMPLATE.md</code> — зафиксировать контракт.</li>
+        <li><b>3.</b> Механическая волна: переименовать синонимы h2 на всех страницах (без переноса контента) — матрица выше станет почти зелёной.</li>
+        <li><b>4.</b> Структурная волна, по компоненту за раз: собрать «Варианты» и «Поведение», понизить уникальные разделы до h3, синхронизировать спеки.</li>
+        <li><b>5.</b> Добавить недостающие обязательные разделы (в т.ч. «Не применимо»).</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ---- сырые данные аудита: фактические h2 каждой страницы (specs/_sections-audit.json) ---- */
+const AUDIT = {
+ "atoms/Avatar": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "atoms/Badge": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "atoms/Buttons": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "atoms/Checkbox": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "atoms/Chip": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков",
+  "Бэклог"
+ ],
+ "atoms/Divider": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "atoms/IconButton": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "atoms/Link": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "atoms/ProgressBar": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков",
+  "Бэклог"
+ ],
+ "atoms/Radiobutton": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "atoms/Switch": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "molecules/Breadcrumbs": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "molecules/ButtonGroup": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "molecules/ContextMenu": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "molecules/InputAutocomplete": [
+  "Страница в подготовке"
+ ],
+ "molecules/Pagination": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "molecules/ReadOnlyField": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков",
+  "Бэклог"
+ ],
+ "molecules/SegmentControl": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "molecules/Select": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "molecules/Splitter": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "molecules/Tab": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "molecules/Toast": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "molecules/Tooltip": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "organisms/Entity": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "organisms/Modal": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "organisms/Popover": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "organisms/RiskMetric": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "organisms/SnackBar": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "organisms/TableCell": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ],
+ "loading/LabelHelper": [
+  "Конструктор",
+  "Использование",
+  "Анатомия",
+  "Варианты",
+  "Размеры",
+  "Контент",
+  "Поведение",
+  "Состояния",
+  "Доступность",
+  "Типографика",
+  "Цвета",
+  "Для разработчиков"
+ ]
+};
+
+const CATS = [
+ ["atoms","Атомы"],["molecules","Молекулы"],["organisms","Организмы"],["loading","Компоненты подкачки"]
+];
+const COLS = ["Конструктор","Использование","Анатомия","Варианты","Размеры","Контент","Поведение","Состояния","Доступность","Типографика","Цвета","Для разработчиков"];
+
+/* классификация одного заголовка: {col, exact} либо {uniq, kind} */
+function classify(h){
+  const t = h.trim();
+  const eq = s => t === s;
+  const has = s => t.includes(s);
+  if (eq("Варианты")) return {col:"Варианты", exact:true};
+  if (eq("Поведение")) return {col:"Поведение", exact:true};
+  if (eq("Типографика")) return {col:"Типографика", exact:true};
+  if (eq("Бэклог")) return {uniq:"Бэклог (вне контракта, допустимо)", kind:"other"};
+  if (has("Конструктор")) return {col:"Конструктор", exact:eq("Конструктор")};
+  if (eq("Использование")) return {col:"Использование", exact:true};
+  if (eq("Когда использовать") || eq("Описание работы")) return {col:"Использование", exact:false};
+  if (has("Анатомия")) return {col:"Анатомия", exact:eq("Анатомия")};
+  if (eq("Размеры")) return {col:"Размеры", exact:true};
+  if (eq("Контент") ) return {col:"Контент", exact:true};
+  if (eq("Текстовка") || eq("Контент сегмента")) return {col:"Контент", exact:false};
+  if (eq("Состояния")) return {col:"Состояния", exact:true};
+  if (has("остояния")) return {col:"Состояния", exact:false};
+  if (eq("Доступность")) return {col:"Доступность", exact:true};
+  if (/оступност/.test(t)) return {col:"Доступность", exact:false};
+  if (eq("Типографика")) return {col:"Типографика", exact:true};
+  if (eq("Цвета")) return {col:"Цвета", exact:true};
+  if (has("Для разработчиков")) return {col:"Для разработчиков", exact:eq("Для разработчиков")};
+  /* уникальные: kind = var | beh | other */
+  const VAR = ["Типы","Тон","Тоны","Форма","Стиль","Ориентация","Type","Danger","Кнопка с меню (chevron)","Fullwidth","Split Button","Сегментированный выбор","Fullwidth и равная ширина","Режим-переключатель","Встроенный вариант (поля и тулбары)","С бейджем","Бейдж","Иконка","Бейдж на аватаре","Группа аватаров","Типы содержимого","Ведущие элементы","Скругление (Rounded)","Типы пунктов","Варианты опции Dropdown_Item","Типы значения","Опции","Ведущий слот","Равная ширина (Fitted)","Ссылка внутри текста","С иконкой и внешние ссылки","Ссылки лайаута и модалок","Ссылки Хлебных крошек","Варианты отступов","Разделитель с подписью","Состав","Label","Helper","Кнопки страниц и стрелки","Тон и статусы"];
+  const BEH = ["Loader","Позиционирование","Позиционирование и авто-разворот","Позиционирование и затемнение","Размещение и стрелка","Авто-разворот и смещение","Триггеры и тайминги","Анимация","Анимация индикатора","Тайминги","Стек и переполнение","Подменю и переполнение","Переполнение","Переполнение и формат","Переполнение текста","Переполнение и перенос","Перенос и обрезка","Ширина и перенос текста","Адаптивность","Поведение и ограничения","Загрузка и асинхронное действие","Удаление","Горячие клавиши","Авто-подбор тона по порогам","Ошибка и валидация","Системные состояния","Заглушки и фолбэк","Количество сегментов и равная ширина","Отключение одного сегмента","Толщина и контраст","Корнер-кейсы"];
+  if (VAR.includes(t)) return {uniq:t, kind:"var"};
+  if (BEH.includes(t)) return {uniq:t, kind:"beh"};
+  return {uniq:t, kind:"other"};
+}
+
+/* ---- построение таблицы ---- */
+const tbl = document.getElementById("matrix");
+let thead = "<thead><tr><th class='name'>Компонент</th>";
+COLS.forEach(c => thead += "<th><span class='v'>"+c+"</span></th>");
+thead += "<th style='text-align:left;'>Разделы вне шаблона</th></tr></thead>";
+let rows = "";
+let full = 0, total = 0, uniqTotal = 0;
+CATS.forEach(([key,label]) => {
+  rows += "<tr class='cat-row'><td colspan='"+(COLS.length+2)+"'>"+label+"</td></tr>";
+  Object.keys(AUDIT).filter(k => k.startsWith(key+"/")).sort().forEach(k => {
+    const name = k.split("/")[1];
+    const heads = AUDIT[k];
+    const wip = heads.length === 1 && heads[0].includes("подготовке");
+    const state = {}; const uniq = [];
+    if (!wip) heads.forEach(h => {
+      const c = classify(h);
+      if (c.col) { if (!state[c.col] || c.exact) state[c.col] = c.exact ? "ok" : "syn"; if(!c.exact && state[c.col]==="ok"){} if(!c.exact){ (state["_syn_"+c.col] = state["_syn_"+c.col]||[]).push(h);} }
+      else uniq.push(c);
+    });
+    total++;
+    const okAll = !wip && COLS.every(c => state[c] === "ok") && uniq.length === 0;
+    if (okAll) full++;
+    uniqTotal += uniq.length;
+    rows += "<tr"+(wip?" class='wip'":"")+"><td class='name'><a href='../"+k+".html'>"+name+"</a></td>";
+    COLS.forEach(c => {
+      if (wip) { rows += "<td class='c'><span class='mark no'>—</span></td>"; return; }
+      const s = state[c];
+      if (s === "ok") rows += "<td class='c'><span class='mark ok'>✓</span></td>";
+      else if (s === "syn") {
+        const t = (state["_syn_"+c]||[]).join(", ");
+        rows += "<td class='c'><span class='mark syn' title='На странице: «"+t.replace(/'/g,"&#39;")+"»'>≈</span></td>";
+      }
+      else rows += "<td class='c'><span class='mark no'>—</span></td>";
+    });
+    rows += "<td class='uniq'>" + (wip ? "<span class='uchip'>Страница в подготовке</span>" :
+      uniq.map(u => "<span class='uchip "+(u.kind==="other"?"":u.kind)+"'>"+u.uniq+"</span>").join("")) + "</td></tr>";
+  });
+});
+tbl.innerHTML = thead + "<tbody>" + rows + "</tbody>";
+
+const stat = document.getElementById("stat");
+stat.innerHTML =
+  "<div class='card'><div class='num'>"+total+"</div><div class='lbl'>страниц компонентов</div></div>" +
+  "<div class='card'><div class='num'>"+full+"</div><div class='lbl'>полностью соответствуют шаблону</div></div>" +
+  "<div class='card'><div class='num'>"+uniqTotal+"</div><div class='lbl'>разделов вне шаблона</div></div>";
+</script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+</body>
+</html>

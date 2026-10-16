@@ -1,0 +1,301 @@
+/* =========================================================================
+   Design System — Pagination
+   Панель переключения страниц многостраничной таблицы: селектор размера
+   страницы, счётчик диапазона, стрелки и номера страниц. Всегда занимает
+   всю ширину нижней строки таблицы; в скролле таблицы не участвует
+   (см. styles.md компонента и раздел «Использование» на странице).
+
+   Части:
+     .pgn-row          — строка-контейнер (левый + правый слот)
+     .pgn-info         — левый слот: информационная сводка (Pagi_counters)
+     .pgn-bulk         — альтернативное состояние строки: массовое действие
+                         над выбранными строками (Action_panel)
+     .pgn              — собственно пагинатор (правый слот)
+       .pgn__pagesize    — селектор «Показывать строк»
+       .pgn__range       — счётчик «N из M»
+       .pgn__nav         — стрелки + номера страниц
+       .pgn__arrow       — стрелка prev/next
+       .pgn__num         — кнопка номера страницы
+       .pgn__ellipsis    — «…» свёрнутый диапазон
+
+   Requires: typography.css, colors.css, radius.css, dropdown-list.css
+   ========================================================================= */
+
+:root {
+  --pgn-h:            56px;   /* высота строки — совпадает с высотой строки таблицы */
+  --pgn-pad-x:         20px;
+  --pgn-gap-section:   28px;  /* зазор между pagesize / range / nav */
+  --pgn-num-size:      32px;  /* сторона кнопки номера страницы / стрелки */
+  --pgn-num-gap:        2px;  /* зазор между кнопками номеров */
+  --pgn-radius:        var(--radius-control-s);
+}
+
+/* =========================================================================
+   ROW — строка нижнего колонтитула таблицы
+   ========================================================================= */
+.pgn-row {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  min-height: var(--pgn-h);
+  padding: 0 var(--pgn-pad-x);
+  background: var(--bg-tile);
+  border-top: 1px solid var(--border-light);
+}
+.pgn-row__left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+.pgn-row__right { flex: none; }
+
+/* строка целиком не участвует в горизонтальном скролле таблицы —
+   демонстрируется через position:sticky в мок-примерах на странице */
+.pgn-row--sticky { position: sticky; left: 0; }
+
+/* =========================================================================
+   PAGESIZE — селектор «Показывать строк»
+   ========================================================================= */
+.pgn__pagesize {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: var(--pgn-radius);
+  background: transparent;
+  color: var(--text-secondary);
+  font: var(--type-body-s);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color .12s ease, border-color .12s ease, color .12s ease;
+}
+.pgn__pagesize b { color: var(--text-primary); font-weight: 600; }
+.pgn__pagesize:hover { background: var(--tertiary-light); color: var(--text-primary); }
+.pgn__pagesize.is-open,
+.pgn__pagesize:focus-visible {
+  background: var(--tertiary-light);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+  outline: none;
+}
+.pgn__pagesize__chev { flex: none; width: 14px; height: 14px; color: var(--text-inactive); display: inline-flex; transition: transform .15s ease; }
+.pgn__pagesize__chev svg { width: 100%; height: 100%; display: block; }
+.pgn__pagesize.is-open .pgn__pagesize__chev { transform: rotate(180deg); }
+
+/* =========================================================================
+   PAGER — сам пагинатор: pagesize + range + nav в один ряд
+   ========================================================================= */
+.pgn {
+  display: flex;
+  align-items: center;
+  gap: var(--pgn-gap-section);
+  flex-wrap: nowrap;
+}
+
+/* =========================================================================
+   RANGE — счётчик «N из M»
+   ========================================================================= */
+.pgn__range {
+  font: var(--type-body-s);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* =========================================================================
+   NAV — стрелки + номера
+   ========================================================================= */
+.pgn__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--pgn-num-gap);
+}
+
+.pgn__arrow {
+  flex: none;
+  width: var(--pgn-num-size);
+  height: var(--pgn-num-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--pgn-radius);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color .12s ease, color .12s ease;
+}
+.pgn__arrow svg { width: 18px; height: 18px; display: block; }
+.pgn__arrow:hover { background: var(--tertiary-light); color: var(--text-primary); }
+.pgn__arrow:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
+.pgn__arrow:disabled,
+.pgn__arrow[aria-disabled="true"] { color: var(--text-inactive); cursor: default; pointer-events: none; background: transparent; }
+
+.pgn__num {
+  flex: none;
+  width: var(--pgn-num-size);
+  height: var(--pgn-num-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--pgn-radius);
+  background: transparent;
+  color: var(--text-secondary);
+  font: var(--type-body-s);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background-color .12s ease, color .12s ease;
+}
+.pgn__num:hover { background: var(--tertiary-light); color: var(--text-primary); }
+.pgn__num:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
+
+/* текущая страница */
+.pgn__num[aria-current="page"] {
+  background: var(--bgtable-row-focus);
+  color: var(--text-black);
+  font: var(--type-body-s-strong);
+  cursor: default;
+}
+.pgn__num[aria-current="page"]:hover { background: var(--bgtable-row-focus); }
+
+.pgn__ellipsis {
+  flex: none;
+  width: var(--pgn-num-size);
+  height: var(--pgn-num-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-inactive);
+  font: var(--type-body-s);
+  user-select: none;
+}
+
+/* =========================================================================
+   MODIFIER — compact (узкий контейнер): скрыть номера страниц;
+   счётчик «N из M» переезжает внутрь nav — между стрелками
+   (рендерится там скриптом, см. renderNav), а внешний скрывается.
+   ========================================================================= */
+.pgn--compact .pgn__num,
+.pgn--compact .pgn__ellipsis { display: none; }
+.pgn--compact > .pgn__range { display: none; }
+.pgn__nav .pgn__range { padding: 0 8px; }
+
+/* =========================================================================
+   RESPONSIVE — адаптив по ширине контейнера строки.
+   Уровень (tier) выставляется скриптом в атрибут data-tier на .pgn и .pgn-row
+   через ResizeObserver. Число видимых номеров сокращается в JS (см.
+   pagination.page.js → applyTier/renderNav); CSS отвечает за перестроение
+   раскладки. Пороги (ширина строки): l ≥ 680 · m ≥ 520 · s ≥ 380 · xs < 380.
+
+     l  — горизонтально, полный набор номеров (до 7)
+     m  — горизонтально, сокращённый набор (до 5): 1 … N … Last
+     s  — строка в столбик; пагинатор compact (стрелки + счётчик)
+     xs — строка в столбик; пагинатор тоже переносится: pagesize/range
+          сверху, стрелки отдельной строкой по краям
+   ========================================================================= */
+
+/* s / xs — строка колонтитула перестраивается в вертикаль */
+.pgn-row[data-tier="s"],
+.pgn-row[data-tier="xs"] {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.pgn-row[data-tier="s"]  .pgn-row__left,
+.pgn-row[data-tier="xs"] .pgn-row__left { flex: none; overflow: visible; }
+.pgn-row[data-tier="s"]  .pgn-row__right,
+.pgn-row[data-tier="xs"] .pgn-row__right { width: 100%; }
+.pgn-row[data-tier="s"]  .pgn,
+.pgn-row[data-tier="xs"] .pgn { width: 100%; justify-content: space-between; }
+
+/* xs — сам пагинатор переносится в две строки */
+.pgn[data-tier="xs"] {
+  flex-wrap: wrap;
+  gap: 10px 16px;
+}
+.pgn[data-tier="xs"] .pgn__nav {
+  flex: 1 0 100%;
+  justify-content: space-between;
+}
+
+/* =========================================================================
+   STATE — disabled / loading (весь пагинатор)
+   ========================================================================= */
+.pgn--disabled .pgn__pagesize,
+.pgn--disabled .pgn__num,
+.pgn--disabled .pgn__arrow { pointer-events: none; color: var(--text-inactive); }
+.pgn--disabled .pgn__num[aria-current="page"] { background: var(--disabled-bg); color: var(--text-inactive); }
+.pgn--disabled .pgn__range { color: var(--text-inactive); }
+
+.pgn--loading .pgn__nav,
+.pgn--loading .pgn__pagesize { pointer-events: none; opacity: .5; }
+.pgn__spinner {
+  display: inline-flex;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-circle);
+  border: 2px solid var(--border-primary);
+  border-top-color: var(--text-secondary);
+  animation: pgn-spin .7s linear infinite;
+}
+@keyframes pgn-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .pgn__spinner { animation-duration: 1.6s; } }
+
+/* =========================================================================
+   FOOTER — обёртка колонтитула: опциональная строка Action_panel НАД
+   обычной строкой пагинации (обе видны одновременно, не взаимоисключающие)
+   ========================================================================= */
+.pgn-footer { width: 100%; }
+
+/* =========================================================================
+   BULK — Action_panel: панель массового действия над выбранными строками.
+   Отдельная строка НАД строкой пагинатора — появляется, когда выбрана
+   хотя бы одна строка таблицы; пагинатор при этом остаётся видимым.
+   ========================================================================= */
+.pgn-bulk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 20px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.pgn-row--bulk { background: var(--bg-tile); }
+.pgn-bulk__count { font: var(--type-body-m); color: var(--text-secondary); white-space: nowrap; }
+.pgn-bulk__count b { color: var(--text-black); font-weight: 600; }
+.pgn-bulk__actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+/* =========================================================================
+   INFO — Pagi_counters: информационная сводка в левом слоте строки
+   ========================================================================= */
+.pgn-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  min-width: 0;
+  font: var(--type-body-s);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.pgn-info__item b { color: var(--text-black); font-weight: 600; }
+.pgn-info__warn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--warning-dark);
+}
+.pgn-info__warn svg { width: 16px; height: 16px; flex: none; color: var(--warning); }

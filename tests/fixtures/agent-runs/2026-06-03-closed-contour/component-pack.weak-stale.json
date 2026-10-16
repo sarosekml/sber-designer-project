@@ -1,0 +1,54 @@
+{
+  "status": "weak",
+  "source": "design-index",
+  "stale": true,
+  "taskKind": "screen-edit",
+  "diagnostics": [],
+  "candidates": [
+    {
+      "role": "breadcrumb",
+      "componentId": "breadcrumb",
+      "title": "Breadcrumb",
+      "shortName": "Breadcrumb",
+      "confidence": "low",
+      "score": 2,
+      "reason": "Matched breadcrumb via title."
+    },
+    {
+      "role": "page-header",
+      "componentId": "page-header",
+      "title": "Page header",
+      "shortName": "PageHeader",
+      "confidence": "low",
+      "score": 2,
+      "reason": "Matched page-header via title."
+    },
+    {
+      "role": "section-header",
+      "componentId": "section-header",
+      "title": "Section header",
+      "shortName": "SectionHeader",
+      "confidence": "low",
+      "score": 2,
+      "reason": "Matched section-header via title."
+    },
+    {
+      "role": "content-panel",
+      "componentId": "content-panel",
+      "title": "Content panel",
+      "shortName": "ContentPanel",
+      "confidence": "low",
+      "score": 2,
+      "reason": "Matched content-panel via title."
+    },
+    {
+      "role": "navigation",
+      "componentId": "navigation",
+      "title": "Navigation",
+      "shortName": "Navigation",
+      "confidence": "low",
+      "score": 2,
+      "reason": "Matched navigation via title."
+    }
+  ]
+}

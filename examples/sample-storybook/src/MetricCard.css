@@ -1,0 +1,30 @@
+.card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 18px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  width: 220px;
+}
+.card__label {
+  color: #6b6b6b;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.card__value {
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+.card__delta {
+  font-size: 12px;
+  margin-top: 4px;
+}
+.card__delta--up {
+  color: #1a8e4f;
+}
+.card__delta--down {
+  color: #c53030;
+}

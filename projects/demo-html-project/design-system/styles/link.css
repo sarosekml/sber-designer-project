@@ -1,0 +1,126 @@
+/* =========================================================================
+   Design System — Link
+   A text link for layout/modal navigation and breadcrumbs.
+   Tones:  accent (primary) · muted (Breadcrumbs_1) · neutral (Breadcrumbs_2)
+   Sizes:  m (Body M) · s (Body S)   — inline variant inherits text size
+   States: default · hover (=focus, underline) · pressed · disabled · visited
+   Variants: inline (always underlined) · with-icon / external · truncate
+   Requires: typography.css, colors.css, radius.css
+   ========================================================================= */
+
+.link {
+  /* color comes from the tone; default = accent */
+  color: var(--link-fg, var(--link));
+  text-decoration: none;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+  border-radius: var(--radius-xs); /* 4px — форма фокус-обводки */
+  -webkit-tap-highlight-color: transparent;
+  transition: color .15s ease, text-decoration-color .15s ease;
+}
+
+/* ---------- sizes (standalone links) -------------------------------------- */
+.link--m { font: var(--type-body-m); letter-spacing: 0; }
+.link--s { font: var(--type-body-s); letter-spacing: 0; }
+
+/* ---------- tones --------------------------------------------------------- */
+/* accent — layout & modal links (primary) */
+.link--accent  { --link-fg: var(--link);          --link-fg-hover: var(--link-dark);     --link-fg-active: var(--c-emerald-900); }
+/* muted — Breadcrumbs_1 (ancestor / secondary crumbs) */
+.link--muted   { --link-fg: var(--text-inactive); --link-fg-hover: var(--text-secondary); --link-fg-active: var(--text-primary); }
+/* neutral — Breadcrumbs_2 (emphasised crumb): non-interactive, Default only */
+.link--neutral {
+  --link-fg: var(--text-black);
+  --link-fg-hover: var(--text-black);
+  --link-fg-active: var(--text-black);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* default tone if none set */
+.link:not([class*="link--accent"]):not([class*="link--muted"]):not([class*="link--neutral"]) {
+  --link-fg: var(--link); --link-fg-hover: var(--link-dark); --link-fg-active: var(--c-emerald-900);
+}
+
+/* ---------- hover = focus (underline) ------------------------------------- */
+/* ---------- hover = focus (одинаковое оформление — единый визуал для мыши и клавиатуры, без отдельной обводки) ---- */
+.link:hover,
+.link.is-hover,
+.link:focus-visible,
+.link.is-focus {
+  color: var(--link-fg-hover);
+  text-decoration-line: underline;
+  outline: none;
+}
+
+/* ---------- pressed ------------------------------------------------------- */
+.link:active,
+.link.is-pressed {
+  color: var(--link-fg-active);
+  text-decoration-line: underline;
+}
+
+/* ---------- neutral override — no hover/focus/pressed visuals ------------- */
+.link--neutral:hover,
+.link--neutral.is-hover,
+.link--neutral:focus-visible,
+.link--neutral.is-focus,
+.link--neutral:active,
+.link--neutral.is-pressed {
+  color: var(--link-fg);
+  text-decoration-line: none;
+  outline: none;
+}
+
+/* ---------- visited (optional — off in product UI by default) ------------- */
+.link--show-visited:visited,
+.link.is-visited { color: var(--secondary-dark); }
+
+/* ---------- disabled ------------------------------------------------------ */
+.link--disabled,
+.link[aria-disabled="true"] {
+  color: var(--text-inactive);
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* ---------- inline (inside body text) ------------------------------------- */
+/* Inline links must be distinguishable without colour → always underlined. */
+.link--inline {
+  font: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+.link--inline:hover,
+.link--inline.is-hover,
+.link--inline:focus-visible { text-decoration-color: currentColor; }
+
+/* ---------- with icon / external ------------------------------------------ */
+.link--with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  vertical-align: baseline;
+}
+.link__icon { width: 1em; height: 1em; flex: none; display: block; }
+.link__icon svg { width: 100%; height: 100%; display: block; }
+
+/* ---------- truncation ---------------------------------------------------- */
+.link--truncate {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+/* =========================================================================
+   Breadcrumbs — вынесен в отдельный компонент, см. styles/breadcrumbs.css
+   и Breadcrumbs.html (полная спецификация: анатомия, авто-схлопывание,
+   обрезка текущей крошки, доступность). Здесь остаются только ссылки
+   Breadcrumbs_1 / Breadcrumbs_2 (тона .link--muted / .link--neutral выше).
+   ========================================================================= */

@@ -1,0 +1,434 @@
+{
+  "version": 1,
+  "name": "demo-project-experiments",
+  "workspacePath": ".",
+  "screens": [
+    {
+      "id": "screen-ai-analysis",
+      "name": "AI Analysis",
+      "kind": "story",
+      "storyId": "screens-investment-crm-ai-analysis--default",
+      "filePath": "src/stories/screens/investment-crm/AiAnalysisScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/AiAnalysisScreen.tsx",
+      "description": "AI analysis workspace with scenario picker, parameters, progress steps, target sensitivity chart, risk scores, and decision summary.",
+      "folder": "Investment CRM",
+      "position": {
+        "x": -54.19876830762962,
+        "y": -393.0530529188934
+      }
+    },
+    {
+      "id": "screen-analyst-dashboard",
+      "name": "Analyst Dashboard",
+      "kind": "story",
+      "storyId": "screens-investment-crm-analyst-dashboard--default",
+      "filePath": "src/stories/screens/investment-crm/AnalystDashboardScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/AnalystDashboardScreen.tsx",
+      "description": "Main landing workspace for analysts with KPI cards, charted performance, required deals, tasks, news, AI idea, and approval queue.",
+      "folder": "Investment CRM",
+      "position": {
+        "x": 284,
+        "y": 138
+      }
+    },
+    {
+      "id": "screen-analyst-feed",
+      "name": "Analyst Feed",
+      "kind": "story",
+      "storyId": "screens-investment-crm-analyst-feed--default",
+      "filePath": "src/stories/screens/investment-crm/AnalystFeedScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/AnalystFeedScreen.tsx",
+      "description": "Unified feed of news, tasks, pipeline updates, and changes with filters and side summaries.",
+      "folder": "Investment CRM",
+      "position": {
+        "x": -555.7546518855779,
+        "y": 175.58434921923634
+      }
+    },
+    {
+      "id": "screen-asset-page",
+      "name": "Asset Page",
+      "kind": "story",
+      "storyId": "screens-investment-crm-asset-page--default",
+      "filePath": "src/stories/screens/investment-crm/AssetPageScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/AssetPageScreen.tsx",
+      "description": "Asset profile for Norilsk Nickel with financial charts, operating metrics, priority ideas, news, timeline, and pending changes.",
+      "folder": "Investment CRM",
+      "position": {
+        "x": 890,
+        "y": 450
+      }
+    },
+    {
+      "id": "screen-assets-list",
+      "name": "Assets List",
+      "kind": "story",
+      "storyId": "screens-investment-crm-assets-list--default",
+      "filePath": "src/stories/screens/investment-crm/AssetsListScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/AssetsListScreen.tsx",
+      "description": "Asset management list with tabs, filters, search, KPI cards, selectable data table, valuation, risk, and status.",
+      "folder": "Investment CRM",
+      "position": {
+        "x": 1531.700244762683,
+        "y": 71.01147942233905
+      }
+    },
+    {
+      "id": "screen-changes",
+      "name": "Changes",
+      "kind": "story",
+      "storyId": "screens-investment-crm-changes--default",
+      "filePath": "src/stories/screens/investment-crm/ChangesScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/ChangesScreen.tsx",
+      "description": "Change approval queue with old vs new values, source badges, approve/reject controls, and audit trail.",
+      "folder": "Investment CRM",
+      "position": {
+        "x": 399.30355861536,
+        "y": -388.49359400818946
+      }
+    },
+    {
+      "id": "screen-communications",
+      "name": "Communications",
+      "kind": "story",
+      "storyId": "screens-investment-crm-communications--default",
+      "filePath": "src/stories/screens/investment-crm/CommunicationsScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/CommunicationsScreen.tsx",
+      "description": "Communications workspace with meeting/email/call rows, selected conversation context, actions, and AI summary.",
+      "folder": "Investment CRM"
+    },
+    {
+      "id": "screen-dashboard-custom-2",
+      "name": "Dashboard Custom 2",
+      "kind": "story",
+      "storyId": "screens-investment-crm-dashboard-custom-2--default",
+      "filePath": "src/stories/screens/investment-crm/DashboardCustom2Screen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/DashboardCustom2Screen.tsx",
+      "description": "Custom dashboard edit mode with reusable widgets, charts, widget catalog, edit bar, and drop target.",
+      "folder": "Investment CRM"
+    },
+    {
+      "id": "screen-dashboard-custom",
+      "name": "Dashboard Custom",
+      "kind": "story",
+      "storyId": "screens-investment-crm-dashboard-custom--default",
+      "filePath": "src/stories/screens/investment-crm/DashboardCustomScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/DashboardCustomScreen.tsx",
+      "description": "Configurable dashboard composed from reusable task, news, AI, deal, chart, heatmap, and quick-action widgets.",
+      "folder": "Investment CRM"
+    },
+    {
+      "id": "screen-fund-detail",
+      "name": "Fund Detail",
+      "kind": "story",
+      "storyId": "screens-investment-crm-fund-detail--default",
+      "filePath": "src/stories/screens/investment-crm/FundDetailScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/FundDetailScreen.tsx",
+      "description": "Fund profile with entity header, tabs, news, assets table, AI idea, investment report, changes, trends, and interaction history.",
+      "folder": "Investment CRM"
+    },
+    {
+      "id": "screen-funds-list",
+      "name": "Funds List",
+      "kind": "story",
+      "storyId": "screens-investment-crm-funds-list--default",
+      "filePath": "src/stories/screens/investment-crm/FundsListScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/FundsListScreen.tsx",
+      "description": "Funds list with portfolio KPI cards, filters, selectable table, priority markers, AUM, IRR, assets, and status.",
+      "folder": "Investment CRM"
+    },
+    {
+      "id": "screen-idea-page",
+      "name": "Idea Page",
+      "kind": "story",
+      "storyId": "screens-investment-crm-idea-page--default",
+      "filePath": "src/stories/screens/investment-crm/IdeaPageScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/IdeaPageScreen.tsx",
+      "description": "AI-generated deal idea with confidence, trigger, reasoning metrics, related entities, decision tasks, and discussion.",
+      "folder": "Investment CRM"
+    },
+    {
+      "id": "screen-search",
+      "name": "Search",
+      "kind": "story",
+      "storyId": "screens-investment-crm-search--default",
+      "filePath": "src/stories/screens/investment-crm/SearchScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/SearchScreen.tsx",
+      "description": "Global command-search screen across assets, funds, ideas, communications, and actions.",
+      "folder": "Investment CRM"
+    },
+    {
+      "id": "screen-investment-crm-deal-page-port-murmansk",
+      "name": "Deal Page · Port Murmansk",
+      "kind": "story",
+      "storyId": "screens-investment-crm-deal-page-port-murmansk--default",
+      "filePath": "src/stories/screens/investment-crm/DealPageScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/DealPageScreen.tsx",
+      "folder": "Investment CRM"
+    },
+    {
+      "id": "screen-1778877013873-base-screen-sidebar-shell",
+      "name": "Deal Page · SeverProm Metallurgy",
+      "kind": "story",
+      "storyId": "screens-investment-crm-deal-page-severprom-metallurgy--default",
+      "filePath": "src/stories/screens/investment-crm/CreditDealPageScreen.stories.tsx",
+      "implementationFilePath": "src/screens/investment-crm/CreditDealPageScreen.tsx",
+      "description": "Generated deal detail screen assembled from project components and patterns.",
+      "folder": "Investment CRM"
+    },
+    {
+      "id": "screen-1779025844704-screen",
+      "name": "Сделка для демо",
+      "kind": "story",
+      "storyId": "screens-2026-05-17-сделка-для-демо-mp9u1z33--default",
+      "filePath": "src/stories/screens/2026-05-17/Screenmp9u1z33.stories.tsx",
+      "implementationFilePath": "src/screens/2026-05-17/Screenmp9u1z33.tsx",
+      "description": "# 📊 ТЗ на дизайн интерфейса\n\n## Экран сделки: Кредит крупному предприятию\n\n---\n\n# 1. 🎯 Цель экрана\n\nСоздать профессиональный банковский экран в стиле **Enterprise / Pro Workstation** для просмотра, анализа и сопровождения кредитной сделки с крупным корпоративным клиентом.\n\nЭкран должен быть рассчитан на пользователей:\n\n- корпоративный банкир / relationship manager\n- кредитный аналитик\n- риск-менеджер\n- член кредитного комитета\n- продуктовый менеджер по корпоративному кредитованию\n\nОсновная задача экрана — дать пользователю полную картину по сделке **на одном экране без глубокого скролла**: кто заемщик, сумма кредита, структура сделки, риски, обеспечение, ковенанты, доходность, статус согласования и следующие действия.\n\n---\n\n# 2. 🧾 Сценарий сделки\n\nСоздать экран детального просмотра кредитной сделки:\n\n**Сделка:** Синдицированный кредит для крупного промышленного предприятия  \n**Заемщик:** АО «СеверПром Металлургия»  \n**Отрасль:** Металлургия / промышленное производство  \n**Группа:** СеверПром Group  \n**Тип финансирования:** Срочный корпоративный кредит  \n**Сумма кредита:** 18 500 000 000 ₽  \n**Валюта:** RUB  \n**Срок:** 5 лет  \n**Ставка:** Ключевая ставка ЦБ + 2.15%  \n**Цель финансирования:** модернизация производственных мощностей, рефинансирование части существующего долга, пополнение оборотного капитала  \n**Статус сделки:** На кредитном комитете  \n**Приоритет:** Высокий  \n**Риск-рейтинг:** BB+ / внутренний рейтинг 7.2  \n**Ответственный банкир:** Иван Петров  \n**Кредитный аналитик:** Анна Смирнова  \n**Следующий шаг:** Рассмотрение на кредитном комитете — 18 июня 2026\n\n---\n\n# 3. 🧩 Общая структура экрана\n\nЭкран должен быть выполнен как плотный аналитический дашборд с карточками.\n\nФормат:\n\n- один экран 1440px или 1600px или 100% шириной\n- без длинного вертикального скролла\n- компактные карточки\n- плотные таблицы\n- много данных, но хорошая визуальная иерархия\n- стиль: Bloomberg / инвестиционный CRM / банковская risk workstation\n- фон светло-серый или почти белый\n- карточки белые, с тонкой границей\n- аккуратные цветовые статусы\n- минимальные отступы\n- много числовых данных\n- все важные параметры сделки видны сразу\n\n---\n\n# 4. 🧱 Layout экрана\n\nИспользовать следующую структуру:\n\n```txt\n┌──────────────────────────────────────────────────────────────┐\n│ Верхняя панель: название сделки, статус, поиск, действия     │\n├──────────────────────────────────────────────────────────────┤\n│ KPI-карточки: сумма, ставка, срок, доходность, риск, статус  │\n├───────────────────────┬───────────────────────┬──────────────┤\n│ Карточка заемщика     │ Условия кредита        │ Риск-профиль │\n├───────────────────────┼───────────────────────┼──────────────┤\n│ Обеспечение           │ Ковенанты              │ Согласования │\n├───────────────────────┴───────────────────────┴──────────────┤\n│ Таблица доходности / economics                               │\n├───────────────────────────────────────────────┬──────────────┤\n│ Timeline сделки                               │ Документы    │\n└───────────────────────────────────────────────┴──────────────┘\n```",
+      "folder": "2026-05-17"
+    },
+    {
+      "id": "screen-1779026481226-base-screen-sidebar-shell",
+      "name": "Base Screen · Sidebar Shell",
+      "kind": "story",
+      "storyId": "screens-2026-05-17-base-screen-·-sidebar-shell-mp9ufm89--default",
+      "filePath": "src/stories/screens/2026-05-17/BaseScreenSidebarShellmp9ufm89.stories.tsx",
+      "implementationFilePath": "src/screens/2026-05-17/BaseScreenSidebarShellmp9ufm89.tsx",
+      "description": "Created from Templates/Base Screen / Sidebar Shell",
+      "folder": "2026-05-17"
+    },
+    {
+      "id": "screen-1779040488044-screens-2026-05-17-d-3174--покупка-актива-северный-хаб--default",
+      "name": "D-3174 · Покупка актива Северный Хаб",
+      "kind": "story",
+      "storyId": "screens-2026-05-17-d-3174-·-покупка-актива-северный-хаб--default",
+      "filePath": "src/stories/screens/2026-05-17/DealD3174SevernyHab.stories.tsx",
+      "implementationFilePath": "src/screens/2026-05-17/DealD3174SevernyHab.tsx",
+      "description": "Экран сделки D-3174 по покупке логистического комплекса «Северный Хаб» фондом Equitas Real Assets Fund I. Включает summary сделки, KPI, структуру, sources & uses, valuation, финмодель, сценарный анализ, DD, риски, согласования, документы и рекомендацию для IC.",
+      "folder": "2026-05-17"
+    },
+    {
+      "id": "screen-1779051473517-news-screen",
+      "name": "News screen",
+      "kind": "story",
+      "storyId": "screens-2026-05-17-news-screen-mpa9bael--default",
+      "filePath": "src/stories/screens/2026-05-17/NewsScreenmpa9bael.stories.tsx",
+      "implementationFilePath": "src/screens/2026-05-17/NewsScreenmpa9bael.tsx",
+      "description": "Empty generated screen",
+      "folder": "2026-05-17"
+    },
+    {
+      "id": "screen-1783021130674-new-test-01",
+      "name": "New-test-01",
+      "updatedAt": 1784797772681,
+      "kind": "story",
+      "storyId": "screens-new-folder-new-test-01--default",
+      "filePath": "src/stories/screens/New folder/NewTest01.stories.tsx",
+      "implementationFilePath": "src/screens/New folder/NewTest01.tsx",
+      "description": "Deal Card (Pipeline) — сводный экран сделки DCM/ECM: клиент, условия сделки, стадия, эмитент, график платежей, команда сделки, документы. Generated from TZ_screen_deal_card_no_issue.md.",
+      "health": {
+        "status": "broken",
+        "reason": "No data-sd-screen-root was found, but Storybook returned non-empty content without runtime error evidence.",
+        "source": "validation",
+        "updatedAt": 1783021361071
+      },
+      "folder": "New folder"
+    }
+  ],
+  "screenCreation": {
+    "lastFolder": "New folder"
+  },
+  "flow": [
+    {
+      "id": "flow-dashboard-feed",
+      "fromScreenId": "screen-analyst-dashboard",
+      "toScreenId": "screen-analyst-feed",
+      "trigger": {
+        "kind": "manual",
+        "label": "Open feed"
+      },
+      "label": "Review live signals"
+    },
+    {
+      "id": "flow-feed-funds",
+      "fromScreenId": "screen-analyst-feed",
+      "toScreenId": "screen-funds-list",
+      "trigger": {
+        "kind": "click",
+        "selector": "[data-sd-flow-id=\"nav-funds\"]",
+        "label": "Funds"
+      },
+      "label": "Inspect fund universe"
+    },
+    {
+      "id": "flow-funds-detail",
+      "fromScreenId": "screen-funds-list",
+      "toScreenId": "screen-fund-detail",
+      "trigger": {
+        "kind": "manual",
+        "label": "Open fund"
+      },
+      "label": "Fund profile"
+    },
+    {
+      "id": "flow-fund-assets",
+      "fromScreenId": "screen-fund-detail",
+      "toScreenId": "screen-assets-list",
+      "trigger": {
+        "kind": "manual",
+        "label": "Open assets"
+      },
+      "label": "Review assets"
+    },
+    {
+      "id": "flow-assets-asset",
+      "fromScreenId": "screen-assets-list",
+      "toScreenId": "screen-asset-page",
+      "trigger": {
+        "kind": "manual",
+        "label": "Open asset"
+      },
+      "label": "Asset profile"
+    },
+    {
+      "id": "flow-asset-idea",
+      "fromScreenId": "screen-asset-page",
+      "toScreenId": "screen-idea-page",
+      "trigger": {
+        "kind": "manual",
+        "label": "Open idea"
+      },
+      "label": "Investigate idea"
+    },
+    {
+      "id": "flow-idea-analysis",
+      "fromScreenId": "screen-idea-page",
+      "toScreenId": "screen-ai-analysis",
+      "trigger": {
+        "kind": "manual",
+        "label": "Run AI analysis"
+      },
+      "label": "Deep analysis"
+    },
+    {
+      "id": "flow-analysis-changes",
+      "fromScreenId": "screen-ai-analysis",
+      "toScreenId": "screen-changes",
+      "trigger": {
+        "kind": "click",
+        "selector": "[data-sd-flow-id=\"nav-changes\"]",
+        "label": "Changes"
+      },
+      "label": "Approve updates"
+    },
+    {
+      "id": "flow-changes-communications",
+      "fromScreenId": "screen-changes",
+      "toScreenId": "screen-communications",
+      "trigger": {
+        "kind": "manual",
+        "label": "Open communications"
+      },
+      "label": "Coordinate follow-up"
+    },
+    {
+      "id": "flow-communications-search",
+      "fromScreenId": "screen-communications",
+      "toScreenId": "screen-search",
+      "trigger": {
+        "kind": "manual",
+        "label": "Search workspace"
+      },
+      "label": "Global lookup"
+    },
+    {
+      "id": "flow-dashboard-custom",
+      "fromScreenId": "screen-analyst-dashboard",
+      "toScreenId": "screen-dashboard-custom",
+      "trigger": {
+        "kind": "manual",
+        "label": "Open custom dashboard"
+      },
+      "label": "Customize workspace"
+    },
+    {
+      "id": "flow-custom-edit",
+      "fromScreenId": "screen-dashboard-custom",
+      "toScreenId": "screen-dashboard-custom-2",
+      "trigger": {
+        "kind": "manual",
+        "label": "Edit layout"
+      },
+      "label": "Layout edit mode"
+    },
+    {
+      "id": "flow-edit-dashboard",
+      "fromScreenId": "screen-dashboard-custom-2",
+      "toScreenId": "screen-analyst-dashboard",
+      "trigger": {
+        "kind": "manual",
+        "label": "Publish layout"
+      },
+      "label": "Return to dashboard"
+    },
+    {
+      "id": "flow-1778518748773-screen-changes-screen-ai-analysis",
+      "fromScreenId": "screen-changes",
+      "toScreenId": "screen-ai-analysis",
+      "trigger": {
+        "kind": "click",
+        "selector": "[data-sd-flow-id=\"nav-analytics\"]",
+        "label": "Analytics"
+      }
+    },
+    {
+      "id": "flow-1778623311415-screen-ai-analysis-screen-funds-list",
+      "fromScreenId": "screen-ai-analysis",
+      "toScreenId": "screen-funds-list",
+      "trigger": {
+        "kind": "click",
+        "selector": "[data-sd-flow-id=\"nav-funds\"]",
+        "label": "Funds"
+      }
+    },
+    {
+      "id": "flow-1778623335381-screen-funds-list-screen-ai-analysis",
+      "fromScreenId": "screen-funds-list",
+      "toScreenId": "screen-ai-analysis",
+      "trigger": {
+        "kind": "click",
+        "selector": "[data-sd-flow-id=\"nav-analytics\"]",
+        "label": "Analytics"
+      }
+    },
+    {
+      "id": "flow-1778927471043-screen-assets-list-screen-changes",
+      "fromScreenId": "screen-assets-list",
+      "toScreenId": "screen-changes",
+      "trigger": {
+        "kind": "click",
+        "selector": "[data-sd-flow-id=\"nav-changes\"]",
+        "label": "Changes"
+      }
+    }
+  ],
+  "flowView": {
+    "previewSize": "frames",
+    "showConnections": true,
+    "showDescriptions": false,
+    "hiddenScreenIds": [],
+    "hiddenFolderNames": [],
+    "hiddenEdgeIds": [],
+    "previewViewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "previewCaptures": []
+  },
+  "comments": [],
+  "agentDefault": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-v4-pro"
+  },
+  "description": "Investment CRM presentation project for validating sber-designer. Screens live as Design-readable implementations in src/screens/investment-crm with thin Storybook wrappers in src/stories/screens/investment-crm.",
+  "savedAt": 1784797772692
+}

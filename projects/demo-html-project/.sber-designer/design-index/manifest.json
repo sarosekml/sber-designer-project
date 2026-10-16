@@ -1,0 +1,288 @@
+{
+  "version": 3,
+  "generatedAt": 1784800154347,
+  "projectName": "demo-html-project3",
+  "projectProfile": {
+    "kind": "html-css",
+    "screenUnit": {
+      "sourceGlob": "{pages,screens,public,site}/**/*.html",
+      "storyRequired": false,
+      "rootMarker": "data-sd-screen-root"
+    },
+    "componentModel": "css-catalog",
+    "renderProbe": "static-html",
+    "htmlDesignSystem": {
+      "status": "canonical",
+      "folderPath": "design-system",
+      "referencePages": [
+        "design-system/_template/Screen.html",
+        "design-system/_template/smoke-test.html",
+        "design-system/pages/atoms/Avatar.html",
+        "design-system/pages/atoms/Badge.html",
+        "design-system/pages/atoms/Buttons.html",
+        "design-system/pages/atoms/Checkbox.html",
+        "design-system/pages/atoms/Chip.html",
+        "design-system/pages/atoms/Divider.html",
+        "design-system/pages/atoms/IconButton.html",
+        "design-system/pages/atoms/Link.html",
+        "design-system/pages/atoms/ProgressBar.html",
+        "design-system/pages/atoms/Radiobutton.html",
+        "design-system/pages/atoms/Switch.html",
+        "design-system/pages/foundations/Colors.html",
+        "design-system/pages/foundations/Elevation.html",
+        "design-system/pages/foundations/Icons.html",
+        "design-system/pages/foundations/Radius.html",
+        "design-system/pages/foundations/Typography.html",
+        "design-system/pages/loading/Alert.html",
+        "design-system/pages/loading/LabelHelper.html",
+        "design-system/pages/molecules/Breadcrumbs.html",
+        "design-system/pages/molecules/ButtonGroup.html",
+        "design-system/pages/molecules/ContextMenu.html",
+        "design-system/pages/molecules/InputAutocomplete.html",
+        "design-system/pages/molecules/InputDate.html",
+        "design-system/pages/molecules/InputText.html",
+        "design-system/pages/molecules/Pagination.html",
+        "design-system/pages/molecules/ReadOnlyField.html",
+        "design-system/pages/molecules/SegmentControl.html",
+        "design-system/pages/molecules/Select.html",
+        "design-system/pages/molecules/Splitter.html",
+        "design-system/pages/molecules/Tab.html",
+        "design-system/pages/molecules/Toast.html",
+        "design-system/pages/molecules/Tooltip.html",
+        "design-system/pages/organisms/Entity.html",
+        "design-system/pages/organisms/Modal.html",
+        "design-system/pages/organisms/Popover.html",
+        "design-system/pages/organisms/RiskMetric.html",
+        "design-system/pages/organisms/SnackBar.html",
+        "design-system/pages/organisms/TableCell.html",
+        "design-system/pages/patterns/SectionsAudit.html",
+        "design-system/refs/imported-index.html"
+      ],
+      "foundRequired": [
+        "design-md",
+        "tokens-css",
+        "components-css"
+      ],
+      "missingRequired": [],
+      "sources": [
+        {
+          "id": "design-md",
+          "label": "Design.md",
+          "required": true,
+          "canonicalPath": "design-system/Design.md",
+          "aliases": [
+            "Design.md",
+            "DESIGN.md",
+            "design.md",
+            "design/Design.md",
+            "design/DESIGN.md",
+            "design/design.md"
+          ],
+          "status": "found",
+          "foundPath": "design-system/Design.md"
+        },
+        {
+          "id": "tokens-css",
+          "label": "tokens.css",
+          "required": true,
+          "canonicalPath": "design-system/tokens.css",
+          "aliases": [
+            "tokens.css",
+            "design/tokens.css",
+            "styles/tokens.css",
+            "css/tokens.css"
+          ],
+          "status": "found",
+          "foundPath": "design-system/tokens.css"
+        },
+        {
+          "id": "components-css",
+          "label": "components.css",
+          "required": true,
+          "canonicalPath": "design-system/components.css",
+          "aliases": [
+            "components.css",
+            "design/components.css",
+            "styles/components.css",
+            "css/components.css"
+          ],
+          "status": "found",
+          "foundPath": "design-system/components.css"
+        },
+        {
+          "id": "design-system-preview",
+          "label": "design-system/index.html",
+          "required": false,
+          "canonicalPath": "design-system/index.html",
+          "aliases": [
+            "design-system.html",
+            "pages/design-system.html",
+            "design/design-system.html",
+            "preview/design-system.html"
+          ],
+          "status": "found",
+          "foundPath": "design-system/index.html"
+        }
+      ]
+    }
+  },
+  "sources": {
+    "storybookCatalog": false,
+    "staticScan": true,
+    "designMd": true,
+    "componentNotes": false,
+    "legacyComponentSelectionMap": false,
+    "lucideFallback": true,
+    "assetPacks": false,
+    "iconSources": false,
+    "externalIconSources": false,
+    "usageScan": false,
+    "screenTemplates": false
+  },
+  "counts": {
+    "components": 408,
+    "componentGroups": 7,
+    "tokens": 800,
+    "icons": 1535,
+    "iconCandidates": 1782,
+    "iconSources": 0,
+    "workspaceIconSources": 0,
+    "externalIconSources": 0,
+    "externalIcons": 0,
+    "projectIconContracts": 247,
+    "fallbackIcons": 1535,
+    "assets": 0,
+    "illustrations": 0,
+    "routes": 0,
+    "screens": 1,
+    "examples": 0,
+    "usageSnippets": 0,
+    "usageCards": 408,
+    "describedComponents": 0,
+    "patterns": 0,
+    "notes": 0,
+    "agentNotes": 0,
+    "diagnostics": 0
+  },
+  "fingerprint": "199c7869c31a6676ad634efe1d0fd9670c90be4a87c46f61fb6143b87bd33b0a",
+  "artifacts": {
+    "manifest": ".sber-designer/design-index/manifest.json",
+    "promptSummary": ".sber-designer/design-index/prompt-summary.md",
+    "projectProfile": ".sber-designer/design-index/project-profile.json",
+    "designBrief": ".sber-designer/design-index/design-brief.md",
+    "components": ".sber-designer/design-index/components.jsonl",
+    "htmlCssCatalogManifest": ".sber-designer/design-index/html-css-catalog-manifest.json",
+    "componentGroups": ".sber-designer/design-index/component-groups.json",
+    "tokens": ".sber-designer/design-index/tokens.json",
+    "icons": ".sber-designer/design-index/icons.json",
+    "iconCandidates": ".sber-designer/design-index/icon-candidates.jsonl",
+    "externalIcons": ".sber-designer/design-index/external-icons.jsonl",
+    "iconCatalog": ".sber-designer/design-index/icon-catalog.md",
+    "assets": ".sber-designer/design-index/assets.jsonl",
+    "routes": ".sber-designer/design-index/routes.json",
+    "screens": ".sber-designer/design-index/screens.jsonl",
+    "storybook": ".sber-designer/design-index/storybook.json",
+    "usageExamples": ".sber-designer/design-index/usage-examples.jsonl",
+    "usageSnippets": ".sber-designer/design-index/usage-snippets.jsonl",
+    "usageCards": ".sber-designer/design-index/usage-cards.jsonl",
+    "descriptionMap": ".sber-designer/design-index/description-map.json",
+    "componentSelectionMap": ".sber-designer/design-index/component-selection-map.json",
+    "patterns": ".sber-designer/design-index/patterns.jsonl",
+    "agentNotes": ".sber-designer/design-index/agent-notes.jsonl",
+    "diagnostics": ".sber-designer/design-index/diagnostics.json",
+    "fingerprints": ".sber-designer/design-index/fingerprints.json"
+  },
+  "quality": {
+    "score": 0.95,
+    "checks": [
+      {
+        "id": "prompt-summary",
+        "label": "Prompt summary",
+        "score": 1,
+        "detail": "Prompt summary artifact is declared in the manifest.",
+        "recommendation": "Regenerate the design index so prompt-summary.md is emitted.",
+        "status": "passed"
+      },
+      {
+        "id": "project-style-contract-sections",
+        "label": "Project style contract",
+        "score": 1,
+        "detail": "9 of 9 portable style-contract sections contain reusable guidance.",
+        "recommendation": "Complete the 9-section project style contract before using it as generation guidance.",
+        "status": "passed"
+      },
+      {
+        "id": "html-design-system",
+        "label": "HTML design system",
+        "score": 1,
+        "detail": "design-system/Design.md, design-system/tokens.css, and design-system/components.css are the canonical HTML design-system sources.",
+        "recommendation": "Restructure the project or add the three canonical sources under design-system/ before relying on HTML-first generation.",
+        "status": "passed"
+      },
+      {
+        "id": "html-design-system-sections",
+        "label": "HTML design-system sections",
+        "score": 1,
+        "detail": "9 of 9 Design.md sections contain reusable guidance.",
+        "recommendation": "Fill the canonical 9-section Design.md style contract or complete the legacy HTML-first sections.",
+        "status": "passed"
+      },
+      {
+        "id": "html-design-system-tokens",
+        "label": "Root design tokens",
+        "score": 1,
+        "detail": "344 design tokens are declared in a :root block.",
+        "recommendation": "Declare color, spacing, radius, and typography tokens as CSS custom properties inside a :root block in tokens.css.",
+        "status": "passed"
+      },
+      {
+        "id": "html-design-system-theme",
+        "label": "Theme override",
+        "score": 0.5,
+        "detail": "No dark-theme override (for example [data-theme=\"dark\"]) was found.",
+        "recommendation": "Add a [data-theme=\"dark\"] (or prefers-color-scheme) override so tokens support light and dark themes.",
+        "status": "warning"
+      },
+      {
+        "id": "html-design-system-components",
+        "label": "Component classes",
+        "score": 1,
+        "detail": "770 reusable component classes are declared in components.css.",
+        "recommendation": "Move reusable UI patterns into components.css classes so generated pages compose them instead of ad-hoc markup.",
+        "status": "passed"
+      },
+      {
+        "id": "html-design-system-token-usage",
+        "label": "Page token discipline",
+        "score": 1,
+        "detail": "2 of 2 pages use tokens or avoid raw inline color/spacing values.",
+        "recommendation": "Replace raw inline color/spacing values on pages with var(--token) references or components.css classes.",
+        "status": "passed"
+      },
+      {
+        "id": "token-context",
+        "label": "Token context",
+        "score": 1,
+        "detail": "800 design token records are indexed.",
+        "recommendation": "Expose project color, spacing, radius, and typography tokens to the index.",
+        "status": "passed"
+      },
+      {
+        "id": "diagnostics",
+        "label": "Diagnostics",
+        "score": 1,
+        "detail": "No warning or error diagnostics are present.",
+        "recommendation": "Resolve index diagnostics before relying on broad generation context.",
+        "status": "passed"
+      }
+    ],
+    "violations": [
+      {
+        "id": "html-design-system-theme",
+        "severity": "warning",
+        "message": "Theme override: No dark-theme override (for example [data-theme=\"dark\"]) was found.",
+        "recommendation": "Add a [data-theme=\"dark\"] (or prefers-color-scheme) override so tokens support light and dark themes."
+      }
+    ]
+  }
+}

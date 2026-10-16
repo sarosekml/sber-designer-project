@@ -1,0 +1,3 @@
+{"type":"system","subtype":"init","session_id":"s-failure-1","model":"CodeChat"}
+{"type":"assistant","session_id":"s-failure-1","message":{"role":"assistant","model":"vllm/DeepSeek-V4-Flash-262k","content":[{"type":"text","text":"The model request failed."}]}}
+{"type":"result","subtype":"failure","session_id":"s-failure-1","is_error":true,"result":"Model request was rejected.","usage":{"input_tokens":21,"output_tokens":4,"total_tokens":25}}

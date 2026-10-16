@@ -1,0 +1,71 @@
+{
+  "kind": "react-storybook",
+  "screenUnit": {
+    "sourceGlob": "src/**/*.{tsx,jsx}",
+    "storyRequired": true,
+    "rootMarker": "data-sd-screen-root"
+  },
+  "componentModel": "react-index",
+  "renderProbe": "storybook",
+  "packageManager": "npm",
+  "frameworks": [
+    "react",
+    "storybook"
+  ],
+  "sourceRoots": [
+    "src",
+    "tokens"
+  ],
+  "styling": [
+    "css",
+    "emotion"
+  ],
+  "aliases": {},
+  "packageScripts": {
+    "setup": "npm install --ignore-scripts --legacy-peer-deps",
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "build-dev": "cross-env NODE_ENV=development rollup -c",
+    "start": "cross-env NODE_ENV=development rollup -c -w",
+    "prepare": "husky install",
+    "release": "standard-version",
+    "test": "jest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "lint": "eslint . --ext .tsx,.ts",
+    "lint-and-fix": "eslint . --ext .tsx,.ts --fix",
+    "prettier-format": "prettier --config .prettierrc.js \\\"src/**/*.tsx,.ts\\\" --write",
+    "lint-staged": "lint-staged",
+    "icons-generate": "cross-env TS_NODE_PROJECT=tsconfig.tools.json node --loader ts-node/esm --experimental-specifier-resolution=node ./tools/icon-converter/index.mts",
+    "svgr": "svgr image-sources --out-dir src/assets/images --typescript",
+    "release-fix": "standard-version --prerelease fix",
+    "osc:check": "npx dependency-resolver",
+    "osc:fix": "npx dependency-resolver -f",
+    "clear-jest": "jest --clearCache"
+  },
+  "allowedUiPackages": [
+    "@mui/base",
+    "@mui/icons-material",
+    "@mui/lab",
+    "@mui/material",
+    "@mui/styles",
+    "@mui/system",
+    "@mui/x-date-pickers",
+    "@storybook/addon-essentials",
+    "@storybook/addon-links",
+    "@storybook/addon-webpack5-compiler-swc",
+    "@storybook/blocks",
+    "@storybook/manager-api",
+    "@storybook/preview-api",
+    "@storybook/react",
+    "@storybook/react-webpack5",
+    "@storybook/test",
+    "react",
+    "react-beautiful-dnd",
+    "react-chartjs-2",
+    "react-dom",
+    "react-error-boundary",
+    "react-hook-form",
+    "react-virtualized",
+    "storybook"
+  ]
+}

@@ -1,0 +1,131 @@
+/* =========================================================================
+   Design System — Tooltip
+   Всплывающая подсказка при наведении / фокусе на объект (иконка, IconButton,
+   обрезанный текст, поле с ошибкой). Контент — строка, может переноситься.
+
+   Types:      main · error
+   Placement:  top · bottom · left · right
+   Align:      start · center · end        (положение стрелки вдоль края)
+   Extras:     no-arrow · multiline
+
+   Tokens:
+     --tip-bg   — фон тултипа и стрелки
+     --tip-fg   — цвет текста
+     --tip-max  — максимальная ширина контейнера
+   Requires: typography.css, colors.css
+   ========================================================================= */
+
+.tip {
+  --tip-bg: var(--bg-hint);          /* #283237 */
+  --tip-fg: var(--text-on-dark);     /* #FFFFFF */
+  --tip-max: 280px;
+  --tip-radius: var(--radius-control);
+  --tip-arrow: 7px;                  /* высота стрелки (вынос за край) */
+  --tip-arrow-edge: 6px;             /* отступ стрелки от края при краевом размещении */
+
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  max-width: var(--tip-max);
+  padding: 8px 12px;                 /* 8/12/8/12 */
+  border-radius: var(--tip-radius);
+  background: var(--tip-bg);
+  color: var(--tip-fg);
+  font: var(--type-body-s);          /* Body S — 14/16 */
+  letter-spacing: 0;
+  white-space: nowrap;               /* по умолчанию — одна строка, обтекание контента */
+  box-shadow: 0 4px 14px rgba(40, 50, 55, .18);
+  z-index: 30;
+}
+
+/* перенос длинного контента — ограничение по --tip-max */
+.tip--multiline { white-space: normal; text-wrap: pretty; }
+
+/* ---------- types --------------------------------------------------------- */
+.tip--main  { --tip-bg: var(--bg-hint); }
+.tip--error { --tip-bg: var(--error); }
+
+/* ---------- arrow --------------------------------------------------------- */
+.tip__arrow {
+  position: absolute;
+  width: calc(var(--tip-arrow) * 2);
+  height: var(--tip-arrow);
+  background: var(--tip-bg);
+  pointer-events: none;
+}
+.tip--no-arrow .tip__arrow { display: none; }
+
+/* --- placement: tooltip ABOVE target → arrow at bottom, points down --- */
+.tip--top .tip__arrow {
+  bottom: calc(var(--tip-arrow) * -1);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+/* --- placement: tooltip BELOW target → arrow at top, points up --- */
+.tip--bottom .tip__arrow {
+  top: calc(var(--tip-arrow) * -1);
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
+/* --- placement: tooltip LEFT of target → arrow at right, points right --- */
+.tip--left .tip__arrow {
+  width: var(--tip-arrow);
+  height: calc(var(--tip-arrow) * 2);
+  right: calc(var(--tip-arrow) * -1);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+/* --- placement: tooltip RIGHT of target → arrow at left, points left --- */
+.tip--right .tip__arrow {
+  width: var(--tip-arrow);
+  height: calc(var(--tip-arrow) * 2);
+  left: calc(var(--tip-arrow) * -1);
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+
+/* --- arrow alignment along a horizontal edge (top / bottom placement) --- */
+.tip--top.tip--start  .tip__arrow,
+.tip--bottom.tip--start  .tip__arrow { left: var(--tip-arrow-edge); }
+.tip--top.tip--center .tip__arrow,
+.tip--bottom.tip--center .tip__arrow { left: 50%; transform: translateX(-50%); }
+.tip--top.tip--end    .tip__arrow,
+.tip--bottom.tip--end    .tip__arrow { right: var(--tip-arrow-edge); }
+
+/* --- arrow alignment along a vertical edge (left / right placement) --- */
+.tip--left.tip--start  .tip__arrow,
+.tip--right.tip--start  .tip__arrow { top: var(--tip-arrow-edge); }
+.tip--left.tip--center .tip__arrow,
+.tip--right.tip--center .tip__arrow { top: 50%; transform: translateY(-50%); }
+.tip--left.tip--end    .tip__arrow,
+.tip--right.tip--end    .tip__arrow { bottom: var(--tip-arrow-edge); }
+
+/* =========================================================================
+   FLOATING — тултип, спозиционированный относительно цели (через JS).
+   Контейнер-якорь получает position:relative, тултип — position:absolute.
+   Появление/скрытие через .is-visible.
+   ========================================================================= */
+.tip-anchor { position: relative; display: inline-flex; }
+
+.tip.tip--floating {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(.96);
+  transform-origin: var(--tip-origin, center);
+  transition: opacity .14s ease, transform .14s ease, visibility 0s linear .14s;
+}
+.tip.tip--floating.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: opacity .14s ease, transform .14s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tip.tip--floating { transition: opacity .01s; transform: none; }
+  .tip.tip--floating.is-visible { transform: none; }
+}
+
+/* pinned — always-visible positioned tooltip (demos that aren't hover-triggered) */
+.tip.tip--floating.tip--pinned {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: none;
+}

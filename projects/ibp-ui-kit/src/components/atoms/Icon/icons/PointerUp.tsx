@@ -1,0 +1,12 @@
+import React from 'react';
+import { SvgIcon } from '@mui/material';
+
+import { SvgIconProps } from './icons.types';
+
+export const PointerUp = (props: SvgIconProps) => {
+  return (
+    <SvgIcon {...props}>
+      <path d="M12 10.41L15.29 13.7C15.68 14.1 16.31 14.1 16.7 13.7C17.1 13.31 17.1 12.68 16.7 12.29L12.7 8.29C12.51 8.09 12.27 8 12 8C11.72 8 11.48 8.09 11.29 8.29L7.29 12.29C6.89 12.68 6.89 13.31 7.29 13.7C7.68 14.1 8.31 14.1 8.7 13.7L12 10.41Z" fillRule="evenodd"/>
+    </SvgIcon>
+  );
+};

@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Фонд · Интеррос</title>
+<link rel="stylesheet" href="design-system.css?v=3" />
+<link rel="stylesheet" href="_shell.css" />
+<style>
+.app.fund-detail { grid-template-columns: 56px 1fr; }
+.fd-main { overflow-y: auto; padding: 16px 20px 24px; background: var(--c-bg); display: grid; gap: 12px; grid-template-columns: 1fr 304px; align-items: start; }
+.fd-main > .col-l { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.fd-main > .col-r { display: flex; flex-direction: column; gap: 12px; }
+.fd-main > .col-full { grid-column: 1 / -1; }
+.tab .count.is-info { background: var(--c-info-soft); color: oklch(0.42 0.14 240); }
+.fd-news-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-xl); padding: 14px 18px; display: flex; flex-direction: column; gap: 8px; transition: border-color 120ms; }
+.fd-news-card:hover { border-color: var(--c-border-strong); }
+.fd-news-card.is-priority { border-left: 3px solid oklch(0.58 0.18 25); padding-left: 17px; }
+.fd-news-card .fnc-meta { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+.fd-news-card .fnc-meta .date { color: var(--c-text-3); font-variant-numeric: tabular-nums; }
+.fd-news-card .fnc-meta .source { color: var(--c-text-4); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+.fd-news-card .fnc-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--c-text-4); }
+.fd-news-card .fnc-actions { margin-left: auto; display: flex; align-items: center; gap: 4px; color: var(--c-text-3); }
+.fd-news-card .fnc-actions a { font-size: 12px; display: inline-flex; align-items: center; gap: 5px; }
+.fd-news-card .fnc-title { font-size: 16px; font-weight: 600; line-height: 1.4; letter-spacing: -0.005em; color: var(--c-text); }
+.fd-news-card .fnc-tags { display: flex; gap: 6px; }
+
+.assets-block .block-head { padding: 12px 18px; }
+.assets-block .block-head .right-links { display: flex; gap: 14px; font-size: 12px; }
+.assets-block .block-head .right-links a { color: var(--c-accent-2); }
+.assets-block table { width: 100%; }
+.assets-block th { font-size: 11px; color: var(--c-text-3); font-weight: 500; padding: 10px 12px; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--c-divider); background: var(--c-surface); }
+.assets-block th.num, .assets-block td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.assets-block td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid var(--c-divider); }
+.assets-block tbody tr:last-child td { border-bottom: 0; }
+.assets-block tbody tr:hover { background: var(--c-surface-2); }
+.assets-block th.cb, .assets-block td.cb { width: 36px; padding-right: 0; }
+.assets-block input[type="checkbox"] { accent-color: var(--c-accent); }
+.sort-arrow { color: var(--c-text-4); margin-left: 3px; font-size: 10px; }
+</style>
+</head><body>
+<div class="app fund-detail">
+  <div class="topbar">
+    <div class="brand"><div class="bm">E</div><div class="n">Equitas</div></div>
+    <nav class="crumbs-top"><a href="Screens Index.html">Главная</a><span class="sep">/</span><a href="Funds List.html">Фонды</a><span class="sep">/</span><span class="current">Гарантийный кооператив «Фарма»</span></nav>
+    <div class="spacer"></div>
+    <label class="search-top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Поиск…"/><span class="kbd">⌘K</span></label>
+    <button class="topbar-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dot-new"></span></button>
+    <div class="avatar avatar-sm avatar-emerald" style="margin-left: 4px;">ПС</div>
+  </div>
+
+  <aside class="rail">
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 3l9 6v11a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg></button>
+    <button class="rail-ic is-active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5zM12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
+    <button class="rail-ic" style="position: relative;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><span style="position: absolute; top: 4px; right: 4px; width: 7px; height: 7px; border-radius: 50%; background: oklch(0.58 0.18 25); border: 1.5px solid var(--c-surface);"></span></button>
+    <div class="foot"><div class="avatar avatar-sm avatar-emerald" style="font-size: 11px;">ПС</div></div>
+  </aside>
+
+  <main class="main fd-main">
+    <!-- Entity header (full width) -->
+    <div class="entity-header col-full">
+      <div class="eh-logo">PL</div>
+      <div class="eh-body">
+        <div class="eh-eyebrow"><span class="badge-mini">PL</span><span>Глобальные рынки</span></div>
+        <div class="eh-title">Интеррос</div>
+        <div class="eh-meta-row">
+          <div class="meta-field" style="min-width: 0;">
+            <div class="mf-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg></div>
+            <div class="mf-body">
+              <div class="mf-lbl">Приоритет</div>
+              <div class="priority-pill is-high" style="margin-top: 1px;"><span class="pp-dot"></span>Высокий<svg class="pp-chev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>
+            </div>
+          </div>
+          <div class="meta-field">
+            <div class="mf-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 3 3 5-5"/></svg></div>
+            <div class="mf-body"><div class="mf-lbl">Управляющий</div><div class="mf-val">Владимир Потанин</div></div>
+          </div>
+          <div class="meta-field">
+            <div class="mf-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+            <div class="mf-body"><div class="mf-lbl">География</div><div class="mf-val">Российская Федерация</div></div>
+          </div>
+          <div class="meta-field">
+            <div class="mf-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 3 3 5-5"/></svg></div>
+            <div class="mf-body"><div class="mf-lbl">Объём инвестиций</div><div class="mf-val">967,65 млрд руб.</div></div>
+          </div>
+          <div class="meta-field">
+            <div class="mf-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></div>
+            <div class="mf-body"><div class="mf-lbl">E-mail</div><div class="mf-val">invest-ideas@interros.ru</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="eh-actions">
+        <button class="btn btn-secondary btn-sm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>Отправить</button>
+        <button class="btn btn-primary btn-sm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Добавить идею</button>
+        <button class="topbar-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Tabs (full width) -->
+    <div class="tabs-row col-full">
+      <div class="tabs">
+        <a class="tab is-active">Общая информация</a>
+        <a class="tab">Новости</a>
+        <a class="tab">Активы</a>
+        <a class="tab">Взаимодействия</a>
+        <a class="tab">Идеи <span class="count is-info">1</span></a>
+        <a class="tab">Изменения <span class="count is-info">2</span></a>
+      </div>
+    </div>
+
+    <!-- LEFT COLUMN -->
+    <div class="col-l">
+      <!-- News stack -->
+      <div class="fd-news-card">
+        <div class="fnc-meta">
+          <span class="date">6 Апреля, 2026</span><span class="dot"></span>
+          <span class="source">Bloomberg Finance</span>
+          <div class="fnc-actions"><a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5zM12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/></svg>Создать идею</a><button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 17.99 8.84l-8.58 8.57a2 2 0 1 1-2.83-2.83l8.49-8.48"/></svg></button></div>
+        </div>
+        <div class="fnc-title">Экспансия на рынки Юго-Восточной Азии показывает ускоренные показатели эффективности за III квартал</div>
+        <div class="fnc-tags"><span class="chip chip-strategic">Стратегический</span><span class="chip chip-growth">Рост</span></div>
+      </div>
+
+      <div class="fd-news-card is-priority">
+        <div class="fnc-meta">
+          <span class="date">31 Марта, 2026</span><span class="dot"></span>
+          <span class="source">РБК Инвестиции</span>
+          <div class="fnc-actions"><a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5zM12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/></svg>Создать идею</a><button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 17.99 8.84l-8.58 8.57a2 2 0 1 1-2.83-2.83l8.49-8.48"/></svg></button></div>
+        </div>
+        <div class="fnc-title">Регуляторные корректировки в секторе финтеха ЕС могут повлиять на предстоящие IPO</div>
+        <div class="fnc-tags"><span class="chip chip-high-prio">Высокий приоритет</span><span class="chip chip-regulatory">Регуляторный</span></div>
+      </div>
+
+      <div class="fd-news-card">
+        <div class="fnc-meta">
+          <span class="date">15 Декабря, 2025</span><span class="dot"></span>
+          <span class="source">РБК Инвестиции</span>
+          <div class="fnc-actions"><a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5zM12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/></svg>Создать идею</a><button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 17.99 8.84l-8.58 8.57a2 2 0 1 1-2.83-2.83l8.49-8.48"/></svg></button></div>
+        </div>
+        <div class="fnc-title">Газпром увеличивает долю в серии IV еще на 200 млн. руб</div>
+        <div class="fnc-tags"><span class="chip chip-stakeholder">Стейкхолдер</span></div>
+      </div>
+
+      <!-- Assets table -->
+      <div class="block assets-block">
+        <div class="block-head">
+          <div class="block-title">Активы</div>
+          <div class="right-links">
+            <a>В новости →</a>
+            <a>В активы →</a>
+          </div>
+        </div>
+        <div class="block-body flush">
+          <table id="assets-tbl">
+            <thead><tr>
+              <th class="cb"><input type="checkbox"/></th>
+              <th>Название актива <span class="sort-arrow">↕</span></th>
+              <th>Год приобретения <span class="sort-arrow">↕</span></th>
+              <th class="num">Объём инвестиций</th>
+              <th>Отрасль</th>
+              <th>Статус <span class="sort-arrow">↕</span></th>
+              <th class="cell-actions"></th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-r">
+      <!-- Idea -->
+      <div class="idea-recommend">
+        <div class="ir-head">
+          <div class="ir-title">Идея сделки</div>
+          <span class="ir-badge">AI РЕКОМЕНДАЦИЯ</span>
+        </div>
+        <h4>Buy-side покупка актива Порт Мурманск в связи с развитием северного направления</h4>
+        <div class="ir-trigger"><b>Триггер:</b> Новости о готовящемся изменении налогового законодательства и …</div>
+        <div class="ir-when">вчера</div>
+      </div>
+
+      <!-- Investment report -->
+      <div class="report-card">
+        <div class="rc-head">
+          <div class="rc-title">Инвестиционный отчёт</div>
+          <a class="icon-btn rc-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </div>
+        <div class="rc-cap-lbl">Вложено капитала</div>
+        <div><span class="rc-cap-val">1,45</span><span class="rc-cap-unit">млрд руб.</span></div>
+        <div class="rc-track"><span style="width: 65.5%;"></span></div>
+        <div class="rc-split">
+          <div class="rc-split-col"><div class="lbl">Освоено</div><div class="val">950 млн. руб.</div></div>
+          <div class="rc-split-col" style="text-align: right;"><div class="lbl">Остаток</div><div class="val">500 млн. руб.</div></div>
+        </div>
+      </div>
+
+      <!-- Pending changes -->
+      <div class="block">
+        <div class="block-head"><div class="block-title">Изменения на подтверждение</div></div>
+        <div class="block-body" style="padding-top: 6px;">
+          <div class="confirm-list">
+            <div class="ci">
+              <div class="ci-lbl">КГ Эрла Хан</div>
+              <div class="ci-text">Старое значение / Новое значение</div>
+              <div class="ci-when">2 часа назад</div>
+            </div>
+            <div class="ci">
+              <div class="ci-lbl">Команда</div>
+              <div class="ci-text">Добавили нового партнёра</div>
+              <div class="ci-when">2 часа назад</div>
+            </div>
+            <div class="ci-actions">
+              <button class="btn btn-secondary btn-sm">Подтвердить</button>
+              <button class="btn btn-link btn-sm">В изменения →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trends -->
+      <div class="trend-card">
+        <div class="tc-title">Тренды</div>
+        <svg class="tc-chart" viewBox="0 0 280 110" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="trendGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="oklch(0.62 0.13 155)" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="oklch(0.62 0.13 155)" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- gridlines -->
+          <line x1="0" y1="20" x2="280" y2="20" stroke="oklch(0.94 0.008 240)" stroke-width="1"/>
+          <line x1="0" y1="55" x2="280" y2="55" stroke="oklch(0.94 0.008 240)" stroke-width="1"/>
+          <line x1="0" y1="90" x2="280" y2="90" stroke="oklch(0.94 0.008 240)" stroke-width="1"/>
+          <!-- area + line: текущий показатель -->
+          <path d="M0,86 C30,82 50,72 80,62 S140,30 180,28 220,28 280,18 L280,90 L0,90 Z" fill="url(#trendGrad)"/>
+          <path d="M0,86 C30,82 50,72 80,62 S140,30 180,28 220,28 280,18" fill="none" stroke="oklch(0.55 0.14 155)" stroke-width="1.6" stroke-linecap="round"/>
+          <!-- baseline среднее -->
+          <path d="M0,72 L40,70 L80,66 L120,60 L160,50 L200,44 L240,40 L280,36" fill="none" stroke="oklch(0.65 0.010 245)" stroke-width="1" stroke-dasharray="3,3"/>
+          <!-- x-axis labels -->
+          <text x="14" y="105" font-size="8" fill="oklch(0.58 0.010 245)">апрель</text>
+          <text x="74" y="105" font-size="8" fill="oklch(0.58 0.010 245)">сентябрь</text>
+          <text x="138" y="105" font-size="8" fill="oklch(0.58 0.010 245)">декабрь</text>
+          <text x="204" y="105" font-size="8" fill="oklch(0.58 0.010 245)">март</text>
+        </svg>
+        <div class="tc-legend">
+          <span class="lg">Текущий показатель</span>
+          <span class="lg is-mute">Средний по отрасли</span>
+        </div>
+        <div class="tc-summary">Фонд в настоящее время работает на 16% ниже заявленного показателя за последние 12 месяцев. <a class="rc-link" style="color: var(--c-accent-2);">Подробнее…</a></div>
+      </div>
+
+      <!-- Interaction history -->
+      <div class="block">
+        <div class="block-head"><div class="block-title">История взаимодействия</div></div>
+        <div class="block-body" style="padding-top: 6px;">
+          <div class="interaction-log">
+            <div class="il">
+              <div class="il-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+              <div class="il-body">
+                <div class="il-name">Петров Сергей Иванович</div>
+                <div class="il-text">Обсуждение отчёта за I квартал</div>
+                <div class="il-when">8 мая</div>
+              </div>
+            </div>
+            <div class="il">
+              <div class="il-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></div>
+              <div class="il-body">
+                <div class="il-name">Онбординг фонда</div>
+                <div class="il-text">Отправили документацию по налаживанию взаимодействия</div>
+                <div class="il-when">31 Марта 2026</div>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <button class="btn btn-secondary btn-sm">Добавить</button>
+            <button class="btn btn-link btn-sm">В взаимодействия →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const ASSETS = [
+  ['Роза Хутор', '2010', '245 000 000', 'tag-hotel', 'Отели, рестораны и объекты досуга'],
+  ['Турьев Хутор', '2025', '145 000 000', 'tag-hotel', 'Отели, рестораны и объекты досуга'],
+  ['Парк Три Вулкана', '2024', '320 000 000', 'tag-hotel', 'Отели, рестораны и объекты досуга'],
+  ['Норильский Никель (35,9%)', '1994', '2 945 000 000', 'tag-metal', 'Металлы и руды'],
+  ['ГРК Быстринское', '2005', '2 945 000 000', 'tag-metal', 'Металлы и руды'],
+  ['Петровакс Фарм', '2014', '320 000 000', 'tag-pharma', 'Фармацевтика'],
+  ['Т-банк', '2022', '320 000 000', 'tag-bank', 'Банки'],
+  ['Банк Точка', '2025', '320 000 000', 'tag-bank', 'Банки'],
+  ['Росбанк', '2022', '950 000 000', 'tag-bank', 'Банки'],
+  ['Яндекс (0,95%)', '2025', '950 000 000', 'tag-it', 'Информационно-технологические услуги'],
+  ['Атомдата', '2022', '90 000 000', 'tag-soft', 'Многоотраслевые финансовые услуги'],
+  ['Раксофт', '2022', '120 000 000', 'tag-soft', 'Программное обеспечение'],
+  ['Фонд Восход', '2021', '70 000 000', 'tag-capital', 'Рынки капитала'],
+];
+const tbody = document.querySelector('#assets-tbl tbody');
+tbody.innerHTML = ASSETS.map(a => `<tr>
+  <td class="cb"><input type="checkbox"/></td>
+  <td><a class="lnk-strong" style="font-weight: 500;">${a[0]}</a></td>
+  <td class="is-muted">${a[1]}</td>
+  <td class="num">${a[2]}</td>
+  <td><span class="tag ${a[3]}">${a[4]}</span></td>
+  <td><span class="status status-active"><span class="d"></span>Активен</span></td>
+  <td class="cell-actions"><button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button></td>
+</tr>`).join('');
+</script>
+</body></html>

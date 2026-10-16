@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Изменения · Equitas</title>
+<link rel="stylesheet" href="design-system.css" />
+<link rel="stylesheet" href="_shell.css" />
+<style>
+.change-card { border: 1px solid var(--c-border); background: var(--c-surface); border-radius: var(--r-xl); overflow: hidden; margin-bottom: 14px; }
+.change-head { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; padding: 14px 18px; align-items: center; border-bottom: 1px solid var(--c-divider); background: var(--c-surface-2); }
+.change-title { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.change-sub { font-size: 11.5px; color: var(--c-text-3); margin-top: 2px; display: flex; align-items: center; gap: 8px; }
+.change-sub .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--c-text-4); }
+.diff-row { display: grid; grid-template-columns: 180px 1fr 1fr; gap: 0; padding: 0; border-bottom: 1px solid var(--c-divider); }
+.diff-row:last-child { border-bottom: 0; }
+.diff-row > div { padding: 12px 18px; font-size: 13px; }
+.diff-field { background: var(--c-surface-2); color: var(--c-text-3); font-size: 11.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; display: flex; align-items: center; }
+.diff-old { color: var(--c-text-2); border-right: 1px solid var(--c-divider); position: relative; }
+.diff-old::before { content: "—"; color: var(--c-danger); font-weight: 700; margin-right: 8px; font-family: var(--font-mono); }
+.diff-new { color: var(--c-text); font-weight: 500; background: oklch(0.97 0.04 155); position: relative; }
+[data-theme="dark"] .diff-new { background: oklch(0.30 0.06 155 / 0.4); }
+.diff-new::before { content: "+"; color: var(--c-accent); font-weight: 700; margin-right: 8px; font-family: var(--font-mono); }
+.change-foot { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-top: 1px solid var(--c-divider); }
+.source { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--c-text-2); }
+.source .s-ic { width: 22px; height: 22px; border-radius: 6px; background: var(--c-surface-3); color: var(--c-text-2); display: grid; place-items: center; }
+.source b { color: var(--c-text); font-weight: 500; }
+
+.audit-log { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 18px; }
+.audit-log::before { content: ""; position: absolute; left: 5px; top: 10px; bottom: 10px; width: 1.5px; background: var(--c-divider); }
+.log-item { position: relative; padding: 10px 0; font-size: 12.5px; }
+.log-item::before { content: ""; position: absolute; left: -16px; top: 16px; width: 8px; height: 8px; border-radius: 50%; background: var(--c-surface); border: 2px solid var(--c-accent-border); }
+.log-item.is-approve::before { background: var(--c-accent); border-color: var(--c-accent); }
+.log-item.is-reject::before { background: var(--c-danger); border-color: var(--c-danger); }
+.log-item .w { font-weight: 500; }
+.log-item .t-micro { margin-top: 2px; }
+
+.stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px; }
+.stat { padding: 14px 16px; border: 1px solid var(--c-border); background: var(--c-surface); border-radius: var(--r-lg); }
+.stat .l { font-size: 11px; color: var(--c-text-3); letter-spacing: 0.02em; text-transform: uppercase; }
+.stat .v { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-top: 4px; }
+.stat .d { font-size: 11.5px; margin-top: 2px; }
+.stat .d.is-up { color: oklch(0.40 0.12 155); }
+.stat .d.is-down { color: oklch(0.45 0.15 25); }
+</style></head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><div class="bm">E</div><div class="n">Equitas</div></div>
+    <nav class="crumbs-top"><a href="Screens Index.html">Главная</a><span class="sep">/</span><a href="#">Фонды</a><span class="sep">/</span><a href="#">Интеррос</a><span class="sep">/</span><span class="current">Изменения</span></nav>
+    <div class="spacer"></div>
+    <label class="search-top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Поиск…"/><span class="kbd">⌘K</span></label>
+    <button class="topbar-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+    <div class="avatar avatar-sm avatar-emerald" style="margin-left: 4px;">АК</div>
+  </div>
+
+  <aside class="rail">
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 3l9 6v11a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></button>
+    <button class="rail-ic is-active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 2 7l10 5 10-5-10-5z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/></svg></button>
+  </aside>
+
+  <aside class="nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Фильтры</div>
+      <a href="#" class="nav-item active"><span class="n-l">На подтверждение</span><span class="num">2</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Все</span><span class="num">34</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Принятые</span><span class="num">28</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Отклонённые</span><span class="num">4</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">По сущности</div>
+      <a href="#" class="nav-item"><span class="n-l">Фонд</span><span class="num">7</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Активы</span><span class="num">21</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Команда</span><span class="num">4</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Контакты</span><span class="num">2</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Источник</div>
+      <a href="#" class="nav-item"><span class="n-l">AI-извлечение</span><span class="num">18</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Пользователь</span><span class="num">12</span></a>
+      <a href="#" class="nav-item"><span class="n-l">API/Bloomberg</span><span class="num">4</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">
+      <div class="ph-l">
+        <h1>Изменения на подтверждение</h1>
+        <div class="sub">Интеррос · 2 изменения ожидают решения · предложены AI и сотрудниками</div>
+      </div>
+      <div class="ph-r">
+        <button class="btn btn-ghost btn-sm">Экспорт</button>
+        <button class="btn btn-secondary btn-sm">Отклонить все</button>
+        <button class="btn btn-primary btn-sm">Подтвердить все (2)</button>
+      </div>
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat"><div class="l">Ожидают</div><div class="v">2</div><div class="d muted">с 2 час назад</div></div>
+      <div class="stat"><div class="l">За 30 дней</div><div class="v">34</div><div class="d is-up">+12 к марту</div></div>
+      <div class="stat"><div class="l">Автоматически</div><div class="v">82%</div><div class="d muted">AI-извлечение</div></div>
+      <div class="stat"><div class="l">Время решения</div><div class="v">4,2 <span style="font-size: 14px; color: var(--c-text-3); font-weight: 400;">ч</span></div><div class="d is-down">медленнее на 0,6ч</div></div>
+    </div>
+
+    <!-- CHANGE 1 -->
+    <div class="change-card">
+      <div class="change-head">
+        <div class="avatar avatar-md avatar-violet" style="border-radius: var(--r-md);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></div>
+        <div>
+          <div class="change-title">Изменение бенефициара фонда <span class="ai-badge">AI Извлечение</span></div>
+          <div class="change-sub"><span>Интеррос</span><span class="dot"></span><span>Сущность: Фонд</span><span class="dot"></span><span>5 часов назад</span><span class="dot"></span><span>Уверенность AI: 94%</span></div>
+        </div>
+        <div class="row-sm">
+          <span class="badge badge-warning"><span class="badge-dot"></span>Ожидает</span>
+        </div>
+      </div>
+      <div>
+        <div class="diff-row">
+          <div class="diff-field">Бенефициар</div>
+          <div class="diff-old">Владимир Потанин</div>
+          <div class="diff-new">Владимир О. Потанин <span class="muted" style="font-weight: 400; font-size: 11.5px;">(уточнение отчества)</span></div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-field">Доля владения</div>
+          <div class="diff-old">30,0%</div>
+          <div class="diff-new">30,4%</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-field">Дата обновления</div>
+          <div class="diff-old">01 янв 2025</div>
+          <div class="diff-new">31 мар 2026</div>
+        </div>
+      </div>
+      <div class="change-foot">
+        <div class="source">
+          <div class="s-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+          <span>Источник: <b>отчёт «Интеррос_Q1_2026.pdf»</b>, стр. 14</span>
+          <a class="btn btn-link" style="font-size: 11.5px;">Открыть →</a>
+        </div>
+        <div class="row-sm">
+          <button class="btn btn-ghost btn-sm">Показать в контексте</button>
+          <button class="btn btn-danger-outline btn-sm">Отклонить</button>
+          <button class="btn btn-primary btn-sm">Подтвердить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHANGE 2 -->
+    <div class="change-card">
+      <div class="change-head">
+        <div class="avatar avatar-md avatar-amber" style="border-radius: var(--r-md);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div>
+          <div class="change-title">Добавление партнёра в команду</div>
+          <div class="change-sub"><span>Интеррос</span><span class="dot"></span><span>Сущность: Команда</span><span class="dot"></span><span>2 часа назад</span><span class="dot"></span><span>Автор: Анна Ковалёва</span></div>
+        </div>
+        <div class="row-sm">
+          <span class="badge badge-warning"><span class="badge-dot"></span>Ожидает</span>
+        </div>
+      </div>
+      <div>
+        <div class="diff-row">
+          <div class="diff-field">ФИО</div>
+          <div class="diff-old">—</div>
+          <div class="diff-new">Михаил Тарасов</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-field">Должность</div>
+          <div class="diff-old">—</div>
+          <div class="diff-new">Управляющий партнёр</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-field">E-mail</div>
+          <div class="diff-old">—</div>
+          <div class="diff-new">m.ivanov@interos.ru</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-field">Доступ</div>
+          <div class="diff-old">—</div>
+          <div class="diff-new">Чтение всех активов · редактирование идей</div>
+        </div>
+      </div>
+      <div class="change-foot">
+        <div class="source">
+          <div class="s-ic"><div class="avatar avatar-xs avatar-amber" style="margin: 0;">АК</div></div>
+          <span>Предложено <b>Анной Ковалёвой</b> · комментарий: «по итогам встречи 02.04»</span>
+        </div>
+        <div class="row-sm">
+          <button class="btn btn-ghost btn-sm">Обсудить</button>
+          <button class="btn btn-danger-outline btn-sm">Отклонить</button>
+          <button class="btn btn-primary btn-sm">Подтвердить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECENTLY APPROVED -->
+    <div style="display: grid; grid-template-columns: 1fr 340px; gap: 14px;">
+      <div class="change-card" style="margin-bottom: 0;">
+        <div class="change-head">
+          <div class="avatar avatar-md avatar-blue" style="border-radius: var(--r-md);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17 9 11l4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+          <div>
+            <div class="change-title">Объём инвестиций в Норникель</div>
+            <div class="change-sub"><span>Интеррос → Актив</span><span class="dot"></span><span>Вчера, 16:42</span><span class="dot"></span><span>Одобрено Петром Семёновым</span></div>
+          </div>
+          <div class="row-sm">
+            <span class="badge badge-success"><span class="badge-dot"></span>Принято</span>
+          </div>
+        </div>
+        <div>
+          <div class="diff-row">
+            <div class="diff-field">Объём инвестиций</div>
+            <div class="diff-old">2 845 000 000 ₽</div>
+            <div class="diff-new">2 910 000 000 ₽</div>
+          </div>
+          <div class="diff-row">
+            <div class="diff-field">Доля владения</div>
+            <div class="diff-old">31,9%</div>
+            <div class="diff-new">32,3%</div>
+          </div>
+        </div>
+        <div class="change-foot">
+          <div class="source">
+            <div class="s-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <span>Источник: <b>Bloomberg Feed</b> · FIGI BBG004731489</span>
+          </div>
+          <div class="row-sm">
+            <button class="btn btn-ghost btn-sm">История</button>
+            <button class="btn btn-secondary btn-sm">Откатить</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding: 18px;">
+        <div class="card-title">Audit-log по фонду</div>
+        <div class="audit-log" style="margin-top: 14px;">
+          <div class="log-item is-approve">
+            <div class="w">Пётр Семёнов <span class="muted" style="font-weight: 400;">одобрил</span> изменение объёма Норникеля</div>
+            <div class="t-micro">вчера, 16:42 · источник: Bloomberg</div>
+          </div>
+          <div class="log-item">
+            <div class="w">AI <span class="muted" style="font-weight: 400;">извлёк</span> изменение бенефициара из Q1-отчёта</div>
+            <div class="t-micro">вчера, 11:08 · уверенность 94%</div>
+          </div>
+          <div class="log-item is-reject">
+            <div class="w">Анна Ковалёва <span class="muted" style="font-weight: 400;">отклонила</span> смену e-mail контакта</div>
+            <div class="t-micro">31 мар, 18:20 · причина: «дубликат»</div>
+          </div>
+          <div class="log-item is-approve">
+            <div class="w">Пётр Семёнов <span class="muted" style="font-weight: 400;">одобрил</span> 3 изменения в ГРК Быстринское</div>
+            <div class="t-micro">29 мар, 09:14 · массовое действие</div>
+          </div>
+          <div class="log-item is-approve">
+            <div class="w">Система <span class="muted" style="font-weight: 400;">обновила</span> котировки по 12 активам</div>
+            <div class="t-micro">29 мар, 07:00 · авто-синк</div>
+          </div>
+        </div>
+        <div style="margin-top: 14px;">
+          <button class="btn btn-ghost btn-sm" style="width: 100%; justify-content: center;">Показать весь лог →</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body></html>

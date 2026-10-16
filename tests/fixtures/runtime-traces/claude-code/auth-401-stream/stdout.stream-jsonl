@@ -1,0 +1,2 @@
+{"type":"system","subtype":"init"}
+{"type":"assistant","isApiErrorMessage":true,"apiErrorStatus":401,"message":{"content":[{"type":"text","text":"API Error: 401 authentication_failed: invalid x-api-key"}]}}

@@ -1,0 +1,3 @@
+{"type":"system","subtype":"init","uuid":"u-1","session_id":"s-mock-1","tools":["read_file","write_file"],"mcp_servers":[],"model":"CodeChat","qwen_code_version":"26.6.31","agents":[]}
+{"type":"assistant","uuid":"u-2","session_id":"s-mock-1","parent_tool_use_id":null,"message":{"id":"m-1","type":"message","role":"assistant","model":"vllm/DeepSeek-V4-Flash-262k","content":[{"type":"text","text":"Hello from GigaCode."}],"stop_reason":"end_turn"}}
+{"type":"result","subtype":"success","session_id":"s-mock-1","is_error":false,"duration_ms":1200,"num_turns":1,"result":"Hello from GigaCode.","usage":{"input_tokens":42,"output_tokens":7,"cache_read_input_tokens":0,"total_tokens":49}}

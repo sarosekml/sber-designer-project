@@ -1,0 +1,46 @@
+{
+  "name": "design-system-token-scout",
+  "description": "Use design-system context and unified index token lookup for a token question.",
+  "agentName": "ai-design-system-scout",
+  "workspace": "custom-token-system",
+  "input": "Which primary brand color should I use for a main action?",
+  "permission": {
+    "*": "allow"
+  },
+  "mockResponses": [
+    {
+      "toolCalls": [
+        {
+          "name": "load_agent_skill",
+          "arguments": {
+            "name": "design-system-context"
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "get_project_index_status",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "get_indexed_token",
+          "arguments": {
+            "idOrName": "brandPrimary"
+          }
+        }
+      ]
+    },
+    {
+      "text": "Use brandPrimary (#0f766e) for the main action token path."
+    }
+  ],
+  "expectedToolSequence": ["load_agent_skill", "get_project_index_status", "get_indexed_token"],
+  "expectedFinalResponseContains": "brandPrimary (#0f766e)",
+  "expectedToolResultsContain": ["brandPrimary", "#0f766e"]
+}

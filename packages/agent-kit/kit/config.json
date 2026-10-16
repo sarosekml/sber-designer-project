@@ -1,0 +1,121 @@
+{
+  "$schema": "https://sber-designer.example/agents.schema.json",
+  "defaultAgent": "ai-product-designer",
+  "instructions": ["agents/ai-product-designer.md", "instructions/*.md"],
+  "knowledge": [
+    {
+      "id": "sber-designer-architecture",
+      "path": "knowledge/sber-designer-architecture.md",
+      "description": "How sber-designer works: modes, sandbox iframe, live-DOM canvas, AST source of truth, and agent boundaries."
+    },
+    {
+      "id": "product-ui-patterns",
+      "path": "knowledge/product-ui-patterns.md",
+      "description": "sber-designer product screen patterns that combine built-in screen templates, catalog components, and design-index facts."
+    },
+    {
+      "id": "frontend-ui-rules",
+      "path": "knowledge/frontend-ui-rules.md",
+      "description": "Production frontend, accessibility, responsive, and state rules for generated sber-designer screens."
+    },
+    {
+      "id": "ui-anti-patterns",
+      "path": "knowledge/ui-anti-patterns.md",
+      "description": "sber-designer anti-patterns: standalone HTML, AST-breaking rewrites, invented design systems, and unsafe edits."
+    },
+    {
+      "id": "layout-recipes",
+      "path": "knowledge/layout-recipes.md",
+      "description": "Design-readable layout recipes mapped to built-in screen templates and catalog component ids."
+    },
+    {
+      "id": "icon-usage",
+      "path": "knowledge/icon-usage.md",
+      "description": "Project-icon-first rules backed by .sber-designer/design-index/icons.json and Lucide fallback metadata."
+    },
+    {
+      "id": "design-mode-contract",
+      "path": "knowledge/design-mode-contract.md",
+      "description": "Universal Design mode baseline and Design-readable output rules for generated or repaired screens."
+    },
+    {
+      "id": "project-index-format",
+      "path": "knowledge/project-index-format.md",
+      "description": "Unified .sber-designer/design-index artifact contract and enrichment rules."
+    },
+    {
+      "id": "project-index-anatomy",
+      "path": "knowledge/project-index-anatomy.md",
+      "description": "How ai-product-designer should read .sber-designer/design-index artifacts and project-index tools."
+    },
+    {
+      "id": "apply-patch-recipes",
+      "path": "knowledge/apply-patch-recipes.md",
+      "description": "Structured apply_patch AST operation recipes for safe sber-designer source edits."
+    },
+    {
+      "id": "screen-template-format",
+      "path": "knowledge/screen-template-format.md",
+      "description": "Built-in screen template format and Storybook-based project template guidance."
+    },
+    {
+      "id": "catalog-response-shape",
+      "path": "knowledge/catalog-response-shape.md",
+      "description": "Agent-facing response shapes for list_components, project-index lookup tools, and read_file."
+    },
+    {
+      "id": "craft-typography",
+      "path": "knowledge/craft/typography.md",
+      "description": "Craft rules for semantic hierarchy, reusable page structure, and component-reuse checks."
+    },
+    {
+      "id": "craft-color",
+      "path": "knowledge/craft/color.md",
+      "description": "Craft rules for token-backed color usage and raw color value avoidance."
+    },
+    {
+      "id": "craft-anti-slop",
+      "path": "knowledge/craft/anti-slop.md",
+      "description": "Craft rules that prevent fake metrics, card soup, marketing hero copy, and unresolved screen sources."
+    },
+    {
+      "id": "craft-state-coverage",
+      "path": "knowledge/craft/state-coverage.md",
+      "description": "Craft rules for data-heavy screen empty, loading, and error state coverage."
+    },
+    {
+      "id": "craft-a11y-baseline",
+      "path": "knowledge/craft/a11y-baseline.md",
+      "description": "Craft rules for accessible controls and React source-shape safety."
+    },
+    {
+      "id": "craft-layout-spacing",
+      "path": "knowledge/craft/layout-spacing.md",
+      "description": "Craft guidance for token-backed spacing, grid rhythm, alignment, and responsive layout structure."
+    },
+    {
+      "id": "craft-laws-of-ux",
+      "path": "knowledge/craft/laws-of-ux.md",
+      "description": "Craft guidance for target size, choice load, proximity, grouping, and predictable interaction cost."
+    },
+    {
+      "id": "craft-form-validation",
+      "path": "knowledge/craft/form-validation.md",
+      "description": "Craft rules for required fields, inline validation, recoverable errors, and submit-state behavior."
+    },
+    {
+      "id": "craft-data-density",
+      "path": "knowledge/craft/data-density.md",
+      "description": "Craft rules for enterprise tables, numeric alignment, sorting, pagination, and dense operational scanning."
+    },
+    {
+      "id": "craft-motion-discipline",
+      "path": "knowledge/craft/motion-discipline.md",
+      "description": "Conditional craft guidance for token-backed motion, reduced-motion support, and restrained transitions."
+    }
+  ],
+  "skills": {
+    "allow": ["*"],
+    "deny": []
+  }
+}

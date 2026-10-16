@@ -1,0 +1,22 @@
+[Unit]
+Description=sber-designer API
+After=network-online.target sd-sandbox.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sd
+Group=sd
+WorkingDirectory=/opt/sber-designer/services/api
+EnvironmentFile=/etc/sber-designer/env
+Environment=SBER_DESIGNER_DISABLE_LOCAL_ENV_LOAD=1
+Environment=SBER_DESIGNER_DEPLOYMENT_MODE=server
+ExecStart=/home/sd/.bun/bin/bun src/index.ts
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=30
+KillSignal=SIGTERM
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

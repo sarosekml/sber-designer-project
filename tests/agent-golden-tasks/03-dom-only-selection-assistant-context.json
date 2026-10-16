@@ -1,0 +1,61 @@
+{
+  "name": "dom-only-selection-assistant-context",
+  "description": "A legacy DOM-only selection should be passed to the assistant as context instead of pretending it is directly editable.",
+  "workspace": "none",
+  "input": "Change this selected element.",
+  "editorState": {
+    "selection": {
+      "loc": "dom:/main/section[1]/button[1]",
+      "sourceKind": "dom-fallback",
+      "domPath": "main > section:nth-child(1) > button:nth-child(1)",
+      "tagName": "BUTTON",
+      "text": "Submit",
+      "selector": "main section button",
+      "rect": {
+        "x": 40,
+        "y": 88,
+        "width": 120,
+        "height": 36
+      }
+    }
+  },
+  "permission": {
+    "*": "allow"
+  },
+  "mockResponses": [
+    {
+      "toolCalls": [
+        {
+          "name": "load_agent_skill",
+          "arguments": {
+            "name": "visual-design-editing"
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "get_selection",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "post_message",
+          "arguments": {
+            "text": "I can use this DOM selection as assistant context, but I need a source-backed target before applying an edit."
+          }
+        }
+      ]
+    },
+    {
+      "text": "The DOM-only selection was routed through assistant context and no unsafe edit was attempted."
+    }
+  ],
+  "expectedToolSequence": ["load_agent_skill", "get_selection", "post_message"],
+  "expectedFinalResponseContains": "DOM-only selection",
+  "expectedToolResultsContain": ["dom-fallback"]
+}

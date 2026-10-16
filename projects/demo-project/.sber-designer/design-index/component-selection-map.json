@@ -1,0 +1,5131 @@
+{
+  "version": 1,
+  "generatedAt": 1784797601185,
+  "indexFingerprint": "206cf05b5102924ff7cd4a438c4285898c0b014151948f6189468d69817eed4b",
+  "counts": {
+    "indexed": 128,
+    "described": 0,
+    "diverged": 0
+  },
+  "entries": [
+    {
+      "componentId": "static-src-App-tsx",
+      "publicName": "App",
+      "title": "App",
+      "sourcePath": "src/App.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "app",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "app",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-AssistantWidgetPrompt",
+      "publicName": "AssistantWidgetPrompt",
+      "title": "AssistantWidgetPrompt",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-ChangePanel",
+      "publicName": "ChangePanel",
+      "title": "ChangePanel",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-ChecklistPanel",
+      "publicName": "ChecklistPanel",
+      "title": "ChecklistPanel",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-CommentsCard",
+      "publicName": "CommentsCard",
+      "title": "CommentsCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-ContactListCard",
+      "publicName": "ContactListCard",
+      "title": "ContactListCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-DealPanel",
+      "publicName": "DealPanel",
+      "title": "DealPanel",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-DetailsCard",
+      "publicName": "DetailsCard",
+      "title": "DetailsCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-DropTargetCard",
+      "publicName": "DropTargetCard",
+      "title": "DropTargetCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-FeedEventList",
+      "publicName": "FeedEventList",
+      "title": "FeedEventList",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-MetricsCard",
+      "publicName": "MetricsCard",
+      "title": "MetricsCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-NewsPanel",
+      "publicName": "NewsPanel",
+      "title": "NewsPanel",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-ParticipantsCard",
+      "publicName": "ParticipantsCard",
+      "title": "ParticipantsCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-RelatedEntitiesCard",
+      "publicName": "RelatedEntitiesCard",
+      "title": "RelatedEntitiesCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-SearchHero",
+      "publicName": "SearchHero",
+      "title": "SearchHero",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-SearchResultsCard",
+      "publicName": "SearchResultsCard",
+      "title": "SearchResultsCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-StatusList",
+      "publicName": "StatusList",
+      "title": "StatusList",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "status-feedback",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-StatusListCard",
+      "publicName": "StatusListCard",
+      "title": "StatusListCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "status-feedback",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-SummaryCard",
+      "publicName": "SummaryCard",
+      "title": "SummaryCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-TaskPanel",
+      "publicName": "TaskPanel",
+      "title": "TaskPanel",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-ThesisCard",
+      "publicName": "ThesisCard",
+      "title": "ThesisCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-TimelineCard",
+      "publicName": "TimelineCard",
+      "title": "TimelineCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-WidgetCatalogCard",
+      "publicName": "WidgetCatalogCard",
+      "title": "WidgetCatalogCard",
+      "sourcePath": "src/components/business-cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "business",
+        "cards",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-AssetsTable",
+      "publicName": "AssetsTable",
+      "title": "AssetsTable",
+      "sourcePath": "src/components/cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "navigation",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "assetstable"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "assetstable"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-Card",
+      "publicName": "Card",
+      "title": "Card",
+      "sourcePath": "src/components/cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "card"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "card"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-ChangesCard",
+      "publicName": "ChangesCard",
+      "title": "ChangesCard",
+      "sourcePath": "src/components/cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "changescard"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "changescard"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-IdeaCard",
+      "publicName": "IdeaCard",
+      "title": "IdeaCard",
+      "sourcePath": "src/components/cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "ideacard"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "ideacard"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-InteractionHistory",
+      "publicName": "InteractionHistory",
+      "title": "InteractionHistory",
+      "sourcePath": "src/components/cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "actions",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "interactionhistory"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "interactionhistory"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-InvestmentReportCard",
+      "publicName": "InvestmentReportCard",
+      "title": "InvestmentReportCard",
+      "sourcePath": "src/components/cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "investmentreportcard"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "investmentreportcard"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-KpiCard",
+      "publicName": "KpiCard",
+      "title": "KpiCard",
+      "sourcePath": "src/components/cards.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "kpicard"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "cards",
+        "tsx",
+        "kpicard"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-charts-tsx-BarChart",
+      "publicName": "BarChart",
+      "title": "BarChart",
+      "sourcePath": "src/components/charts.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "charts",
+        "tsx",
+        "barchart"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "charts",
+        "tsx",
+        "barchart"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "tone",
+          "values": [
+            "accent",
+            "info",
+            "warning",
+            "danger",
+            "violet",
+            "neutral"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-charts-tsx-DonutChart",
+      "publicName": "DonutChart",
+      "title": "DonutChart",
+      "sourcePath": "src/components/charts.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "charts",
+        "tsx",
+        "donutchart"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "charts",
+        "tsx",
+        "donutchart"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "tone",
+          "values": [
+            "accent",
+            "info",
+            "warning",
+            "danger",
+            "violet",
+            "neutral"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-charts-tsx-Heatmap",
+      "publicName": "Heatmap",
+      "title": "Heatmap",
+      "sourcePath": "src/components/charts.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "charts",
+        "tsx",
+        "heatmap"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "charts",
+        "tsx",
+        "heatmap"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "tone",
+          "values": [
+            "accent",
+            "info",
+            "warning",
+            "danger",
+            "violet",
+            "neutral"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-charts-tsx-LineChart",
+      "publicName": "LineChart",
+      "title": "LineChart",
+      "sourcePath": "src/components/charts.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "charts",
+        "tsx",
+        "linechart"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "charts",
+        "tsx",
+        "linechart"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "tone",
+          "values": [
+            "accent",
+            "info",
+            "warning",
+            "danger",
+            "violet",
+            "neutral"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-charts-tsx-Sparkline",
+      "publicName": "Sparkline",
+      "title": "Sparkline",
+      "sourcePath": "src/components/charts.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "charts",
+        "tsx",
+        "sparkline"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "charts",
+        "tsx",
+        "sparkline"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "tone",
+          "values": [
+            "accent",
+            "info",
+            "warning",
+            "danger",
+            "violet",
+            "neutral"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-BuildingIcon",
+      "publicName": "BuildingIcon",
+      "title": "BuildingIcon",
+      "sourcePath": "src/components/icons.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "buildingicon"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "buildingicon"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-CalendarIcon",
+      "publicName": "CalendarIcon",
+      "title": "CalendarIcon",
+      "sourcePath": "src/components/icons.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "calendaricon"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "calendaricon"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-CheckIcon",
+      "publicName": "CheckIcon",
+      "title": "CheckIcon",
+      "sourcePath": "src/components/icons.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "checkicon"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "checkicon"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-DocIcon",
+      "publicName": "DocIcon",
+      "title": "DocIcon",
+      "sourcePath": "src/components/icons.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "docicon"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "docicon"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-HashIcon",
+      "publicName": "HashIcon",
+      "title": "HashIcon",
+      "sourcePath": "src/components/icons.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "hashicon"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "hashicon"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-PendingIcon",
+      "publicName": "PendingIcon",
+      "title": "PendingIcon",
+      "sourcePath": "src/components/icons.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "pendingicon"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "pendingicon"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-PercentIcon",
+      "publicName": "PercentIcon",
+      "title": "PercentIcon",
+      "sourcePath": "src/components/icons.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "percenticon"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "percenticon"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-ShieldIcon",
+      "publicName": "ShieldIcon",
+      "title": "ShieldIcon",
+      "sourcePath": "src/components/icons.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "shieldicon"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "shieldicon"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-TargetIcon",
+      "publicName": "TargetIcon",
+      "title": "TargetIcon",
+      "sourcePath": "src/components/icons.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "targeticon"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "targeticon"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-UsersIcon",
+      "publicName": "UsersIcon",
+      "title": "UsersIcon",
+      "sourcePath": "src/components/icons.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "usersicon"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "icons",
+        "tsx",
+        "usersicon"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-layout-tsx-AppShell",
+      "publicName": "AppShell",
+      "title": "AppShell",
+      "sourcePath": "src/components/layout.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "layout",
+        "tsx",
+        "appshell"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "layout",
+        "tsx",
+        "appshell"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-layout-tsx-Breadcrumbs",
+      "publicName": "Breadcrumbs",
+      "title": "Breadcrumbs",
+      "sourcePath": "src/components/layout.tsx",
+      "source": "react-index",
+      "roles": [
+        "navigation",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "layout",
+        "tsx",
+        "breadcrumbs"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "layout",
+        "tsx",
+        "breadcrumbs"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-layout-tsx-PageHeader",
+      "publicName": "PageHeader",
+      "title": "PageHeader",
+      "sourcePath": "src/components/layout.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "layout",
+        "tsx",
+        "pageheader"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "layout",
+        "tsx",
+        "pageheader"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-layout-tsx-Tabs",
+      "publicName": "Tabs",
+      "title": "Tabs",
+      "sourcePath": "src/components/layout.tsx",
+      "source": "react-index",
+      "roles": [
+        "navigation",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "layout",
+        "tsx",
+        "tabs"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "layout",
+        "tsx",
+        "tabs"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-layout-tsx-TopToolbar",
+      "publicName": "TopToolbar",
+      "title": "TopToolbar",
+      "sourcePath": "src/components/layout.tsx",
+      "source": "react-index",
+      "roles": [
+        "actions",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "layout",
+        "tsx",
+        "toptoolbar"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "layout",
+        "tsx",
+        "toptoolbar"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-GlobeIcon",
+      "publicName": "GlobeIcon",
+      "title": "GlobeIcon",
+      "sourcePath": "src/components/meta-list.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-MessageIcon",
+      "publicName": "MessageIcon",
+      "title": "MessageIcon",
+      "sourcePath": "src/components/meta-list.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-MetaItem",
+      "publicName": "MetaItem",
+      "title": "MetaItem",
+      "sourcePath": "src/components/meta-list.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-MetaList",
+      "publicName": "MetaList",
+      "title": "MetaList",
+      "sourcePath": "src/components/meta-list.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-TrendIcon",
+      "publicName": "TrendIcon",
+      "title": "TrendIcon",
+      "sourcePath": "src/components/meta-list.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-UserIcon",
+      "publicName": "UserIcon",
+      "title": "UserIcon",
+      "sourcePath": "src/components/meta-list.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "meta",
+        "list",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-CardGrid",
+      "publicName": "CardGrid",
+      "title": "CardGrid",
+      "sourcePath": "src/components/page-layouts.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "gap",
+          "values": [
+            "none",
+            "sm",
+            "md"
+          ]
+        },
+        {
+          "prop": "mode",
+          "values": [
+            "default",
+            "single",
+            "auto"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-ContentGrid",
+      "publicName": "ContentGrid",
+      "title": "ContentGrid",
+      "sourcePath": "src/components/page-layouts.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "gap",
+          "values": [
+            "none",
+            "sm",
+            "md"
+          ]
+        },
+        {
+          "prop": "mode",
+          "values": [
+            "default",
+            "single",
+            "auto"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-FilterPanel",
+      "publicName": "FilterPanel",
+      "title": "FilterPanel",
+      "sourcePath": "src/components/page-layouts.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "gap",
+          "values": [
+            "none",
+            "sm",
+            "md"
+          ]
+        },
+        {
+          "prop": "mode",
+          "values": [
+            "default",
+            "single",
+            "auto"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-PageBlock",
+      "publicName": "PageBlock",
+      "title": "PageBlock",
+      "sourcePath": "src/components/page-layouts.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "gap",
+          "values": [
+            "none",
+            "sm",
+            "md"
+          ]
+        },
+        {
+          "prop": "mode",
+          "values": [
+            "default",
+            "single",
+            "auto"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-PageStack",
+      "publicName": "PageStack",
+      "title": "PageStack",
+      "sourcePath": "src/components/page-layouts.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "gap",
+          "values": [
+            "none",
+            "sm",
+            "md"
+          ]
+        },
+        {
+          "prop": "mode",
+          "values": [
+            "default",
+            "single",
+            "auto"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-SplitLayout",
+      "publicName": "SplitLayout",
+      "title": "SplitLayout",
+      "sourcePath": "src/components/page-layouts.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "gap",
+          "values": [
+            "none",
+            "sm",
+            "md"
+          ]
+        },
+        {
+          "prop": "mode",
+          "values": [
+            "default",
+            "single",
+            "auto"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-ThreeColumnGrid",
+      "publicName": "ThreeColumnGrid",
+      "title": "ThreeColumnGrid",
+      "sourcePath": "src/components/page-layouts.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "gap",
+          "values": [
+            "none",
+            "sm",
+            "md"
+          ]
+        },
+        {
+          "prop": "mode",
+          "values": [
+            "default",
+            "single",
+            "auto"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-TwoColumnLayout",
+      "publicName": "TwoColumnLayout",
+      "title": "TwoColumnLayout",
+      "sourcePath": "src/components/page-layouts.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "page",
+        "layouts",
+        "tsx"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "gap",
+          "values": [
+            "none",
+            "sm",
+            "md"
+          ]
+        },
+        {
+          "prop": "mode",
+          "values": [
+            "default",
+            "single",
+            "auto"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-AvatarStack",
+      "publicName": "AvatarStack",
+      "title": "AvatarStack",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "avatarstack"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "avatarstack"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-ChangeReviewList",
+      "publicName": "ChangeReviewList",
+      "title": "ChangeReviewList",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "changereviewlist"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "changereviewlist"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-ChartPanel",
+      "publicName": "ChartPanel",
+      "title": "ChartPanel",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "chartpanel"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "chartpanel"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-ChecklistCard",
+      "publicName": "ChecklistCard",
+      "title": "ChecklistCard",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "checklistcard"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "checklistcard"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-CommentThread",
+      "publicName": "CommentThread",
+      "title": "CommentThread",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "commentthread"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "commentthread"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-CommunicationList",
+      "publicName": "CommunicationList",
+      "title": "CommunicationList",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "communicationlist"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "communicationlist"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-DashboardChartSet",
+      "publicName": "DashboardChartSet",
+      "title": "DashboardChartSet",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "dashboardchartset"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "dashboardchartset"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-DealList",
+      "publicName": "DealList",
+      "title": "DealList",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "deallist"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "deallist"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-DemoWidget",
+      "publicName": "DemoWidget",
+      "title": "DemoWidget",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "demowidget"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "demowidget"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-EntityHeader",
+      "publicName": "EntityHeader",
+      "title": "EntityHeader",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "entityheader"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "entityheader"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-MetricBar",
+      "publicName": "MetricBar",
+      "title": "MetricBar",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "metricbar"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "metricbar"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-MiniPerformanceCard",
+      "publicName": "MiniPerformanceCard",
+      "title": "MiniPerformanceCard",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "miniperformancecard"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "miniperformancecard"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-NewsList",
+      "publicName": "NewsList",
+      "title": "NewsList",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "newslist"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "newslist"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-PrioritySummary",
+      "publicName": "PrioritySummary",
+      "title": "PrioritySummary",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "status-feedback",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "prioritysummary"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "prioritysummary"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-ProgressSteps",
+      "publicName": "ProgressSteps",
+      "title": "ProgressSteps",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "status-feedback",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "progresssteps"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "progresssteps"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-RelatedEntityList",
+      "publicName": "RelatedEntityList",
+      "title": "RelatedEntityList",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "relatedentitylist"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "relatedentitylist"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-ScenarioPicker",
+      "publicName": "ScenarioPicker",
+      "title": "ScenarioPicker",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "scenariopicker"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "scenariopicker"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-SearchResults",
+      "publicName": "SearchResults",
+      "title": "SearchResults",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "searchresults"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "searchresults"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-TaskList",
+      "publicName": "TaskList",
+      "title": "TaskList",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "tasklist"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "tasklist"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-Timeline",
+      "publicName": "Timeline",
+      "title": "Timeline",
+      "sourcePath": "src/components/patterns.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "timeline"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "patterns",
+        "tsx",
+        "timeline"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "span",
+          "values": [
+            "normal",
+            "wide",
+            "tall",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-AiBadge",
+      "publicName": "AiBadge",
+      "title": "AiBadge",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "status-feedback",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "aibadge"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "aibadge"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Avatar",
+      "publicName": "Avatar",
+      "title": "Avatar",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "avatar"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "avatar"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Badge",
+      "publicName": "Badge",
+      "title": "Badge",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "status-feedback",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "badge"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "badge"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Button",
+      "publicName": "Button",
+      "title": "Button",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "actions",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "button"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "button"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-ButtonGroup",
+      "publicName": "ButtonGroup",
+      "title": "ButtonGroup",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "actions",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "buttongroup"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "buttongroup"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Checkbox",
+      "publicName": "Checkbox",
+      "title": "Checkbox",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "checkbox"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "checkbox"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-CommandSearch",
+      "publicName": "CommandSearch",
+      "title": "CommandSearch",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "navigation",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "commandsearch"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "commandsearch"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Field",
+      "publicName": "Field",
+      "title": "Field",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "field"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "field"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-KebabButton",
+      "publicName": "KebabButton",
+      "title": "KebabButton",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "actions",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "kebabbutton"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "kebabbutton"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Pill",
+      "publicName": "Pill",
+      "title": "Pill",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "pill"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "pill"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-PriorityBadge",
+      "publicName": "PriorityBadge",
+      "title": "PriorityBadge",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "status-feedback",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "prioritybadge"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "prioritybadge"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Radio",
+      "publicName": "Radio",
+      "title": "Radio",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "radio"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "radio"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-SearchField",
+      "publicName": "SearchField",
+      "title": "SearchField",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "searchfield"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "searchfield"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-SegmentedControl",
+      "publicName": "SegmentedControl",
+      "title": "SegmentedControl",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "segmentedcontrol"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "segmentedcontrol"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-SelectControl",
+      "publicName": "SelectControl",
+      "title": "SelectControl",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "selectcontrol"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "selectcontrol"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Spinner",
+      "publicName": "Spinner",
+      "title": "Spinner",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "spinner"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "spinner"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Status",
+      "publicName": "Status",
+      "title": "Status",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "status-feedback",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "status"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "status"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Tag",
+      "publicName": "Tag",
+      "title": "Tag",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "tag"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "tag"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Textarea",
+      "publicName": "Textarea",
+      "title": "Textarea",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "textarea"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "textarea"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-TextInput",
+      "publicName": "TextInput",
+      "title": "TextInput",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "textinput"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "textinput"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Toggle",
+      "publicName": "Toggle",
+      "title": "Toggle",
+      "sourcePath": "src/components/primitives.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "toggle"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "primitives",
+        "tsx",
+        "toggle"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "violet",
+            "neutral"
+          ]
+        },
+        {
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "danger",
+            "dangerOutline",
+            "link"
+          ]
+        }
+      ]
+    },
+    {
+      "componentId": "static-src-components-table-tsx-DataTable",
+      "publicName": "DataTable",
+      "title": "DataTable",
+      "sourcePath": "src/components/table.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "navigation",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "table",
+        "tsx",
+        "datatable"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "table",
+        "tsx",
+        "datatable"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-table-tsx-FundAssetsTable",
+      "publicName": "FundAssetsTable",
+      "title": "FundAssetsTable",
+      "sourcePath": "src/components/table.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "navigation",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "table",
+        "tsx",
+        "fundassetstable"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "table",
+        "tsx",
+        "fundassetstable"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-components-templates-tsx-BaseScreenTemplate",
+      "publicName": "BaseScreenTemplate",
+      "title": "BaseScreenTemplate",
+      "sourcePath": "src/components/templates.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "components",
+        "templates",
+        "tsx",
+        "basescreentemplate"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "components",
+        "templates",
+        "tsx",
+        "basescreentemplate"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-2026-05-17-BaseScreenSidebarShellmp9ufm89-tsx-BaseScreenSidebarShellmp9ufm89",
+      "publicName": "BaseScreenSidebarShellmp9ufm89",
+      "title": "BaseScreenSidebarShellmp9ufm89",
+      "sourcePath": "src/screens/2026-05-17/BaseScreenSidebarShellmp9ufm89.tsx",
+      "source": "react-index",
+      "roles": [
+        "navigation",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "2026",
+        "05",
+        "17"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "2026",
+        "05",
+        "17"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-2026-05-17-DealD3174SevernyHab-tsx-DealD3174SevernyHab",
+      "publicName": "DealD3174SevernyHab",
+      "title": "DealD3174SevernyHab",
+      "sourcePath": "src/screens/2026-05-17/DealD3174SevernyHab.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "2026",
+        "05",
+        "17"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "2026",
+        "05",
+        "17"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-2026-05-17-NewsScreenmpa9bael-tsx-NewsScreenmpa9bael",
+      "publicName": "NewsScreenmpa9bael",
+      "title": "NewsScreenmpa9bael",
+      "sourcePath": "src/screens/2026-05-17/NewsScreenmpa9bael.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "2026",
+        "05",
+        "17"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "2026",
+        "05",
+        "17"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-2026-05-17-Screenmp9u1z33-tsx-Screenmp9u1z33",
+      "publicName": "Screenmp9u1z33",
+      "title": "Screenmp9u1z33",
+      "sourcePath": "src/screens/2026-05-17/Screenmp9u1z33.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "2026",
+        "05",
+        "17"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "2026",
+        "05",
+        "17"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-AiAnalysisScreen-tsx-AiAnalysisScreen",
+      "publicName": "AiAnalysisScreen",
+      "title": "AiAnalysisScreen",
+      "sourcePath": "src/screens/investment-crm/AiAnalysisScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "aianalysisscreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "aianalysisscreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-AnalystDashboardScreen-tsx-AnalystDashboardScreen",
+      "publicName": "AnalystDashboardScreen",
+      "title": "AnalystDashboardScreen",
+      "sourcePath": "src/screens/investment-crm/AnalystDashboardScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "analystdashboardscreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "analystdashboardscreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "mined-draft",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-AnalystFeedScreen-tsx-AnalystFeedScreen",
+      "publicName": "AnalystFeedScreen",
+      "title": "AnalystFeedScreen",
+      "sourcePath": "src/screens/investment-crm/AnalystFeedScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "analystfeedscreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "analystfeedscreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-AssetPageScreen-tsx-AssetPageScreen",
+      "publicName": "AssetPageScreen",
+      "title": "AssetPageScreen",
+      "sourcePath": "src/screens/investment-crm/AssetPageScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "assetpagescreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "assetpagescreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-AssetsListScreen-tsx-AssetsListScreen",
+      "publicName": "AssetsListScreen",
+      "title": "AssetsListScreen",
+      "sourcePath": "src/screens/investment-crm/AssetsListScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "assetslistscreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "assetslistscreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-ChangesScreen-tsx-ChangesScreen",
+      "publicName": "ChangesScreen",
+      "title": "ChangesScreen",
+      "sourcePath": "src/screens/investment-crm/ChangesScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "changesscreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "changesscreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-CommunicationsScreen-tsx-CommunicationsScreen",
+      "publicName": "CommunicationsScreen",
+      "title": "CommunicationsScreen",
+      "sourcePath": "src/screens/investment-crm/CommunicationsScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "communicationsscreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "communicationsscreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-CreditDealPageScreen-tsx-CreditDealPageScreen",
+      "publicName": "CreditDealPageScreen",
+      "title": "CreditDealPageScreen",
+      "sourcePath": "src/screens/investment-crm/CreditDealPageScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "creditdealpagescreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "creditdealpagescreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-DashboardCustom2Screen-tsx-DashboardCustom2Screen",
+      "publicName": "DashboardCustom2Screen",
+      "title": "DashboardCustom2Screen",
+      "sourcePath": "src/screens/investment-crm/DashboardCustom2Screen.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "dashboardcustom2screen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "dashboardcustom2screen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-DashboardCustomScreen-tsx-DashboardCustomScreen",
+      "publicName": "DashboardCustomScreen",
+      "title": "DashboardCustomScreen",
+      "sourcePath": "src/screens/investment-crm/DashboardCustomScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "dashboardcustomscreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "dashboardcustomscreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-DealPageScreen-tsx-DealPageScreen",
+      "publicName": "DealPageScreen",
+      "title": "DealPageScreen",
+      "sourcePath": "src/screens/investment-crm/DealPageScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "dealpagescreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "dealpagescreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-FundDetailScreen-tsx-FundDetailScreen",
+      "publicName": "FundDetailScreen",
+      "title": "FundDetailScreen",
+      "sourcePath": "src/screens/investment-crm/FundDetailScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "funddetailscreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "funddetailscreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-FundsListScreen-tsx-FundsListScreen",
+      "publicName": "FundsListScreen",
+      "title": "FundsListScreen",
+      "sourcePath": "src/screens/investment-crm/FundsListScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "tables-lists",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "fundslistscreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "fundslistscreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-IdeaPageScreen-tsx-IdeaPageScreen",
+      "publicName": "IdeaPageScreen",
+      "title": "IdeaPageScreen",
+      "sourcePath": "src/screens/investment-crm/IdeaPageScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "layout-surfaces",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "ideapagescreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "ideapagescreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-SearchScreen-tsx-SearchScreen",
+      "publicName": "SearchScreen",
+      "title": "SearchScreen",
+      "sourcePath": "src/screens/investment-crm/SearchScreen.tsx",
+      "source": "react-index",
+      "roles": [
+        "forms-inputs",
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "searchscreen"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "investment",
+        "crm",
+        "searchscreen"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    },
+    {
+      "componentId": "static-src-screens-New-folder-NewTest01-tsx-NewTest01",
+      "publicName": "NewTest01",
+      "title": "NewTest01",
+      "sourcePath": "src/screens/New folder/NewTest01.tsx",
+      "source": "react-index",
+      "roles": [
+        "data-visualization"
+      ],
+      "capabilities": [
+        "static",
+        "src",
+        "screens",
+        "new",
+        "folder",
+        "newtest01"
+      ],
+      "keywords": [
+        "static",
+        "src",
+        "screens",
+        "new",
+        "folder",
+        "newtest01"
+      ],
+      "whenToUse": [],
+      "whenNotToUse": [],
+      "descriptionStatus": "missing",
+      "evidenceConfidence": "low",
+      "variantAxes": []
+    }
+  ]
+}

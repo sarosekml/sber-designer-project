@@ -1,0 +1,158 @@
+/* =========================================================================
+   Style-Scout Proposal: tokens.css
+   Proposal ID: style-scout-0114-live-20260723
+   Evidence: design-system/styles/colors.css, typography.css, radius.css, shadow.css
+
+   This file contains only the semantic design tokens extracted from live
+   foundation source. It does NOT redefine the primitive ramps (--c-*),
+   which already live in the existing design-system/styles/colors.css.
+   Screen authors should import the existing ds.css entrypoint for the full
+   token set; this file is a proposal-level reference, not a new runtime asset.
+   ========================================================================= */
+
+:root {
+  /* =======================================================================
+     TYPOGRAPHY — from design-system/styles/typography.css
+     ======================================================================= */
+
+  /* Font families */
+  --font-display: "SB Sans Display", system-ui, sans-serif;
+  --font-text:    "SB Sans Text",    system-ui, sans-serif;
+  --font-screen:  "SB Sans Screen",  system-ui, sans-serif;
+
+  /* Weights */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-semibold: 600;
+
+  /* Headings — SB Sans Display */
+  --type-h1:        var(--weight-light)    52px/68px var(--font-display);
+  --type-h2:        var(--weight-light)    42px/52px var(--font-display);
+  --type-h3-strong: var(--weight-semibold) 28px/32px var(--font-display);
+  --type-h3:        var(--weight-regular)  28px/32px var(--font-display);
+  --type-h4-strong: var(--weight-semibold) 22px/24px var(--font-display);
+  --type-h4:        var(--weight-regular)  22px/24px var(--font-display);
+  --type-h5-strong: var(--weight-semibold) 18px/24px var(--font-display);
+  --type-h5:        var(--weight-regular)  18px/24px var(--font-display);
+  --type-h6-strong: var(--weight-semibold) 16px/20px var(--font-display);
+  --type-h6:        var(--weight-regular)  16px/20px var(--font-display);
+
+  /* Body — SB Sans Text */
+  --type-body-xl:        var(--weight-regular)  24px/32px var(--font-text);
+  --type-body-xl-strong: var(--weight-semibold) 24px/32px var(--font-text);
+  --type-body-l:         var(--weight-regular)  18px/24px var(--font-text);
+  --type-body-l-strong:  var(--weight-semibold) 18px/24px var(--font-text);
+  --type-body-m:         var(--weight-regular)  16px/20px var(--font-text);
+  --type-body-m-strong:  var(--weight-semibold) 16px/20px var(--font-text);
+  --type-body-s:         var(--weight-regular)  14px/16px var(--font-text);
+  --type-body-s-strong:  var(--weight-semibold) 14px/16px var(--font-text);
+  --type-body-xs:        var(--weight-regular)  12px/16px var(--font-text);
+
+  /* Buttons — SB Sans Screen */
+  --type-button-m:  var(--weight-regular) 16px/24px var(--font-screen);
+  --type-button-s:  var(--weight-regular) 14px/20px var(--font-screen);
+  --type-button-xs: var(--weight-regular) 12px/16px var(--font-screen);
+
+  /* =======================================================================
+     RADIUS — from design-system/styles/radius.css
+     ======================================================================= */
+
+  /* Semantic aliases (components reference these, never the primitives) */
+  --radius-control-s: 6px;     /* button XS, chip S/XS, icon-button S */
+  --radius-control:   8px;     /* button M/S, chip L/M, tooltip, input */
+  --radius-field:     8px;     /* input fields, selects */
+  --radius-popup:     12px;    /* menus, popovers, dropdowns */
+  --radius-card:      16px;    /* cards, panels, groups */
+  --radius-modal:     24px;    /* modal windows, sheets */
+  --radius-pill:      999px;   /* pill shapes: chip-rounded, badge, switch, tab marker */
+  --radius-round:     50%;     /* circles: avatar, radio, icon-only button */
+
+  /* =======================================================================
+     ELEVATION — from design-system/styles/shadow.css
+     ======================================================================= */
+
+  --elevation-1: 0 1px 2px rgba(40, 50, 55, .28);      /* switch thumb */
+  --elevation-2: 0 10px 30px rgba(40, 50, 55, .16);    /* tooltips, context menus, dropdowns */
+  --elevation-3: 0 14px 38px rgba(40, 50, 55, .18);    /* reserved */
+  --elevation-4: 0 18px 48px rgba(40, 50, 55, .20);    /* reserved */
+  --elevation-5: 0 22px 58px rgba(40, 50, 55, .22);    /* reserved */
+  --shadow-modal-form: 0 24px 64px rgba(40, 50, 55, .28); /* modal windows, sheets */
+
+  /* =======================================================================
+     SEMANTIC COLOR — from design-system/styles/colors.css
+     (values resolved from primitives; see colors.css for --c-* definitions)
+     ======================================================================= */
+
+  /* --- Static: backgrounds & information display --- */
+  --bg-popup:    #FFFFFF;
+  --bg-tile:     #FFFFFF;
+  --bg-mainmenu: #FEFEFE;
+  --bg-hint:     #283237;
+  --bg-page:     linear-gradient(180deg, #F5F7F7 0%, #F2F7F7 100%);
+
+  --border-primary: #B8CCCC;
+  --border-light:   #E1EDE7;
+  --border-dark:    #6C8080;
+
+  --text-primary:     #324844;
+  --text-secondary:   #6C8080;
+  --text-inactive:    #AAB2B1;
+  --text-black:       #283237;
+  --text-on-tertiary: #617C7C;
+  --text-on-dark:     #FFFFFF;
+
+  /* --- Active: interactive elements --- */
+  --primary:       #00AA9B;
+  --primary-dark:  #007A6D;
+  --primary-light: #58DCCC;
+
+  --secondary:       #B8D6D3;
+  --secondary-dark:  #639994;
+  --secondary-light: #CDE2E0;
+
+  --tertiary:       #E5ECEB;
+  --tertiary-dark:  #7A9994;
+  --tertiary-light: #EEF2F1;
+
+  /* --- Situative: status & feedback --- */
+  --error:       #E5625C;
+  --error-dark:  #D32F2F;
+  --error-light: #E57373;
+
+  --warning:       #FFB300;
+  --warning-dark:  #C68400;
+  --warning-light: #FFE54C;
+
+  --success:       #7CB342;
+  --success-dark:  #558B2F;
+  --success-light: #9CCC65;
+
+  --info:       #1E88E5;
+  --info-dark:  #01579B;
+  --info-light: #29B6F6;
+
+  --link:       #00AA9B;
+  --link-dark:  #007A6D;
+  --link-light: #B8D6D3;
+
+  --disabled:         #BEC5C8;
+  --disabled-border:  #E8EDED;
+
+  /* --- Situative backgrounds --- */
+  --error-bg-light:   #FCF1F1;
+  --error-bg:         #FBECEB;
+  --warning-bg:       #FFF8E1;
+  --success-bg:       #E9F6DA;
+  --info-bg:          #EAF8FE;
+
+  /* =======================================================================
+     Z-INDEX SCALE — extracted from component CSS comments
+     ======================================================================= */
+  --z-menu:      30;
+  --z-tooltip:   30;
+  --z-toast:     40;
+  --z-nav:       50;
+  --z-modal:     1000;
+  --z-modal-nested: 1010;
+  --z-snackbar:  9900;
+}

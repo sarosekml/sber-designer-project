@@ -1,0 +1,882 @@
+{
+  "version": 1,
+  "name": "ibp-ui-kit",
+  "workspacePath": ".",
+  "screens": [
+    {
+      "id": "screen-1778405460578-atoms-page--main",
+      "name": "Page · Main",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "atoms-page--main"
+    },
+    {
+      "id": "screen-1779226369875-test-gen",
+      "name": "Payment page",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-payments-payment-page--default",
+      "filePath": "src/stories/screens/Payments/PaymentPage.stories.tsx",
+      "implementationFilePath": "src/screens/Payments/PaymentPage.tsx",
+      "description": "This is payment screen",
+      "folder": "Payments",
+      "position": {
+        "x": 546.6839860296237,
+        "y": 80.00000000000001
+      }
+    },
+    {
+      "id": "screen-1779358928583-new-screen",
+      "name": "Compliance Dashboard New",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-deepseekv4flash-compliance-dashboard-new--default",
+      "filePath": "src/stories/screens/DeepseekV4Flash/ComplianceDashboardNew.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Flash/ComplianceDashboardNew.tsx",
+      "description": "Empty generated screen",
+      "folder": "DeepseekV4Flash",
+      "position": {
+        "x": 977.9617021624587,
+        "y": 105.11073960090954
+      }
+    },
+    {
+      "id": "screen-1780063194655-risk-metrics",
+      "name": "Risk-metrics",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-deepseekv4flash-risk-metrics--default",
+      "filePath": "src/stories/screens/DeepseekV4Flash/RiskMetrics.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Flash/RiskMetrics.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1780308535797
+      },
+      "folder": "DeepseekV4Flash"
+    },
+    {
+      "id": "screen-1780257385795-administration-from-img",
+      "name": "Administration-codex-img",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-codex-claude-administration-codex-img--default",
+      "filePath": "src/stories/screens/Codex-Claude/AdministrationCodexImg.stories.tsx",
+      "implementationFilePath": "src/screens/Codex-Claude/AdministrationCodexImg.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1780344958994
+      },
+      "folder": "Codex-Claude"
+    },
+    {
+      "id": "screen-1780583069253-dcm-deal",
+      "name": "DCM Deal",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-dcm-deals-dcm-deal--default",
+      "filePath": "src/stories/screens/DCM Deals/DCMDeal.stories.tsx",
+      "implementationFilePath": "src/screens/DCM Deals/DCMDeal.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1781089454008
+      },
+      "folder": "DCM Deals",
+      "position": {
+        "x": 2606.9230918169965,
+        "y": 89.44057975045027
+      }
+    },
+    {
+      "id": "screen-1780772866409-dcm2",
+      "name": "DCM2",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-dcm-deals-dcm2--default",
+      "filePath": "src/stories/screens/DCM Deals/DCM2.stories.tsx",
+      "implementationFilePath": "src/screens/DCM Deals/DCM2.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1781089456202
+      },
+      "folder": "DCM Deals"
+    },
+    {
+      "id": "screen-1780778639929-new-screen-01",
+      "name": "Payments-test-00",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-payments-payments-test-00--default",
+      "filePath": "src/stories/screens/Payments/PaymentsTest00.stories.tsx",
+      "implementationFilePath": "src/screens/Payments/PaymentsTest00.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1781089444816
+      },
+      "folder": "Payments"
+    },
+    {
+      "id": "screen-1780786329419-new-screen-02",
+      "name": "0075 Recovery Smoke",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-misc-0075-recovery-smoke--default",
+      "filePath": "src/stories/screens/Misc/Screen0075RecoverySmoke.stories.tsx",
+      "implementationFilePath": "src/screens/Misc/Screen0075RecoverySmoke.tsx",
+      "description": "Recovery smoke test 0075 dashboard: breadcrumbs, page header, 3 status cards, recent checks table, loading/empty/error states",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1781089459098
+      },
+      "folder": "Misc"
+    },
+    {
+      "id": "screen-1780836626768-new-screen-02",
+      "name": "Actives",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-deepseekv4flash-actives--default",
+      "filePath": "src/stories/screens/DeepseekV4Flash/Actives.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Flash/Actives.tsx",
+      "description": "Empty generated screen",
+      "folder": "DeepseekV4Flash"
+    },
+    {
+      "id": "screen-1780877224926-new-screen-03",
+      "name": "Risk-segment",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-codex-claude-risk-segment--default",
+      "filePath": "src/stories/screens/Codex-Claude/RiskSegment.stories.tsx",
+      "implementationFilePath": "src/screens/Codex-Claude/RiskSegment.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1781089466989
+      },
+      "folder": "Codex-Claude"
+    },
+    {
+      "id": "screen-1780960742525-new-screen-04",
+      "name": "Payments-test-01",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-codex-claude-payments-test-01--default",
+      "filePath": "src/stories/screens/Codex-Claude/PaymentsTest01.stories.tsx",
+      "implementationFilePath": "src/screens/Codex-Claude/PaymentsTest01.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1781391303361
+      },
+      "folder": "Codex-Claude"
+    },
+    {
+      "id": "screen-1781348521514-payment-schedule-new",
+      "name": "Payments-test-02",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-deepseekv4flash-payments-test-02--default",
+      "filePath": "src/stories/screens/DeepseekV4Flash/PaymentsTest02.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Flash/PaymentsTest02.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1781358976769
+      },
+      "folder": "DeepseekV4Flash"
+    },
+    {
+      "id": "screen-1781359849701-payments-test-03",
+      "name": "Payments-test-03",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-codex-claude-payments-test-03--default",
+      "filePath": "src/stories/screens/Codex-Claude/PaymentsTest03.stories.tsx",
+      "implementationFilePath": "src/screens/Codex-Claude/PaymentsTest03.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1781391301492
+      },
+      "folder": "Codex-Claude"
+    },
+    {
+      "id": "screen-1781400066794-payment-test-04",
+      "name": "ClientInfoPage Test 01",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-deepseekv4pro-clientinfopage-test-01--default",
+      "filePath": "src/stories/screens/DeepseekV4Pro/ClientInfoPageTest01.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Pro/ClientInfoPageTest01.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1781905307366
+      },
+      "folder": "DeepseekV4Pro"
+    },
+    {
+      "id": "screen-1781455951490-peyments-test-05",
+      "name": "Peyments-test-05",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-opencode-ds4flashfree-peyments-test-05--default",
+      "filePath": "src/stories/screens/Opencode-DS4FlashFree/PeymentsTest05.stories.tsx",
+      "implementationFilePath": "src/screens/Opencode-DS4FlashFree/PeymentsTest05.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1782341288899
+      },
+      "folder": "Opencode-DS4FlashFree"
+    },
+    {
+      "id": "screen-1781905354138-client-page-test-02",
+      "name": "ClientInfoPage Test 02",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-deepseekv4pro-clientinfopage-test-02--default",
+      "filePath": "src/stories/screens/DeepseekV4Pro/ClientInfoPageTest02.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Pro/ClientInfoPageTest02.tsx",
+      "description": "Client info page (Общая информация) — 3-column grid with Industry, Requisites, Documents, Employee tiles, Related Physical Persons, and GigaСправка. Matches ClientInfoPage_Update2_TZ.md spec.",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1782325334585
+      },
+      "folder": "DeepseekV4Pro"
+    },
+    {
+      "id": "screen-1782332009207-peyments-test-06",
+      "name": "Peyments-test-06",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-deepseekv4pro-peyments-test-06--default",
+      "filePath": "src/stories/screens/DeepseekV4Pro/PeymentsTest06.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Pro/PeymentsTest06.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1782332280827
+      },
+      "folder": "DeepseekV4Pro"
+    },
+    {
+      "id": "screen-1782332586008-dcm-draft-test-01",
+      "name": "DCM-draft-test-01",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-deepseekv4pro-dcm-draft-test-01--default",
+      "filePath": "src/stories/screens/DeepseekV4Pro/DCMDraftTest01.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Pro/DCMDraftTest01.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1782336163133
+      },
+      "folder": "DeepseekV4Pro"
+    },
+    {
+      "id": "screen-1782379639652-image-test",
+      "name": "Image-test",
+      "createdAt": 1784840307974,
+      "updatedAt": 1789935160375,
+      "kind": "story",
+      "storyId": "screens-deepseekv4pro-image-test--default",
+      "filePath": "src/stories/screens/DeepseekV4Pro/ImageTest.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Pro/ImageTest.tsx",
+      "description": "Payment schedule page with breadcrumbs, summary tiles (total amounts and payment statistics), and a detailed payment schedule table showing date, counterparty, direction, status, and amount for each payment.",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1782384059172
+      },
+      "folder": "DeepseekV4Pro"
+    },
+    {
+      "id": "screen-1782384087759-image-test-02",
+      "name": "Test-after-rebuild-harness-01",
+      "createdAt": 1784840307974,
+      "updatedAt": 1789925385408,
+      "kind": "story",
+      "storyId": "screens-deepseekv4pro-test-after-rebuild-harness-01--default",
+      "filePath": "src/stories/screens/DeepseekV4Pro/TestAfterRebuildHarness01.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Pro/TestAfterRebuildHarness01.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "needs-review",
+        "reason": "Runtime screen root was not proven because this probe cannot execute preview JavaScript. Configure browser render evidence before treating this as a failed screen root.",
+        "source": "validation",
+        "updatedAt": 1789925385395
+      },
+      "folder": "DeepseekV4Pro"
+    },
+    {
+      "id": "screen-1782424272927-dcm-draft-test-02",
+      "name": "Test-after-rebuild-harness-02",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-deepseekv4pro-test-after-rebuild-harness-02--default",
+      "filePath": "src/stories/screens/DeepseekV4Pro/TestAfterRebuildHarness02.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Pro/TestAfterRebuildHarness02.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1782429068795
+      },
+      "folder": "DeepseekV4Pro"
+    },
+    {
+      "id": "screen-1782430257037-claude-img-test-01",
+      "name": "img test 01",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-misc-img-test-01--default",
+      "filePath": "src/stories/screens/Misc/ImgTest01.stories.tsx",
+      "implementationFilePath": "src/screens/Misc/ImgTest01.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1782467027157
+      },
+      "folder": "Misc"
+    },
+    {
+      "id": "screen-1782467042839-img-test-02",
+      "name": "img test 02",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-misc-img-test-02--default",
+      "filePath": "src/stories/screens/Misc/ImgTest02.stories.tsx",
+      "implementationFilePath": "src/screens/Misc/ImgTest02.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1783021504785
+      },
+      "folder": "Misc"
+    },
+    {
+      "id": "screen-1782639526597-img-test-03",
+      "name": "img test 03",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-misc-img-test-03--default",
+      "filePath": "src/stories/screens/Misc/ImgTest03.stories.tsx",
+      "implementationFilePath": "src/screens/Misc/ImgTest03.tsx",
+      "description": "Empty generated screen",
+      "folder": "Misc"
+    },
+    {
+      "id": "screen-1782644614086-img-test-04",
+      "name": "img test 04",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-misc-img-test-04--default",
+      "filePath": "src/stories/screens/Misc/ImgTest04.stories.tsx",
+      "implementationFilePath": "src/screens/Misc/ImgTest04.tsx",
+      "description": "Empty generated screen",
+      "folder": "Misc"
+    },
+    {
+      "id": "screen-1783020247138-test-new-harness-01",
+      "name": "Test-new-harness-01",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-deepseekv4pro-test-new-harness-01--default",
+      "filePath": "src/stories/screens/DeepseekV4Pro/TestNewHarness01.stories.tsx",
+      "implementationFilePath": "src/screens/DeepseekV4Pro/TestNewHarness01.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1783020697101
+      },
+      "folder": "DeepseekV4Pro"
+    },
+    {
+      "id": "screen-screens-deepseekv4pro-peyments-test-07--default",
+      "name": "Peyments-test-07",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784937438564,
+      "kind": "story",
+      "storyId": "screens-deepseekv4pro-peyments-test-07--default",
+      "filePath": "src/stories/screens/DeepseekV4Pro/PeymentsTest07.stories.tsx",
+      "folder": "DeepseekV4Pro"
+    },
+    {
+      "id": "screen-screens-misc-img-test-05--default",
+      "name": "img test 05",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-misc-img-test-05--default",
+      "filePath": "src/stories/screens/Misc/ImgTest05.stories.tsx",
+      "folder": "Misc"
+    },
+    {
+      "id": "screen-1783034429588-codex-img-01",
+      "name": "Codex-img-t3-t4-t9",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-01-codex-img-t3-t4-t9--default",
+      "filePath": "src/stories/screens/Megatest-01/CodexImgT3T4T9.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-01/CodexImgT3T4T9.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "needs-review",
+        "reason": "Runtime screen root was not proven because this probe cannot execute preview JavaScript. Configure browser render evidence before treating this as a failed screen root.",
+        "source": "validation",
+        "updatedAt": 1784581662000
+      },
+      "folder": "Megatest-01"
+    },
+    {
+      "id": "screen-1783036368120-qwen-api-img-t1-t2",
+      "name": "Qwen-api-img-t1-t2",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-01-qwen-api-img-t1-t2--default",
+      "filePath": "src/stories/screens/Megatest-01/QwenApiImgT1T2.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-01/QwenApiImgT1T2.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1783038942526
+      },
+      "folder": "Megatest-01"
+    },
+    {
+      "id": "screen-1783038999078-opencode-text-t7",
+      "name": "Opencode-text-t7",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-01-opencode-text-t7--default",
+      "filePath": "src/stories/screens/Megatest-01/OpencodeTextT7.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-01/OpencodeTextT7.tsx",
+      "description": "Empty generated screen",
+      "folder": "Megatest-01"
+    },
+    {
+      "id": "screen-1783039167889-deepseek-api-test-t13",
+      "name": "Deepseek-api-test-T13",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-01-deepseek-api-test-t13--default",
+      "filePath": "src/stories/screens/Megatest-01/DeepseekApiTestT13.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-01/DeepseekApiTestT13.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1783039487129
+      },
+      "folder": "Megatest-01"
+    },
+    {
+      "id": "screen-1783039526226-deepseek-api-text-t9",
+      "name": "Deepseek-api-text-T10",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-01-deepseek-api-text-t10--default",
+      "filePath": "src/stories/screens/Megatest-01/DeepseekApiTextT10.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-01/DeepseekApiTextT10.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "needs-review",
+        "reason": "Runtime screen root was not proven because this probe cannot execute preview JavaScript. Configure browser render evidence before treating this as a failed screen root.",
+        "source": "validation",
+        "updatedAt": 1784583962123
+      },
+      "folder": "Megatest-01"
+    },
+    {
+      "id": "screen-1783039588573-codex-text-t10",
+      "name": "Codex-text-T10",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-01-codex-text-t10--default",
+      "filePath": "src/stories/screens/Megatest-01/CodexTextT10.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-01/CodexTextT10.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1783094317855
+      },
+      "folder": "Megatest-01"
+    },
+    {
+      "id": "screen-1783095000711-megatest-02",
+      "name": "Qwen-api-img-t1-t2-v02",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-02-qwen-api-img-t1-t2-v02--default",
+      "filePath": "src/stories/screens/Megatest-02/QwenApiImgT1T2V02.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-02/QwenApiImgT1T2V02.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1783105996944
+      },
+      "folder": "Megatest-02"
+    },
+    {
+      "id": "screen-1783095258652-codex-img-t3-t4-t9-02",
+      "name": "Codex-img-t3-t4-t9-v02",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-02-codex-img-t3-t4-t9-v02--default",
+      "filePath": "src/stories/screens/Megatest-02/CodexImgT3T4T9V02.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-02/CodexImgT3T4T9V02.tsx",
+      "description": "Empty generated screen",
+      "folder": "Megatest-02"
+    },
+    {
+      "id": "screen-1783095833984-deepseek-api-text-t13",
+      "name": "Deepseek-api-text-T13",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-02-deepseek-api-text-t13--default",
+      "filePath": "src/stories/screens/Megatest-02/DeepseekApiTextT13.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-02/DeepseekApiTextT13.tsx",
+      "description": "Empty generated screen",
+      "folder": "Megatest-02"
+    },
+    {
+      "id": "screen-1783095858650-deepseek-api-text-t11",
+      "name": "Deepseek-api-text-T11",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-02-deepseek-api-text-t11--default",
+      "filePath": "src/stories/screens/Megatest-02/DeepseekApiTextT11.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-02/DeepseekApiTextT11.tsx",
+      "description": "Empty generated screen",
+      "folder": "Megatest-02"
+    },
+    {
+      "id": "screen-1783095939711-deepseek-api-text-t10-02",
+      "name": "Deepseek-api-text-T10-v02",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-02-deepseek-api-text-t10-v02--default",
+      "filePath": "src/stories/screens/Megatest-02/DeepseekApiTextT10V02.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-02/DeepseekApiTextT10V02.tsx",
+      "description": "Empty generated screen",
+      "folder": "Megatest-02"
+    },
+    {
+      "id": "screen-1783095965562-codex-text-t10-v02",
+      "name": "Codex-text-T10-v02",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-02-codex-text-t10-v02--default",
+      "filePath": "src/stories/screens/Megatest-02/CodexTextT10V02.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-02/CodexTextT10V02.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1783182470393
+      },
+      "folder": "Megatest-02"
+    },
+    {
+      "id": "screen-1783096001425-opencode-text-t7-v02",
+      "name": "Opencode-text-T7-v02",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-02-opencode-text-t7-v02--default",
+      "filePath": "src/stories/screens/Megatest-02/OpencodeTextT7V02.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-02/OpencodeTextT7V02.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1783182477692
+      },
+      "folder": "Megatest-02"
+    },
+    {
+      "id": "screen-1783181409876-test3-dp4pro-api-text-t13",
+      "name": "test3-dp4pro-api-text-T13",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-03-test3-dp4pro-api-text-t13--default",
+      "filePath": "src/stories/screens/Megatest-03/Test3Dp4proApiTextT13.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-03/Test3Dp4proApiTextT13.tsx",
+      "description": "Corporate request detail page — breadcrumbs, status badge, 7 info tiles (Deal, Counterparty, Contract, RequestSubject, Team, Deadlines, CustomerResponse) in a 12-column grid, right workflow panel with vertical stepper and \"Передать в работу\" transition button. Mock data with interactive status transition.",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1783183781378
+      },
+      "folder": "Megatest-03"
+    },
+    {
+      "id": "screen-1783182518656-test3-opencode-text-t7",
+      "name": "test3-opencode-text-T7",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-03-test3-opencode-text-t7--default",
+      "filePath": "src/stories/screens/Megatest-03/Test3OpencodeTextT7.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-03/Test3OpencodeTextT7.tsx",
+      "description": "Empty generated screen",
+      "folder": "Megatest-03"
+    },
+    {
+      "id": "screen-1783184405668-test3-qwen-api-img-t1-t2",
+      "name": "test3-qwen-api-img-T1-T2",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-03-test3-qwen-api-img-t1-t2--default",
+      "filePath": "src/stories/screens/Megatest-03/Test3QwenApiImgT1T2.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-03/Test3QwenApiImgT1T2.tsx",
+      "description": "Empty generated screen",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1784560055879
+      },
+      "folder": "Megatest-03"
+    },
+    {
+      "id": "screen-1783184616301-test3-ds4pro-api-text-t10",
+      "name": "test3-ds4pro-api-text-T10",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-megatest-03-test3-ds4pro-api-text-t10--default",
+      "filePath": "src/stories/screens/Megatest-03/Test3Ds4proApiTextT10.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-03/Test3Ds4proApiTextT10.tsx",
+      "description": "Corporate request detail page — shows request context (deal, counterparty, contract, request subject, team, deadlines, customer response) with editable tiles, breadcrumbs, status badge, and a right-side workflow stepper panel with transition action.",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1783194580883
+      },
+      "folder": "Megatest-03"
+    },
+    {
+      "id": "screen-1783184635901-test3-codex-cli-text-t10",
+      "name": "test3-codex-cli-text-T10",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784838563500,
+      "kind": "story",
+      "storyId": "screens-megatest-03-test3-codex-cli-text-t10--default",
+      "filePath": "src/stories/screens/Megatest-03/Test3CodexCliTextT10.stories.tsx",
+      "implementationFilePath": "src/screens/Megatest-03/Test3CodexCliTextT10.tsx",
+      "description": "Empty generated screen",
+      "folder": "Megatest-03"
+    },
+    {
+      "id": "screen-1784454879529-b6-structured-brief-03",
+      "name": "B6-structured-brief-03",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784840307974,
+      "kind": "story",
+      "storyId": "screens-b6-live-test-b6-structured-brief-03--default",
+      "filePath": "src/stories/screens/B6-live-test/B6StructuredBrief03.stories.tsx",
+      "implementationFilePath": "src/screens/B6-live-test/B6StructuredBrief03.tsx",
+      "description": "Сдеалай экран сделки с карточками:\n- Клиент\n- Параметры сделки\n- Стадия\n- Описание\n- Команда\n\nпридумай в каждой карточке примерный контент по смыслу",
+      "health": {
+        "status": "ok",
+        "reason": "Marked healthy manually.",
+        "source": "manual",
+        "updatedAt": 1784457230134
+      },
+      "folder": "B6-live-test"
+    },
+    {
+      "id": "screen-1784475439810-b6-structured-brief-04",
+      "name": "B6-structured-brief-04",
+      "createdAt": 1784840307974,
+      "updatedAt": 1784817853075,
+      "kind": "story",
+      "storyId": "screens-b6-live-test-b6-structured-brief-04--default",
+      "filePath": "src/stories/screens/B6-live-test/B6StructuredBrief04.stories.tsx",
+      "implementationFilePath": "src/screens/B6-live-test/B6StructuredBrief04.tsx",
+      "description": "Сдеалай экран платежа с карточками:\n- Клиент (контрагент)\n- Параметры платежа, сумма, сроки, банк, номер счета, кто получатель, по какому договору\n- приложенные документы: счет, счет-фактура\n\nпридумай в каждой карточке примерный контент по смыслу",
+      "folder": "B6-live-test"
+    }
+  ],
+  "screenCreation": {
+    "lastFolder": "B6-live-test"
+  },
+  "screensPanel": {
+    "collapsedFolderNames": [
+      "Payments",
+      "Megatest-02",
+      "Opencode-DS4FlashFree",
+      "Misc",
+      "DCM Deals",
+      "Codex-Claude",
+      "DeepseekV4Flash",
+      "Megatest-01"
+    ]
+  },
+  "flow": [
+    {
+      "id": "flow-1780051903021-screen-1778405460578-atoms-page--main-screen-1779226369875-test-gen",
+      "fromScreenId": "screen-1778405460578-atoms-page--main",
+      "toScreenId": "screen-1779226369875-test-gen",
+      "trigger": {
+        "kind": "click"
+      }
+    },
+    {
+      "id": "flow-1780051922471-screen-1779226369875-test-gen-screen-1779358928583-new-screen",
+      "fromScreenId": "screen-1779226369875-test-gen",
+      "toScreenId": "screen-1779358928583-new-screen",
+      "trigger": {
+        "kind": "click",
+        "selector": "[data-testid=\"PaymentDetailBackToRegistry_Button\"]",
+        "label": "В реестр"
+      }
+    },
+    {
+      "id": "flow-1782135164256-screen-1780257385795-administration-from-img-screen-1780583069253-dcm-deal",
+      "fromScreenId": "screen-1780257385795-administration-from-img",
+      "toScreenId": "screen-1780583069253-dcm-deal",
+      "trigger": {
+        "kind": "click"
+      }
+    }
+  ],
+  "flowView": {
+    "previewSize": "frames",
+    "showConnections": false,
+    "showDescriptions": false,
+    "hiddenScreenIds": [],
+    "hiddenFolderNames": [],
+    "hiddenEdgeIds": [],
+    "previewViewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "previewCaptures": []
+  },
+  "comments": [],
+  "agentDefault": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-v4-pro"
+  },
+  "assetPacks": {
+    "kinds": [
+      "icons",
+      "illustrations"
+    ],
+    "updatedAt": 1781904030748
+  },
+  "externalAssetSources": {
+    "icons": [
+      {
+        "id": "source-icons-settings",
+        "name": "Icons Pack",
+        "kind": "local-folder",
+        "families": [
+          "icons",
+          "illustrations"
+        ],
+        "mode": "workspace",
+        "workspacePath": "icons-pack",
+        "updatedAt": 1781904030748
+      }
+    ]
+  },
+  "savedAt": 1789935167910
+}

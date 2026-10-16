@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "name": "demo-html-project3",
+  "workspacePath": ".",
+  "projectKind": "html-first",
+  "screens": [
+    {
+      "id": "page-pages-ds-adapter-smoke",
+      "name": "IBP DS adapter smoke",
+      "createdAt": 1784759516276,
+      "updatedAt": 1784799229128,
+      "kind": "page",
+      "filePath": "pages/ds-adapter-smoke.html",
+      "implementationFilePath": "pages/ds-adapter-smoke.html"
+    }
+  ],
+  "flow": [],
+  "agentMemory": {
+    "styleMemoryEnabled": true
+  },
+  "savedAt": 1784799229130
+}

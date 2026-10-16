@@ -1,0 +1,51 @@
+{
+  "name": "add-screen-to-flow",
+  "description": "Use indexed screens and register a flow edge between generated screens.",
+  "workspace": "generated-readable-screen",
+  "input": "Add the approval queue screen to the review flow.",
+  "permission": {
+    "*": "allow"
+  },
+  "mockResponses": [
+    {
+      "toolCalls": [
+        {
+          "name": "load_agent_skill",
+          "arguments": {
+            "name": "product-screen-generation"
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "list_indexed_screens",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "flow_add_edge",
+          "arguments": {
+            "fromScreenId": "queue-screen",
+            "toScreenId": "summary-screen",
+            "trigger": {
+              "kind": "manual",
+              "label": "Review complete"
+            },
+            "label": "Queue to summary"
+          }
+        }
+      ]
+    },
+    {
+      "text": "Added the approval queue screen to the review flow."
+    }
+  ],
+  "expectedToolSequence": ["load_agent_skill", "list_indexed_screens", "flow_add_edge"],
+  "expectedFinalResponseContains": "review flow",
+  "expectedToolResultsContain": ["\"edgeCount\":1"]
+}

@@ -1,0 +1,80 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.*
+
+# Build output
+/BUILD_INFO.json
+dist/
+build/
+out/
+storybook-static/
+.next/
+.nuxt/
+.turbo/
+.vite/
+.tauri/
+target/
+
+# Bun
+bun.lockb
+
+# Tests / coverage
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+tmp/
+.playwright-mcp/
+smoke-artifacts/
+tests/fixtures/product-neutrality/*.local.json
+
+# Local root-level screenshots/captures from manual browser smoke runs.
+# Keep source/docs assets tracked in their own folders.
+/*-smoke.png
+/*-smoke.jpg
+/*-smoke.jpeg
+/*-after-*.png
+/*-before-*.png
+/screenshot-*.png
+/page-*.png
+
+# Editor / IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.iml
+.cursor/
+.zed/
+.obsidian/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Local Claude/agent caches (project-scoped tooling, not source)
+.claude/
+
+# 0136 R07 — personal config overlay: machine-specific MCP wiring, a different
+# default provider, anything that must not travel with a clone. Deep-merged
+# over the tracked sber-designer.json by services/api/src/config-store.ts.
+sber-designer.local.json
+
+# Isolated deploy staging and rollback artifacts
+.sd-update-*/

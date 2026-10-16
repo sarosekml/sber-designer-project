@@ -1,0 +1,123 @@
+{
+  "name": "large-brd-active-screen",
+  "description": "Fill the active registered screen from a BRD without creating a duplicate screen.",
+  "workspace": "generated-readable-screen",
+  "input": "Create a structured finance deal screen from the attached BRD on the active screen.",
+  "editorState": {
+    "activeScreen": {
+      "id": "queue-screen",
+      "name": "Queue Screen",
+      "kind": "story",
+      "implementationFilePath": "src/screens/QueueScreen.tsx"
+    },
+    "assistantTaskIntent": {
+      "kind": "edit-current-screen",
+      "targetScreenId": "queue-screen"
+    }
+  },
+  "permission": {
+    "*": "allow"
+  },
+  "mockResponses": [
+    {
+      "toolCalls": [
+        {
+          "name": "load_agent_skill",
+          "arguments": {
+            "name": "product-screen-generation"
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "get_project_index_status",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "search_project_index",
+          "arguments": {
+            "query": "MetricCard Button structured finance deal",
+            "types": ["component"],
+            "limit": 5
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "write_file",
+          "arguments": {
+            "path": "src/screens/QueueScreen.tsx",
+            "contentsLines": [
+              "import { MetricCard } from '../components/MetricCard';",
+              "import { Button } from '../components/Button';",
+              "",
+              "const dealMetrics = [",
+              "  { label: 'Facility size', value: '$2.4M' },",
+              "  { label: 'Target margin', value: '2.85%' },",
+              "];",
+              "",
+              "export function QueueScreen() {",
+              "  return (",
+              "    <main className=\"deal-screen\" data-testid=\"structured-finance-deal-screen\">",
+              "      <header>",
+              "        <h1>Structured finance deal</h1>",
+              "        <p>Mock data based on the attached BRD sample.</p>",
+              "      </header>",
+              "      <section aria-label=\"Deal metrics\">",
+              "        {dealMetrics.map((metric) => (",
+              "          <MetricCard key={metric.label} data-testid={metric.label}>",
+              "            <h2>{metric.label}</h2>",
+              "            <p>{metric.value}</p>",
+              "          </MetricCard>",
+              "        ))}",
+              "      </section>",
+              "      <aside aria-label=\"Deal actions\">",
+              "        <Button>Review covenants</Button>",
+              "      </aside>",
+              "    </main>",
+              "  );",
+              "}",
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "validate_design_screen",
+          "arguments": {
+            "implementationFilePath": "src/screens/QueueScreen.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "text": "Generated the structured finance deal screen on the active registered screen."
+    }
+  ],
+  "expectedToolSequence": [
+    "load_agent_skill",
+    "get_project_index_status",
+    "search_project_index",
+    "write_file",
+    "validate_design_screen"
+  ],
+  "expectedFinalResponseContains": "structured finance deal screen",
+  "expectedToolResultsContain": ["\"status\":\"compatible\""],
+  "expectedFiles": [
+    {
+      "path": "src/screens/QueueScreen.tsx",
+      "contains": "structured-finance-deal-screen"
+    }
+  ]
+}

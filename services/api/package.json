@@ -1,0 +1,30 @@
+{
+  "name": "@sber-designer/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Edge service between apps/web and the rest of the backend. Hosts the resolved sber-designer.json (server-side env-vars), proxies LLM calls through @sber-designer/llm-gateway, and (Phase 1) bridges proj-mcp to the editor over WebSocket. See ADR-0009.",
+  "main": "./src/index.ts",
+  "scripts": {
+    "dev": "bun run ../../scripts/write-build-info.ts && bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@sber-designer/agent-kit": "workspace:*",
+    "@sber-designer/ast-bridge": "workspace:*",
+    "@sber-designer/design-indexer": "workspace:*",
+    "@sber-designer/llm-gateway": "workspace:*",
+    "@sber-designer/proj-mcp": "workspace:*",
+    "@sber-designer/shared-types": "workspace:*",
+    "@sber-designer/storybook-indexer": "workspace:*",
+    "hono": "^4.6.0",
+    "html-to-image": "1.11.11",
+    "jose": "^5.9.0",
+    "svg-captcha": "^1.4.0",
+    "ts-morph": "^23.0.0",
+    "zod": "^3.23.0",
+    "zod-to-json-schema": "^3.23.0"
+  }
+}

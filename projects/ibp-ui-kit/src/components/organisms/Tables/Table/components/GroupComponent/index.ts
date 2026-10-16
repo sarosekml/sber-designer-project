@@ -1,0 +1,1 @@
+export { GroupComponent } from './GroupComponent';

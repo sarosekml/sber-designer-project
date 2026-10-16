@@ -1,0 +1,58 @@
+[
+  {
+    "type": "iteration-start",
+    "iteration": 1
+  },
+  {
+    "type": "runtime-session",
+    "sessionId": "s-failure-1",
+    "captureEvent": "system.init"
+  },
+  {
+    "type": "text-delta",
+    "iteration": 1,
+    "delta": "The model request failed."
+  },
+  {
+    "type": "usage",
+    "iteration": 1,
+    "usage": {
+      "inputTokens": 21,
+      "outputTokens": 4,
+      "totalTokens": 25
+    }
+  },
+  {
+    "type": "error",
+    "message": "Model request was rejected."
+  },
+  {
+    "type": "iteration-end",
+    "iteration": 1,
+    "hadToolCalls": false,
+    "finishReason": "other"
+  },
+  {
+    "type": "done",
+    "iterations": 1,
+    "truncated": false,
+    "hadErrors": true,
+    "stoppedAfterPermissionDeny": false,
+    "finalResponse": {
+      "text": "The model request failed.",
+      "provider": "gigacode-runtime",
+      "model": "vllm/DeepSeek-V4-Flash-262k",
+      "finishReason": "other",
+      "usage": {
+        "inputTokens": 21,
+        "outputTokens": 4,
+        "totalTokens": 25
+      }
+    },
+    "usage": {
+      "inputTokens": 21,
+      "outputTokens": 4,
+      "totalTokens": 25
+    }
+  }
+]

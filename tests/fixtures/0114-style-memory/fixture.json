@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "expectedRule": "Use denser screen layouts.",
+  "screens": [
+    {
+      "id": "density-orders",
+      "name": "Orders",
+      "targetPath": "src/screens/Orders.tsx",
+      "before": "orders.before.tsx.txt",
+      "after": "orders.after.tsx.txt"
+    },
+    {
+      "id": "density-payments",
+      "name": "Payments",
+      "targetPath": "src/screens/Payments.tsx",
+      "before": "payments.before.tsx.txt",
+      "after": "payments.after.tsx.txt"
+    }
+  ]
+}

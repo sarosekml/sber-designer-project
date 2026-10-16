@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI-анализ · Equitas</title>
+<link rel="stylesheet" href="design-system.css" />
+<link rel="stylesheet" href="_shell.css" />
+<style>
+.ai-head { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 20px 22px; border: 1px solid var(--c-border); background: linear-gradient(135deg, var(--c-surface), oklch(0.97 0.03 295 / 0.5)); border-radius: var(--r-xl); margin-bottom: 16px; }
+[data-theme="dark"] .ai-head { background: linear-gradient(135deg, var(--c-surface), oklch(0.28 0.04 295 / 0.4)); }
+.ai-head h1 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin: 0; display: flex; align-items: center; gap: 10px; }
+.ai-orb { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, oklch(0.78 0.18 295), oklch(0.55 0.15 330), oklch(0.45 0.14 200)); box-shadow: 0 0 16px oklch(0.62 0.18 295 / 0.35); animation: pulse 3s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+.ai-head .sub { color: var(--c-text-2); font-size: 13px; margin-top: 6px; max-width: 560px; }
+
+.scenario-pick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+.scenario { padding: 14px 14px; border: 1.5px solid var(--c-border); border-radius: var(--r-lg); background: var(--c-surface); cursor: pointer; text-align: left; display: flex; flex-direction: column; gap: 4px; }
+.scenario:hover { border-color: var(--c-accent-border); }
+.scenario.is-active { border-color: var(--c-accent); background: var(--c-accent-soft); }
+[data-theme="dark"] .scenario.is-active { background: oklch(0.30 0.06 155 / 0.4); }
+.scenario .t { font-size: 13px; font-weight: 600; }
+.scenario .d { font-size: 11.5px; color: var(--c-text-3); line-height: 1.45; }
+.scenario .badge { align-self: flex-start; margin-top: 4px; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.param-card { border: 1px solid var(--c-border); background: var(--c-surface); border-radius: var(--r-xl); padding: 18px; }
+.param-card h3 { font-size: 13px; font-weight: 600; margin: 0 0 14px; display: flex; align-items: center; justify-content: space-between; }
+.slider-row { display: grid; grid-template-columns: 140px 1fr 60px; gap: 12px; align-items: center; padding: 8px 0; border-top: 1px solid var(--c-divider); }
+.slider-row:first-of-type { border-top: 0; }
+.slider-row .l { font-size: 12.5px; color: var(--c-text-2); }
+.slider-row .v { font-size: 12.5px; font-family: var(--font-mono); text-align: right; color: var(--c-text); font-weight: 500; }
+.slider { position: relative; height: 6px; background: var(--c-surface-3); border-radius: 3px; }
+.slider .fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--c-accent); border-radius: 3px; }
+.slider .knob { position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: white; border: 2px solid var(--c-accent); transform: translate(-50%, -50%); box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+
+.progress-track { height: 8px; background: var(--c-surface-3); border-radius: 4px; overflow: hidden; }
+.progress-track .fill { height: 100%; background: linear-gradient(90deg, var(--c-accent), oklch(0.70 0.14 185)); border-radius: 4px; animation: shimmer 2s ease-in-out infinite; }
+@keyframes shimmer { 0%, 100% { opacity: 0.85; } 50% { opacity: 1; } }
+
+.step { display: grid; grid-template-columns: 22px 1fr 80px; gap: 12px; align-items: center; padding: 10px 0; font-size: 13px; }
+.step + .step { border-top: 1px solid var(--c-divider); }
+.step .dot { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; }
+.step.is-done .dot { background: var(--c-accent); color: white; }
+.step.is-active .dot { background: var(--c-surface); border: 2px solid var(--c-accent); position: relative; }
+.step.is-active .dot::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--c-accent); opacity: 0.3; animation: pulse 1.5s ease infinite; }
+.step.is-wait .dot { background: var(--c-surface-3); border: 1.5px solid var(--c-border-strong); }
+.step .d { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-4); text-align: right; }
+
+.target { padding: 16px; border: 1px solid var(--c-border); border-radius: var(--r-lg); background: var(--c-surface); display: flex; flex-direction: column; gap: 10px; }
+.target-head { display: flex; align-items: center; justify-content: space-between; }
+.target .name { font-size: 13px; font-weight: 600; }
+.target .score { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.target-meta { display: flex; gap: 12px; font-size: 11.5px; color: var(--c-text-3); }
+.target-bars { display: flex; flex-direction: column; gap: 6px; }
+.bar-row { display: grid; grid-template-columns: 90px 1fr 40px; gap: 8px; align-items: center; font-size: 11px; }
+.bar-row .l { color: var(--c-text-3); }
+.bar-row .bar { height: 4px; background: var(--c-surface-3); border-radius: 2px; overflow: hidden; }
+.bar-row .bar > span { display: block; height: 100%; background: var(--c-accent); border-radius: 2px; }
+.bar-row .v { font-family: var(--font-mono); font-size: 10.5px; text-align: right; color: var(--c-text-2); }
+.score-high { color: oklch(0.40 0.12 155); }
+[data-theme="dark"] .score-high { color: oklch(0.85 0.13 155); }
+.score-mid { color: oklch(0.45 0.13 70); }
+[data-theme="dark"] .score-mid { color: oklch(0.88 0.12 75); }
+</style></head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><div class="bm">E</div><div class="n">Equitas</div></div>
+    <nav class="crumbs-top"><a href="Screens Index.html">Главная</a><span class="sep">/</span><a href="#">Идеи</a><span class="sep">/</span><span class="current">AI-анализ</span></nav>
+    <div class="spacer"></div>
+    <label class="search-top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Поиск…"/><span class="kbd">⌘K</span></label>
+    <button class="topbar-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+    <div class="avatar avatar-sm avatar-emerald" style="margin-left: 4px;">АК</div>
+  </div>
+
+  <aside class="rail">
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 3l9 6v11a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
+    <button class="rail-ic is-active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 2 7l10 5 10-5-10-5z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/></svg></button>
+  </aside>
+
+  <aside class="nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Сценарии AI</div>
+      <a href="#" class="nav-item active"><span class="n-l">Поиск активов</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Скоринг идеи</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Оценка фонда</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Дайджест новостей</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Сравнение активов</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">История анализов</div>
+      <a href="#" class="nav-item"><span class="n-l">Петровакс · 02 апр</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Интеррос Q1 · 29 мар</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Sigma Growth · 24 мар</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Норникель news · 18 мар</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Шаблоны</div>
+      <a href="#" class="nav-item"><span class="n-l">🎯 Рост в логистике</span></a>
+      <a href="#" class="nav-item"><span class="n-l">💊 Фарма RU</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="ai-head">
+      <div>
+        <h1><span class="ai-orb"></span>AI-анализ</h1>
+        <p class="sub">Выберите сценарий, настройте параметры и запустите фоновый анализ. Результаты появятся в разделе «История анализов» и в таймлайне фонда.</p>
+        <div class="scenario-pick">
+          <button class="scenario is-active">
+            <div class="t">🔍 Поиск активов</div>
+            <div class="d">Найти потенциальные объекты инвестиций по заданным критериям отрасли, географии и финансовых метрик.</div>
+            <span class="badge badge-success">Рекомендовано</span>
+          </button>
+          <button class="scenario">
+            <div class="t">📈 Скоринг идеи</div>
+            <div class="d">Оценить привлекательность существующей инвестиционной идеи на основе 12 факторов.</div>
+          </button>
+          <button class="scenario">
+            <div class="t">⚖️ Сравнение</div>
+            <div class="d">Сопоставить 2–5 активов по выбранным метрикам с нормализацией и AI-выводами.</div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 360px 1fr;">
+      <!-- PARAMETERS -->
+      <div class="param-card">
+        <h3>Параметры анализа <button class="btn btn-link" style="font-size: 11px;">Сбросить</button></h3>
+
+        <div class="field" style="margin-bottom: 12px;">
+          <label class="field-label">Отрасль</label>
+          <div class="select-wrap"><select class="select"><option>Логистика и портовая инфраструктура</option><option>Металлы и руды</option><option>Фармацевтика</option></select></div>
+        </div>
+
+        <div class="field" style="margin-bottom: 12px;">
+          <label class="field-label">География</label>
+          <div class="row-sm">
+            <label class="check"><input type="checkbox" checked/><span class="box"></span>Россия</label>
+            <label class="check"><input type="checkbox" checked/><span class="box"></span>СНГ</label>
+            <label class="check"><input type="checkbox"/><span class="box"></span>Азия</label>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="slider-row">
+          <div class="l">Размер чека</div>
+          <div class="slider"><div class="fill" style="width: 58%;"></div><div class="knob" style="left: 58%;"></div></div>
+          <div class="v">500M ₽</div>
+        </div>
+        <div class="slider-row">
+          <div class="l">Целевой IRR</div>
+          <div class="slider"><div class="fill" style="width: 74%;"></div><div class="knob" style="left: 74%;"></div></div>
+          <div class="v">22%</div>
+        </div>
+        <div class="slider-row">
+          <div class="l">Горизонт</div>
+          <div class="slider"><div class="fill" style="width: 42%;"></div><div class="knob" style="left: 42%;"></div></div>
+          <div class="v">5 лет</div>
+        </div>
+        <div class="slider-row">
+          <div class="l">Риск</div>
+          <div class="slider"><div class="fill" style="width: 35%;"></div><div class="knob" style="left: 35%;"></div></div>
+          <div class="v">Средний</div>
+        </div>
+        <div class="slider-row">
+          <div class="l">Порог уверенности</div>
+          <div class="slider"><div class="fill" style="width: 80%;"></div><div class="knob" style="left: 80%;"></div></div>
+          <div class="v">80%</div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="field">
+          <label class="field-label">Источники данных</label>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label class="toggle"><input type="checkbox" checked/><span class="track"></span>Bloomberg Feed</label>
+            <label class="toggle"><input type="checkbox" checked/><span class="track"></span>Внутренняя база активов</label>
+            <label class="toggle"><input type="checkbox" checked/><span class="track"></span>Новости RU (24 источника)</label>
+            <label class="toggle"><input type="checkbox"/><span class="track"></span>Отчётность МСФО</label>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 18px;">
+          <button class="btn btn-secondary btn-sm" style="flex: 1;">Сохранить как шаблон</button>
+          <button class="btn btn-primary btn-sm" style="flex: 2;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 3l14 9-14 9z"/></svg>
+            Запустить анализ
+          </button>
+        </div>
+      </div>
+
+      <!-- RUN + TARGETS -->
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="param-card">
+          <h3>Текущий прогон <span class="ai-badge">AI в работе</span></h3>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <span class="t-caption">Обработано 847 из 1 240 объектов</span>
+            <span class="t-caption tnum" style="font-weight: 600; color: var(--c-accent-2);">68%</span>
+          </div>
+          <div class="progress-track"><div class="fill" style="width: 68%;"></div></div>
+          <div class="t-micro" style="margin-top: 6px;">Ожидаемое время завершения: ~2 мин 14 сек · запущено Анной Ковалёвой в 14:32</div>
+
+          <div class="hr"></div>
+
+          <div class="step is-done">
+            <div class="dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div>Сбор выборки по критериям <span class="muted">· найдено 1 240 объектов</span></div>
+            <div class="d">0:08</div>
+          </div>
+          <div class="step is-done">
+            <div class="dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div>Обогащение финансовыми данными</div>
+            <div class="d">0:42</div>
+          </div>
+          <div class="step is-active">
+            <div class="dot"></div>
+            <div>Скоринг по 12 факторам · модель Equitas-Scorer v4</div>
+            <div class="d">1:18</div>
+          </div>
+          <div class="step is-wait">
+            <div class="dot"></div>
+            <div>Кросс-проверка по новостному фону (24 источника)</div>
+            <div class="d">—</div>
+          </div>
+          <div class="step is-wait">
+            <div class="dot"></div>
+            <div>Формирование отчёта и меморандума</div>
+            <div class="d">—</div>
+          </div>
+        </div>
+
+        <div class="param-card">
+          <h3>Найденные таргеты <span class="muted" style="font-weight: 400; font-size: 12px;">3 из ожидаемых 5–8</span></h3>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="target">
+              <div class="target-head">
+                <div><span class="name">Порт Мурманск</span> <span class="tag tag-hotel" style="margin-left: 6px;">Логистика</span></div>
+                <div class="score score-high">92 <span class="muted tnum" style="font-size: 11px; font-weight: 400;">/100</span></div>
+              </div>
+              <div class="target-meta"><span>EV 480 млн ₽</span><span>Выручка +14%/г</span><span>5 лет · IRR 24%</span></div>
+              <div class="target-bars">
+                <div class="bar-row"><span class="l">Финансы</span><div class="bar"><span style="width: 95%;"></span></div><span class="v">95</span></div>
+                <div class="bar-row"><span class="l">Рост</span><div class="bar"><span style="width: 88%;"></span></div><span class="v">88</span></div>
+                <div class="bar-row"><span class="l">Риск</span><div class="bar"><span style="width: 72%; background: var(--c-warning);"></span></div><span class="v">72</span></div>
+                <div class="bar-row"><span class="l">Синергии</span><div class="bar"><span style="width: 94%;"></span></div><span class="v">94</span></div>
+              </div>
+              <div class="row-sm" style="margin-top: 2px;">
+                <button class="btn btn-primary btn-sm" style="padding: 0 10px; height: 26px; font-size: 11.5px;">Создать идею</button>
+                <button class="btn btn-ghost btn-sm" style="padding: 0 8px; height: 26px; font-size: 11.5px;">Открыть</button>
+              </div>
+            </div>
+
+            <div class="target">
+              <div class="target-head">
+                <div><span class="name">Архангельский морской порт</span> <span class="tag tag-hotel" style="margin-left: 6px;">Логистика</span></div>
+                <div class="score score-high">84 <span class="muted tnum" style="font-size: 11px; font-weight: 400;">/100</span></div>
+              </div>
+              <div class="target-meta"><span>EV 310 млн ₽</span><span>Выручка +9%/г</span><span>5 лет · IRR 19%</span></div>
+              <div class="target-bars">
+                <div class="bar-row"><span class="l">Финансы</span><div class="bar"><span style="width: 82%;"></span></div><span class="v">82</span></div>
+                <div class="bar-row"><span class="l">Рост</span><div class="bar"><span style="width: 78%;"></span></div><span class="v">78</span></div>
+                <div class="bar-row"><span class="l">Риск</span><div class="bar"><span style="width: 88%;"></span></div><span class="v">88</span></div>
+                <div class="bar-row"><span class="l">Синергии</span><div class="bar"><span style="width: 86%;"></span></div><span class="v">86</span></div>
+              </div>
+            </div>
+
+            <div class="target">
+              <div class="target-head">
+                <div><span class="name">Терминал Лавна</span> <span class="tag tag-hotel" style="margin-left: 6px;">Логистика</span></div>
+                <div class="score score-mid">76 <span class="muted tnum" style="font-size: 11px; font-weight: 400;">/100</span></div>
+              </div>
+              <div class="target-meta"><span>EV 210 млн ₽</span><span>Выручка +18%/г</span><span>5 лет · IRR 26%</span></div>
+              <div class="target-bars">
+                <div class="bar-row"><span class="l">Финансы</span><div class="bar"><span style="width: 64%; background: var(--c-warning);"></span></div><span class="v">64</span></div>
+                <div class="bar-row"><span class="l">Рост</span><div class="bar"><span style="width: 92%;"></span></div><span class="v">92</span></div>
+                <div class="bar-row"><span class="l">Риск</span><div class="bar"><span style="width: 55%; background: var(--c-danger);"></span></div><span class="v">55</span></div>
+                <div class="bar-row"><span class="l">Синергии</span><div class="bar"><span style="width: 80%;"></span></div><span class="v">80</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body></html>

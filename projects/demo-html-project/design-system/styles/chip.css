@@ -1,0 +1,270 @@
+/* =========================================================================
+   Design System — Chip
+   A compact, interactive element used for filters, tags and statuses, and as
+   a child inside other components (InputAutocomplete, chiplists).
+
+   Type:    edit (interactive) · readonly (inside ReadOnly inputs)
+   Style:   fill  (Border + Fill) · outline (Border only)
+   Sizes:   l (40) · m (32) · s (24) · xs (20)
+            l — readonly only · xs — content/compact
+   Tone:    system (default) · accent · success · info · warning · error · dark ← proposed
+            Solid: success-solid · warning-solid · error-solid · dark-solid ← proposed
+            (base status fill + white text — критичные акценты, RiskMetric красная/чёрная зона)
+            Тон — не фиксированный список «ситуативных» имён: чип может брать любой
+            локальный статус-тон (Local, colors.css). success/info/warning/error —
+            просто самые частые алиасы (StGreen/StLBlue/StOrange/StRed); dark — ещё
+            один локальный тон (StGrey), для нейтрально-тёмной/«чёрной» семантики
+            (см. RiskMetric — Чёрная зона).
+   States:  default · hover · selected ← proposed · focus ← proposed
+            disabled · loading ← proposed · error/invalid ← proposed
+   Slots:   leading icon / marker / badge / avatar · trailing remove (×) /
+            dropdown (chevron) / info-trigger (открывает Popover) ← proposed / counter
+   Extras:  rounded (999px pill) · max-width 320px → ellipsis + tooltip
+   Requires: typography.css, colors.css
+   ========================================================================= */
+
+.chip {
+  /* size tokens — overridden per size modifier */
+  --chip-height: 24px;
+  --chip-pad-x: 10px;
+  --chip-gap: 6px;
+  --chip-icon: 16px;
+  --chip-radius: var(--radius-control-s);
+  --chip-font: var(--type-body-s);
+
+  /* tone tokens — system by default; overridden per tone */
+  --chip-fill: var(--st-system-light);          /* Swamp_400 16% */
+  --chip-fill-hover: var(--st-system-midlight);  /* Swamp_400 32% */
+  --chip-border: var(--st-system-light);
+  --chip-border-hover: var(--st-system-light);
+  --chip-text: var(--st-system-dark);            /* CGrey_600 */
+  --chip-icon-color: var(--st-system);           /* Swamp_400 */
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--chip-gap);
+  max-width: 320px;
+  height: var(--chip-height);
+  padding: 0 var(--chip-pad-x);
+  border: 1px solid var(--chip-border);
+  border-radius: var(--chip-radius);
+  background: var(--chip-fill);
+  color: var(--chip-text);
+  font: var(--chip-font);
+  letter-spacing: 0;
+  white-space: nowrap;
+  user-select: none;
+  cursor: default;
+  vertical-align: middle;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
+}
+
+/* the text label — truncates with ellipsis at max-width */
+.chip__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* ---------- icon / slot sizing -------------------------------------------- */
+.chip__icon,
+.chip__marker,
+.chip__remove,
+.chip__dropdown,
+.chip__info {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--chip-icon);
+  height: var(--chip-icon);
+  color: var(--chip-icon-color);
+}
+.chip__icon svg,
+.chip__marker svg,
+.chip__remove svg,
+.chip__dropdown svg,
+.chip__info svg { width: 100%; height: 100%; display: block; }
+.chip__dropdown svg { width: 80%; height: 80%; }
+.chip__info svg { width: 88%; height: 88%; }
+
+/* leading marker (graph-node / status dot proxy) */
+.chip__marker { color: var(--chip-icon-color); }
+
+/* mini leading avatar / badge — sits flush to the left edge */
+.chip__avatar,
+.chip__badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--chip-height) - 6px);
+  height: calc(var(--chip-height) - 6px);
+  margin-left: calc(0px - (var(--chip-pad-x) - 4px));
+  border-radius: var(--radius-circle);
+  background: var(--st-system-midlight);
+  color: var(--chip-text);
+  font: var(--weight-semibold) 10px/1 var(--font-text);
+  overflow: hidden;
+}
+.chip__avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* trailing counter — «(3)» style numeric suffix */
+.chip__count {
+  flex: none;
+  font-weight: var(--weight-semibold);
+  color: var(--chip-icon-color);
+  font-variant-numeric: tabular-nums;
+}
+
+/* remove (×) is genuinely interactive — gets its own hit state */
+.chip__remove { cursor: pointer; border-radius: var(--radius-circle); transition: background-color .12s ease, color .12s ease; }
+.chip__remove:hover { background: color-mix(in srgb, var(--chip-text) 12%, transparent); color: var(--chip-text); }
+.chip__dropdown { cursor: pointer; }
+
+/* info-trigger (×) — PROPOSED: opens a Popover with metric detail (used by RiskMetric).
+   Unlike other trailing slots it is a real <button>, independently focusable even
+   inside a chip--readonly (the chip itself carries no tabindex/hover state). */
+.chip__info {
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+  border-radius: var(--radius-circle);
+  transition: background-color .12s ease, color .12s ease;
+  font: inherit;
+}
+.chip__info:hover { background: color-mix(in srgb, var(--chip-text) 12%, transparent); color: var(--chip-text); }
+.chip__info:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+/* trailing info-trigger carries its own visual weight, so the padding rhythm shifts:
+   text (left) keeps a fuller 8px, icon (right) reads correctly at a tighter 4px.
+   Scoped to chips with .chip__info (RiskMetric) — doesn't touch other Chip usages. */
+.chip:has(.chip__info) { padding-left: 8px; padding-right: 4px; }
+/* .chip__info hosts its glyph as <i data-icon="…"> (ds-icons.js) rather than inline <svg> —
+   ds-icons.js's own [data-icon]{width:24px;height:24px} rule has equal specificity and loads
+   after chip.css, so it wins the cascade and forces the icon to 24px regardless of --chip-icon.
+   Pin it back to the chip's icon slot size (16px on chip--s) with higher specificity. */
+.chip__info [data-icon] { width: 100%; height: 100%; }
+.chip__info [data-icon] svg { width: 100%; height: 100%; }
+
+/* ---------- sizes --------------------------------------------------------- */
+.chip--l  { --chip-height: 40px; --chip-pad-x: 14px; --chip-gap: 8px; --chip-icon: 20px; --chip-radius: var(--radius-control); --chip-font: var(--type-body-m); }
+.chip--m  { --chip-height: 32px; --chip-pad-x: 12px; --chip-gap: 6px; --chip-icon: 20px; --chip-radius: var(--radius-control); --chip-font: var(--type-body-m); }
+.chip--s  { --chip-height: 24px; --chip-pad-x: 10px; --chip-gap: 6px; --chip-icon: 16px; --chip-radius: var(--radius-control-s); --chip-font: var(--type-body-s); }
+.chip--xs { --chip-height: 20px; --chip-pad-x: 8px;  --chip-gap: 4px; --chip-icon: 16px; --chip-radius: var(--radius-control-s); --chip-font: var(--type-body-xs); }
+
+/* ---------- style: outline (Border only) ---------------------------------- */
+.chip--outline {
+  --chip-fill: transparent;
+  --chip-border: var(--st-system-mid);          /* Swamp_400 56% */
+  --chip-border-hover: var(--st-system-mid);
+}
+
+/* ---------- rounded (full pill) ------------------------------------------- */
+.chip--rounded { --chip-radius: var(--radius-pill); }
+
+/* ---------- hover (Edit only) --------------------------------------------- */
+.chip--edit:not(.chip--disabled):hover,
+.chip--edit:not(.chip--disabled).is-hover {
+  background: var(--chip-fill-hover);
+  border-color: var(--chip-border-hover);
+}
+
+/* ---------- focus-visible (keyboard a11y) — PROPOSED ---------------------- */
+.chip--edit:focus-visible,
+.chip--edit.is-focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ---------- selected (filter toggle) — PROPOSED --------------------------- */
+.chip--selected {
+  --chip-fill: var(--st-primary-light);
+  --chip-fill-hover: var(--st-primary-midlight);
+  --chip-border: color-mix(in srgb, var(--primary) 56%, transparent);
+  --chip-border-hover: var(--primary);
+  --chip-text: var(--primary-dark);
+  --chip-icon-color: var(--primary);
+}
+
+/* ---------- tones / statuses — PROPOSED ----------------------------------- *
+   Used when chips carry status meaning (active/blocked/overdue…) rather than
+   neutral tags. Fill = status Light, text = status Dark, icon = status base. */
+.chip--accent  { --chip-fill: var(--st-primary-light); --chip-fill-hover: var(--st-primary-midlight); --chip-border: var(--st-primary-light); --chip-border-hover: var(--st-primary-light); --chip-text: var(--st-primary-dark); --chip-icon-color: var(--primary); }
+.chip--success { --chip-fill: var(--st-green-light);   --chip-fill-hover: var(--st-green-midlight);   --chip-border: var(--st-green-light);   --chip-border-hover: var(--st-green-light);   --chip-text: var(--st-green-dark);   --chip-icon-color: var(--st-green); }
+.chip--info    { --chip-fill: var(--st-lblue-light);   --chip-fill-hover: var(--st-lblue-midlight);   --chip-border: var(--st-lblue-light);   --chip-border-hover: var(--st-lblue-light);   --chip-text: var(--st-lblue-dark);   --chip-icon-color: var(--st-lblue); }
+.chip--warning { --chip-fill: var(--st-orange-light);  --chip-fill-hover: var(--st-orange-midlight);  --chip-border: var(--st-orange-light);  --chip-border-hover: var(--st-orange-light);  --chip-text: var(--st-orange-dark);  --chip-icon-color: var(--st-orange); }
+.chip--error   { --chip-fill: var(--st-red-light);     --chip-fill-hover: var(--st-red-midlight);     --chip-border: var(--st-red-light);     --chip-border-hover: var(--st-red-light);     --chip-text: var(--st-red-dark);     --chip-icon-color: var(--st-red); }
+.chip--dark    { --chip-fill: var(--st-grey-light);    --chip-fill-hover: var(--st-grey-midlight);    --chip-border: var(--st-grey-light);    --chip-border-hover: var(--st-grey-light);    --chip-text: var(--st-grey-dark);    --chip-icon-color: var(--st-grey); }
+
+/* outline + tone — keep fill transparent, colour the border at Mid opacity */
+.chip--outline.chip--accent  { --chip-border: color-mix(in srgb, var(--primary) 56%, transparent); }
+.chip--outline.chip--success { --chip-border: var(--st-green-mid); }
+.chip--outline.chip--info    { --chip-border: var(--st-lblue-mid); }
+.chip--outline.chip--warning { --chip-border: var(--st-orange-mid); }
+.chip--outline.chip--error   { --chip-border: var(--st-red-mid); }
+.chip--outline.chip--dark    { --chip-border: var(--st-grey-mid); }
+
+/* ---------- solid tones — PROPOSED ---------------------------------------- *
+   Насыщенная заливка = status base, текст и иконка белые (--c-mgrey-50).
+   Для критичных статусов, где светлого фона недостаточно (красная/чёрная
+   зона в RiskMetric). Тон-масштаб: чем выше критичность, тем плотнее фон. */
+.chip--success-solid { --chip-fill: var(--st-green);  --chip-fill-hover: var(--st-green-dark);  --chip-border: var(--st-green);  --chip-border-hover: var(--st-green-dark);  --chip-text: var(--c-mgrey-50); --chip-icon-color: var(--c-mgrey-50); }
+.chip--warning-solid { --chip-fill: var(--st-orange); --chip-fill-hover: var(--st-orange-dark); --chip-border: var(--st-orange); --chip-border-hover: var(--st-orange-dark); --chip-text: var(--c-mgrey-50); --chip-icon-color: var(--c-mgrey-50); }
+.chip--error-solid   { --chip-fill: var(--st-red);    --chip-fill-hover: var(--st-red-dark);    --chip-border: var(--st-red);    --chip-border-hover: var(--st-red-dark);    --chip-text: var(--c-mgrey-50); --chip-icon-color: var(--c-mgrey-50); }
+.chip--dark-solid    { --chip-fill: var(--st-grey);   --chip-fill-hover: var(--st-grey-dark);   --chip-border: var(--st-grey);   --chip-border-hover: var(--st-grey-dark);   --chip-text: var(--c-mgrey-50); --chip-icon-color: var(--c-mgrey-50); }
+
+/* ---------- invalid / validation error on input chip — PROPOSED ----------- */
+.chip--invalid {
+  --chip-fill: var(--error-bg-light);
+  --chip-fill-hover: var(--error-bg);
+  --chip-border: var(--st-red-mid);
+  --chip-border-hover: var(--error);
+  --chip-text: var(--error-dark);
+  --chip-icon-color: var(--error);
+}
+
+/* ---------- disabled ------------------------------------------------------ */
+.chip--disabled {
+  --chip-fill: var(--st-disabled-light);        /* CGrey_600 4% */
+  --chip-fill-hover: var(--st-disabled-light);
+  --chip-border: var(--st-disabled-light);
+  --chip-text: var(--st-disabled-dark);          /* CGrey_600 40% */
+  --chip-icon-color: var(--st-disabled);         /* CGrey_600 24% */
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.chip--outline.chip--disabled { --chip-fill: transparent; --chip-border: var(--st-disabled-mid); /* CGrey_600 16% */ }
+/* a disabled chip with long, truncated text must still show its tooltip */
+.chip--disabled.chip--has-tooltip { pointer-events: auto; }
+.chip--disabled .chip__remove { pointer-events: none; }
+
+/* ---------- loading — PROPOSED -------------------------------------------- */
+.chip--loading { --chip-icon-color: var(--st-system); }
+.chip__spinner {
+  flex: none;
+  width: var(--chip-icon);
+  height: var(--chip-icon);
+  border-radius: var(--radius-circle);
+  border: 2px solid color-mix(in srgb, var(--chip-icon-color) 28%, transparent);
+  border-top-color: var(--chip-icon-color);
+  animation: chip-spin .7s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .chip__spinner { animation-duration: 1.6s; }
+}
+@keyframes chip-spin { to { transform: rotate(360deg); } }
+
+/* =========================================================================
+   CHIPLIST — wrapping container of chips with consistent gaps
+   ========================================================================= */
+.chiplist {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.chiplist--s { gap: 6px; }
+/* overflow counter «+N» chip uses the same outline visual */

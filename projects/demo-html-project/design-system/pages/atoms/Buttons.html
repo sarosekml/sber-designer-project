@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Button — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/button.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    margin: 0; font-family: var(--font-text), system-ui, sans-serif;
+    color: var(--text-primary); background: var(--bg-page); background-attachment: fixed;
+  }
+  .page { max-width: 1320px; margin: 0 auto; padding: clamp(40px,7vw,96px) clamp(24px,5vw,72px) 140px; }
+
+  /* masthead */
+  .masthead { border-bottom: 1px solid var(--border-light); padding-bottom: 30px; }
+  .masthead .meta { font: var(--type-body-xs); color: var(--text-inactive); display:flex; gap:24px; margin:0 0 22px; }
+  .masthead .meta b { color: var(--text-secondary); font: var(--type-body-xs); font-weight:600; }
+  .eyebrow { font: var(--type-button-xs); letter-spacing:.14em; text-transform:uppercase; color: var(--primary); margin:0 0 14px; }
+  .masthead h1 { font: var(--type-h1); margin:0 0 14px; color: var(--text-black); }
+  @media (max-width:600px){ .masthead h1{ font-size:40px; line-height:48px; } }
+  .masthead p.lead { font: var(--type-body-l); color: var(--text-secondary); margin:0; max-width:58ch; }
+
+  /* section */
+  .section { margin-top: 76px; }
+  .section > h2 { font: var(--type-h3-strong); margin:0 0 8px; color: var(--text-black); }
+  .section > p.desc { font: var(--type-body-m); color: var(--text-secondary); margin:0 0 28px; max-width:70ch; text-wrap:pretty; }
+  .section > p.desc.tight { margin-bottom:20px; }
+
+  .panel {
+    background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px;
+    padding: 32px 34px;
+  }
+  .row { display:flex; flex-wrap:wrap; align-items:center; gap:20px; }
+  .row + .row { margin-top: 22px; }
+
+  .label { font: var(--type-body-s); color: var(--text-inactive); margin:0 0 14px; }
+
+  /* sizes spec */
+  .size-item { display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+  .size-tag { font: var(--type-body-s-strong); color: var(--text-secondary); }
+  .size-tag span { color: var(--text-inactive); font: var(--type-body-s); }
+  .sizes { display:flex; gap:48px; flex-wrap:wrap; align-items:flex-end; }
+
+  /* padding spec table */
+  .spec-table { width:100%; border-collapse:collapse; }
+  .spec-table th, .spec-table td { text-align:left; padding:14px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); }
+  .spec-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .spec-table td.num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  .spec-table tr:last-child td { border-bottom:none; }
+  .spec-table .px { color: var(--text-inactive); font-size:13px; }
+
+  /* inline token chip */
+  code.tok { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.86em; color: var(--primary); background: var(--primary-bg); padding:1px 6px; border-radius:5px; }
+
+  /* reference table (typography) */
+  .ref-table { width:100%; border-collapse:collapse; }
+  .ref-table th, .ref-table td { text-align:left; padding:16px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:middle; }
+  .ref-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .ref-table tr:last-child td { border-bottom:none; }
+  .ref-table .rt-size { font: var(--type-body-m-strong); color: var(--text-black); }
+  .ref-table .rt-sample { color: var(--text-black); }
+  .ref-table .rt-tok code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; color: var(--primary); }
+  .ref-table .rt-num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+
+  /* color reference — grouped cards */
+  .color-ref { display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; }
+  @media (max-width:900px){ .color-ref { grid-template-columns:1fr; } }
+  .cref-group { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; overflow:hidden; }
+  .cref-group > h3 { font: var(--type-h5-strong); margin:0; color: var(--text-primary); padding:18px 22px; border-bottom:1px solid var(--border-light); }
+  .cref-rows { padding:6px 0; }
+  .cref-row { display:grid; grid-template-columns: 36px 1fr auto; gap:14px; align-items:center; padding:9px 22px; }
+  .cref-row:hover { background: var(--bgtable-row-hover); }
+  .cref-sw { width:36px; height:36px; border-radius:8px; border:1px solid rgba(40,50,55,.12); position:relative; overflow:hidden; flex:none; }
+  .cref-sw.alpha::before { content:""; position:absolute; inset:0; z-index:0;
+    background-image:
+      linear-gradient(45deg,#d9e0e0 25%,transparent 25%),linear-gradient(-45deg,#d9e0e0 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#d9e0e0 75%),linear-gradient(-45deg,transparent 75%,#d9e0e0 75%);
+    background-size:8px 8px; background-position:0 0,0 4px,4px -4px,-4px 0; }
+  .cref-sw .cf { position:absolute; inset:0; z-index:1; }
+  .cref-meta { min-width:0; }
+  .cref-meta .role { font: var(--type-body-s); color: var(--text-inactive); margin:0; }
+  .cref-meta .tname { font: var(--type-body-m-strong); color: var(--text-primary); margin:1px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; word-break:break-all; }
+  .cref-hex { font: var(--type-body-s-strong); color: var(--text-secondary); font-variant-numeric: tabular-nums; text-align:right; flex:none; }
+
+  /* states matrix */
+  .matrix { display:grid; grid-template-columns: 150px repeat(4, 1fr); gap:18px 20px; align-items:center; }
+  .matrix .col-head { font: var(--type-body-m); color: var(--text-secondary); text-align:left; }
+  .matrix .grouphdr { grid-column:1 / -1; font: var(--type-h6-strong); color: var(--text-black); margin-top:10px; }
+  .matrix .rowname { font: var(--type-body-m-strong); color: var(--text-primary); }
+  .matrix .rowname.sub { font: var(--type-body-m); color: var(--text-secondary); }
+  .matrix .cell { display:flex; }
+
+  /* fullwidth demo */
+  .fw-grid { display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; }
+  @media (max-width:760px){ .fw-grid{ grid-template-columns:1fr; } }
+
+  /* big grid (legacy) */
+  .grid-wrap { overflow-x:auto; padding-bottom:8px; }
+
+  /* ---------- playground ---------- */
+  .panel.pg { padding:0; overflow:hidden; display:grid; grid-template-columns: 320px 1fr; }
+  @media (max-width:820px){ .panel.pg { grid-template-columns:1fr; } }
+  .pg__controls { padding:30px 30px; display:flex; flex-direction:column; gap:24px; border-right:1px solid var(--border-light); }
+  @media (max-width:820px){ .pg__controls { border-right:none; border-bottom:1px solid var(--border-light); } }
+  .pg__stage { padding:48px 40px; display:flex; align-items:center; justify-content:center; min-height:200px;
+    background:
+      linear-gradient(var(--bg-tile),var(--bg-tile)) padding-box,
+      repeating-conic-gradient(#f2f5f5 0% 25%, #fbfcfc 0% 50%) 0 / 22px 22px; }
+  .pg__stagebox { width:100%; max-width:460px; display:flex; align-items:center; justify-content:center; }
+
+  .ctl { display:flex; flex-direction:column; gap:10px; }
+  .ctl > .lbl { font: var(--type-body-s-strong); color: var(--text-inactive); text-transform:uppercase; letter-spacing:.05em; font-size:11px; }
+
+  .seg { display:inline-flex; background: var(--tertiary); border-radius:9px; padding:3px; gap:3px; flex-wrap:wrap; }
+  .seg button { border:none; background:transparent; padding:7px 12px; border-radius:6px; font: var(--type-button-s); color: var(--text-secondary); cursor:pointer; transition:.12s; }
+  .seg button:hover { color: var(--text-primary); }
+  .seg button[aria-selected="true"] { background: var(--bg-tile); color: var(--primary); box-shadow:0 1px 2px rgba(40,50,55,.10); }
+
+  .toggles { display:flex; flex-direction:column; gap:9px; }
+  .toggle { display:inline-flex; align-items:center; gap:11px; padding:9px 12px; border:1px solid var(--border-light); border-radius:9px; font: var(--type-body-m); color: var(--text-primary); cursor:pointer; user-select:none; background: var(--bg-tile); transition:.12s; }
+  .toggle:hover { border-color: var(--border-primary); }
+  .toggle[aria-pressed="true"] { border-color: var(--primary); color: var(--primary); }
+  .toggle .sw { width:36px; height:20px; border-radius:999px; background: var(--c-cgrey-200); position:relative; transition:.15s; flex:none; }
+  .toggle .sw::after { content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.2); transition:.15s; }
+  .toggle[aria-pressed="true"] .sw { background: var(--primary); }
+  .toggle[aria-pressed="true"] .sw::after { transform: translateX(16px); }
+  .toggle[aria-disabled="true"] { opacity:.4; pointer-events:none; }
+
+  .pg__code { margin-top:4px; font: var(--type-body-s); color: var(--text-inactive); }
+  .pg__code code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; color: var(--text-secondary); background: var(--bgtable-row-focus); padding:3px 7px; border-radius:6px; display:inline-block; word-break:break-all; }
+
+  /* select control (used when options don't fit one segmented row) */
+  .pg-select { position:relative; }
+  .pg-select select {
+    appearance:none; -webkit-appearance:none;
+    width:100%; height:40px; padding:0 38px 0 14px;
+    border:1px solid var(--border-primary); border-radius:9px;
+    background: var(--bg-tile); color: var(--text-primary);
+    font: var(--type-body-m); cursor:pointer;
+  }
+  .pg-select select:focus-visible { outline:2px solid var(--primary); outline-offset:1px; }
+  .pg-select::after {
+    content:""; position:absolute; right:15px; top:50%; width:9px; height:9px;
+    border-right:2px solid var(--text-secondary); border-bottom:2px solid var(--text-secondary);
+    transform:translateY(-65%) rotate(45deg); pointer-events:none;
+  }
+
+  /* chevron dropdown menu */
+  .dropdown { position:relative; display:inline-flex; }
+  .dropdown .btn__chevron { transition: transform .15s ease; }
+  .dropdown.is-open .btn__chevron { transform: rotate(180deg); }
+  .dropdown__menu {
+    position:absolute; top:calc(100% + 6px); left:0; z-index:30;
+    min-width:200px; padding:6px;
+    background: var(--bg-popup); border:1px solid var(--border-light); border-radius:11px;
+    box-shadow:0 10px 30px rgba(40,50,55,.16);
+  }
+  .dropdown__menu[hidden] { display:none; }
+  .dropdown--right .dropdown__menu { left:auto; right:0; }
+  .dropdown__item {
+    display:flex; align-items:center; gap:10px; width:100%;
+    padding:9px 12px; border:none; background:transparent; border-radius:7px;
+    font: var(--type-body-m); color: var(--text-primary); cursor:pointer; text-align:left;
+  }
+  .dropdown__item svg { width:18px; height:18px; color: var(--text-secondary); flex:none; }
+  .dropdown__item:hover { background: var(--bgtable-row-hover); }
+  .dropdown__item:active { background: var(--bgtable-row-focus); }
+  .typecols { display:grid; grid-template-columns: 44px repeat(3, auto); gap:0 56px; min-width:min-content; }
+  .typecols .th { font: var(--type-h5-strong); color: var(--text-black); padding:0 0 20px; }
+  .typecols .sz { display:flex; align-items:center; justify-content:center; }
+  .typecols .sz .badge { font: var(--type-body-s-strong); color: var(--text-on-tertiary); background: var(--tertiary); padding:6px 9px; border-radius:6px; letter-spacing:.05em; }
+  .stack { display:flex; flex-direction:column; gap:10px; padding:14px 0 26px; }
+  .stack .pair { display:flex; gap:10px; align-items:center; }
+
+  /* loader demo */
+  .loader-demo { display:flex; flex-direction:column; gap:18px; }
+  .loader-demo .lrow { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .loader-demo .lrow .tag { font: var(--type-body-s); color: var(--text-inactive); width:140px; }
+  .hint { font: var(--type-body-s); color: var(--text-inactive); margin-top:14px; }
+
+  .addon { font: var(--type-button-xs); letter-spacing:.06em; text-transform:uppercase; color: var(--primary); background: var(--primary-bg); padding:5px 10px; border-radius:999px; }
+  .subhead { font: var(--type-body-m-strong); color: var(--text-black); margin:0 0 16px; }
+  .subhead.mt { margin-top: 30px; }
+  .subhead .req { font: var(--type-body-s); color: var(--text-inactive); font-weight:400; }
+
+  /* content rules list */
+  .rules { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; }
+  .rules li { font: var(--type-body-m); color: var(--text-primary); padding-left:26px; position:relative; text-wrap:pretty; }
+  .rules li::before { content:""; position:absolute; left:2px; top:9px; width:7px; height:7px; border-radius:50%; background: var(--primary); }
+  .rules li b { color: var(--text-black); }
+
+  /* ---------- developer handoff ---------- */
+  .dev-intro { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:-6px 0 22px; }
+  .dev-intro .req { font: var(--type-body-s); color: var(--text-inactive); }
+  .dev-intro code.tok { font-size:.86em; }
+
+  .code-panel { background: var(--c-cgrey-800); border-radius: 12px; overflow:hidden; }
+  .code-panel + .code-panel { margin-top:20px; }
+  .code-panel__head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 16px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .code-panel__name { font: var(--type-body-s-strong); color: rgba(255,255,255,.72); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; letter-spacing:.02em; }
+  .code-panel__copy {
+    display:inline-flex; align-items:center; gap:6px; border:0; padding:6px 11px; border-radius:7px;
+    background: rgba(255,255,255,.08); color: rgba(255,255,255,.86); font: var(--type-body-xs); cursor:pointer;
+    transition: background-color .12s ease;
+  }
+  .code-panel__copy:hover { background: rgba(255,255,255,.16); }
+  .code-panel__copy svg { width:14px; height:14px; flex:none; }
+  .code-panel__copy.is-copied { background: color-mix(in srgb, var(--success) 30%, transparent); color:#fff; }
+  .code-panel pre { margin:0; padding:18px 20px; overflow-x:auto; }
+  .code-panel code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; line-height:1.65;
+    color: rgba(255,255,255,.82); white-space:pre;
+  }
+  .code-panel .tk-tag  { color:#79D9C9; }
+  .code-panel .tk-attr { color:#9FC1FF; }
+  .code-panel .tk-val  { color:#F2C879; }
+  .code-panel .tk-cm   { color: rgba(255,255,255,.4); font-style:italic; }
+
+  .dev-table { width:100%; border-collapse:collapse; }
+  .dev-table th, .dev-table td { text-align:left; padding:13px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:top; }
+  .dev-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .dev-table tr:last-child td { border-bottom:none; }
+  .dev-table code.tok { white-space:nowrap; }
+  .dev-table td.dsc { color: var(--text-secondary); font: var(--type-body-s); }
+  .dev-table td.rt-num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+
+  .dev-note { font: var(--type-body-s); color: var(--text-inactive); margin:16px 2px 0; text-wrap:pretty; }
+
+  footer.page-foot { margin-top:90px; padding-top:26px; border-top:1px solid var(--border-light);
+    font: var(--type-body-s); color: var(--text-inactive); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+</style>
+  <link rel="stylesheet" href="../../styles/ds-nav.css">
+  <link rel="stylesheet" href="../../styles/ds-toc.css">
+<link rel="stylesheet" href="../../styles/pg-kit.css">
+<style>
+/* unified-template: бывшие h2-разделы, понижены до подразделов */
+.section .subsec{margin-top:48px;}
+.section .subsec>h3{font:var(--type-h4-strong);margin:0 0 8px;color:var(--text-black);}
+.section .subsec>p.desc{font:var(--type-body-m);color:var(--text-secondary);margin:0 0 24px;max-width:82ch;text-wrap:pretty;}
+.section .subsec>p.desc.tight{margin-bottom:20px;}
+.section .subsec>p.desc+p.desc{margin-top:-16px;}
+</style>
+</head>
+<body>
+<main class="page" data-screen-label="Button">
+
+  <header class="masthead">
+    <div class="meta"><span>Версия: <b>v1.4</b></span><span>Обновлено: <b>08.07.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Компоненты</p>
+    <h1>Button</h1>
+    <p class="lead">Кнопка инициирует действие. Три типа, три размера, состояния Default / Hover / Active / Disabled, лоадер и режим Fullwidth. Модификатор <code class="tok">--danger</code> комбинируется с любым типом — для деструктивных действий (диалог подтверждения удаления). Текст кнопок набран токенами Button&nbsp;M&nbsp;/&nbsp;S&nbsp;/&nbsp;XS (SB Sans Screen).</p>
+  </header>
+
+  <!-- PLAYGROUND (interactive — always first) -->
+  <section class="section" data-screen-label="Playground">
+    <h2>Конструктор</h2>
+    <p class="desc">Соберите кнопку: переключайте тип, размер, состояние, иконки и текст — превью обновляется мгновенно.</p>
+    <div class="panel pg">
+      <div class="pg__controls" id="pg-controls"></div>
+      <div class="pg__stage"><div class="pg__stagebox" id="pg-preview"></div></div>
+    </div>
+    <p class="pg__code" id="pg-code"></p>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" data-screen-label="Usage">
+    <h2>Использование</h2>
+    <p class="desc tight">Тип кнопки отражает вес действия. На одной области экрана — только один Accent; рядом с ним второстепенные действия — Outline, третичные — Transparent. Справа от текста может быть либо шеврон (кнопка-меню), либо иконка — но не одновременно.</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table">
+        <thead><tr><th>Тип</th><th>Роль</th><th>Типичные места</th></tr></thead>
+        <tbody>
+          <tr><td>Accent</td><td class="dsc">Главное действие экрана или сценария — одно на экран/модалку</td><td class="dsc">Сабмит формы, «Применить» в модальном окне</td></tr>
+          <tr><td>Outline</td><td class="dsc">Второстепенное действие рядом с главным</td><td class="dsc">«Отмена» рядом с «Применить», «Скачать» на тайле</td></tr>
+          <tr><td>Transparent</td><td class="dsc">Третичное действие, не спорящее с контентом</td><td class="dsc">Экшены в таблицах, тулбары, группы действий</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- STRUCTURE -->
+  <section class="section" data-screen-label="Anatomy">
+    <h2>Анатомия</h2>
+    <p class="desc">Кнопка может содержать иконку слева и/или справа от текста, и/или сам текст. Иконки допускаются с обеих сторон одновременно.</p>
+    <div class="panel"><div class="row" id="struct-row"></div></div>
+  </section>
+
+  <!-- ВАРИАНТЫ -->
+  <section class="section" data-screen-label="Variants">
+    <h2>Варианты</h2>
+    <p class="desc">Оси конфигурации компонента — каждая описана отдельным подразделом.</p>
+  
+<div class="subsec" data-screen-label="Type">
+    <h3>Type</h3>
+    <p class="desc">Свойство Type определяет общий вид кнопки: <b>Accent</b>, <b>Outline</b>, <b>Transparent</b>.</p>
+    <div class="panel"><div class="row" id="type-row"></div></div>
+  </div>
+
+<div class="subsec" data-screen-label="Danger">
+    <h3>Danger<span class="badge-new">Новое</span></h3>
+    <p class="desc">Модификатор, а не отдельный тип — комбинируется с Accent / Outline / Transparent и меняет только цвет на токены <code class="tok">Error</code>. Используется для деструктивного действия в диалоге подтверждения (например «Удалить» в confirm-модалке, см. <a class="inl" href="../organisms/Modal.html">Modal</a>). Не применяйте Danger к обычному «Удалить» в подвале формы — там кнопка остаётся Transparent, деструктивность подтверждает отдельный диалог, а не цвет.</p>
+    <div class="panel"><div class="row" id="danger-row"></div></div>
+  </div>
+
+<div class="subsec" data-screen-label="Menu">
+    <h3>Кнопка с меню (chevron)</h3>
+    <p class="desc">Если кнопка содержит шеврон — она открывает контекстное меню. Клик по самой кнопке только показывает меню; действия выполняются исключительно по пунктам меню. Справа может быть либо шеврон, либо иконка — но не одновременно. Нажмите, чтобы открыть.</p>
+    <div class="panel"><div class="row" id="menu-row"></div></div>
+  </div>
+
+<div class="subsec" data-screen-label="Fullwidth">
+    <h3>Fullwidth</h3>
+    <p class="desc">Кнопки со свойством Fullwidth заполняют весь контейнер: боковые паддинги убираются, контент центрируется. Кнопки, содержащие только иконку, не растягиваются.</p>
+    <div class="panel"><div class="fw-grid" id="fw-row"></div></div>
+  </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="section" data-screen-label="Sizes">
+    <h2>Размеры</h2>
+    <p class="desc tight">Три размера. Ширина зависит от контента, высота фиксирована.<br>
+      <b>M&nbsp;— 40</b> · кнопки в модальных окнах &nbsp;·&nbsp; <b>S&nbsp;— 32</b> · в таблицах, на тайлах &nbsp;·&nbsp; <b>XS&nbsp;— 24</b> · фильтры и экшены на одном уровне с фильтром.</p>
+    <div class="panel"><div class="sizes" id="sizes-row"></div></div>
+  
+<div class="subsec" data-screen-label="Padding">
+    <h3>Отступы</h3>
+    <p class="desc">Отступы внутри кнопок разного типа, но одного состава — идентичны. Все значения в пикселях.</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="spec-table">
+        <thead><tr>
+          <th>Размер</th><th>Высота</th><th>Боковой padding</th><th>Отступ иконка ↔ текст</th><th>Padding (icon-only)</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>M</td><td class="num">40</td><td class="num">16</td><td class="num">8</td><td class="num">8</td></tr>
+          <tr><td>S</td><td class="num">32</td><td class="num">12</td><td class="num">6</td><td class="num">6</td></tr>
+          <tr><td>XS</td><td class="num">24</td><td class="num">8</td><td class="num">4</td><td class="num">4</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="section" data-screen-label="Content">
+    <h2>Контент</h2>
+    <p class="desc">Текст кнопки — короткая глагольная формулировка действия. Ширина кнопки следует за текстом, поэтому правило одно: короче текст — лучше.</p>
+    <div class="panel">
+      <ul class="rules">
+        <li><b>Глагол действия:</b> «Применить», «Скачать PDF», «Создать копию» — 1–3 слова, без точки в конце.</li>
+        <li><b>Без переноса и обрезки:</b> текст набирается в одну строку (<code class="tok">white-space: nowrap</code>). Если не помещается — сокращайте формулировку, а не кнопку.</li>
+        <li><b>Sentence case:</b> заглавная — только первая буква и имена собственные.</li>
+        <li><b>Текст стабилен:</b> при переходе в Loader формулировка не меняется.</li>
+        <li><b>Icon-only:</b> кнопке без текста обязателен <code class="tok">aria-label</code> с названием действия.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ПОВЕДЕНИЕ -->
+  <section class="section" data-screen-label="Behavior">
+    <h2>Поведение</h2>
+    <p class="desc">Правила поведения: позиционирование, переполнение, анимация, адаптивность.</p>
+  
+<div class="subsec" data-screen-label="Loader">
+    <h3>Loader</h3>
+    <p class="desc">Сообщает, что идёт процесс, вызванный кликом. На время процесса кнопка переходит в Disabled. Если в кнопке есть иконка — лоадер заменяет её (при иконках с обеих сторон заменяется левая). Если иконок нет — лоадер появляется слева от текста и увеличивает ширину. В IconOnly иконка заменяется лоадером. Нажмите на любую кнопку, чтобы увидеть.</p>
+    <div class="panel">
+      <div class="loader-demo">
+        <div class="lrow"><span class="tag">С иконкой</span><span id="ld1"></span></div>
+        <div class="lrow"><span class="tag">Только текст</span><span id="ld2"></span></div>
+        <div class="lrow"><span class="tag">Иконки с двух&nbsp;сторон</span><span id="ld3"></span></div>
+        <div class="lrow"><span class="tag">IconOnly</span><span id="ld4"></span></div>
+      </div>
+      <p class="hint">hasLoader=Yes удерживает кнопку в Disabled, пока процесс не завершится.</p>
+    </div>
+  </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="section" data-screen-label="States">
+    <h2>Состояния</h2>
+    <p class="desc">Default, Hover, Active, Disabled — для каждого типа.</p>
+    <div class="panel"><div class="matrix" id="matrix"></div></div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" data-screen-label="A11y">
+    <h2>Доступность <span class="addon">Расширение</span></h2>
+    <p class="desc">Кнопка — нативный <code class="tok">&lt;button type="button"&gt;</code>: Enter и Space работают из коробки. Фокус — <code class="tok">outline: 2px var(--primary)</code> с отступом 2px, только по <code class="tok">:focus-visible</code>. Disabled задаётся атрибутом <code class="tok">disabled</code>. В состоянии Loader кнопка не интерактивна (<code class="tok">pointer-events: none</code>) — дополнительно ставьте <code class="tok">aria-busy="true"</code> и держите её disabled до конца процесса. Icon-only обязана иметь <code class="tok">aria-label</code>. Кнопка с шевроном получает <code class="tok">aria-haspopup="menu"</code> и <code class="tok">aria-expanded</code>; меню — <code class="tok">role="menu"</code> с пунктами <code class="tok">role="menuitem"</code>, Esc закрывает меню и возвращает фокус на кнопку. Спиннер замедляется при <code class="tok">prefers-reduced-motion</code>.</p>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="section" data-screen-label="Typography">
+    <h2>Типографика</h2>
+    <p class="desc">Текст кнопок набран гарнитурой <b>SB Sans Screen</b>. Размер текста привязан к размеру кнопки через токены <code class="tok">--type-button-*</code>.</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="ref-table" id="typo-table">
+        <thead><tr><th>Размер кнопки</th><th>Образец</th><th>Токен</th><th>Шрифт</th><th>Начертание</th><th>Размер / интерлиньяж</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section class="section" data-screen-label="Colors">
+    <h2>Цвета</h2>
+    <p class="desc">Компонент использует только семантические токены из палитры; hex резолвится из живого значения токена. Заливки Hover/Active у Outline и Transparent и Active у Accent — производные от <code class="tok">--primary</code> через <code class="tok">color-mix</code> (<code class="tok">--btn-hover-bg</code>, <code class="tok">--btn-active-bg</code>, <code class="tok">--btn-pale</code>); Hover у Accent — самостоятельный токен <code class="tok">--primary-dark</code>.</p>
+    <div class="color-ref" id="color-ref"></div>
+  </section>
+
+  <!-- DEVELOPER HANDOFF -->
+  <section class="section" data-screen-label="Dev">
+    <h2>Для разработчиков <span class="addon">Расширение</span></h2>
+    <p class="desc">Эта страница ДС собрана на чистых CSS-классах и vanilla JS — но всё ниже не привязано к стеку: команда, которая верстает компонент на React (или любом другом фреймворке), может взять отсюда анатомию, точные размеры, состояния и цвета, не заглядывая в этот код построчно.</p>
+
+    <p class="subhead">Точные размеры (redline)</p>
+    <p class="desc tight">Значения измерены на живом экземпляре компонента (<code class="tok">getComputedStyle</code>), источник — токены в <code class="tok">styles/button.css</code>.</p>
+    <div class="panel" style="padding:8px 10px; margin-bottom:36px;">
+      <table class="dev-table" id="dev-spec-table">
+        <thead><tr><th>Параметр</th><th>M</th><th>S</th><th>XS</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="dev-intro">
+      <span class="req">Подключить (если переиспользуете этот CSS напрямую):</span>
+      <code class="tok">styles/typography.css</code>
+      <code class="tok">styles/colors.css</code>
+      <code class="tok">styles/radius.css</code>
+      <code class="tok">styles/button.css</code>
+    </div>
+
+    <p class="subhead">Анатомия DOM <span class="req">— эталонная структура, имена классов условны, важны сами элементы и их роли/состояния</span></p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Разметка · HTML (эталонная реализация ДС)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-html"><span class="tk-cm">&lt;!-- иконка слева и/или текст и/или иконка справа; справа — иконка ИЛИ шеврон, не оба --&gt;</span>
+<span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--accent btn--m"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;svg</span> <span class="tk-attr">aria-hidden=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/svg&gt;</span>                <span class="tk-cm">&lt;!-- иконка слева, 20/18/16 px --&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"btn__label"</span><span class="tk-tag">&gt;</span>Применить<span class="tk-tag">&lt;/span&gt;</span>
+<span class="tk-tag">&lt;/button&gt;</span>
+
+<span class="tk-cm">&lt;!-- кнопка-меню: шеврон справа, клик только открывает меню --&gt;</span>
+<span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--outline btn--m"</span> <span class="tk-attr">aria-haspopup=</span><span class="tk-val">"menu"</span> <span class="tk-attr">aria-expanded=</span><span class="tk-val">"false"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"btn__label"</span><span class="tk-tag">&gt;</span>Действия<span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;svg</span> <span class="tk-attr">class=</span><span class="tk-val">"btn__chevron"</span> <span class="tk-attr">aria-hidden=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/svg&gt;</span>
+<span class="tk-tag">&lt;/button&gt;</span>
+
+<span class="tk-cm">&lt;!-- icon-only: квадратный паддинг, обязателен aria-label --&gt;</span>
+<span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--outline btn--s btn--icon-only"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Скачать"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;svg</span> <span class="tk-attr">aria-hidden=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/svg&gt;</span>
+<span class="tk-tag">&lt;/button&gt;</span>
+
+<span class="tk-cm">&lt;!-- loading: спиннер на месте левой иконки, кнопка удерживается в disabled --&gt;</span>
+<span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--accent btn--m btn--loading"</span> <span class="tk-attr">disabled</span> <span class="tk-attr">aria-busy=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"btn__spinner"</span><span class="tk-tag">&gt;&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"btn__label"</span><span class="tk-tag">&gt;</span>Применить<span class="tk-tag">&lt;/span&gt;</span>
+<span class="tk-tag">&lt;/button&gt;</span></code></pre>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Поведение · псевдокод (framework-agnostic)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-js"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-js"><span class="tk-cm">// 1. Loader — спиннер занимает место ЛЕВОЙ иконки:</span>
+<span class="tk-cm">//    есть левая иконка → заменить её на .btn__spinner (правая иконка/шеврон остаются)</span>
+<span class="tk-cm">//    нет левой иконки → вставить спиннер перед .btn__label (ширина кнопки растёт)</span>
+<span class="tk-cm">//    icon-only → заменить иконку на спиннер</span>
+<span class="tk-cm">// На время загрузки: .btn--loading + disabled + aria-busy="true";</span>
+<span class="tk-cm">// текст кнопки не меняется, по завершении вернуть исходный состав.</span>
+
+<span class="tk-cm">// React: loading — просто пропс, состав рендерится декларативно:</span>
+leftSlot = loading ? Spinner : iconLeft
+
+<span class="tk-cm">// 2. Кнопка-меню (шеврон):</span>
+<span class="tk-cm">//    клик по кнопке ТОЛЬКО открывает/закрывает меню — действие не выполняет</span>
+<span class="tk-cm">//    действия выполняются исключительно по пунктам меню</span>
+<span class="tk-cm">//    клик вне меню и Esc — закрывают; aria-expanded синхронизируется</span>
+<span class="tk-cm">//    при открытом меню шеврон поворачивается на 180° (transform .15s ease)</span>
+<span class="tk-cm">//    справа либо шеврон, либо иконка — никогда оба (шеврон имеет приоритет)</span>
+
+<span class="tk-cm">// 3. Состояния hover/active — чистый CSS (:hover/:active);</span>
+<span class="tk-cm">//    классы .is-hover/.is-active существуют только для спецификаций в документации.</span></code></pre>
+    </div>
+    <p class="dev-note">Это не готовый сниппет для вставки — алгоритм, который нужно реализовать поверх вашего стека (рабочий референс на vanilla JS — функции <code class="tok">makeBtn</code>, <code class="tok">attachLoader</code> и <code class="tok">makeDropdown</code> в коде этой страницы).</p>
+
+    <p class="subhead mt">Рекомендуемый API компонента (React)</p>
+    <p class="desc tight">Форма пропсов — предложение, а не обязательный контракт; адаптируйте под конвенции вашей кодовой базы.</p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Button.types.ts</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-api"><span class="tk-attr">type</span> ButtonVariant = <span class="tk-val">'accent'</span> | <span class="tk-val">'outline'</span> | <span class="tk-val">'transparent'</span>;
+<span class="tk-attr">type</span> ButtonSize = <span class="tk-val">'m'</span> | <span class="tk-val">'s'</span> | <span class="tk-val">'xs'</span>;
+
+<span class="tk-attr">interface</span> ButtonProps <span class="tk-attr">extends</span> React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt; {
+  variant?: ButtonVariant;     <span class="tk-cm">// по умолчанию 'accent'</span>
+  size?: ButtonSize;           <span class="tk-cm">// по умолчанию 'm'</span>
+  children?: React.ReactNode;  <span class="tk-cm">// текст; не задан → icon-only (обязателен aria-label)</span>
+  iconLeft?: React.ReactNode;  <span class="tk-cm">// 20/18/16 px по размеру</span>
+  iconRight?: React.ReactNode; <span class="tk-cm">// взаимоисключим с chevron</span>
+  chevron?: <span class="tk-attr">boolean</span>;           <span class="tk-cm">// кнопка-меню; исключает iconRight</span>
+  loading?: <span class="tk-attr">boolean</span>;           <span class="tk-cm">// спиннер + disabled + aria-busy</span>
+  fullWidth?: <span class="tk-attr">boolean</span>;         <span class="tk-cm">// icon-only не растягивается</span>
+}</code></pre>
+    </div>
+
+    <p class="subhead mt">Справочник классов и атрибутов</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table">
+        <thead><tr><th>Класс / атрибут</th><th>На чём</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code class="tok">.btn</code></td><td>button</td><td class="dsc">Базовый класс: флекс-раскладка, типографика, переходы, focus-visible</td></tr>
+          <tr><td><code class="tok">.btn--accent / --outline / --transparent</code></td><td>button</td><td class="dsc">Тип кнопки — заливка, граница, цвет текста и состояния</td></tr>
+          <tr><td><code class="tok">.btn--danger</code></td><td>button</td><td class="dsc">Модификатор (не тип) — меняет цвет любого типа на токены Error; для диалогов подтверждения удаления</td></tr>
+          <tr><td><code class="tok">.btn--m / --s / --xs</code></td><td>button</td><td class="dsc">Размер: высота, паддинги, иконка, радиус, токен типографики</td></tr>
+          <tr><td><code class="tok">.btn--icon-only</code></td><td>button</td><td class="dsc">Кнопка без текста — квадратный паддинг, обязателен <code class="tok">aria-label</code></td></tr>
+          <tr><td><code class="tok">.btn--fullwidth</code></td><td>button</td><td class="dsc">Растягивает кнопку на 100% контейнера; icon-only не растягивается</td></tr>
+          <tr><td><code class="tok">.btn--loading</code></td><td>button</td><td class="dsc">Состояние загрузки — <code class="tok">pointer-events: none</code>, внутри <code class="tok">.btn__spinner</code></td></tr>
+          <tr><td><code class="tok">disabled</code> / <code class="tok">.btn--disabled</code></td><td>button</td><td class="dsc">Отключённое состояние; класс — для не-button элементов (например ссылок)</td></tr>
+          <tr><td><code class="tok">.is-hover / .is-active</code></td><td>button</td><td class="dsc">Форсированные состояния — только для спецификаций в документации, не для продакшена</td></tr>
+          <tr><td><code class="tok">.btn__label</code></td><td>span</td><td class="dsc">Текст кнопки, не переносится</td></tr>
+          <tr><td><code class="tok">.btn__chevron</code></td><td>svg</td><td class="dsc">Шеврон кнопки-меню — 80% размера иконки, поворачивается при открытом меню</td></tr>
+          <tr><td><code class="tok">.btn__spinner</code></td><td>span</td><td class="dsc">Лоадер — кольцо <code class="tok">currentColor</code>, размер иконки, уважает <code class="tok">prefers-reduced-motion</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · Button</span>
+    <span>Accent · Outline · Transparent — M / S / XS</span>
+  </footer>
+</main>
+
+<script src="../../scripts/icons-data.js"></script>
+<script>
+/* ---------- icons ---------- */
+const ICONS = {
+  download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg>',
+  star:     '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 5.9 6.6.9-4.8 4.6 1.1 6.6L12 18.9 6.2 21l1.1-6.6L2.5 9.3l6.6-.9z"/></svg>',
+  plus:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  chevron:  '<svg class="btn__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+};
+/* подставляем иконки из библиотеки ДС */
+(function(){ const L=window.DS_ICONS||{}; const m={download:'download',star:'star-filled',plus:'add'};
+  for(const k in m){ if(L[m[k]]) ICONS[k]=L[m[k]]; }
+  if(L['chevron-down']) ICONS.chevron=L['chevron-down'].replace('<svg','<svg class="btn__chevron"');
+})();
+
+/* ---------- button factory ---------- */
+function makeBtn(o = {}) {
+  const { type='accent', size='m', text='Button', lead=null, trail=null,
+          chevron=false, iconOnly=null, disabled=false, force=null, fullwidth=false } = o;
+  // right side is EITHER a chevron OR a trailing icon — never both. Chevron wins.
+  const trailIcon = chevron ? null : trail;
+  const b = document.createElement('button');
+  b.className = 'btn btn--' + type + ' btn--' + size;
+  if (iconOnly) b.classList.add('btn--icon-only');
+  if (fullwidth) b.classList.add('btn--fullwidth');
+  if (disabled) b.disabled = true;
+  if (force) b.classList.add('is-' + force);
+
+  let html = '';
+  if (iconOnly) {
+    html = ICONS[iconOnly];
+  } else {
+    if (lead) html += ICONS[lead];
+    html += '<span class="btn__label">' + text + '</span>';
+    if (trailIcon) html += ICONS[trailIcon];
+    if (chevron) html += ICONS.chevron;
+  }
+  b.innerHTML = html;
+  return b;
+}
+function appendBtns(target, list) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  list.forEach(o => el.appendChild(makeBtn(o)));
+}
+
+/* ---------- dropdown (chevron → context menu) ---------- */
+const MENU_ITEMS = [
+  { label:'Скачать PDF',          icon:'download' },
+  { label:'Добавить в избранное', icon:'star' },
+  { label:'Создать копию',        icon:'plus' },
+];
+function makeDropdown(btn, items=MENU_ITEMS){
+  const wrap = document.createElement('span'); wrap.className = 'dropdown';
+  const menu = document.createElement('div'); menu.className = 'dropdown__menu'; menu.hidden = true; menu.setAttribute('role','menu');
+  items.forEach(it=>{
+    const mi = document.createElement('button'); mi.type='button'; mi.className='dropdown__item';
+    mi.innerHTML = (it.icon ? ICONS[it.icon] : '') + '<span>' + it.label + '</span>';
+    mi.addEventListener('click', e => { e.stopPropagation(); close(); /* действие выполняется здесь */ });
+    menu.appendChild(mi);
+  });
+  function onDoc(e){ if(!wrap.contains(e.target)) close(); }
+  function open(){ menu.hidden=false; wrap.classList.add('is-open'); document.addEventListener('click', onDoc); }
+  function close(){ menu.hidden=true; wrap.classList.remove('is-open'); document.removeEventListener('click', onDoc); }
+  // клик по кнопке только показывает меню — действия только по пунктам меню
+  btn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); if(btn.disabled) return; menu.hidden ? open() : close(); });
+  wrap.appendChild(btn); wrap.appendChild(menu);
+  return wrap;
+}
+
+/* ---------- TYPE ---------- */
+appendBtns('type-row', [
+  { type:'accent',      lead:'star', text:'Button' },
+  { type:'outline',     lead:'star', text:'Button' },
+  { type:'transparent', lead:'star', text:'Button' },
+]);
+
+/* ---------- DANGER (модификатор поверх любого типа) ---------- */
+(function(){
+  const el = document.getElementById('danger-row');
+  [['accent','Удалить'],['outline','Удалить'],['transparent','Удалить']].forEach(([type,text])=>{
+    const b = makeBtn({ type, text });
+    b.classList.add('btn--danger');
+    el.appendChild(b);
+  });
+})();
+
+/* ---------- MENU / CHEVRON ---------- */
+['accent','outline','transparent'].forEach(t=>{
+  const b = makeBtn({ type:t, lead:'download', text:'Действия', chevron:true });
+  document.getElementById('menu-row').appendChild(makeDropdown(b));
+});
+
+/* ---------- STRUCTURE ---------- */
+appendBtns('struct-row', [
+  { lead:'star', text:'Применить' },
+  { text:'Применить' },
+  { text:'Применить', trail:'star' },
+  { lead:'star', text:'Применить', trail:'star' },
+  { iconOnly:'star' },
+]);
+
+/* ---------- SIZES ---------- */
+(function(){
+  const data = [ ['M','40','m'], ['S','32','s'], ['XS','24','xs'] ];
+  const wrap = document.getElementById('sizes-row');
+  data.forEach(([name,h,sz])=>{
+    const item = document.createElement('div'); item.className='size-item';
+    item.appendChild(makeBtn({ size:sz, text:'Применить' }));
+    const tag = document.createElement('div'); tag.className='size-tag';
+    tag.innerHTML = name + ' &nbsp;<span>'+h+' px</span>';
+    item.appendChild(tag);
+    wrap.appendChild(item);
+  });
+})();
+
+/* ---------- FULLWIDTH ---------- */
+appendBtns('fw-row', [
+  { type:'accent', lead:'star', text:'Button', fullwidth:true },
+  { type:'outline', text:'Button', fullwidth:true },
+  { type:'transparent', text:'Button', trail:'star', fullwidth:true },
+  { type:'accent', lead:'star', text:'Button', fullwidth:true, disabled:true },
+  { type:'outline', text:'Button', fullwidth:true, disabled:true },
+  { type:'transparent', text:'Button', trail:'star', fullwidth:true, disabled:true },
+]);
+
+/* ---------- STATES MATRIX ---------- */
+(function(){
+  const m = document.getElementById('matrix');
+  const heads = ['', 'Default','Hover','Active','Disabled'];
+  heads.forEach((h,i)=>{
+    const d=document.createElement('div');
+    d.className = i===0 ? 'rowname' : 'col-head';
+    d.textContent = h; m.appendChild(d);
+  });
+  function rowBlock(rowLabel, type, sub){
+    const name=document.createElement('div');
+    name.className='rowname'+(sub?' sub':''); name.textContent=rowLabel; m.appendChild(name);
+    [null,'hover','active','disabled'].forEach(state=>{
+      const cell=document.createElement('div'); cell.className='cell';
+      cell.appendChild(makeBtn({
+        type, text:'Применить',
+        force: state && state!=='disabled' ? state : null,
+        disabled: state==='disabled'
+      }));
+      m.appendChild(cell);
+    });
+  }
+  const g=document.createElement('div'); g.className='grouphdr'; g.textContent='Accent'; m.appendChild(g);
+  rowBlock('Default','accent');
+  const g2=document.createElement('div'); g2.className='grouphdr'; g2.textContent='Outline'; m.appendChild(g2);
+  rowBlock('Default','outline');
+  const g3=document.createElement('div'); g3.className='grouphdr'; g3.textContent='Transparent'; m.appendChild(g3);
+  rowBlock('Default','transparent');
+})();
+
+/* ---------- LOADER ---------- */
+/* Replaces the LEADING icon with a spinner, leaving any trailing icon/chevron
+   intact. If there is no leading icon, the spinner is inserted to the left of
+   the text (increasing width). IconOnly: the icon is replaced by the spinner. */
+function attachLoader(btn){
+  const original = btn.innerHTML;
+  btn.addEventListener('click', ()=>{
+    if (btn.classList.contains('btn--loading')) return;
+    btn.classList.add('btn--loading');
+    const spinner = document.createElement('span');
+    spinner.className = 'btn__spinner';
+
+    if (btn.classList.contains('btn--icon-only')) {
+      btn.innerHTML = '';
+      btn.appendChild(spinner);
+    } else {
+      const label = btn.querySelector('.btn__label');
+      const firstSvg = btn.querySelector('svg');
+      const hasLeadingIcon = firstSvg && label &&
+        (firstSvg.compareDocumentPosition(label) & Node.DOCUMENT_POSITION_FOLLOWING);
+      if (hasLeadingIcon) {
+        firstSvg.replaceWith(spinner);      // swap leading icon → spinner
+      } else {
+        btn.insertBefore(spinner, label);   // no leading icon → spinner before text
+      }
+    }
+    setTimeout(()=>{ btn.classList.remove('btn--loading'); btn.innerHTML = original; }, 1900);
+  });
+}
+(function(){
+  const b1 = makeBtn({ type:'accent', lead:'download', text:'Применить' });
+  document.getElementById('ld1').appendChild(b1); attachLoader(b1);
+  const b2 = makeBtn({ type:'outline', text:'Применить' });
+  document.getElementById('ld2').appendChild(b2); attachLoader(b2);
+  const b3 = makeBtn({ type:'accent', lead:'download', text:'Применить', trail:'star' });
+  document.getElementById('ld3').appendChild(b3); attachLoader(b3);
+  const b4 = makeBtn({ type:'accent', iconOnly:'download' });
+  document.getElementById('ld4').appendChild(b4); attachLoader(b4);
+})();
+
+/* ---------- PLAYGROUND ---------- */
+(function(){
+  const state = {
+    type:'accent', size:'m', state:'default',
+    lead:true, text:true, trail:false, chevron:true, loader:false, fullwidth:false,
+  };
+  const controls = document.getElementById('pg-controls');
+  const preview  = document.getElementById('pg-preview');
+  const codeEl   = document.getElementById('pg-code');
+
+  function seg(label, options, getCur, onPick){
+    const wrap=document.createElement('div'); wrap.className='ctl';
+    const l=document.createElement('div'); l.className='lbl'; l.textContent=label; wrap.appendChild(l);
+    const s=document.createElement('div'); s.className='seg';
+    options.forEach(([val,txt])=>{
+      const b=document.createElement('button'); b.type='button'; b.textContent=txt;
+      b.setAttribute('aria-selected', String(val===getCur()));
+      b.addEventListener('click',()=>{ onPick(val); [...s.children].forEach(c=>c.setAttribute('aria-selected', String(c===b))); render(); });
+      s.appendChild(b);
+    });
+    wrap.appendChild(s); return wrap;
+  }
+  function select(label, options, getCur, onPick){
+    const wrap=document.createElement('div'); wrap.className='ctl';
+    const l=document.createElement('div'); l.className='lbl'; l.textContent=label; wrap.appendChild(l);
+    const box=document.createElement('div'); box.className='pg-select';
+    const sel=document.createElement('select');
+    options.forEach(([val,txt])=>{ const o=document.createElement('option'); o.value=val; o.textContent=txt; if(val===getCur()) o.selected=true; sel.appendChild(o); });
+    sel.addEventListener('change',()=>{ onPick(sel.value); render(); });
+    box.appendChild(sel); wrap.appendChild(box); return wrap;
+  }
+  function syncToggles(){
+    controls.querySelectorAll('.toggle').forEach(t=> t.setAttribute('aria-pressed', String(state[t.dataset.key])));
+  }
+  function sw(label, key){
+    const t=document.createElement('button'); t.type='button'; t.className='toggle'; t.dataset.key=key;
+    t.setAttribute('aria-pressed', String(state[key]));
+    t.innerHTML='<span class="sw"></span><span>'+label+'</span>';
+    t.addEventListener('click',()=>{
+      const nv = !state[key];
+      state[key] = nv;
+      // right side is EITHER chevron OR trailing icon — keep them mutually exclusive
+      if (nv && key==='trail')   state.chevron = false;
+      if (nv && key==='chevron') state.trail = false;
+      syncToggles(); render();
+    });
+    return t;
+  }
+
+  // Тип и Состояние не помещаются в один ряд сегментами → выпадающие списки
+  controls.appendChild(select('Тип', [['accent','Accent'],['outline','Outline'],['transparent','Transparent']],
+    ()=>state.type, v=>state.type=v));
+  controls.appendChild(seg('Размер', [['m','M'],['s','S'],['xs','XS']], ()=>state.size, v=>state.size=v));
+  controls.appendChild(select('Состояние', [['default','Default'],['hover','Hover'],['active','Active'],['disabled','Disabled']],
+    ()=>state.state, v=>state.state=v));
+
+  const compWrap=document.createElement('div'); compWrap.className='ctl';
+  const cl=document.createElement('div'); cl.className='lbl'; cl.textContent='Состав'; compWrap.appendChild(cl);
+  const toggles=document.createElement('div'); toggles.className='toggles';
+  toggles.appendChild(sw('Иконка слева','lead'));
+  toggles.appendChild(sw('Текст','text'));
+  toggles.appendChild(sw('Иконка справа','trail'));
+  toggles.appendChild(sw('Шеврон','chevron'));
+  toggles.appendChild(sw('Лоадер','loader'));
+  toggles.appendChild(sw('Fullwidth','fullwidth'));
+  compWrap.appendChild(toggles); controls.appendChild(compWrap);
+
+  function syncToggleAvailability(){
+    // when text is off → button is icon-only; text-related toggles disabled
+    const iconOnly = !state.text;
+    controls.querySelectorAll('.toggle').forEach(t=>{
+      const k=t.dataset.key;
+      const off = iconOnly && (k==='chevron' || k==='trail');
+      t.setAttribute('aria-disabled', String(off));
+    });
+  }
+
+  function applyLoader(btn){
+    if(!state.loader) return;
+    btn.classList.add('btn--loading');
+    const spinner=document.createElement('span'); spinner.className='btn__spinner';
+    if (btn.classList.contains('btn--icon-only')){ btn.innerHTML=''; btn.appendChild(spinner); return; }
+    const label=btn.querySelector('.btn__label');
+    const firstSvg=btn.querySelector('svg');
+    const hasLeading = firstSvg && label && (firstSvg.compareDocumentPosition(label) & Node.DOCUMENT_POSITION_FOLLOWING);
+    if (hasLeading) firstSvg.replaceWith(spinner); else if(label) btn.insertBefore(spinner,label);
+  }
+
+  function render(){
+    syncToggleAvailability();
+    const o = { type:state.type, size:state.size, fullwidth:state.fullwidth };
+    if (!state.text){
+      o.iconOnly = state.lead ? 'download' : (state.trail ? 'star' : 'download');
+    } else {
+      o.text='Button';
+      if (state.lead)  o.lead='download';
+      if (state.trail) o.trail='star';
+      if (state.chevron) o.chevron=true;
+    }
+    if (state.state==='disabled') o.disabled=true;
+    else if (state.state==='hover')  o.force='hover';
+    else if (state.state==='active') o.force='active';
+
+    const btn=makeBtn(o);
+    applyLoader(btn);
+    preview.innerHTML='';
+    // chevron → interactive dropdown (when not loading/disabled/fullwidth)
+    if (state.text && state.chevron && state.state!=='disabled' && !state.loader && !state.fullwidth){
+      preview.appendChild(makeDropdown(btn));
+    } else {
+      preview.appendChild(btn);
+    }
+
+    // code string
+    const cls=['btn','btn--'+state.type,'btn--'+state.size];
+    if (o.iconOnly) cls.push('btn--icon-only');
+    if (state.fullwidth) cls.push('btn--fullwidth');
+    if (state.loader) cls.push('btn--loading');
+    let attrs='';
+    if (state.state==='disabled') attrs+=' disabled';
+    else if (state.state==='hover') attrs+=' /* :hover */';
+    else if (state.state==='active') attrs+=' /* :active */';
+    codeEl.innerHTML = '<code>&lt;button class="'+cls.join(' ')+'"'+attrs+'&gt;</code>';
+  }
+
+  render();
+})();
+
+/* ---------- TYPOGRAPHY REFERENCE ---------- */
+(function(){
+  const rows = [
+    ['M',  'Button M',  '--type-button-m',  'SB Sans Screen', 'Regular', '16 / 24', 'ds-button-m'],
+    ['S',  'Button S',  '--type-button-s',  'SB Sans Screen', 'Regular', '14 / 20', 'ds-button-s'],
+    ['XS', 'Button XS', '--type-button-xs', 'SB Sans Screen', 'Regular', '12 / 16', 'ds-button-xs'],
+  ];
+  const tb = document.querySelector('#typo-table tbody');
+  tb.innerHTML = rows.map(([sz,name,tok,font,weight,sl,cls])=>`
+    <tr>
+      <td class="rt-size">${sz}</td>
+      <td class="rt-sample"><span class="${cls}">Button</span></td>
+      <td class="rt-tok"><code>${tok}</code></td>
+      <td>${font}</td>
+      <td>${weight}</td>
+      <td class="rt-num">${sl}</td>
+    </tr>`).join('');
+})();
+
+/* ---------- COLORS REFERENCE ---------- */
+(function(){
+  // resolve any CSS color (incl. color-mix) to #RRGGBB / rgba
+  const probe = document.createElement('span');
+  probe.style.cssText = 'position:absolute;left:-9999px;width:0;height:0;';
+  document.body.appendChild(probe);
+  function resolveHex(cssValue){
+    probe.style.backgroundColor = 'transparent';
+    probe.style.backgroundColor = cssValue;
+    const v = getComputedStyle(probe).backgroundColor;
+    let r,g,b,a=1;
+    let m = v.match(/color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/i);
+    if (m){ r=+m[1]*255; g=+m[2]*255; b=+m[3]*255; if(m[4]!==undefined) a=+m[4]; }
+    else { const n=v.match(/[\d.]+/g); if(!n) return cssValue; r=+n[0]; g=+n[1]; b=+n[2]; if(n[3]!==undefined) a=+n[3]; }
+    const hx = (n)=>Math.round(n).toString(16).padStart(2,'0').toUpperCase();
+    let s = '#'+hx(r)+hx(g)+hx(b);
+    if (a<1) s += ' · '+Math.round(a*100)+'%';
+    return s;
+  }
+  const groups = [
+    { name:'Accent', rows:[
+      ['Фон · Default',   '--primary',      false],
+      ['Фон · Hover',     '--primary-dark', false],
+      ['Фон · Active',    '--btn-pale',     false],
+      ['Текст / иконка',  '--text-on-dark', false],
+      ['Фон · Disabled',  '--disabled',     false],
+    ]},
+    { name:'Outline', rows:[
+      ['Текст / граница · Default', '--primary',        false],
+      ['Фон',                       '--bg-tile',        false],
+      ['Фон · Hover',               '--btn-hover-bg',   false],
+      ['Фон · Active',              '--btn-active-bg',  false],
+      ['Граница · Disabled',        '--disabled',       false],
+      ['Текст · Disabled',          '--text-inactive',  false],
+    ]},
+    { name:'Transparent', rows:[
+      ['Текст / иконка · Default', '--primary',        false],
+      ['Фон · Hover',              '--btn-hover-bg',   false],
+      ['Фон · Active',             '--btn-active-bg',  false],
+      ['Текст · Disabled',         '--text-inactive',  false],
+    ]},
+  ];
+  const root = document.getElementById('color-ref');
+  root.innerHTML = groups.map(g=>`
+    <section class="cref-group">
+      <h3>${g.name}</h3>
+      <div class="cref-rows">
+        ${g.rows.map(([role,tok,alpha])=>`
+          <div class="cref-row">
+            <div class="cref-sw${alpha?' alpha':''}"><div class="cf" style="background:var(${tok});"></div></div>
+            <div class="cref-meta"><p class="role">${role}</p><p class="tname">${tok}</p></div>
+            <div class="cref-hex">${resolveHex('var('+tok+')')}</div>
+          </div>`).join('')}
+      </div>
+    </section>`).join('');
+  probe.remove();
+})();
+/* ---------- DEV: redline measured from live component ---------- */
+(function(){
+  const tbody = document.querySelector('#dev-spec-table tbody');
+  if(!tbody) return;
+  const host = document.createElement('div');
+  host.style.cssText = 'position:absolute;left:-9999px;top:0;';
+  document.body.appendChild(host);
+  function measure(sz){
+    const b  = makeBtn({ size:sz, lead:'download', text:'Применить', chevron:true });
+    const io = makeBtn({ size:sz, iconOnly:'download' });
+    host.appendChild(b); host.appendChild(io);
+    const cs = getComputedStyle(b);
+    const icon = b.querySelector('svg:not(.btn__chevron)');
+    const chev = b.querySelector('.btn__chevron');
+    return {
+      h:    parseFloat(cs.height),
+      px:   parseFloat(cs.paddingLeft),
+      gap:  parseFloat(cs.columnGap),
+      iop:  parseFloat(getComputedStyle(io).paddingLeft),
+      icon: parseFloat(getComputedStyle(icon).width),
+      chev: parseFloat(getComputedStyle(chev).width),
+      rad:  parseFloat(cs.borderTopLeftRadius),
+      bw:   parseFloat(cs.borderTopWidth),
+      fs:   parseFloat(cs.fontSize),
+      lh:   parseFloat(cs.lineHeight),
+    };
+  }
+  const d = { m:measure('m'), s:measure('s'), xs:measure('xs') };
+  host.remove();
+  const r = n => Math.round(n*10)/10;
+  const rows = [
+    ['Высота', z => r(d[z].h)+' px'],
+    ['Боковой padding', z => r(d[z].px)+' px'],
+    ['Зазор иконка ↔ текст (gap)', z => r(d[z].gap)+' px'],
+    ['Padding icon-only (по X)', z => r(d[z].iop)+' px'],
+    ['Иконка', z => r(d[z].icon)+' px'],
+    ['Шеврон (80% иконки)', z => r(d[z].chev)+' px'],
+    ['Радиус скругления', z => r(d[z].rad)+' px'],
+    ['Граница', z => r(d[z].bw)+' px'],
+    ['Типографика (кегль / интерлиньяж)', z => r(d[z].fs)+' / '+r(d[z].lh)+' px'],
+  ];
+  tbody.innerHTML = rows.map(([label, fn]) =>
+    `<tr><td>${label}</td><td class="rt-num">${fn('m')}</td><td class="rt-num">${fn('s')}</td><td class="rt-num">${fn('xs')}</td></tr>`
+  ).join('');
+})();
+
+/* ---------- DEV: copy-to-clipboard on code panels ---------- */
+(function(){
+  document.querySelectorAll('.code-panel__copy').forEach(btn => {
+    const target = document.getElementById(btn.dataset.copyTarget);
+    if (!target) return;
+    const label = btn.querySelector('.copy-label');
+    btn.addEventListener('click', async () => {
+      const text = target.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (e2) {}
+        ta.remove();
+      }
+      btn.classList.add('is-copied');
+      const prev = label.textContent;
+      label.textContent = 'Скопировано';
+      setTimeout(() => { btn.classList.remove('is-copied'); label.textContent = prev; }, 1600);
+    });
+  });
+})();
+</script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+</body>
+</html>

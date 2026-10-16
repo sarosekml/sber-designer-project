@@ -1,0 +1,123 @@
+/* =========================================================================
+   Design System — IconButton
+   A borderless, icon-only action with a circular state layer.
+   Tones:  neutral (--secondary) · primary · danger · contrast   (state layer = icon color)
+   Sizes:  l (40) · m (32) · s (24)
+   States: default · hover · pressed · focus · selected · disabled · loading
+   Shape:  circle (default) · square
+   Variant: embedded (no state layer — for inputs/dense toolbars)
+   Requires: typography.css, colors.css
+   ========================================================================= */
+
+.ibtn {
+  /* layout */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ibtn-size);
+  height: var(--ibtn-size);
+  padding: 0;
+  flex: none;
+
+  /* surface */
+  border: none;
+  background: transparent;          /* this IS the circular state layer */
+  border-radius: var(--radius-circle);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  /* the icon color drives everything: state layer is mixed from currentColor */
+  color: var(--ibtn-fg);
+  transition: background-color .15s ease, color .15s ease;
+}
+
+.ibtn svg { width: var(--ibtn-icon); height: var(--ibtn-icon); display: block; flex: none; }
+
+.ibtn:focus { outline: none; }
+.ibtn:focus-visible,
+.ibtn.is-focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* ---------- sizes ---------------------------------------------------------- */
+.ibtn--l { --ibtn-size: 40px; --ibtn-icon: 24px; --ibtn-radius: var(--radius-control); }
+.ibtn--m { --ibtn-size: 32px; --ibtn-icon: 20px; --ibtn-radius: var(--radius-control); }
+.ibtn--s { --ibtn-size: 24px; --ibtn-icon: 16px; --ibtn-radius: var(--radius-control-s); }
+
+/* ---------- tones (set the icon color; state layer follows) ---------------- */
+.ibtn--neutral  { --ibtn-fg: var(--secondary); }   /* Active · Secondary (Emerald_200) */
+.ibtn--primary  { --ibtn-fg: var(--primary); }
+.ibtn--danger   { --ibtn-fg: var(--error); }
+.ibtn--contrast { --ibtn-fg: var(--text-on-dark); }   /* for dark surfaces */
+
+/* default tone if none specified */
+.ibtn:not([class*="ibtn--neutral"]):not([class*="ibtn--primary"]):not([class*="ibtn--danger"]):not([class*="ibtn--contrast"]) {
+  --ibtn-fg: var(--secondary);
+}
+
+/* ---------- interactive states (state layer mixed from icon color) --------- */
+/* "Цвет рипла соответствует цвету иконки" — the layer tint = currentColor */
+.ibtn:hover,
+.ibtn.is-hover {
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+.ibtn:active,
+.ibtn.is-pressed {
+  background: color-mix(in srgb, currentColor 22%, transparent);
+}
+/* contrast tone needs a slightly stronger layer to read on dark backgrounds */
+.ibtn--contrast:hover,   .ibtn--contrast.is-hover   { background: color-mix(in srgb, #fff 18%, transparent); }
+.ibtn--contrast:active,  .ibtn--contrast.is-pressed { background: color-mix(in srgb, #fff 30%, transparent); }
+
+/* ---------- selected (toggle on) ------------------------------------------- */
+/* icon turns primary and keeps a persistent faint layer; pair with a filled glyph */
+.ibtn--selected { --ibtn-fg: var(--primary); background: color-mix(in srgb, var(--primary) 12%, transparent); }
+.ibtn--selected:hover,
+.ibtn--selected.is-hover { background: color-mix(in srgb, var(--primary) 20%, transparent); }
+
+/* ---------- shape: square -------------------------------------------------- */
+.ibtn--square { border-radius: var(--ibtn-radius); }
+
+/* ---------- variant: embedded (inputs / dense toolbars) -------------------- */
+/* No circular state layer; the icon shifts to primary on hover instead.
+   This is the "Hover (Input)" behaviour. */
+.ibtn--embedded { color: var(--text-inactive); border-radius: var(--ibtn-radius); }
+.ibtn--embedded:hover,
+.ibtn--embedded.is-hover { background: transparent; color: var(--primary); }
+.ibtn--embedded:active,
+.ibtn--embedded.is-pressed { background: transparent; color: var(--primary-dark); }
+
+/* ---------- disabled ------------------------------------------------------- */
+.ibtn:disabled,
+.ibtn--disabled {
+  color: var(--text-inactive);
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ---------- loading -------------------------------------------------------- */
+.ibtn--loading { pointer-events: none; }
+.ibtn__spinner {
+  flex: none;
+  width: var(--ibtn-icon);
+  height: var(--ibtn-icon);
+  border-radius: var(--radius-circle);
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  opacity: .9;
+  animation: ibtn-spin .7s linear infinite;
+}
+@keyframes ibtn-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ibtn__spinner { animation-duration: 1.6s; } }
+
+/* ---------- badge slot ----------------------------------------------------- */
+/* Pin a Badge (counter or dot) to the top-right of the icon. */
+.ibtn { overflow: visible; }
+.ibtn__badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  pointer-events: none;
+}
+.ibtn--s .ibtn__badge { top: -3px; right: -3px; }

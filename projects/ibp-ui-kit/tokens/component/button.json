@@ -1,0 +1,856 @@
+{
+  "atoms": {
+    "button": {
+      "size": {
+        "lg": {
+          "height": {
+            "value": "48",
+            "type": "sizing"
+          },
+          "borderRadius": {
+            "value": "8",
+            "type": "borderRadius"
+          },
+          "icon": {
+            "size": {
+              "value": "24",
+              "type": "sizing"
+            },
+            "spacing": {
+              "value": "8",
+              "type": "spacing"
+            }
+          },
+          "padding": {
+            "onlyText": {
+              "value": "8 20",
+              "type": "spacing"
+            },
+            "textAndStartIcon": {
+              "value": "8 20 8 16",
+              "type": "spacing"
+            },
+            "textAndLoader": {
+              "value": "8 20 8 16",
+              "type": "spacing"
+            },
+            "textAndEndIcon": {
+              "value": "8 16 8 20",
+              "type": "spacing"
+            },
+            "textAndBothIcons": {
+              "value": "8 16",
+              "type": "spacing"
+            },
+            "onlyIcon": {
+              "value": "12",
+              "type": "spacing"
+            }
+          },
+          "typography": {
+            "value": "{typography.ButtonL}",
+            "type": "typography"
+          }
+        },
+        "md": {
+          "height": {
+            "value": "40",
+            "type": "sizing"
+          },
+          "borderRadius": {
+            "value": "8",
+            "type": "borderRadius"
+          },
+          "icon": {
+            "size": {
+              "value": "20",
+              "type": "sizing"
+            },
+            "spacing": {
+              "value": "6",
+              "type": "spacing"
+            }
+          },
+          "padding": {
+            "onlyText": {
+              "value": "8 16",
+              "type": "spacing"
+            },
+            "textAndStartIcon": {
+              "value": "8 16 8 12",
+              "type": "spacing"
+            },
+            "textAndLoader": {
+              "value": "8 16 8 12",
+              "type": "spacing"
+            },
+            "textAndEndIcon": {
+              "value": "8 12 8 16",
+              "type": "spacing"
+            },
+            "textAndBothIcons": {
+              "value": "8 12",
+              "type": "spacing"
+            },
+            "onlyIcon": {
+              "value": "10",
+              "type": "spacing"
+            }
+          },
+          "typography": {
+            "value": "{typography.ButtonM}",
+            "type": "typography"
+          }
+        },
+        "sm": {
+          "height": {
+            "value": "32",
+            "type": "sizing"
+          },
+          "borderRadius": {
+            "value": "6",
+            "type": "borderRadius"
+          },
+          "icon": {
+            "size": {
+              "value": "16",
+              "type": "sizing"
+            },
+            "spacing": {
+              "value": "4",
+              "type": "spacing"
+            }
+          },
+          "padding": {
+            "onlyText": {
+              "value": "6 12",
+              "type": "spacing"
+            },
+            "textAndStartIcon": {
+              "value": "6 12 6 10",
+              "type": "spacing"
+            },
+            "textAndLoader": {
+              "value": "6 12 6 10",
+              "type": "spacing"
+            },
+            "textAndEndIcon": {
+              "value": "6 10 6 12",
+              "type": "spacing"
+            },
+            "textAndBothIcons": {
+              "value": "6 10",
+              "type": "spacing"
+            },
+            "onlyIcon": {
+              "value": "8",
+              "type": "spacing"
+            }
+          },
+          "typography": {
+            "value": "{typography.ButtonS}",
+            "type": "typography"
+          }
+        },
+        "xs": {
+          "height": {
+            "value": "24",
+            "type": "sizing"
+          },
+          "borderRadius": {
+            "value": "4",
+            "type": "borderRadius"
+          },
+          "icon": {
+            "size": {
+              "value": "16",
+              "type": "sizing"
+            },
+            "spacing": {
+              "value": "4",
+              "type": "spacing"
+            }
+          },
+          "padding": {
+            "onlyText": {
+              "value": "2 8",
+              "type": "spacing"
+            },
+            "textAndStartIcon": {
+              "value": "4 8 4 6",
+              "type": "spacing"
+            },
+            "textAndLoader": {
+              "value": "4 8 4 6",
+              "type": "spacing"
+            },
+            "textAndEndIcon": {
+              "value": "4 6 4 8",
+              "type": "spacing"
+            },
+            "textAndBothIcons": {
+              "value": "4 6",
+              "type": "spacing"
+            },
+            "onlyIcon": {
+              "value": "4",
+              "type": "spacing"
+            }
+          },
+          "typography": {
+            "value": "{typography.ButtonS}",
+            "type": "typography"
+          }
+        }
+      },
+      "border": {
+        "width": {
+          "value": "1",
+          "type": "borderWidth"
+        },
+        "style": {
+          "value": "solid",
+          "type": "other"
+        }
+      },
+      "accent": {
+        "default": {
+          "bg": {
+            "value": "{palette.Primary.Primary}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextOnDark}",
+            "type": "color"
+          },
+          "icon": {
+            "value": "{palette.Text.TextOnDark}",
+            "type": "color"
+          },
+          "border": {
+            "value": "#00000000",
+            "type": "color"
+          }
+        },
+        "hover": {
+          "bg": {
+            "value": "{palette.Primary.PrimaryDark}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextOnDark}",
+            "type": "color"
+          },
+          "icon": {
+            "value": "{palette.Text.TextOnDark}",
+            "type": "color"
+          },
+          "border": {
+            "value": "#00000000",
+            "type": "color"
+          }
+        },
+        "active": {
+          "bg": {
+            "value": "{palette.Primary.PrimaryLight}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextOnDark}",
+            "type": "color"
+          },
+          "icon": {
+            "value": "{palette.Text.TextOnDark}",
+            "type": "color"
+          },
+          "border": {
+            "value": "{palette.Primary.PrimaryLight}",
+            "type": "color"
+          }
+        },
+        "disabled": {
+          "bg": {
+            "value": "{palette.Disabled.Disabled}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextOnDark}",
+            "type": "color"
+          },
+          "icon": {
+            "value": "{palette.Text.TextOnDark}",
+            "type": "color"
+          },
+          "border": {
+            "value": "#00000000",
+            "type": "color"
+          }
+        }
+      },
+      "outlined": {
+        "default": {
+          "default": {
+            "border": {
+              "value": "{palette.Secondary.Secondary}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Primary.Primary}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "border": {
+              "value": "{palette.Secondary.SecondaryDark}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Primary.PrimaryDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Primary.PrimaryBG}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "border": {
+              "value": "{palette.Secondary.SecondaryLight}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Primary.PrimaryLight}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          }
+        },
+        "primary": {
+          "default": {
+            "border": {
+              "value": "{palette.Primary.Primary}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Primary.Primary}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "border": {
+              "value": "{palette.Primary.PrimaryDark}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Primary.PrimaryDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Secondary.SecondaryBG}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "border": {
+              "value": "{palette.Primary.PrimaryLight}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Primary.PrimaryLight}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          }
+        },
+        "secondary": {
+          "default": {
+            "border": {
+              "value": "{palette.Secondary.Secondary}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Secondary.Secondary}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "border": {
+              "value": "{palette.Secondary.SecondaryDark}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Secondary.SecondaryDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Secondary.SecondaryBG}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "border": {
+              "value": "{palette.Secondary.SecondaryLight}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Secondary.SecondaryLight}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          }
+        },
+        "info": {
+          "default": {
+            "border": {
+              "value": "{palette.Info.Info}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Info.Info}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "border": {
+              "value": "{palette.Info.Info}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Info.Info}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Primary.PrimaryBGSemiTransparent}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "border": {
+              "value": "{palette.Info.Info}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Text.TextOnDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Info.Info}",
+              "type": "color"
+            }
+          }
+        },
+        "success": {
+          "default": {
+            "border": {
+              "value": "{palette.Success.Success}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Success.Success}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "border": {
+              "value": "{palette.Success.Success}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Success.Success}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Primary.PrimaryBGSemiTransparent}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "border": {
+              "value": "{palette.Success.Success}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Text.TextOnDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Success.Success}",
+              "type": "color"
+            }
+          }
+        },
+        "warning": {
+          "default": {
+            "border": {
+              "value": "{palette.Warning.Warning}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Warning.Warning}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "border": {
+              "value": "{palette.Warning.Warning}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Warning.Warning}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Primary.PrimaryBGSemiTransparent}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "border": {
+              "value": "{palette.Warning.Warning}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Text.TextOnDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Warning.Warning}",
+              "type": "color"
+            }
+          }
+        },
+        "error": {
+          "default": {
+            "border": {
+              "value": "{palette.Error.Error}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Error.Error}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "border": {
+              "value": "{palette.Error.Error}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Error.Error}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Primary.PrimaryBGSemiTransparent}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "border": {
+              "value": "{palette.Error.Error}",
+              "type": "color"
+            },
+            "text": {
+              "value": "{palette.Text.TextOnDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Error.Error}",
+              "type": "color"
+            }
+          }
+        },
+        "disabled": {
+          "border": {
+            "value": "{palette.Disabled.Disabled}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Disabled.Disabled}",
+            "type": "color"
+          },
+          "icon": {
+            "value": "{palette.Disabled.Disabled}",
+            "type": "color"
+          },
+          "bg": {
+            "value": "#00000000",
+            "type": "color"
+          }
+        }
+      },
+      "transparent": {
+        "default": {
+          "default": {
+            "text": {
+              "value": "{palette.Primary.Primary}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "text": {
+              "value": "{palette.Primary.PrimaryDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Primary.PrimaryBG}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "text": {
+              "value": "{palette.Primary.PrimaryLight}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          }
+        },
+        "primary": {
+          "default": {
+            "text": {
+              "value": "{palette.Primary.Primary}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "text": {
+              "value": "{palette.Primary.PrimaryDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Secondary.SecondaryBG}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "text": {
+              "value": "{palette.Primary.PrimaryLight}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          }
+        },
+        "secondary": {
+          "default": {
+            "text": {
+              "value": "{palette.Secondary.Secondary}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "text": {
+              "value": "{palette.Secondary.SecondaryDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Secondary.SecondaryBG}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "text": {
+              "value": "{palette.Secondary.SecondaryLight}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          }
+        },
+        "info": {
+          "default": {
+            "text": {
+              "value": "{palette.Info.Info}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "text": {
+              "value": "{palette.Info.Info}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Primary.PrimaryBGSemiTransparent}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "text": {
+              "value": "{palette.Text.TextOnDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Info.Info}",
+              "type": "color"
+            }
+          }
+        },
+        "success": {
+          "default": {
+            "text": {
+              "value": "{palette.Success.Success}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "text": {
+              "value": "{palette.Success.Success}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Primary.PrimaryBGSemiTransparent}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "text": {
+              "value": "{palette.Text.TextOnDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Success.Success}",
+              "type": "color"
+            }
+          }
+        },
+        "warning": {
+          "default": {
+            "text": {
+              "value": "{palette.Warning.Warning}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "text": {
+              "value": "{palette.Warning.Warning}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Primary.PrimaryBGSemiTransparent}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "text": {
+              "value": "{palette.Text.TextOnDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Warning.Warning}",
+              "type": "color"
+            }
+          }
+        },
+        "error": {
+          "default": {
+            "text": {
+              "value": "{palette.Error.Error}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "#00000000",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "text": {
+              "value": "{palette.Error.Error}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Primary.PrimaryBGSemiTransparent}",
+              "type": "color"
+            }
+          },
+          "active": {
+            "text": {
+              "value": "{palette.Text.TextOnDark}",
+              "type": "color"
+            },
+            "bg": {
+              "value": "{palette.Error.Error}",
+              "type": "color"
+            }
+          }
+        },
+        "disabled": {
+          "text": {
+            "value": "{palette.Disabled.Disabled}",
+            "type": "color"
+          },
+          "bg": {
+            "value": "#00000000",
+            "type": "color"
+          }
+        }
+      }
+    }
+  }
+}

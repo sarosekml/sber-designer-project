@@ -1,0 +1,5 @@
+{"type":"turn.started"}
+{"type":"mcp_tool_call_begin","invocation":{"callId":"mcp_auth_1","server":"figma","tool":"get_file","arguments":{"fileKey":"redacted"}}}
+{"type":"mcp_tool_call_end","invocation":{"callId":"mcp_auth_1","server":"figma","tool":"get_file","isError":true,"result":"401 Unauthorized: reconnect Figma MCP"}}
+{"type":"agent_message_delta","delta":"MCP auth failed; reconnect the integration."}
+{"type":"turn.completed","usage":{"input_tokens":42,"output_tokens":9}}

@@ -1,0 +1,1 @@
+Process terminated after permission approval prompt.

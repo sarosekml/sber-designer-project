@@ -1,0 +1,1 @@
+export { CentredIcon } from './CentredIcon';

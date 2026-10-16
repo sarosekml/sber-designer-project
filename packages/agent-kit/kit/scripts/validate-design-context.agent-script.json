@@ -1,0 +1,9 @@
+{
+  "name": "validate-design-context",
+  "description": "Validate DESIGN.md and design-index artifacts before agent-heavy UI work.",
+  "command": "bun",
+  "args": ["run", "validate:design"],
+  "cwd": "workspace",
+  "permission": "ask",
+  "timeoutMs": 120000
+}

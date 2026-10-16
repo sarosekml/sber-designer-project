@@ -1,0 +1,10 @@
+export function Payments() {
+  return (
+    <main className="p-6">
+      <section className="flex flex-col gap-8">
+        <button className="h-12">Open payment</button>
+        <button className="h-12">Open payment</button>
+      </section>
+    </main>
+  );
+}

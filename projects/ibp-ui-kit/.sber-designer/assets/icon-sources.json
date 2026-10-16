@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "generatedAt": 1789935155723,
+  "sources": [
+    {
+      "id": "source-icons-settings",
+      "name": "Icons Pack",
+      "kind": "local-folder",
+      "mode": "workspace",
+      "families": [
+        "icons",
+        "illustrations"
+      ],
+      "workspacePath": "icons-pack",
+      "status": "ready",
+      "count": 276,
+      "updatedAt": 1781904030748
+    }
+  ]
+}

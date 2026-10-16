@@ -1,0 +1,245 @@
+/* =========================================================================
+   Design System — Modal
+   Modal — не «компонент» в привычном смысле, а свод правил построения
+   модальных форм: обязательные шапка (Modal_Top) и подвал (Modal_Bottom),
+   между ними — произвольная контентная область (Modal_Body), которая может
+   содержать что угодно (форму, таблицу, пустое состояние, другую разметку).
+
+   Источник пропорций — референс "Основной компонент (варианты)":
+   Modal_Top (шапка: заголовок + крестик, 12 шагов ширины) и Modal_Bottom
+   (подвал: Modal_Bottom_Left — Изменить/Удалить, Modal_Bottom_Right —
+   Очистить фильтр/Сохранить).
+
+   Requires: typography.css, colors.css, radius.css, shadow.css, button.css,
+             icon-button.css
+   ========================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------
+     Шкала ширины — 12 шагов. Значения сведены (округление до 10px) из
+     референса, где ширина растёт линейно шагом ≈150px. Практический
+     диапазон для форм — 3–9; 1–2 годятся только для короткого
+     подтверждающего диалога (заголовок + 1-2 строки + кнопки), 10–12 —
+     широкие формы с таблицами/колонками внутри.
+     --------------------------------------------------------------------- */
+  --modal-w-1:  140px;
+  --modal-w-2:  290px;
+  --modal-w-3:  440px;
+  --modal-w-4:  600px;
+  --modal-w-5:  750px;
+  --modal-w-6:  900px;
+  --modal-w-7:  1050px;
+  --modal-w-8:  1200px;
+  --modal-w-9:  1360px;
+  --modal-w-10: 1510px;
+  --modal-w-11: 1660px;
+  --modal-w-12: 1820px;
+
+  /* ---------------------------------------------------------------------
+     Геометрия — общий горизонтальный паддинг связывает шапку, контент
+     и подвал по одной левой/правой линии.
+     --------------------------------------------------------------------- */
+  --modal-pad-x:      28px;
+  --modal-head-pad-y: 22px;
+  --modal-body-pad-y: 28px;
+  --modal-foot-pad-y: 20px;
+  --modal-gap:        16px;   /* зазор между заголовком и крестиком, между левой/правой группой кнопок подвала */
+  --modal-viewport-guard: 24px; /* охранное поле от края вьюпорта */
+
+  /* поверхность */
+  --modal-radius: var(--radius-modal);      /* 24px — общая шкала радиусов */
+  --modal-shadow: var(--shadow-modal-form); /* именованная тень под модалки */
+  --modal-bg:     var(--bg-popup);
+
+  /* скрим — тёмная подложка, гасит фон под модалкой. Конвенция как у
+     --toast-scrim (color-mix поверх --st-grey), процент выше — модалка
+     блокирует весь экран, а не просто подсвечивает тост */
+  --modal-scrim: color-mix(in srgb, var(--st-grey) 48%, transparent);
+
+  /* z-index — выше остальных слоёв ДС (nav 50/60, toast 40/55/60, меню 30/40) */
+  --modal-z: 1000;
+  --modal-z-nested: 1010; /* вложенный (confirm) диалог поверх открытой модалки */
+}
+
+/* =========================================================================
+   СКРИМ + ПОЗИЦИОНИРОВАНИЕ
+   ========================================================================= */
+
+.modal-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--modal-z);
+  background: var(--modal-scrim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--modal-viewport-guard);
+  overflow-y: auto; /* если модалка выше вьюпорта — скроллится весь скрим, а не только тело */
+  box-sizing: border-box;
+}
+.modal-scrim--nested { z-index: var(--modal-z-nested); }
+
+/* встраивание превью в статичный контейнер документации/канваса —
+   вместо фиксированного оверлея на весь вьюпорт */
+.modal-scrim--inline { position: absolute; animation: none; }
+
+/* вход/выход — уважает reduced-motion */
+.modal-scrim {
+  animation: modal-scrim-in .18s ease;
+}
+.modal-scrim .modal { animation: modal-pop-in .18s cubic-bezier(.2,.8,.3,1); }
+@keyframes modal-scrim-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modal-pop-in { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .modal-scrim, .modal-scrim .modal { animation: none; }
+}
+
+/* =========================================================================
+   КОНТЕЙНЕР
+   ========================================================================= */
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0; /* внутри flex-скрима модалка никогда не сжимается молча —
+                     если места не хватает, скрим должен скроллиться, а не врать про ширину */
+  background: var(--modal-bg);
+  border-radius: var(--modal-radius);
+  box-shadow: var(--modal-shadow);
+  width: var(--modal-w-6); /* дефолт — шаг 6, переопределяется модификатором */
+  max-width: calc(100vw - (var(--modal-viewport-guard) * 2));
+  max-height: calc(100vh - (var(--modal-viewport-guard) * 2));
+  box-sizing: border-box;
+  overflow: hidden; /* скругление реза́лось бы содержимым без этого */
+}
+
+/* модификаторы ширины — 12 шагов шкалы */
+.modal--w1  { width: var(--modal-w-1); }
+.modal--w2  { width: var(--modal-w-2); }
+.modal--w3  { width: var(--modal-w-3); }
+.modal--w4  { width: var(--modal-w-4); }
+.modal--w5  { width: var(--modal-w-5); }
+.modal--w6  { width: var(--modal-w-6); }
+.modal--w7  { width: var(--modal-w-7); }
+.modal--w8  { width: var(--modal-w-8); }
+.modal--w9  { width: var(--modal-w-9); }
+.modal--w10 { width: var(--modal-w-10); }
+.modal--w11 { width: var(--modal-w-11); }
+.modal--w12 { width: var(--modal-w-12); }
+
+/* =========================================================================
+   ШАПКА — Modal_Top: заголовок + крестик. Ничего лишнего.
+   ========================================================================= */
+
+.modal__head {
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--modal-gap);
+  padding: var(--modal-head-pad-y) var(--modal-pad-x);
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+  transition: box-shadow .15s ease;
+}
+/* тень появляется, когда тело прокручено от верхнего края — усиливает
+   разделительную линию, которая присутствует всегда */
+.modal__head.is-scrolled { box-shadow: 0 6px 12px -8px rgba(40, 50, 55, .18); }
+
+.modal__title {
+  margin: 0;
+  font: var(--type-h5-strong);
+  color: var(--text-black);
+  flex: 1 1 auto;
+  min-width: 0;
+  text-wrap: pretty; /* заголовок переносится на 2 строки, а не обрезается */
+}
+
+.modal__close { flex: none; margin-top: 1px; } /* класс-якорь; сама кнопка — ibtn ibtn--neutral ibtn--m */
+
+/* =========================================================================
+   КОНТЕНТ — Modal_Body: единственная зона, которая варьируется. Здесь
+   не задаётся ничего, кроме паддинга, скролла и охранных отступов —
+   содержимое (форма, таблица, пустое состояние) приходит снаружи.
+   ========================================================================= */
+
+.modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--modal-body-pad-y) var(--modal-pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font: var(--type-body-m);
+  color: var(--text-primary);
+}
+.modal__body::-webkit-scrollbar { width: 8px; }
+.modal__body::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 8px; }
+
+/* тело без внутреннего паддинга — когда контент сам управляет отступами
+   (например таблица на всю ширину модалки) */
+.modal__body--flush { padding: 0; gap: 0; }
+
+/* =========================================================================
+   ПОДВАЛ — Modal_Bottom: Modal_Bottom_Left (Изменить/Удалить, опционально)
+   + Modal_Bottom_Right (Secondary + Primary). Все вместе на Bottom_Left
+   не используются — Изменить и Удалить принадлежат разным режимам формы
+   (просмотр → Изменить, редактирование существующей сущности → Удалить).
+   ========================================================================= */
+
+.modal__foot {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--modal-gap);
+  flex-wrap: wrap;
+  padding: var(--modal-foot-pad-y) var(--modal-pad-x);
+  border-top: 1px solid var(--border-light);
+  position: relative;
+  transition: box-shadow .15s ease;
+}
+.modal__foot.is-scrolled { box-shadow: 0 -6px 12px -8px rgba(40, 50, 55, .18); }
+
+.modal__foot-left,
+.modal__foot-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.modal__foot-right { margin-left: auto; gap: 12px; }
+.modal__foot-left:empty { display: none; }
+
+/* =========================================================================
+   ЗАГРУЗКА КОНТЕНТА (скелетон при открытии) — тот же приём шиммера,
+   что и в ReadOnlyField (--st-disabled-light/-midlight, 1.6s ease).
+   ========================================================================= */
+
+.modal__skeleton {
+  display: block;
+  height: 16px;
+  width: var(--sk-w, 100%);
+  border-radius: var(--radius-xs);
+  background: linear-gradient(90deg, var(--st-disabled-light) 25%, var(--st-disabled-midlight) 37%, var(--st-disabled-light) 63%);
+  background-size: 400% 100%;
+  animation: modal-shimmer 1.6s ease infinite;
+}
+.modal__skeleton--title { height: 20px; width: var(--sk-w, 40%); }
+@keyframes modal-shimmer { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .modal__skeleton { animation-duration: 3.2s; } }
+
+/* =========================================================================
+   СОХРАНЕНИЕ В ПРОЦЕССЕ — форма заблокирована, Primary уходит в Loading
+   (готовый .btn--loading из button.css). Оборачивайте поля в <fieldset
+   disabled> — здесь только визуальное приглушение контейнера.
+   ========================================================================= */
+
+.modal--saving .modal__body { opacity: .55; pointer-events: none; }
+
+/* =========================================================================
+   ПУСТОЕ/ОШИБКА ВАЛИДАЦИИ — модалка остаётся открытой, футер закреплён;
+   сама ошибка — забота компонента LabelHelper внутри контента (role="alert").
+   Здесь фиксируется только то, что модалка НЕ закрывается и НЕ схлопывается.
+   ========================================================================= */

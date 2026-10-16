@@ -1,0 +1,10 @@
+export function Orders() {
+  return (
+    <main className="p-4">
+      <section className="grid gap-3">
+        <div className="h-9">Order 1248</div>
+        <div className="h-9">Order 1249</div>
+      </section>
+    </main>
+  );
+}

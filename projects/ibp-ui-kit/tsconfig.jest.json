@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": ["es2021", "dom"],
+    "target": "es2021",
+    "types": ["node", "jest"],
+    "moduleResolution": "node",
+    "allowJs": true,
+    "jsx": "react",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "build"]
+}

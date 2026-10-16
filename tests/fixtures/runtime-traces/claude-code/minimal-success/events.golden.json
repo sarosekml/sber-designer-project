@@ -1,0 +1,46 @@
+[
+  {
+    "type": "iteration-start",
+    "iteration": 1
+  },
+  {
+    "type": "text-delta",
+    "iteration": 1,
+    "delta": "Done."
+  },
+  {
+    "type": "usage",
+    "iteration": 1,
+    "usage": {
+      "inputTokens": 12,
+      "outputTokens": 3
+    }
+  },
+  {
+    "type": "iteration-end",
+    "iteration": 1,
+    "hadToolCalls": false,
+    "finishReason": "stop"
+  },
+  {
+    "type": "done",
+    "iterations": 1,
+    "truncated": false,
+    "hadErrors": false,
+    "stoppedAfterPermissionDeny": false,
+    "finalResponse": {
+      "text": "Done.",
+      "provider": "claude-code-runtime",
+      "model": "default",
+      "finishReason": "stop",
+      "usage": {
+        "inputTokens": 12,
+        "outputTokens": 3
+      }
+    },
+    "usage": {
+      "inputTokens": 12,
+      "outputTokens": 3
+    }
+  }
+]

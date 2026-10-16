@@ -1,0 +1,222 @@
+# Icon catalog
+
+## Icon resolution order
+
+1. `project-icon-prop`: strings that are valid for the project icon component, usually `<Icon iconName="..." />`.
+2. `project-asset`: imported local SVG/image assets.
+3. `project-file`: local icon component files.
+4. `external-icon-reference`: configured external icon folders; materialize before use.
+5. `lucide-fallback`: built-in Lucide imports when no project icon fits.
+
+Always call `get_indexed_icon` before using an icon. Lucide fallback icons are valid for `lucide-react` imports, not for a project `Icon` string prop unless the same name appears as `project-icon-prop`.
+
+Project iconName values: 287
+- action: <IconTypes name="action" />
+- Add: <Icon iconName="Add" />
+- AddCircle: <Icon iconName="AddCircle" />
+- AdminCkp: <Icon iconName="AdminCkp" />
+- AdministrationIcon: <DashboardIcon iconName="AdministrationIcon" />
+- AdminPanelSettings: <Icon iconName="AdminPanelSettings" />
+- AiStars: <Icon iconName="AiStars" />
+- AiStars02: <Icon iconName="AiStars02" />
+- AlertCircle: <Icon iconName="AlertCircle" />
+- AlertCircleFilled: <Icon iconName="AlertCircleFilled" />
+- AlertTriangle: <Icon iconName="AlertTriangle" />
+- AlertTriangleFilled: <Icon iconName="AlertTriangleFilled" />
+- AnalysIcon: <DashboardIcon iconName="AnalysIcon" />
+- Archive: <Icon iconName="Archive" />
+- ARisk: <Icon iconName="ARisk" />
+- ArrowBlockDown: <Icon iconName="ArrowBlockDown" />
+- ArrowBlockDownFilled: <Icon iconName="ArrowBlockDownFilled" />
+- ArrowBlockLeft: <Icon iconName="ArrowBlockLeft" />
+- ArrowBlockLeftFilled: <Icon iconName="ArrowBlockLeftFilled" />
+- ArrowBlockLeftOutlined: <Icon iconName="ArrowBlockLeftOutlined" />
+- ArrowBlockRight: <Icon iconName="ArrowBlockRight" />
+- ArrowBlockRightFilled: <Icon iconName="ArrowBlockRightFilled" />
+- ArrowBlockRightOutlined: <Icon iconName="ArrowBlockRightOutlined" />
+- ArrowBlockUp: <Icon iconName="ArrowBlockUp" />
+- ArrowBlockUpFilled: <Icon iconName="ArrowBlockUpFilled" />
+- ArrowCircleDown: <Icon iconName="ArrowCircleDown" />
+- ArrowCircleDownFilled: <Icon iconName="ArrowCircleDownFilled" />
+- ArrowCircleLeft: <Icon iconName="ArrowCircleLeft" />
+- ArrowCircleLeftFilled: <Icon iconName="ArrowCircleLeftFilled" />
+- ArrowCircleRight: <Icon iconName="ArrowCircleRight" />
+- ArrowCircleRightFilled: <Icon iconName="ArrowCircleRightFilled" />
+- ArrowCircleUp: <Icon iconName="ArrowCircleUp" />
+- ArrowCircleUpFilled: <Icon iconName="ArrowCircleUpFilled" />
+- ArrowDown: <Icon iconName="ArrowDown" />
+- ArrowDownLeft: <Icon iconName="ArrowDownLeft" />
+- ArrowDownRight: <Icon iconName="ArrowDownRight" />
+- ArrowLeft: <Icon iconName="ArrowLeft" />
+- ArrowLeftRight: <Icon iconName="ArrowLeftRight" />
+- ArrowNarrowDown: <Icon iconName="ArrowNarrowDown" />
+- ArrowNarrowDownLeft: <Icon iconName="ArrowNarrowDownLeft" />
+- ArrowNarrowDownRight: <Icon iconName="ArrowNarrowDownRight" />
+- ArrowNarrowLeft: <Icon iconName="ArrowNarrowLeft" />
+- ArrowNarrowRight: <Icon iconName="ArrowNarrowRight" />
+- ArrowNarrowUp: <Icon iconName="ArrowNarrowUp" />
+- ArrowNarrowUpLeft: <Icon iconName="ArrowNarrowUpLeft" />
+- ArrowNarrowUpRight: <Icon iconName="ArrowNarrowUpRight" />
+- ArrowRight: <Icon iconName="ArrowRight" />
+- ArrowTrendUp: <Icon iconName="ArrowTrendUp" />
+- ArrowUp: <Icon iconName="ArrowUp" />
+- ArrowUpDown: <Icon iconName="ArrowUpDown" />
+- ArrowUpLeft: <Icon iconName="ArrowUpLeft" />
+- ArrowUpRight: <Icon iconName="ArrowUpRight" />
+- Attach: <Icon iconName="Attach" />
+- Bank: <Icon iconName="Bank" />
+- BarChartSquare: <Icon iconName="BarChartSquare" />
+- BarLineChart: <Icon iconName="BarLineChart" />
+- BBBArrowLeft: <Icon iconName="BBBArrowLeft" />
+- BBBArrowRight: <Icon iconName="BBBArrowRight" />
+- BindingLeads: <Icon iconName="BindingLeads" />
+- Blocked: <Icon iconName="Blocked" />
+- BookmarkAdd: <Icon iconName="BookmarkAdd" />
+- BookmarkCheck: <Icon iconName="BookmarkCheck" />
+- BookmarkCheckFilled: <Icon iconName="BookmarkCheckFilled" />
+- BookmarkMinus: <Icon iconName="BookmarkMinus" />
+- Building: <Icon iconName="Building" />
+- Building01: <Icon iconName="Building01" />
+- Building02: <Icon iconName="Building02" />
+- Building03: <Icon iconName="Building03" />
+- Calc: <Icon iconName="Calc" />
+- CalcFVDashIcon: <DashboardIcon iconName="CalcFVDashIcon" />
+- CalclateFv: <Icon iconName="CalclateFv" />
+- CalculateFV: <Icon iconName="CalculateFV" />
+- Calendar: <Icon iconName="Calendar" />
+- CalendarEdit: <Icon iconName="CalendarEdit" />
+- CalendarKpkiIcon: <DashboardIcon iconName="CalendarKpkiIcon" />
+- CashFlow: <Icon iconName="CashFlow" />
+- Check: <Icon iconName="Check" />
+- CheckBox: <Icon iconName="CheckBox" />
+- CheckBoxBlank: <Icon iconName="CheckBoxBlank" />
+- CheckBoxIndeterminate: <Icon iconName="CheckBoxIndeterminate" />
+
+Project asset icons: 227
+- A risk: icons-pack/icons/a-risk.svg
+- Add: icons-pack/icons/add.svg
+- Add circle: icons-pack/icons/add-circle.svg
+- Admin ckp: icons-pack/icons/admin-ckp.svg
+- Admin panel settings: icons-pack/icons/admin-panel-settings.svg
+- Ai stars: icons-pack/icons/ai-stars.svg
+- Ai stars 02: icons-pack/icons/ai-stars-02.svg
+- Alert circle: icons-pack/icons/alert-circle.svg
+- Alert circle filled: icons-pack/icons/alert-circle-filled.svg
+- Alert triangle: icons-pack/icons/alert-triangle.svg
+- Alert triangle filled: icons-pack/icons/alert-triangle-filled.svg
+- Archive: icons-pack/icons/archive.svg
+- Arrow block down filled: icons-pack/icons/arrow-block-down-filled.svg
+- Arrow block left: icons-pack/icons/arrow-block-left.svg
+- Arrow block left filled: icons-pack/icons/arrow-block-left-filled.svg
+- Arrow block right: icons-pack/icons/arrow-block-right.svg
+- Arrow block right filled: icons-pack/icons/arrow-block-right-filled.svg
+- Arrow block up filled: icons-pack/icons/arrow-block-up-filled.svg
+- Arrow circle down: icons-pack/icons/arrow-circle-down.svg
+- Arrow circle down filled: icons-pack/icons/arrow-circle-down-filled.svg
+- Arrow circle left: icons-pack/icons/arrow-circle-left.svg
+- Arrow circle left filled: icons-pack/icons/arrow-circle-left-filled.svg
+- Arrow circle right: icons-pack/icons/arrow-circle-right.svg
+- Arrow circle right filled: icons-pack/icons/arrow-circle-right-filled.svg
+- Arrow circle up: icons-pack/icons/arrow-circle-up.svg
+- Arrow circle up filled: icons-pack/icons/arrow-circle-up-filled.svg
+- Arrow down: icons-pack/icons/arrow-down.svg
+- Arrow down left: icons-pack/icons/arrow-down-left.svg
+- Arrow down right: icons-pack/icons/arrow-down-right.svg
+- Arrow left: icons-pack/icons/arrow-left.svg
+- Arrow left right: icons-pack/icons/arrow-left-right.svg
+- Arrow narrow down: icons-pack/icons/arrow-narrow-down.svg
+- Arrow narrow down left: icons-pack/icons/arrow-narrow-down-left.svg
+- Arrow narrow down right: icons-pack/icons/arrow-narrow-down-right.svg
+- Arrow narrow left: icons-pack/icons/arrow-narrow-left.svg
+- Arrow narrow right: icons-pack/icons/arrow-narrow-right.svg
+- Arrow narrow up: icons-pack/icons/arrow-narrow-up.svg
+- Arrow narrow up left: icons-pack/icons/arrow-narrow-up-left.svg
+- Arrow narrow up right: icons-pack/icons/arrow-narrow-up-right.svg
+- Arrow right: icons-pack/icons/arrow-right.svg
+
+Project file icons: 0
+
+External icon references: 0
+
+Lucide fallback icons: 1535
+- AArrowDown: import { AArrowDown } from 'lucide-react'
+- AArrowUp: import { AArrowUp } from 'lucide-react'
+- Accessibility: import { Accessibility } from 'lucide-react'
+- Activity: import { Activity } from 'lucide-react'
+- Airplay: import { Airplay } from 'lucide-react'
+- AirVent: import { AirVent } from 'lucide-react'
+- ALargeSmall: import { ALargeSmall } from 'lucide-react'
+- AlarmClock: import { AlarmClock } from 'lucide-react'
+- AlarmClockCheck: import { AlarmClockCheck } from 'lucide-react'
+- AlarmClockMinus: import { AlarmClockMinus } from 'lucide-react'
+- AlarmClockOff: import { AlarmClockOff } from 'lucide-react'
+- AlarmClockPlus: import { AlarmClockPlus } from 'lucide-react'
+- AlarmSmoke: import { AlarmSmoke } from 'lucide-react'
+- Album: import { Album } from 'lucide-react'
+- AlignCenter: import { AlignCenter } from 'lucide-react'
+- AlignCenterHorizontal: import { AlignCenterHorizontal } from 'lucide-react'
+- AlignCenterVertical: import { AlignCenterVertical } from 'lucide-react'
+- AlignEndHorizontal: import { AlignEndHorizontal } from 'lucide-react'
+- AlignEndVertical: import { AlignEndVertical } from 'lucide-react'
+- AlignHorizontalDistributeCenter: import { AlignHorizontalDistributeCenter } from 'lucide-react'
+- AlignHorizontalDistributeEnd: import { AlignHorizontalDistributeEnd } from 'lucide-react'
+- AlignHorizontalDistributeStart: import { AlignHorizontalDistributeStart } from 'lucide-react'
+- AlignHorizontalJustifyCenter: import { AlignHorizontalJustifyCenter } from 'lucide-react'
+- AlignHorizontalJustifyEnd: import { AlignHorizontalJustifyEnd } from 'lucide-react'
+- AlignHorizontalJustifyStart: import { AlignHorizontalJustifyStart } from 'lucide-react'
+- AlignHorizontalSpaceAround: import { AlignHorizontalSpaceAround } from 'lucide-react'
+- AlignHorizontalSpaceBetween: import { AlignHorizontalSpaceBetween } from 'lucide-react'
+- AlignJustify: import { AlignJustify } from 'lucide-react'
+- AlignLeft: import { AlignLeft } from 'lucide-react'
+- AlignRight: import { AlignRight } from 'lucide-react'
+- AlignStartHorizontal: import { AlignStartHorizontal } from 'lucide-react'
+- AlignStartVertical: import { AlignStartVertical } from 'lucide-react'
+- AlignVerticalDistributeCenter: import { AlignVerticalDistributeCenter } from 'lucide-react'
+- AlignVerticalDistributeEnd: import { AlignVerticalDistributeEnd } from 'lucide-react'
+- AlignVerticalDistributeStart: import { AlignVerticalDistributeStart } from 'lucide-react'
+- AlignVerticalJustifyCenter: import { AlignVerticalJustifyCenter } from 'lucide-react'
+- AlignVerticalJustifyEnd: import { AlignVerticalJustifyEnd } from 'lucide-react'
+- AlignVerticalJustifyStart: import { AlignVerticalJustifyStart } from 'lucide-react'
+- AlignVerticalSpaceAround: import { AlignVerticalSpaceAround } from 'lucide-react'
+- AlignVerticalSpaceBetween: import { AlignVerticalSpaceBetween } from 'lucide-react'
+- Ambulance: import { Ambulance } from 'lucide-react'
+- Ampersand: import { Ampersand } from 'lucide-react'
+- Ampersands: import { Ampersands } from 'lucide-react'
+- Amphora: import { Amphora } from 'lucide-react'
+- Anchor: import { Anchor } from 'lucide-react'
+- Angry: import { Angry } from 'lucide-react'
+- Annoyed: import { Annoyed } from 'lucide-react'
+- Antenna: import { Antenna } from 'lucide-react'
+- Anvil: import { Anvil } from 'lucide-react'
+- Aperture: import { Aperture } from 'lucide-react'
+- Apple: import { Apple } from 'lucide-react'
+- AppWindow: import { AppWindow } from 'lucide-react'
+- AppWindowMac: import { AppWindowMac } from 'lucide-react'
+- Archive: import { Archive } from 'lucide-react'
+- ArchiveRestore: import { ArchiveRestore } from 'lucide-react'
+- ArchiveX: import { ArchiveX } from 'lucide-react'
+- Armchair: import { Armchair } from 'lucide-react'
+- ArrowBigDown: import { ArrowBigDown } from 'lucide-react'
+- ArrowBigDownDash: import { ArrowBigDownDash } from 'lucide-react'
+- ArrowBigLeft: import { ArrowBigLeft } from 'lucide-react'
+- ArrowBigLeftDash: import { ArrowBigLeftDash } from 'lucide-react'
+- ArrowBigRight: import { ArrowBigRight } from 'lucide-react'
+- ArrowBigRightDash: import { ArrowBigRightDash } from 'lucide-react'
+- ArrowBigUp: import { ArrowBigUp } from 'lucide-react'
+- ArrowBigUpDash: import { ArrowBigUpDash } from 'lucide-react'
+- ArrowDown: import { ArrowDown } from 'lucide-react'
+- ArrowDown01: import { ArrowDown01 } from 'lucide-react'
+- ArrowDown10: import { ArrowDown10 } from 'lucide-react'
+- ArrowDownAZ: import { ArrowDownAZ } from 'lucide-react'
+- ArrowDownFromLine: import { ArrowDownFromLine } from 'lucide-react'
+- ArrowDownLeft: import { ArrowDownLeft } from 'lucide-react'
+- ArrowDownNarrowWide: import { ArrowDownNarrowWide } from 'lucide-react'
+- ArrowDownRight: import { ArrowDownRight } from 'lucide-react'
+- ArrowDownToDot: import { ArrowDownToDot } from 'lucide-react'
+- ArrowDownToLine: import { ArrowDownToLine } from 'lucide-react'
+- ArrowDownUp: import { ArrowDownUp } from 'lucide-react'
+- ArrowDownWideNarrow: import { ArrowDownWideNarrow } from 'lucide-react'
+- ArrowDownZA: import { ArrowDownZA } from 'lucide-react'
+- ArrowLeft: import { ArrowLeft } from 'lucide-react'
+- ArrowLeftFromLine: import { ArrowLeftFromLine } from 'lucide-react'
+

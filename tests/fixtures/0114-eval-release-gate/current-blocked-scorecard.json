@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-07-18T13:00:00.000Z",
+  "totals": { "cells": 4, "completed": 3, "failed": 1, "planned": 0 },
+  "byProfile": {
+    "react-storybook": { "cells": 4, "completed": 3, "failed": 1, "planned": 0 }
+  },
+  "byModel": {
+    "mock-eval": { "cells": 4, "completed": 3, "failed": 1, "planned": 0 }
+  },
+  "byFixture": {
+    "demo/orders": { "cells": 2, "completed": 2, "failed": 0, "planned": 0 },
+    "demo/payments": { "cells": 2, "completed": 1, "failed": 1, "planned": 0 }
+  },
+  "averages": {
+    "componentReuseScore": 0.81,
+    "craftBlockingCount": 1,
+    "languageFactFidelityScore": null,
+    "jury_composite": 8.6,
+    "promptTokens": 950,
+    "completionTokens": 180
+  }
+}

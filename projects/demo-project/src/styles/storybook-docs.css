@@ -1,0 +1,30 @@
+/*
+ * Storybook Docs renders every story inside a preview canvas by default.
+ * For this demo design system the canvas frame obscures the actual
+ * component shape, so we make docs previews look like a clean catalog.
+ */
+.sbdocs .sbdocs-preview,
+.sbdocs .docblock-code-toggle,
+.sbdocs .docblock-source {
+  box-shadow: none !important;
+}
+
+.sbdocs .sbdocs-preview {
+  margin-block: 12px 36px !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.sbdocs .docs-story {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.sbdocs .docs-story > div:first-child {
+  margin: 0 !important;
+}
+
+.sbdocs .docblock-code-toggle {
+  margin-top: 10px !important;
+}

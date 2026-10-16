@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Идея · Buy-side Порт Мурманск</title>
+<link rel="stylesheet" href="design-system.css" />
+<link rel="stylesheet" href="_shell.css" />
+<style>
+.idea-hero { background: linear-gradient(135deg, var(--c-accent-soft), oklch(0.96 0.02 240)); border: 1px solid var(--c-accent-border); border-radius: var(--r-xl); padding: 20px 22px; margin-bottom: 14px; }
+[data-theme="dark"] .idea-hero { background: linear-gradient(135deg, oklch(0.30 0.06 155), oklch(0.26 0.014 250)); }
+.idea-hero h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3; margin-top: 8px; }
+.idea-hero .meta { display: flex; gap: 14px; align-items: center; font-size: 12px; color: var(--c-text-2); margin-top: 12px; }
+.idea-hero .meta .dot { width: 3px; height: 3px; background: var(--c-text-4); border-radius: 50%; }
+.recco { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px; }
+.recco-tile { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); padding: 10px 12px; }
+.recco-tile .lbl { font-size: 10.5px; color: var(--c-text-3); text-transform: uppercase; letter-spacing: 0.04em; }
+.recco-tile .val { font-size: 16px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cmt { display: flex; gap: 10px; padding: 12px 0; }
+.cmt + .cmt { border-top: 1px solid var(--c-divider); }
+.cmt .body { flex: 1; }
+.cmt .head { display: flex; align-items: center; gap: 6px; font-size: 12.5px; }
+.cmt .head .who { font-weight: 600; }
+.cmt .head .when { color: var(--c-text-4); font-size: 11px; }
+.cmt .text { font-size: 13px; color: var(--c-text); margin-top: 4px; line-height: 1.5; }
+.cmt-input { display: flex; gap: 10px; padding-top: 12px; border-top: 1px solid var(--c-divider); }
+.cmt-input .w { flex: 1; }
+.trigger-link { display: flex; gap: 12px; padding: 12px 14px; border: 1px solid var(--c-border); border-radius: var(--r-md); background: var(--c-surface-2); }
+.trigger-link .src { font-size: 10.5px; color: var(--c-text-3); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+.action-list { display: flex; flex-direction: column; gap: 0; }
+.action-list .ai-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; }
+.action-list .ai-row + .ai-row { border-top: 1px solid var(--c-divider); }
+.action-list .ai-row .num { width: 22px; height: 22px; border-radius: 50%; background: var(--c-violet-soft); color: oklch(0.42 0.14 295); font-size: 11px; font-weight: 600; display: grid; place-items: center; flex-shrink: 0; }
+[data-theme="dark"] .action-list .ai-row .num { color: oklch(0.85 0.12 295); }
+</style></head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><div class="bm">E</div><div class="n">Equitas</div></div>
+    <nav class="crumbs-top"><a href="Screens Index.html">Главная</a><span class="sep">/</span><a href="Funds List.html">Фонды</a><span class="sep">/</span><a>Интеррос</a><span class="sep">/</span><a>Идеи</a><span class="sep">/</span><span class="current">#1842</span></nav>
+    <div class="spacer"></div>
+    <label class="search-top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Поиск…"/><span class="kbd">⌘K</span></label>
+    <button class="topbar-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dot-new"></span></button>
+    <div class="avatar avatar-sm avatar-emerald" style="margin-left: 4px;">АК</div>
+  </div>
+
+  <aside class="rail">
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 3l9 6v11a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></button>
+    <button class="rail-ic is-active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5zM12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 6-6"/></svg></button>
+  </aside>
+
+  <aside class="nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Идеи</div>
+      <a href="#" class="nav-item"><span class="n-l">Все идеи</span><span class="num">23</span></a>
+      <a href="#" class="nav-item active"><span class="n-l">Интеррос</span><span class="num">7</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Sigma Growth</span><span class="num">5</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Высокий приоритет</span><span class="num">7</span></a>
+      <a href="#" class="nav-item"><span class="n-l">AI-генерированные</span><span class="num">11</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Идеи фонда «Интеррос»</div>
+      <a href="#" class="nav-item active"><span class="n-l">#1842 Порт Мурманск</span></a>
+      <a href="#" class="nav-item"><span class="n-l">#1839 Удержать ГРК Быстринское</span></a>
+      <a href="#" class="nav-item"><span class="n-l">#1834 Снизить долю Росбанка</span></a>
+      <a href="#" class="nav-item"><span class="n-l">#1822 Сделка с Полюс</span></a>
+      <a href="#" class="nav-item"><span class="n-l">#1815 Buy-side Сегежа</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">
+      <div class="ph-l">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="t-eyebrow">Идея сделки · #1842</span>
+          <span class="ai-badge">AI Рекомендация</span>
+          <span class="pill pill-high">ВЫСОКИЙ ПРИОРИТЕТ</span>
+        </div>
+        <h1 style="margin-top: 6px;">Buy-side покупка актива «Порт Мурманск»</h1>
+        <div class="sub">Фонд: <a href="Design System.html#fund">Интеррос</a> · автор: AI · 2 дня назад</div>
+      </div>
+      <div class="ph-r">
+        <button class="btn btn-secondary btn-sm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H5.17L4 17.17z"/></svg>Поделиться</button>
+        <button class="btn btn-secondary btn-sm">В архив</button>
+        <button class="btn btn-primary btn-sm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Принять идею</button>
+      </div>
+    </div>
+
+    <div class="idea-hero">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="badge badge-violet"><span class="badge-dot"></span>В работе аналитика</span>
+        <span class="t-caption">Подтверждена менеджером · ожидает решения комитета</span>
+      </div>
+      <h2>Приобрести 25–30% долю в «Порт Мурманск» в связи с развитием северного направления и налоговой льготой</h2>
+      <div class="meta">
+        <span>Целевая стоимость <b style="color: var(--c-text);">~480 млн ₽</b></span>
+        <span class="dot"></span>
+        <span>Горизонт: <b style="color: var(--c-text);">12–18 мес</b></span>
+        <span class="dot"></span>
+        <span>Оценка AI-уверенности: <b style="color: var(--c-text);">82%</b></span>
+      </div>
+
+      <div class="recco">
+        <div class="recco-tile"><div class="lbl">Действие</div><div class="val" style="color: var(--c-accent-2);">BUY</div></div>
+        <div class="recco-tile"><div class="lbl">Целевая доля</div><div class="val">28%</div></div>
+        <div class="recco-tile"><div class="lbl">Бюджет</div><div class="val">480 млн ₽</div></div>
+        <div class="recco-tile"><div class="lbl">Ожидаемая IRR</div><div class="val" style="color: var(--c-accent-2);">+22%</div></div>
+      </div>
+    </div>
+
+    <div class="section-grid">
+      <!-- LEFT: Trigger + AI analysis -->
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="block">
+          <div class="block-head"><div class="block-title">Триггер</div><div class="block-sub">источник идеи</div></div>
+          <div class="block-body">
+            <div class="trigger-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c-text-3)" stroke-width="1.6" style="flex-shrink:0;margin-top:2px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+              <div>
+                <div class="src">Коммерсантъ · 31.03.2026</div>
+                <div style="font-size: 13.5px; font-weight: 500; margin-top: 4px;">Налоговые льготы для портовой инфраструктуры Севморпути продлеваются до 2032 года</div>
+                <div class="t-caption" style="margin-top: 6px;">Минфин расширил перечень регионов, на которые распространяется льгота. Ожидаемый эффект для операторов — снижение налоговой нагрузки на 14–18%.</div>
+                <div style="margin-top: 8px;"><a class="btn btn-link" style="padding: 0;">Открыть источник →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-head">
+            <div><div class="block-title">AI-обоснование</div><div class="block-sub">claude · 5 шагов рассуждения</div></div>
+            <button class="btn btn-ghost btn-sm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>Перегенерировать</button>
+          </div>
+          <div class="block-body">
+            <div class="action-list">
+              <div class="ai-row"><span class="num">1</span><div><div style="font-weight:500;font-size:13px;">Контекст: Севморпуть</div><div class="t-caption" style="margin-top:2px;">Северное направление — приоритет логистических инвестиций фонда. Уже есть актив «Норильский Никель» (31,9%), который нуждается в портовой инфраструктуре.</div></div></div>
+              <div class="ai-row"><span class="num">2</span><div><div style="font-weight:500;font-size:13px;">Триггер: налоговая льгота</div><div class="t-caption" style="margin-top:2px;">Продление льготы до 2032 года повышает оценочную IRR с 14% до 22% при горизонте 12–18 мес.</div></div></div>
+              <div class="ai-row"><span class="num">3</span><div><div style="font-weight:500;font-size:13px;">Цена входа</div><div class="t-caption" style="margin-top:2px;">Текущая капитализация «Порт Мурманск» — ~1,7 млрд ₽. Доля 28% оценивается в 480 млн ₽ с премией к рынку 4%.</div></div></div>
+              <div class="ai-row"><span class="num">4</span><div><div style="font-weight:500;font-size:13px;">Риски</div><div class="t-caption" style="margin-top:2px;">Концентрация в одном регионе, регуляторный риск отмены льготы (низкий), сезонность грузопотока.</div></div></div>
+              <div class="ai-row"><span class="num">5</span><div><div style="font-weight:500;font-size:13px;">Рекомендация</div><div class="t-caption" style="margin-top:2px;">BUY 28% доли с целевой стоимостью 480 млн ₽. Запустить due-diligence в течение 2 недель.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: People + comments + tasks -->
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="block">
+          <div class="block-head"><div class="block-title">Связанные сущности</div></div>
+          <div class="block-body" style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; gap: 10px; align-items: center;"><div class="avatar avatar-sm avatar-blue">ПМ</div><div><div style="font-size:13px;font-weight:500;">Порт Мурманск</div><div class="t-micro">потенциальный актив</div></div></div>
+              <a class="btn btn-link">Открыть →</a>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; gap: 10px; align-items: center;"><div class="avatar avatar-sm avatar-emerald">НН</div><div><div style="font-size:13px;font-weight:500;">Норильский Никель</div><div class="t-micro">связанный актив фонда</div></div></div>
+              <a class="btn btn-link" href="Asset Page.html">Открыть →</a>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; gap: 10px; align-items: center;"><div class="avatar avatar-sm avatar-violet">ИН</div><div><div style="font-size:13px;font-weight:500;">Интеррос</div><div class="t-micro">фонд</div></div></div>
+              <a class="btn btn-link" href="Design System.html#fund">Открыть →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-head"><div class="block-title">Задачи на принятие</div><div class="block-sub">3 из 5 выполнены</div></div>
+          <div class="block-body" style="display: flex; flex-direction: column; gap: 10px;">
+            <label class="check"><input type="checkbox" checked/><span class="box"></span><span style="text-decoration: line-through; color: var(--c-text-3);">Запросить финансовую отчётность</span></label>
+            <label class="check"><input type="checkbox" checked/><span class="box"></span><span style="text-decoration: line-through; color: var(--c-text-3);">Согласовать с юридическим отделом</span></label>
+            <label class="check"><input type="checkbox" checked/><span class="box"></span><span style="text-decoration: line-through; color: var(--c-text-3);">Провести оценку 3-х аналитиков</span></label>
+            <label class="check"><input type="checkbox"/><span class="box"></span><span>Подготовить презентацию для комитета</span></label>
+            <label class="check"><input type="checkbox"/><span class="box"></span><span>Получить решение инвестиционного комитета</span></label>
+            <div class="progress" style="margin-top: 6px;"><span style="width: 60%;"></span></div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-head"><div class="block-title">Обсуждение</div><div class="block-sub">3 комментария</div></div>
+          <div class="block-body">
+            <div class="cmt">
+              <div class="avatar avatar-sm avatar-violet">АК</div>
+              <div class="body">
+                <div class="head"><span class="who">Анна Ковалёва</span><span class="when">вчера, 14:22</span></div>
+                <div class="text">Согласна с AI-рекомендацией. Юристы подтвердили, что льгота действует и для частных операторов. Готовлю запрос на due-diligence.</div>
+              </div>
+            </div>
+            <div class="cmt">
+              <div class="avatar avatar-sm avatar-amber">ПС</div>
+              <div class="body">
+                <div class="head"><span class="who">Пётр Семёнов</span><span class="when">сегодня, 09:14</span></div>
+                <div class="text">Нужно проверить структуру акционеров — там были обременения 2023 года. Подниму архив.</div>
+              </div>
+            </div>
+            <div class="cmt">
+              <div class="avatar avatar-sm avatar-emerald">МТ</div>
+              <div class="body">
+                <div class="head"><span class="who">Мария Титова</span><span class="when">сегодня, 11:48</span></div>
+                <div class="text">Оценка IRR выглядит оптимистично — стоит сделать второй сценарий с сохранением старой ставки и сравнить. Если сделаешь — приложу к презентации.</div>
+              </div>
+            </div>
+            <div class="cmt-input">
+              <div class="avatar avatar-sm avatar-emerald">АК</div>
+              <div class="w">
+                <textarea class="textarea" placeholder="Написать комментарий…" style="min-height: 60px;"></textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                  <div class="row-sm"><button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 11-2 2-7-7-7 7 5 5"/><path d="M14 8h.01"/></svg></button><button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></button></div>
+                  <button class="btn btn-primary btn-sm">Отправить</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <aside class="ctx">
+    <div class="ctx-head"><div class="ctx-title">Статус и решения</div></div>
+    <div class="ctx-body">
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">Статус</div></div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; gap: 10px; align-items: center;"><div style="width: 22px; height: 22px; border-radius: 50%; background: var(--c-accent); color: white; display: grid; place-items: center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><span style="font-size: 12.5px; font-weight: 500;">Создано AI</span><span class="t-micro" style="margin-left: auto;">Пн</span></div>
+          <div style="display: flex; gap: 10px; align-items: center;"><div style="width: 22px; height: 22px; border-radius: 50%; background: var(--c-accent); color: white; display: grid; place-items: center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><span style="font-size: 12.5px; font-weight: 500;">Подтверждено менеджером</span><span class="t-micro" style="margin-left: auto;">Вт</span></div>
+          <div style="display: flex; gap: 10px; align-items: center;"><div style="width: 22px; height: 22px; border-radius: 50%; background: var(--c-warning-soft); color: oklch(0.45 0.13 70); display: grid; place-items: center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg></div><span style="font-size: 12.5px; font-weight: 500;">Аналитика</span><span class="t-micro" style="margin-left: auto;">сейчас</span></div>
+          <div style="display: flex; gap: 10px; align-items: center;"><div style="width: 22px; height: 22px; border-radius: 50%; background: var(--c-surface-3); color: var(--c-text-4); display: grid; place-items: center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg></div><span style="font-size: 12.5px; color: var(--c-text-3);">Решение комитета</span></div>
+          <div style="display: flex; gap: 10px; align-items: center;"><div style="width: 22px; height: 22px; border-radius: 50%; background: var(--c-surface-3); color: var(--c-text-4); display: grid; place-items: center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg></div><span style="font-size: 12.5px; color: var(--c-text-3);">Сделка</span></div>
+        </div>
+      </div>
+
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">Метаданные</div></div>
+        <div class="ctx-meta-row"><span class="k">ID</span><span class="v mono">#1842</span></div>
+        <div class="ctx-meta-row"><span class="k">Автор</span><span class="v">AI · Claude 4.5</span></div>
+        <div class="ctx-meta-row"><span class="k">Создано</span><span class="v">17.04.2026</span></div>
+        <div class="ctx-meta-row"><span class="k">Дедлайн</span><span class="v">02.05.2026</span></div>
+        <div class="ctx-meta-row"><span class="k">Уверенность</span><span class="v">82%</span></div>
+      </div>
+
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">Команда</div><a class="title-act">+ добавить</a></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; gap: 8px; align-items: center;"><div class="avatar avatar-sm avatar-violet">АК</div><div><div style="font-size: 12.5px; font-weight: 500;">Анна Ковалёва</div><div class="t-micro">Аналитик · ответственный</div></div></div>
+          <div style="display: flex; gap: 8px; align-items: center;"><div class="avatar avatar-sm avatar-amber">ПС</div><div><div style="font-size: 12.5px; font-weight: 500;">Пётр Семёнов</div><div class="t-micro">Юрист</div></div></div>
+          <div style="display: flex; gap: 8px; align-items: center;"><div class="avatar avatar-sm avatar-emerald">МТ</div><div><div style="font-size: 12.5px; font-weight: 500;">Мария Титова</div><div class="t-micro">Фонд-менеджер</div></div></div>
+        </div>
+      </div>
+
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">Действия AI</div></div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <a class="btn btn-secondary btn-sm" href="AI Analysis.html" style="justify-content: flex-start;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>Запустить второй сценарий</a>
+          <button class="btn btn-secondary btn-sm" style="justify-content: flex-start;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Сгенерировать слайды</button>
+          <button class="btn btn-secondary btn-sm" style="justify-content: flex-start;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Экспорт меморандума</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+</body></html>

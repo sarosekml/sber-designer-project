@@ -1,0 +1,27 @@
+branch:
+  ignore_regex: "^master$|^release/.*$|^hotfix/.*$" #регулярное выражение для игнорирования пр-ов из ветки такой-то
+review_mode: # режим ревью: можно выбрать либо использовать одновременно
+  - SUGGESTIONS # предлагает изменение в коде
+  - REPORT # оставляет комментарий в формате единого отчета
+customer_instructions_file_name: "reviewer-instructions.md" # имя файла с инструкциями
+extra_instruction:
+  # Данная инструкция модифицирует поведение режима предложения, оставьте пустыми если не хотите менять поведение агента
+	suggestion: "Инструкция"
+  # Данная инструкция модифицирует поведение режима отчета, оставьте пустыми если не хотите менять поведение агента
+  # Фильтрация по серьезности дефектов
+  report: "Инструкция"
+severity_type:
+	- "MAJOR"
+  - "MINOR"
+	- "INFO"
+# Если конфигурационный файл не указан, или какие-то поля не заполнены. То поля заполняются следующими значениями(только те которые отсуствуют)
+#  ignore_regex: "release"
+#  customer_instructions_file_name: "reviewer-instructions.md"
+#  review_mode:
+#    - "SUGGESTIONS"
+#    - "REPORT"
+#  extra_instruction:
+#  	suggestion: ""
+#  	report: ""
+## severity_type:
+#   - "MAJOR"

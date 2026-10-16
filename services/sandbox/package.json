@@ -1,0 +1,18 @@
+{
+  "name": "@sber-designer/sandbox",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-spawn sandbox controller. Hono server that spawns a target repo's Storybook (or any dev-server) via child_process and proxies its preview URL back to the editor. Docker-per-session is Phase 1 — see ADR-0008.",
+  "main": "./src/index.ts",
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@sber-designer/shared-types": "workspace:*",
+    "hono": "^4.6.0",
+    "zod": "^3.23.0"
+  }
+}

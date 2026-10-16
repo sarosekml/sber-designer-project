@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Поиск · Equitas</title>
+<link rel="stylesheet" href="design-system.css" />
+<link rel="stylesheet" href="_shell.css" />
+<style>
+.search-hero { border: 1px solid var(--c-border); background: var(--c-surface); border-radius: var(--r-xl); padding: 20px 22px; }
+.search-big { display: flex; align-items: center; gap: 12px; border: 1.5px solid var(--c-accent); border-radius: var(--r-lg); padding: 12px 14px; background: var(--c-surface); box-shadow: var(--sh-ring); }
+.search-big input { flex: 1; border: 0; outline: 0; background: transparent; font-size: 16px; color: var(--c-text); font-family: inherit; }
+.search-big .kbd { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-4); background: var(--c-surface-2); border: 1px solid var(--c-border); border-radius: 4px; padding: 2px 6px; }
+.filter-bar { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
+.filter-bar button { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; font-size: 12px; color: var(--c-text-2); border-radius: var(--r-full); border: 1px solid var(--c-border); background: var(--c-surface); cursor: pointer; }
+.filter-bar button.is-active { background: var(--c-text); color: var(--c-surface); border-color: var(--c-text); font-weight: 500; }
+.filter-bar button .c { font-size: 11px; opacity: 0.7; }
+.result-group + .result-group { margin-top: 22px; }
+.result-title { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--c-divider); }
+.result-title .t { font-size: 13px; font-weight: 600; }
+.result-title .c { font-size: 11.5px; color: var(--c-text-3); }
+.result-title a { margin-left: auto; font-size: 12px; }
+.hit { display: flex; gap: 12px; padding: 12px 14px; border: 1px solid var(--c-border); border-radius: var(--r-md); background: var(--c-surface); align-items: flex-start; cursor: pointer; }
+.hit + .hit { margin-top: 8px; }
+.hit:hover { background: var(--c-surface-2); }
+.hit .icon { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; flex-shrink: 0; }
+.hit .title { font-size: 13.5px; font-weight: 500; }
+.hit .title mark { background: oklch(0.92 0.10 80); color: inherit; padding: 0 2px; border-radius: 2px; }
+[data-theme="dark"] .hit .title mark { background: oklch(0.45 0.14 80); color: white; }
+.hit .meta { font-size: 11.5px; color: var(--c-text-3); margin-top: 3px; display: flex; gap: 10px; align-items: center; }
+.hit .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--c-text-4); }
+.hit .body { flex: 1; }
+.hit .trail { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+</style></head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><div class="bm">E</div><div class="n">Equitas</div></div>
+    <nav class="crumbs-top"><a href="Screens Index.html">Главная</a><span class="sep">/</span><span class="current">Поиск</span></nav>
+    <div class="spacer"></div>
+    <label class="search-top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Поиск…" value="мурманск"/><span class="kbd">⌘K</span></label>
+    <button class="topbar-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+    <div class="avatar avatar-sm avatar-emerald" style="margin-left: 4px;">АК</div>
+  </div>
+
+  <aside class="rail">
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 3l9 6v11a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
+    <button class="rail-ic is-active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 2 7l10 5 10-5-10-5z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/></svg></button>
+  </aside>
+
+  <aside class="nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Недавние запросы</div>
+      <a href="#" class="nav-item active"><span class="n-l">мурманск</span></a>
+      <a href="#" class="nav-item"><span class="n-l">норильский никель Q1</span></a>
+      <a href="#" class="nav-item"><span class="n-l">потанин</span></a>
+      <a href="#" class="nav-item"><span class="n-l">ipo финтех</span></a>
+      <a href="#" class="nav-item"><span class="n-l">быстринское</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Сохранённые фильтры</div>
+      <a href="#" class="nav-item"><span class="n-l">⭐ Активы в металлургии</span></a>
+      <a href="#" class="nav-item"><span class="n-l">⭐ Идеи от AI &gt;80%</span></a>
+      <a href="#" class="nav-item"><span class="n-l">⭐ Фонды региона РФ</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="search-hero">
+      <div class="search-big">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-accent-2)" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+        <input value="мурманск" />
+        <span class="kbd">⌘K</span>
+        <button class="btn btn-ghost btn-sm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+        <span class="t-caption">Найдено <b style="color: var(--c-text);">47 результатов</b> · запрос выполнен за 0.12 с</span>
+        <div class="row-sm">
+          <button class="btn btn-ghost btn-sm">Сохранить поиск</button>
+          <button class="btn btn-secondary btn-sm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4"/></svg>Спросить AI</button>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <button class="is-active">Все <span class="c">47</span></button>
+        <button>Активы <span class="c">6</span></button>
+        <button>Идеи <span class="c">3</span></button>
+        <button>Фонды <span class="c">2</span></button>
+        <button>Новости <span class="c">24</span></button>
+        <button>Взаимодействие <span class="c">8</span></button>
+        <button>Документы <span class="c">4</span></button>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <div class="result-group">
+        <div class="result-title"><span class="t">Активы</span><span class="c">6 результатов</span><a class="btn btn-link">Показать все →</a></div>
+        <div class="hit">
+          <div class="icon avatar-blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 22h20M4 22V9l8-6 8 6v13M10 22v-6h4v6"/></svg></div>
+          <div class="body">
+            <div class="title">Порт <mark>Мурманск</mark></div>
+            <div class="t-caption" style="margin-top: 3px;">Потенциальный актив · Логистика и портовая инфраструктура · 480 млн ₽</div>
+            <div class="meta"><span>Интеррос</span><span class="dot"></span><span>3 связанные идеи</span><span class="dot"></span><span>Due-diligence в работе</span></div>
+          </div>
+          <div class="trail"><span class="status status-active"><span class="d"></span>В работе</span></div>
+        </div>
+        <div class="hit">
+          <div class="icon avatar-amber"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7v10l10 5 10-5V7z"/></svg></div>
+          <div class="body">
+            <div class="title"><mark>Мурманск</mark>ий Морской Торговый Порт</div>
+            <div class="t-caption" style="margin-top: 3px;">Альтернативный актив · приоритет: Средний</div>
+            <div class="meta"><span>Интеррос</span><span class="dot"></span><span>Отслеживается с 2024</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-group">
+        <div class="result-title"><span class="t">Идеи</span><span class="c">3 результата</span><a class="btn btn-link">Показать все →</a></div>
+        <div class="hit">
+          <div class="icon" style="background: var(--c-violet-soft); color: oklch(0.42 0.14 295);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5z"/></svg></div>
+          <div class="body">
+            <div class="title">#1842 Buy-side покупка актива Порт <mark>Мурманск</mark></div>
+            <div class="t-caption" style="margin-top: 3px;">Триггер: налоговая льгота Севморпути · IRR +22%</div>
+            <div class="meta"><span class="ai-badge" style="padding: 1px 6px; font-size: 9.5px;">AI</span><span>Интеррос</span><span class="dot"></span><span class="pill pill-high" style="padding: 1px 6px;">ВЫСОКИЙ</span><span class="dot"></span><span>2 дня назад</span></div>
+          </div>
+          <div class="trail"><button class="btn btn-ghost btn-sm">Открыть →</button></div>
+        </div>
+        <div class="hit">
+          <div class="icon" style="background: var(--c-violet-soft); color: oklch(0.42 0.14 295);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5z"/></svg></div>
+          <div class="body">
+            <div class="title">#1719 Северный логистический кластер · <mark>Мурманск</mark> + Архангельск</div>
+            <div class="t-caption" style="margin-top: 3px;">Стратегическая идея объединения портовых активов</div>
+            <div class="meta"><span>Аналитик: ПС</span><span class="dot"></span><span>Архив · одобрена 2025</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-group">
+        <div class="result-title"><span class="t">Новости</span><span class="c">24 результата</span><a class="btn btn-link">Показать все →</a></div>
+        <div class="hit">
+          <div class="icon" style="background: var(--c-surface-2); color: var(--c-text-2);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+          <div class="body">
+            <div class="title">Налоговые льготы для портовой инфраструктуры Севморпути продлеваются до 2032 года</div>
+            <div class="t-caption" style="margin-top: 3px;">…расширен перечень регионов. В числе основных бенефициаров — порты <mark>Мурманск</mark>а, Архангельска и Находки…</div>
+            <div class="meta"><span style="font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; font-size: 10.5px;">Коммерсантъ</span><span class="dot"></span><span>31 мар 2026</span><span class="dot"></span><span class="pill pill-high" style="padding: 1px 6px;">ВЫСОКИЙ</span></div>
+          </div>
+        </div>
+        <div class="hit">
+          <div class="icon" style="background: var(--c-surface-2); color: var(--c-text-2);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div>
+          <div class="body">
+            <div class="title">Грузооборот порта <mark>Мурманск</mark>а вырос на 11,4% в I квартале 2026</div>
+            <div class="t-caption" style="margin-top: 3px;">…основной прирост обеспечили контейнерные перевозки и вывоз угля…</div>
+            <div class="meta"><span style="font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; font-size: 10.5px;">Bloomberg</span><span class="dot"></span><span>12 апр 2026</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-group">
+        <div class="result-title"><span class="t">Взаимодействие</span><span class="c">8 результатов</span><a class="btn btn-link">Показать все →</a></div>
+        <div class="hit">
+          <div class="icon" style="background: var(--c-info-soft); color: oklch(0.42 0.12 240);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H5.17L4 17.17z"/></svg></div>
+          <div class="body">
+            <div class="title">Запрос документов по due-diligence Порт <mark>Мурманск</mark></div>
+            <div class="t-caption" style="margin-top: 3px;">Ожидаем ответ от юр. отдела до 30 апреля…</div>
+            <div class="meta"><span>Анна Ковалёва → Порт <mark>Мурманск</mark></span><span class="dot"></span><span>20 мар 2026</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body></html>

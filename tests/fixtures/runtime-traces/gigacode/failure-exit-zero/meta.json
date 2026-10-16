@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "runtime": "gigacode",
+  "command": "gigacode",
+  "argsSnapshot": ["--approval-mode", "auto-edit", "--output-format", "stream-json"],
+  "exitCode": 0,
+  "durationMs": 0,
+  "notes": "GigaCode may report result.subtype=failure while still exiting zero. The runner must preserve the runtime failure in iteration-end and done."
+}

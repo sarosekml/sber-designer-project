@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Popover — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/shadow.css">
+<link rel="stylesheet" href="../../styles/button.css">
+<link rel="stylesheet" href="../../styles/icon-button.css">
+<link rel="stylesheet" href="../../styles/link.css">
+<link rel="stylesheet" href="../../styles/chip.css">
+<link rel="stylesheet" href="../../styles/label-helper.css">
+<link rel="stylesheet" href="../../styles/popover.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    margin: 0; font-family: var(--font-text), system-ui, sans-serif;
+    color: var(--text-primary); background: var(--bg-page); background-attachment: fixed;
+  }
+  a.inl { color: var(--link); text-decoration: none; font-weight: 600; border-bottom: 1px solid color-mix(in srgb, var(--link) 35%, transparent); }
+  a.inl:hover { color: var(--link-dark); }
+  .page { max-width: 1320px; margin: 0 auto; padding: clamp(40px,7vw,96px) clamp(24px,5vw,72px) 140px; }
+
+  /* masthead */
+  .masthead { border-bottom: 1px solid var(--border-light); padding-bottom: 30px; }
+  .masthead .meta { font: var(--type-body-xs); color: var(--text-inactive); display:flex; gap:24px; margin:0 0 22px; }
+  .masthead .meta b { color: var(--text-secondary); font: var(--type-body-xs); font-weight:600; }
+  .eyebrow { font: var(--type-button-xs); letter-spacing:.14em; text-transform:uppercase; color: var(--primary); margin:0 0 14px; }
+  .masthead h1 { font: var(--type-h1); margin:0 0 14px; color: var(--text-black); }
+  @media (max-width:600px){ .masthead h1{ font-size:40px; line-height:48px; } }
+  .masthead p.lead { font: var(--type-body-l); color: var(--text-secondary); margin:0; max-width:70ch; text-wrap:pretty; }
+
+  /* section */
+  .section { margin-top: 76px; }
+  .section > h2 { font: var(--type-h3-strong); margin:0 0 8px; color: var(--text-black); }
+  .section > p.desc { font: var(--type-body-m); color: var(--text-secondary); margin:0 0 28px; max-width:76ch; text-wrap:pretty; }
+  .section > p.desc.tight { margin-bottom:20px; }
+  .section > p.desc + p.desc { margin-top:-16px; }
+  .badge-new { display:inline-block; font: var(--type-button-xs); letter-spacing:.06em; text-transform:uppercase; color: var(--primary); background: var(--primary-bg); border:1px solid color-mix(in srgb, var(--primary) 22%, transparent); padding:3px 9px; border-radius:999px; margin-left:12px; vertical-align:middle; }
+
+  .panel { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; padding: 32px 34px; }
+  .panel + .panel { margin-top: 20px; }
+  .row { display:flex; flex-wrap:wrap; align-items:flex-start; gap:40px; }
+
+  ul.bullets { margin: 0 0 0 2px; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  ul.bullets li { position:relative; padding-left:18px; font: var(--type-body-m); color: var(--text-secondary); }
+  ul.bullets li::before { content:""; position:absolute; left:2px; top:8px; width:5px; height:5px; border-radius:50%; background: var(--text-inactive); }
+
+  ul.rules { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; }
+  ul.rules li { font: var(--type-body-m); color: var(--text-primary); padding-left:26px; position:relative; text-wrap:pretty; }
+  ul.rules li::before { content:""; position:absolute; left:2px; top:9px; width:7px; height:7px; border-radius:50%; background: var(--primary); }
+  ul.rules li b { color: var(--text-black); }
+
+  code.tok { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.86em; color: var(--primary); background: var(--primary-bg); padding:1px 6px; border-radius:5px; }
+
+  /* ---------- playground ---------- */
+  .panel.pg { padding:0; overflow:hidden; display:grid; grid-template-columns: 340px 1fr; }
+  @media (max-width:820px){ .panel.pg { grid-template-columns:1fr; } }
+  .pg__controls { padding:30px 30px; display:flex; flex-direction:column; gap:22px; border-right:1px solid var(--border-light); }
+  @media (max-width:820px){ .pg__controls { border-right:none; border-bottom:1px solid var(--border-light); } }
+  .pg__stage { padding:40px 32px; display:flex; align-items:flex-start; justify-content:safe center; min-height:420px; position:relative; overflow:auto;
+    background:
+      linear-gradient(var(--bg-tile),var(--bg-tile)) padding-box,
+      repeating-conic-gradient(#f2f5f5 0% 25%, #fbfcfc 0% 50%) 0 / 22px 22px; }
+
+  .ctl { display:flex; flex-direction:column; gap:8px; }
+  .ctl > .lbl { font: var(--type-body-s-strong); color: var(--text-inactive); text-transform:uppercase; letter-spacing:.05em; font-size:11px; }
+
+  .pg-select { position:relative; }
+  .pg-select select { appearance:none; -webkit-appearance:none; width:100%; height:40px; padding:0 38px 0 14px; border:1px solid var(--border-primary); border-radius:9px; background: var(--bg-tile); color: var(--text-primary); font: var(--type-body-m); cursor:pointer; }
+  .pg-select select:focus-visible { outline:2px solid var(--primary); outline-offset:1px; }
+  .pg-select::after { content:""; position:absolute; right:15px; top:50%; width:9px; height:9px; border-right:2px solid var(--text-secondary); border-bottom:2px solid var(--text-secondary); transform:translateY(-65%) rotate(45deg); pointer-events:none; }
+
+  /* ---------- anatomy ---------- */
+  .anat { display:grid; grid-template-columns: minmax(320px,1fr) minmax(260px,380px); gap:44px; align-items:center; }
+  @media (max-width:820px){ .anat { grid-template-columns:1fr; } }
+  .anat__stage { background: var(--tertiary-light); border:1px solid var(--border-light); border-radius:14px; padding:44px; display:flex; justify-content:center; position:relative; overflow:auto; }
+  .anat__legend { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; counter-reset:a; }
+  .anat__legend li { display:flex; gap:14px; align-items:flex-start; font: var(--type-body-m); color: var(--text-primary); }
+  .anat__legend li .n { counter-increment:a; flex:none; width:24px; height:24px; border-radius:50%; background: var(--primary); color:#fff; font: var(--type-body-s-strong); display:flex; align-items:center; justify-content:center; }
+  .anat__legend li .n::before { content:counter(a); }
+  .anat__legend li .t .k { font: var(--type-body-m-strong); color: var(--text-black); }
+  .anat__legend li .t .d { font: var(--type-body-s); color: var(--text-secondary); }
+
+  /* ---------- header variants ---------- */
+  .hvariants { display:flex; gap:20px; flex-wrap:wrap; }
+
+  /* ---------- sizes ---------- */
+  .size-table { width:100%; border-collapse:collapse; }
+  .size-table th, .size-table td { text-align:left; padding:12px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); }
+  .size-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .size-table tr:last-child td { border-bottom:none; }
+  .size-table td.num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  .size-table td.rec { color: var(--text-inactive); font: var(--type-body-s); }
+  .size-bar { display:inline-block; height:8px; border-radius:4px; background: var(--primary); vertical-align:middle; margin-right:10px; }
+
+  /* ---------- usage: footer combos ---------- */
+  .use-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
+  @media (max-width:820px){ .use-grid { grid-template-columns:1fr; } }
+  .use-block { border:1px solid var(--border-light); border-radius:14px; overflow:hidden; background: var(--bg-tile); }
+  .use-block__stage { padding:20px; background: var(--tertiary-light); }
+  .use-block__cap { padding:14px 18px; font: var(--type-body-xs); color: var(--text-secondary); border-top:1px solid var(--border-light); }
+
+  /* ---------- content variants table ---------- */
+  .content-table { width:100%; border-collapse:collapse; }
+  .content-table th, .content-table td { text-align:left; padding:13px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:top; }
+  .content-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .content-table tr:last-child td { border-bottom:none; }
+  .content-table td.dsc { color: var(--text-secondary); font: var(--type-body-s); }
+
+  /* ---------- placement grid ---------- */
+  .pgrid { display:grid; grid-template-columns: repeat(3, 1fr); gap:40px 24px; }
+  @media (max-width:900px){ .pgrid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width:560px){ .pgrid { grid-template-columns: 1fr; } }
+  .pcell { display:flex; flex-direction:column; align-items:flex-start; gap:10px; width:100%; }
+  .pcell .cap { font: var(--type-body-xs); color: var(--text-inactive); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .popbox { position:relative; width:100%; height:190px; border:1px solid var(--border-light); border-radius:12px; background: var(--tertiary-light); overflow:hidden; }
+  .pcell-target { position:absolute; transform:translate(-50%,-50%); width:10px; height:10px; border-radius:50%; background: var(--primary); box-shadow:0 0 0 4px var(--primary-bg); }
+
+  /* ---------- trigger: text-link ---------- */
+  .pop-trigger-link { display:inline-flex; align-items:center; gap:6px; border:0; background:none; padding:0; cursor:pointer; }
+  .pop-trigger-link i { width:14px; height:14px; color: var(--text-inactive); flex:none; }
+
+  /* ---------- auto-flip demo ---------- */
+  .flip-vp { position:relative; height:190px; border:1px solid var(--border-light); border-radius:14px; background: var(--tertiary-light); }
+  .flip-controls { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+
+  /* ---------- single-open demo ---------- */
+  .single-open-demo { display:flex; gap:18px; position:relative; padding: 4px 0 0; }
+
+  /* ---------- states grid ---------- */
+  .states { display:grid; grid-template-columns: repeat(2, 1fr); gap:30px 26px; }
+  @media (max-width:760px){ .states { grid-template-columns: 1fr; } }
+  .state-cell { display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+  .state-cap { font: var(--type-body-s-strong); color: var(--text-secondary); }
+
+  /* ---------- mock content (иллюстративное — не компонент ДС) ---------- */
+  .mock-input { height:36px; display:flex; align-items:center; padding:0 12px; border:1px solid var(--border-primary); border-radius: var(--radius-field); background: var(--bg-tile); font: var(--type-body-m); color: var(--text-primary); }
+
+  /* ---------- do / don't ---------- */
+  .guide { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:720px){ .guide { grid-template-columns:1fr; } }
+  .guide-card { border:1px solid var(--border-light); border-radius:12px; overflow:hidden; background: var(--bg-tile); display:flex; flex-direction:column; }
+  .guide-card__bar { height:4px; }
+  .guide-card.bad  .guide-card__bar { background: var(--error); }
+  .guide-card.good .guide-card__bar { background: var(--success); }
+  .guide-card__tag { display:inline-flex; align-items:center; gap:7px; font: var(--type-body-s-strong); padding:14px 20px 0; }
+  .guide-card.bad  .guide-card__tag { color: var(--error-dark); }
+  .guide-card.good .guide-card__tag { color: var(--success-dark); }
+  .guide-card__tag .ic { width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; flex:none; }
+  .guide-card.bad  .guide-card__tag .ic { background: var(--error); }
+  .guide-card.good .guide-card__tag .ic { background: var(--success); }
+  .guide-card__tag .ic svg { width:12px; height:12px; }
+  .guide-card__body { padding:16px 20px 22px; font: var(--type-body-m); color: var(--text-primary); }
+  .guide-card__cap { padding:0 20px 20px; font: var(--type-body-xs); color: var(--text-inactive); text-wrap:pretty; }
+
+  /* ---------- reference tables ---------- */
+  .ref-table { width:100%; border-collapse:collapse; }
+  .ref-table th, .ref-table td { text-align:left; padding:14px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:top; }
+  .ref-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .ref-table tr:last-child td { border-bottom:none; }
+  kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; color: var(--text-primary); background: var(--bgtable-row-focus); border:1px solid var(--border-primary); border-radius:5px; padding:1px 7px; }
+
+  .color-ref { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
+  @media (max-width:760px){ .color-ref { grid-template-columns:1fr; } }
+  .cref-group { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; overflow:hidden; }
+  .cref-group > h3 { font: var(--type-h5-strong); margin:0; color: var(--text-primary); padding:18px 22px; border-bottom:1px solid var(--border-light); }
+  .cref-rows { padding:6px 0; }
+  .cref-row { display:grid; grid-template-columns: 36px 1fr; gap:14px; align-items:center; padding:9px 22px; }
+  .cref-row:hover { background: var(--bgtable-row-hover); }
+  .cref-sw { width:36px; height:36px; border-radius:8px; border:1px solid rgba(40,50,55,.12); position:relative; overflow:hidden; flex:none; }
+  .cref-sw .cf { position:absolute; inset:0; }
+  .cref-meta { min-width:0; }
+  .cref-meta .role { font: var(--type-body-s); color: var(--text-inactive); margin:0; }
+  .cref-meta .tname { font: var(--type-body-m-strong); color: var(--text-primary); margin:1px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; word-break:break-all; }
+
+  /* ---------- developer handoff ---------- */
+  .subhead { font: var(--type-body-m-strong); color: var(--text-black); margin:0 0 16px; }
+  .subhead.mt { margin-top: 34px; }
+  .subhead .req { font: var(--type-body-s); color: var(--text-inactive); font-weight:400; }
+  .dev-intro { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:-6px 0 22px; }
+  .dev-intro .req { font: var(--type-body-s); color: var(--text-inactive); }
+  .code-panel { background: var(--c-cgrey-800); border-radius: 12px; overflow:hidden; }
+  .code-panel + .code-panel { margin-top:20px; }
+  .code-panel__head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 16px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .code-panel__name { color: rgba(255,255,255,.72); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; letter-spacing:.02em; font-weight:600; }
+  .code-panel__copy { display:inline-flex; align-items:center; gap:6px; border:0; padding:6px 11px; border-radius:7px; background: rgba(255,255,255,.08); color: rgba(255,255,255,.86); font: var(--type-body-xs); cursor:pointer; transition: background-color .12s ease; }
+  .code-panel__copy:hover { background: rgba(255,255,255,.16); }
+  .code-panel__copy svg { width:14px; height:14px; flex:none; }
+  .code-panel__copy.is-copied { background: color-mix(in srgb, var(--success) 30%, transparent); color:#fff; }
+  .code-panel pre { margin:0; padding:18px 20px; overflow-x:auto; }
+  .code-panel code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; line-height:1.65; color: rgba(255,255,255,.82); white-space:pre; }
+  .code-panel .tk-tag  { color:#79D9C9; }
+  .code-panel .tk-attr { color:#9FC1FF; }
+  .code-panel .tk-val  { color:#F2C879; }
+  .code-panel .tk-cm   { color: rgba(255,255,255,.4); font-style:italic; }
+  .dev-table { width:100%; border-collapse:collapse; }
+  .dev-table th, .dev-table td { text-align:left; padding:13px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:top; }
+  .dev-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .dev-table tr:last-child td { border-bottom:none; }
+  .dev-table code.tok { white-space:nowrap; }
+  .dev-table td.dsc { color: var(--text-secondary); font: var(--type-body-s); }
+  .dev-table td.rt-num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  .dev-note { font: var(--type-body-s); color: var(--text-inactive); margin:16px 2px 0; text-wrap:pretty; }
+
+  footer.page-foot { margin-top:90px; padding-top:26px; border-top:1px solid var(--border-light);
+    font: var(--type-body-s); color: var(--text-inactive); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+</style>
+  <link rel="stylesheet" href="../../styles/ds-nav.css">
+  <link rel="stylesheet" href="../../styles/ds-toc.css">
+  <link rel="stylesheet" href="../../styles/pg-kit.css">
+<style>
+/* unified-template: бывшие h2-разделы, понижены до подразделов */
+.section .subsec{margin-top:48px;}
+.section .subsec>h3{font:var(--type-h4-strong);margin:0 0 8px;color:var(--text-black);}
+.section .subsec>p.desc{font:var(--type-body-m);color:var(--text-secondary);margin:0 0 24px;max-width:82ch;text-wrap:pretty;}
+.section .subsec>p.desc.tight{margin-bottom:20px;}
+.section .subsec>p.desc+p.desc{margin-top:-16px;}
+</style>
+</head>
+<body>
+<main class="page" data-screen-label="Popover">
+
+  <header class="masthead">
+    <div class="meta"><span>Версия: <b>v1.1</b></span><span>Обновлено: <b>08.07.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Организмы</p>
+    <h1>Popover</h1>
+    <p class="lead">Popover — нон-модальный всплывающий контейнер, привязанный к триггеру. Показывает расширенный контекстный контент (текст с форматированием, интерактивные элементы, формы, легенды, списки). В отличие от <a class="inl" href="../molecules/Tooltip.html">Tooltip</a> — требует клика для открытия и не закрывается при уходе курсора; в отличие от <b>Modal</b> — не блокирует страницу, не имеет скрима и закрывается кликом вне себя.</p>
+  </header>
+
+  <!-- PLAYGROUND -->
+  <section class="section" data-screen-label="Playground">
+    <h2>Конструктор</h2>
+    <p class="desc">Соберите поповер: тип триггера, ширина (5 шагов шкалы), наличие шапки, состав подвала, тип контента и стрелка-указатель.</p>
+    <div class="panel pg">
+      <div class="pg__controls" id="pg-controls"></div>
+      <div class="pg__stage" id="pg-stage"></div>
+    </div>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" data-screen-label="Usage">
+    <h2>Использование</h2>
+    <p class="desc tight">Поповер показывает расширенный контекстный контент, требующий клика (в отличие от Tooltip — только hover/focus, только строка текста) и не блокирующий страницу (в отличие от Modal). Используйте для легенды чарта, карточки предпросмотра сущности, быстрого inline-редактирования 1–3 полей, фильтра, подтверждения лёгкого действия. Для многошаговых сценариев, обязательных к заполнению форм и любого контента, которому не хватает ширины 560px или высоты со скроллом — Modal или отдельная страница.</p>
+    <div class="panel" style="margin-bottom:20px;">
+      <table class="dev-table">
+        <thead><tr><th>Критерий</th><th>Tooltip</th><th>Popover</th><th>Modal</th></tr></thead>
+        <tbody>
+          <tr><td>Триггер</td><td class="dsc">Hover / Focus</td><td>Click / Enter / Space</td><td class="dsc">Click</td></tr>
+          <tr><td>Тип контента</td><td class="dsc">Только текст, 1–2 строки</td><td>Текст, интерактив, формы, медиа</td><td class="dsc">Любой, многошаговый</td></tr>
+          <tr><td>Блокирует страницу</td><td class="dsc">Нет</td><td>Нет</td><td class="dsc">Да (скрим)</td></tr>
+          <tr><td>Связан с триггером</td><td class="dsc">Да, строго</td><td>Да</td><td class="dsc">Нет</td></tr>
+          <tr><td>Максимальная ширина</td><td class="dsc">280px (<code class="tok">--tip-max</code>)</td><td>560px (<code class="tok">--pop-w-max</code>)</td><td class="dsc">1820px (12 шагов)</td></tr>
+          <tr><td>Закрытие</td><td class="dsc">Уход курсора / потеря фокуса</td><td>✕ / клик вне / Esc / Tab за последний элемент</td><td class="dsc">Обязательное действие (кроме исключений)</td></tr>
+        </tbody>
+      </table>
+      <p class="dev-note">Правило переключения: если контенту не хватает ширины свыше 560px или вертикальная прокрутка тела превышает разумный предел (см. «Размеры») — это сигнал перейти на Modal.</p>
+    </div>
+    <div class="panel" style="margin-bottom:20px;">
+      <p class="desc tight" style="margin-bottom:18px;">Правила Header и Footer — как у Modal, но с одним отличием: <b>в Header не размещаются кнопки действий</b> — только заголовок и ✕ (опционально — служебная метка/ссылка). Все действия живут в Footer.</p>
+      <table class="dev-table">
+        <thead><tr><th>Зона</th><th>Что можно</th><th>Чего нельзя</th></tr></thead>
+        <tbody>
+          <tr><td>Header</td><td class="dsc">Заголовок (до ~25 символов, 1 строка), кнопка ✕, служебная метка/ссылка справа от заголовка (например «Сбросить»)</td><td class="dsc">Primary/Secondary-кнопки действий — «Сохранить», «Применить», «Открыть сделку»</td></tr>
+          <tr><td>Footer</td><td class="dsc">Кнопки действий (Secondary + Primary), информационные подписи и служебные ссылки слева</td><td class="dsc">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="use-grid" id="use-foot-combos"></div>
+  
+<div class="subsec" data-screen-label="Guidelines">
+    <h3>Рекомендации</h3>
+    <p class="desc">Поповер — лёгкая контекстная надстройка над триггером, а не самостоятельный экран.</p>
+    <div class="guide">
+      <div class="guide-card bad">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>Не так</div>
+        <div class="guide-card__body">Кнопка «Сохранить» размещена в Header рядом с заголовком — пользователь не понимает, действие это или метка.</div>
+        <p class="guide-card__cap">Header — только заголовок и ✕. Все действия — в Footer.</p>
+      </div>
+      <div class="guide-card good">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Так</div>
+        <div class="guide-card__body">Заголовок и ✕ в Header, кнопки «Отмена» и «Применить» — в Footer справа.</div>
+        <p class="guide-card__cap">Однозначное разделение: контекст сверху, действия снизу.</p>
+      </div>
+      <div class="guide-card bad">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>Не так</div>
+        <div class="guide-card__body">Форма из 8 полей с обязательной валидацией — засунута в поповер шириной 400px с прокруткой на 3 экрана.</div>
+        <p class="guide-card__cap">Обязательная многошаговая форма — это Modal, а не Popover.</p>
+      </div>
+      <div class="guide-card good">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Так</div>
+        <div class="guide-card__body">Поповер — быстрое редактирование 1–3 полей (тег, срок, статус); полноценное редактирование сущности — в Modal.</div>
+        <p class="guide-card__cap">Poповер — для лёгких, необязательных к завершению действий.</p>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="section" data-screen-label="Anatomy">
+    <h2>Анатомия</h2>
+    <p class="desc">2 обязательные и 3 опциональные части. Header и Footer — фиксированные зоны (flex: none), Body — единственная гибкая и прокручиваемая зона (flex: 1).</p>
+    <div class="panel">
+      <div class="anat">
+        <div class="anat__stage" id="anat-stage"></div>
+        <ul class="anat__legend">
+          <li><span class="n"></span><span class="t"><span class="k">Trigger</span><span class="d"> — вне поповера. Любой интерактивный элемент: кнопка, иконка, ссылка, чип. Обязателен</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Header</span><span class="d"> — заголовок + ✕, опционально примыкающий чип/ссылка (не действие). Опционален</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Body</span><span class="d"> — произвольный контент, единственная прокручиваемая зона. Обязателен</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Footer</span><span class="d"> — foot-left служебное/инфо, foot-right Secondary+Primary. Опционален</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Arrow</span><span class="d"> — указывает на триггер. Опциональна, по умолчанию выключена</span></span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="subhead mt" style="margin-top:30px;">Варианты Header</p>
+    <p class="desc tight">Заголовок и ✕ — обязательный минимум. Справа от заголовка можно разместить служебную метку состояния или ссылку — но не действие.</p>
+    <div class="hvariants" id="header-variants"></div>
+  </section>
+
+  <!-- VARIANTS (STUB) -->
+  <section class="section" data-screen-label="Variants">
+    <h2>Варианты</h2>
+    <p class="desc">Не применимо: компонент существует в единственной конфигурации, отдельных вариантов нет.</p>
+  </section>
+
+  <!-- SIZES -->
+  <section class="section" data-screen-label="Sizes">
+    <h2>Размеры</h2>
+    <p class="desc tight">Ширина — 5 фиксированных шагов, резиновой ширины нет. Высота растёт по контенту (auto) и ограничена сверху max-height тела — дальше тело прокручивается, шапка и подвал остаются на месте. Горизонтальная прокрутка запрещена.</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="size-table">
+        <thead><tr><th>Токен</th><th>Ширина</th><th>Наглядно</th><th>max-height Body</th><th>Типовое использование</th></tr></thead>
+        <tbody>
+          <tr><td><code class="tok">--pop-w-s</code></td><td class="num">240px</td><td><span class="size-bar" style="width:48px;"></span></td><td class="num">auto, без скролла</td><td class="rec">Легенда чарта, короткий список, подсказка без действий</td></tr>
+          <tr><td><code class="tok">--pop-w-m</code></td><td class="num">320px</td><td><span class="size-bar" style="width:64px;"></span></td><td class="num">320px</td><td class="rec">Стандартный поповер с заголовком и текстом — дефолт</td></tr>
+          <tr><td><code class="tok">--pop-w-l</code></td><td class="num">400px</td><td><span class="size-bar" style="width:80px;"></span></td><td class="num">440px</td><td class="rec">Форма 3–5 полей, карточка сущности, детали сделки</td></tr>
+          <tr><td><code class="tok">--pop-w-xl</code></td><td class="num">480px</td><td><span class="size-bar" style="width:96px;"></span></td><td class="num">520px</td><td class="rec">Сложный/многоколоночный контент, список с деталями</td></tr>
+          <tr><td><code class="tok">--pop-w-max</code></td><td class="num">560px</td><td><span class="size-bar" style="width:112px; opacity:.5;"></span></td><td class="num">600px</td><td class="rec">Верхняя граница, только при обосновании — свыше 560px переключайтесь на Modal</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="subhead mt" style="margin-top:30px;">Отступы и зазоры</h3>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table">
+        <thead><tr><th>Зона</th><th>Значение</th><th>Примечание</th></tr></thead>
+        <tbody>
+          <tr><td>Паддинг Header/Footer (X)</td><td class="num">16px</td><td class="dsc">Горизонтальный отступ обеих фиксированных зон</td></tr>
+          <tr><td>Высота Header</td><td class="num">48px</td><td class="dsc">Фиксированная, содержимое выровнено по центру по вертикали</td></tr>
+          <tr><td>Паддинг Footer (Y)</td><td class="num">12px</td><td class="dsc">Вертикальный отступ подвала (высота растёт по контенту)</td></tr>
+          <tr><td>Паддинг Body</td><td class="num">16px</td><td class="dsc">Внутренний отступ контентной области</td></tr>
+          <tr><td>Зазор от триггера</td><td class="num">8px</td><td class="dsc">Между поповером и триггером в любом placement</td></tr>
+          <tr><td>Скругление углов</td><td class="num">8px</td><td class="dsc"><code class="tok">--radius-m</code> — компактный радиус, без внешнего бордера</td></tr>
+          <tr><td>Охранное поле от края viewport</td><td class="num">16px</td><td class="dsc">Минимальное расстояние при позиционировании</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="section" data-screen-label="Content">
+    <h2>Контент</h2>
+    <p class="desc tight">Body — единственная обязательная зона; поповер не диктует состав и не ограничивает тип контента — содержать может почти что угодно, если это умещается в шкалу ширины и разумную высоту (см. «Размеры»). Таблица ниже — не исчерпывающий перечень и не ограничение, а ориентир по частым случаям, когда добавляются Header и Footer:</p>
+    <div class="panel" style="margin-bottom:20px;">
+      <table class="content-table">
+        <thead><tr><th>Тип контента (примеры)</th><th>Примеры</th><th>Header</th><th>Footer</th></tr></thead>
+        <tbody>
+          <tr><td><b>Текст + ссылка</b></td><td class="dsc">Пояснение к полю, help-текст, определение термина</td><td class="dsc">—</td><td class="dsc">—</td></tr>
+          <tr><td><b>Список / легенда</b></td><td class="dsc">Легенда чарта, набор статусов</td><td class="dsc">Опционально</td><td class="dsc">—</td></tr>
+          <tr><td><b>Форма</b></td><td class="dsc">Быстрое редактирование тега, фильтр, inline-edit</td><td class="dsc">Да</td><td class="dsc">Да</td></tr>
+          <tr><td><b>Карточка данных</b></td><td class="dsc">Превью сделки, разбивка метрики</td><td class="dsc">Да</td><td class="dsc">Опционально</td></tr>
+          <tr><td><b>Таблица</b></td><td class="dsc">Короткий список операций (без горизонтального скролла)</td><td class="dsc">Да</td><td class="dsc">Опционально</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="dev-note" style="margin:-6px 0 20px;">Это примеры, а не закрытый список: жёстких ограничений по типу контента у Body нет — единственное требование — укладываться в шкалу ширины и разумную высоту с прокруткой.</p>
+    <div class="panel" style="margin-bottom:20px;">
+      <ul class="rules">
+        <li><b>Header добавляется</b>, когда контенту нужна метка/группировка, форма содержит несколько полей, или ширина поповера больше 320px.</li>
+        <li><b>Footer добавляется</b>, когда внутри есть форма или выбор, требующий подтверждения, либо деструктивное действие. Только информационный контент — без Footer.</li>
+        <li><b>Крестик</b> размещается в правом верхнем углу Header (если Header есть); если Header нет — компактный ✕ можно разместить в правом верхнем углу Body.</li>
+        <li><b>Порядок кнопок Footer</b> — как у Modal: справа Secondary + Primary (Primary крайний правый), слева — служебная информация/ссылки, никогда не действия.</li>
+        <li><b>Поповер — контейнер-примитив.</b> Конкретные содержательные варианты (Popover/Легенда, Popover/Форма правки) стоит документировать отдельными паттернами, а не плодить новые компоненты.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ПОВЕДЕНИЕ -->
+  <section class="section" data-screen-label="Behavior">
+    <h2>Поведение</h2>
+    <p class="desc">Правила поведения: позиционирование, переполнение, анимация, адаптивность.</p>
+  
+<div class="subsec" data-screen-label="Placement">
+    <h3>Позиционирование</h3>
+    <p class="desc tight">4 стороны × 3 выравнивания стрелки = 12 позиций — тот же приём, что у Tooltip. Стрелка (опциональна, см. «Анатомия») всегда направлена на триггер.</p>
+    <div class="panel">
+      <div class="pgrid" id="placement-grid"></div>
+    </div>
+    <p class="subhead mt" style="margin-top:30px;">Авто-flip у края контейнера<span class="badge-new">Новое</span></p>
+    <p class="desc tight">Если предпочтительному выравниванию не хватает места по горизонтали до края — поповер перевыравнивается на противоположный край (start ↔ end), стрелка остаётся направленной на триггер. Переключите положение триггера.</p>
+    <div class="panel">
+      <div class="flip-controls">
+        <span style="font: var(--type-body-s-strong); color: var(--text-secondary);">Триггер у:</span>
+        <div class="pg-select" style="width:200px;">
+          <select id="flip-pos">
+            <option value="left">Левого края</option>
+            <option value="center" selected>Центра</option>
+            <option value="right">Правого края</option>
+          </select>
+        </div>
+      </div>
+      <div class="flip-vp" id="flip-vp"></div>
+    </div>
+  </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="section" data-screen-label="States">
+    <h2>Состояния</h2>
+    <p class="desc tight">Открывается по клику/Enter/Space на триггере. Закрывается пятью равнозначно обязательными способами — ни один нельзя убрать.</p>
+    <div class="panel" style="margin-bottom:20px;">
+      <table class="dev-table">
+        <thead><tr><th>Способ закрытия</th><th>Обязательность</th></tr></thead>
+        <tbody>
+          <tr><td>Кнопка <b>✕</b> внутри поповера</td><td class="dsc">Обязательно</td></tr>
+          <tr><td>Клик вне поповера</td><td class="dsc">Обязательно</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td class="dsc">Обязательно — фокус возвращается на триггер</td></tr>
+          <tr><td><kbd>Tab</kbd> за последний интерактивный элемент</td><td class="dsc">Обязательно — поповер не модальный, фокус не заперт внутри</td></tr>
+          <tr><td>Кнопка-действие в Footer, завершающая задачу</td><td class="dsc">Контекстно</td></tr>
+        </tbody>
+      </table>
+      <p class="dev-note">Запрещено: автозакрытие по таймеру и открытие сразу при загрузке страницы — пользователь теряет контроль (Nielsen, эвристика №3). Одновременно может быть открыт только один поповер — открытие нового закрывает предыдущий (демо ниже). Возврат фокуса на триггер при любом закрытии — требование WCAG 2.1.2.</p>
+    </div>
+
+    <p class="subhead">Один поповер одновременно<span class="badge-new">Новое</span></p>
+    <p class="desc tight">Откройте второй поповер — первый закроется автоматически.</p>
+    <div class="panel" style="margin-bottom:20px;">
+      <div class="single-open-demo" id="single-open-demo"></div>
+    </div>
+
+    <p class="subhead">Триггер, загрузка, ошибка, прокрутка</p>
+    <div class="states" id="states-demo"></div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" data-screen-label="A11y">
+    <h2>Доступность</h2>
+    <p class="desc">Триггер получает <code class="tok">aria-haspopup="dialog"</code>, <code class="tok">aria-expanded</code> и <code class="tok">aria-controls</code>, указывающий на поповер. Контейнер — <code class="tok">role="dialog"</code> и <code class="tok">aria-modal="false"</code> (не блокирует страницу, в отличие от Modal), <code class="tok">aria-labelledby</code> — на заголовок, если Header есть. При открытии фокус переходит на первый интерактивный элемент (или на ✕, если тело нестатично из интерактивных элементов); фокус <b>не заперт</b> внутри — Tab с последнего элемента уводит дальше по странице и закрывает поповер (в отличие от Modal с focus trap).</p>
+    <div class="row">
+      <div class="panel" style="flex:1; min-width:280px;">
+        <p class="desc tight" style="margin-bottom:18px;">Клавиатура</p>
+        <table class="ref-table"><tbody>
+          <tr><td><kbd>Enter</kbd> / <kbd>Space</kbd></td><td class="dsc">Открывает поповер, когда фокус на триггере</td></tr>
+          <tr><td><kbd>Tab</kbd> / <kbd>Shift+Tab</kbd></td><td class="dsc">Перемещение по фокусируемым элементам внутри; с последнего/первого — уходит из поповера и закрывает его (без focus trap)</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td class="dsc">Закрывает поповер, фокус возвращается на триггер</td></tr>
+        </tbody></table>
+      </div>
+      <div class="panel" style="flex:1; min-width:260px;">
+        <p class="desc tight" style="margin-bottom:18px;">Скрин-ридер</p>
+        <ul class="bullets">
+          <li>триггер объявляет своё состояние через <code class="tok">aria-expanded</code>;</li>
+          <li>заголовок Header связан с контейнером через <code class="tok">aria-labelledby</code>;</li>
+          <li>ошибка загрузки контента объявляется через <code class="tok">role="alert"</code>;</li>
+          <li>контент страницы за поповером <b>не</b> получает <code class="tok">aria-hidden</code>/<code class="tok">inert</code> — в отличие от Modal, Popover не блокирует остальной интерфейс.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY (STUB) -->
+  <section class="section" data-screen-label="Typography">
+    <h2>Типографика</h2>
+    <p class="desc">Раздел требует ревизии: токены типографики компонента — в redline-таблице раздела «Для разработчиков».</p>
+  </section>
+
+  <!-- COLORS -->
+  <section class="section" data-screen-label="Colors">
+    <h2>Цвета</h2>
+    <p class="desc">Компонент использует только семантические токены. Поверхность — <code class="tok">--bg-popup</code> (тело), <code class="tok">--radius-m</code> (8px, без внешнего бордера), тень <code class="tok">--elevation-5</code>. Фон Header и Footer — <code class="tok">--bgtable-pinned</code> (Pinned Default, #F5F7F7), отличая эти зоны от белого Body.</p>
+    <div class="color-ref" id="color-ref"></div>
+  </section>
+
+  <!-- DEVELOPER HANDOFF -->
+  <section class="section" data-screen-label="Dev">
+    <h2>Для разработчиков</h2>
+    <p class="desc">Хендофф-пакет: точные размеры, эталонная структура DOM, поведение и рекомендуемый API. Не привязан к стеку — команда, которая собирает компонент на React, берёт отсюда нужное для вёрстки.</p>
+
+    <p class="subhead">Точные размеры (redline)</p>
+    <p class="desc tight">Значения измерены на живом экземпляре компонента (<code class="tok">getComputedStyle</code>), источник — токены в <code class="tok">styles/popover.css</code>.</p>
+    <div class="panel" style="padding:8px 10px; margin-bottom:34px;">
+      <table class="dev-table" id="dev-spec-table">
+        <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="dev-intro">
+      <span class="req">Подключить (если переиспользуете этот CSS напрямую):</span>
+      <code class="tok">styles/typography.css</code>
+      <code class="tok">styles/colors.css</code>
+      <code class="tok">styles/radius.css</code>
+      <code class="tok">styles/shadow.css</code>
+      <code class="tok">styles/button.css</code>
+      <code class="tok">styles/icon-button.css</code>
+      <code class="tok">styles/link.css</code>
+      <code class="tok">styles/chip.css</code>
+      <code class="tok">styles/popover.css</code>
+    </div>
+
+    <p class="subhead">Анатомия DOM <span class="req">— эталонная структура, имена классов условны, важны сами элементы и их роли/состояния</span></p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Разметка · HTML (эталонная реализация ДС)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-html"><span class="tk-cm">&lt;!-- триггер: aria-haspopup/aria-expanded/aria-controls, обычно обёрнут в .pop-anchor --&gt;</span>
+<span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"pop-anchor"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">aria-haspopup=</span><span class="tk-val">"dialog"</span> <span class="tk-attr">aria-expanded=</span><span class="tk-val">"true"</span> <span class="tk-attr">aria-controls=</span><span class="tk-val">"pop-1"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/button&gt;</span>
+
+  <span class="tk-cm">&lt;!-- контейнер: не модальный — aria-modal="false", клик вне себя закрывает --&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">id=</span><span class="tk-val">"pop-1"</span> <span class="tk-attr">class=</span><span class="tk-val">"pop pop--w-m pop--bottom pop--start pop--floating"</span> <span class="tk-attr">role=</span><span class="tk-val">"dialog"</span> <span class="tk-attr">aria-modal=</span><span class="tk-val">"false"</span> <span class="tk-attr">aria-labelledby=</span><span class="tk-val">"pop-1-title"</span><span class="tk-tag">&gt;</span>
+
+    <span class="tk-cm">&lt;!-- Header: заголовок (+ опц. чип/ссылка) + ✕, БЕЗ кнопок действий --&gt;</span>
+    <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"pop__head"</span><span class="tk-tag">&gt;</span>
+      <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"pop__head-main"</span><span class="tk-tag">&gt;</span>
+        <span class="tk-tag">&lt;h3</span> <span class="tk-attr">class=</span><span class="tk-val">"pop__title"</span> <span class="tk-attr">id=</span><span class="tk-val">"pop-1-title"</span><span class="tk-tag">&gt;</span>Изменить тег<span class="tk-tag">&lt;/h3&gt;</span>
+        <span class="tk-cm">&lt;!-- опц.: chip/link, gap 8px от заголовка --&gt;</span>
+      <span class="tk-tag">&lt;/div&gt;</span>
+      <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"pop__close"</span><span class="tk-tag">&gt;</span><span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">class=</span><span class="tk-val">"ibtn ibtn--neutral ibtn--s"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Закрыть"</span><span class="tk-tag">&gt;</span>&lt;svg…&gt;&lt;/svg&gt;<span class="tk-tag">&lt;/button&gt;</span><span class="tk-tag">&lt;/span&gt;</span>
+    <span class="tk-tag">&lt;/div&gt;</span>
+
+    <span class="tk-cm">&lt;!-- Body: единственная гибкая/прокручиваемая зона, контент произвольный --&gt;</span>
+    <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"pop__body"</span><span class="tk-tag">&gt;</span>
+      …форма, легенда, карточка, таблица…
+    <span class="tk-tag">&lt;/div&gt;</span>
+
+    <span class="tk-cm">&lt;!-- Footer: foot-left служебное (опц.), foot-right Secondary+Primary --&gt;</span>
+    <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"pop__foot"</span><span class="tk-tag">&gt;</span>
+      <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"pop__foot-left"</span><span class="tk-tag">&gt;</span><span class="tk-tag">&lt;/div&gt;</span>
+      <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"pop__foot-right"</span><span class="tk-tag">&gt;</span>
+        <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--transparent btn--s"</span><span class="tk-tag">&gt;</span>Отмена<span class="tk-tag">&lt;/button&gt;</span>
+        <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--accent btn--s"</span><span class="tk-tag">&gt;</span>Применить<span class="tk-tag">&lt;/button&gt;</span>
+      <span class="tk-tag">&lt;/div&gt;</span>
+    <span class="tk-tag">&lt;/div&gt;</span>
+
+    <span class="tk-cm">&lt;!-- Arrow: опциональна, добавляет модификатор .pop--arrow --&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"pop__arrow"</span><span class="tk-tag">&gt;&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;/div&gt;</span>
+<span class="tk-tag">&lt;/span&gt;</span></code></pre>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Поведение · псевдокод (framework-agnostic)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-js"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-js"><span class="tk-cm">// 1. Открытие: единственный открытый поповер в приложении — глобальный реестр.
+//    Перед показом нового — закрыть предыдущий открытый (если есть).
+let openPopover = null;
+function open(popEl, triggerEl):
+  if (openPopover && openPopover !== popEl) close(openPopover.trigger)
+  position(popEl, triggerEl)             // см. п.2
+  popEl.classList.add('is-open')
+  triggerEl.setAttribute('aria-expanded', 'true')
+  focusFirstFocusable(popEl) or focusCloseButton(popEl)
+  openPopover = { pop: popEl, trigger: triggerEl }</span>
+
+<span class="tk-cm">// 2. Позиционирование (пересчитывать на показе, resize, scroll):
+//    взять getBoundingClientRect() триггера и поповера;
+//    top/bottom — y = край триггера ± gap(8px); left/right — аналогично по X;
+//    align center/start/end сдвигает вторую ось (start/end — отступ под стрелку:
+//    18px для top/bottom, 14px для left/right)</span>
+
+<span class="tk-cm">// 3. Авто-flip: если предпочтительному align не хватает места до края
+//    контейнера/viewport — переключить на противоположный (start ↔ end);
+//    если не хватает места самой предпочтительной СТОРОНЕ (placement) —
+//    попробовать противоположную, затем перпендикулярные (как у Tooltip)</span>
+
+<span class="tk-cm">// 4. Закрытие — 5 равнозначных способов, ни один не убирать:
+function onOutsideClick(e): if (!popEl.contains(e.target) && e.target !== triggerEl) close()
+function onEsc(): close(); triggerEl.focus()
+function onTabOut(): close()             // фокус НЕ заперт — Tab с последнего элемента уводит дальше
+function onCloseButtonClick(): close()
+// + опционально: клик по кнопке-действию в Footer, если она завершает задачу
+
+function close():
+  popEl.classList.remove('is-open')
+  triggerEl.setAttribute('aria-expanded', 'false')
+  openPopover = null</span>
+
+<span class="tk-cm">// 5. Тень у шапки/подвала — по scrollTop контентной зоны, идентично Modal:
+onBodyScroll():
+  head.classList.toggle('is-scrolled', body.scrollTop > 0)
+  foot.classList.toggle('is-scrolled', body.scrollTop + body.clientHeight < body.scrollHeight - 1)</span>
+
+<span class="tk-cm">// 6. prefers-reduced-motion: анимация появления/исчезновения отключается —
+//    поповер появляется/скрывается мгновенно (см. styles/popover.css)</span></code></pre>
+    </div>
+    <p class="dev-note">Это не готовый сниппет для вставки — алгоритм поверх вашего стека. Рабочий референс на vanilla JS — функции <code class="tok">buildPopover</code> и <code class="tok">placePop</code> в <code class="tok">popover.page.js</code>.</p>
+
+    <p class="subhead mt">Рекомендуемый API компонента (React)</p>
+    <p class="desc tight">Форма пропсов — предложение, а не обязательный контракт. Тело — просто <code class="tok">children</code>, компонент не диктует его структуру.</p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Popover.types.ts</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-api"><span class="tk-attr">type</span> PopoverWidth = <span class="tk-val">'s'</span> | <span class="tk-val">'m'</span> | <span class="tk-val">'l'</span> | <span class="tk-val">'xl'</span> | <span class="tk-val">'max'</span>;
+<span class="tk-attr">type</span> PopoverPlacement = <span class="tk-val">'top'</span> | <span class="tk-val">'bottom'</span> | <span class="tk-val">'left'</span> | <span class="tk-val">'right'</span>;
+<span class="tk-attr">type</span> PopoverAlign = <span class="tk-val">'start'</span> | <span class="tk-val">'center'</span> | <span class="tk-val">'end'</span>;
+
+<span class="tk-attr">interface</span> PopoverFooterAction {
+  label: <span class="tk-attr">string</span>;
+  onClick(): <span class="tk-attr">void</span>;
+  disabled?: <span class="tk-attr">boolean</span>;
+}
+
+<span class="tk-attr">interface</span> PopoverProps {
+  open: <span class="tk-attr">boolean</span>;
+  onOpenChange(open: <span class="tk-attr">boolean</span>): <span class="tk-attr">void</span>;
+  trigger: React.ReactElement;          <span class="tk-cm">// клонируется с aria-haspopup/aria-expanded/aria-controls</span>
+  title?: <span class="tk-attr">string</span>;                     <span class="tk-cm">// если задан — рендерит Header с заголовком и ✕</span>
+  width?: PopoverWidth;                 <span class="tk-cm">// по умолчанию 'm' (320px)</span>
+  placement?: PopoverPlacement;         <span class="tk-cm">// по умолчанию 'bottom'; авто-flip при нехватке места</span>
+  align?: PopoverAlign;                 <span class="tk-cm">// по умолчанию 'start'</span>
+  arrow?: <span class="tk-attr">boolean</span>;                    <span class="tk-cm">// по умолчанию false — как у Menu/DropdownList</span>
+  offset?: <span class="tk-attr">number</span>;                    <span class="tk-cm">// зазор от триггера в px, по умолчанию 8</span>
+  children: React.ReactNode;            <span class="tk-cm">// Body — произвольный контент</span>
+  primaryAction?: PopoverFooterAction;   <span class="tk-cm">// правый Primary — рендерит Footer</span>
+  secondaryAction?: PopoverFooterAction; <span class="tk-cm">// правый Secondary</span>
+  footerLeft?: React.ReactNode;         <span class="tk-cm">// служебная информация/ссылка слева — НЕ действие</span>
+  closeOnOutsideClick?: <span class="tk-attr">boolean</span>;       <span class="tk-cm">// по умолчанию true, отключать запрещено</span>
+  closeOnEsc?: <span class="tk-attr">boolean</span>;                <span class="tk-cm">// по умолчанию true, отключать запрещено</span>
+}</code></pre>
+    </div>
+
+    <p class="subhead mt">Справочник классов и атрибутов</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table">
+        <thead><tr><th>Класс / атрибут</th><th>На чём</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code class="tok">.pop-anchor</code></td><td>span</td><td class="dsc">position:relative обёртка вокруг триггера — точка отсчёта для floating-позиционирования</td></tr>
+          <tr><td><code class="tok">.pop</code></td><td>div</td><td class="dsc">Контейнер: фон, радиус 8px (--radius-m), тень --elevation-5, без внешнего бордера, flex-колонка из Header/Body/Footer</td></tr>
+          <tr><td><code class="tok">.pop--w-s … --w-max</code></td><td>div</td><td class="dsc">Ширина — 5 шагов (240–560px), одновременно задаёт max-height тела</td></tr>
+          <tr><td><code class="tok">.pop--floating</code></td><td>div</td><td class="dsc">JS-позиционирование относительно триггера; показ/скрытие через <code class="tok">.is-open</code></td></tr>
+          <tr><td><code class="tok">.pop--pinned</code></td><td>div</td><td class="dsc">Всегда открытый поповер — только для демонстраций в документации</td></tr>
+          <tr><td><code class="tok">.pop--top / --bottom / --left / --right</code></td><td>div</td><td class="dsc">Сторона размещения относительно триггера</td></tr>
+          <tr><td><code class="tok">.pop--start / --center / --end</code></td><td>div</td><td class="dsc">Выравнивание стрелки/поповера вдоль края триггера</td></tr>
+          <tr><td><code class="tok">.pop--arrow</code></td><td>div</td><td class="dsc">Включает стрелку-указатель (<code class="tok">.pop__arrow</code>); по умолчанию выключена</td></tr>
+          <tr><td><code class="tok">.pop__head / .pop__foot</code></td><td>div</td><td class="dsc">Фиксированные зоны, фон --bgtable-pinned; Header — высота 48px, содержимое по центру; тень — при <code class="tok">.is-scrolled</code>, как у Modal</td></tr>
+          <tr><td><code class="tok">.pop__head-main</code></td><td>div</td><td class="dsc">Заголовок + опц. чип/ссылка внутри Header, примыкают с зазором 8px</td></tr>
+          <tr><td><code class="tok">.pop__title</code></td><td>h3</td><td class="dsc">Заголовок — Body S Strong 14px, одна строка с многоточием (≤25 символов)</td></tr>
+          <tr><td><code class="tok">.pop__close</code></td><td>span</td><td class="dsc">Обёртка ✕ — сама кнопка это <code class="tok">.ibtn.ibtn--neutral.ibtn--s</code></td></tr>
+          <tr><td><code class="tok">.pop__body</code></td><td>div</td><td class="dsc">Единственная гибкая/прокручиваемая зона; контент произвольный</td></tr>
+          <tr><td><code class="tok">.pop__body--flush</code></td><td>div</td><td class="dsc">Без внутреннего паддинга — контент сам управляет отступами (таблица)</td></tr>
+          <tr><td><code class="tok">.pop__foot-left / -right</code></td><td>div</td><td class="dsc">Независимо включаемые группы: слева — информация/ссылка/кнопка, справа — Secondary+Primary; могут присутствовать одновременно</td></tr>
+          <tr><td><code class="tok">.pop__skeleton</code></td><td>span</td><td class="dsc">Loading-плейсхолдер — тот же приём шиммера, что у Modal/ReadOnlyField</td></tr>
+          <tr><td><code class="tok">role="dialog"</code> / <code class="tok">aria-modal="false"</code></td><td>.pop</td><td class="dsc">Не блокирующий диалог — в отличие от Modal (<code class="tok">aria-modal="true"</code>)</td></tr>
+          <tr><td><code class="tok">aria-haspopup</code> / <code class="tok">aria-expanded</code> / <code class="tok">aria-controls</code></td><td>триггер</td><td class="dsc">Связь триггера с поповером и его состоянием</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · Popover</span>
+    <span>Trigger / Header / Body / Footer / Arrow · 5 ширин · 12 позиций · один открытый одновременно</span>
+  </footer>
+</main>
+
+<script src="../../scripts/icons-data.js"></script>
+<script src="../../scripts/ds-icons.js"></script>
+<script src="../../scripts/popover.page.js"></script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+</body>
+</html>

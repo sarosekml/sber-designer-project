@@ -1,0 +1,39 @@
+:root {
+  --color-brand: #14532d;
+  --color-surface-card: #ffffff;
+  --space-card: 24px;
+  --font-display: Inter;
+}
+
+[data-theme='dark'] {
+  --color-brand: #bbf7d0;
+}
+
+.hero {
+  color: var(--color-brand);
+}
+
+.card {
+  background: var(--color-surface-card);
+  padding: var(--space-card);
+}
+
+.card__header {
+  font-family: var(--font-display);
+}
+
+.card__body {
+  color: var(--color-brand);
+}
+
+.card--featured {
+  border: 1px solid var(--color-brand);
+}
+
+.primary-action {
+  background: var(--color-brand);
+}
+
+.primary-action--danger {
+  background: #dc2626;
+}

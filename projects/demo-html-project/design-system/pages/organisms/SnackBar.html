@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SnackBar — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/shadow.css">
+<link rel="stylesheet" href="../../styles/button.css">
+<link rel="stylesheet" href="../../styles/link.css">
+<link rel="stylesheet" href="../../styles/snackbar.css">
+<link rel="stylesheet" href="../../styles/pg-kit.css">
+<link rel="stylesheet" href="../../styles/ds-nav.css">
+<link rel="stylesheet" href="../../styles/ds-toc.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+body{margin:0;font-family:var(--font-text),system-ui,sans-serif;color:var(--text-primary);background:var(--bg-page);background-attachment:fixed;}
+.page{max-width:1320px;margin:0 auto;padding:clamp(40px,7vw,96px) clamp(24px,5vw,72px) 140px;}
+.masthead{border-bottom:1px solid var(--border-light);padding-bottom:30px;}
+.masthead .meta{font:var(--type-body-xs);color:var(--text-inactive);display:flex;gap:24px;margin:0 0 22px;flex-wrap:wrap;}
+.masthead .meta b{color:var(--text-secondary);font-weight:600;}
+.eyebrow{font:var(--type-button-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin:0 0 14px;}
+.masthead h1{font:var(--type-h1);margin:0 0 14px;color:var(--text-black);}
+@media(max-width:600px){.masthead h1{font-size:40px;line-height:48px;}}
+.masthead p.lead{font:var(--type-body-l);color:var(--text-secondary);margin:0;max-width:66ch;text-wrap:pretty;}
+.crumb{display:inline-flex;align-items:center;gap:7px;font:var(--type-body-s);color:var(--text-inactive);text-decoration:none;margin-bottom:20px;}
+.crumb:hover{color:var(--primary);}
+a{color:var(--link);} a:hover{color:var(--link-dark);}
+.section{margin-top:76px;}
+.section>h2{font:var(--type-h3-strong);margin:0 0 8px;color:var(--text-black);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.section>p.desc{font:var(--type-body-m);color:var(--text-secondary);margin:0 0 28px;max-width:80ch;text-wrap:pretty;}
+.panel{background:var(--bg-tile);border:1px solid var(--border-light);border-radius:16px;padding:32px 34px;}
+.panel+.panel{margin-top:16px;}
+.subhead{font:var(--type-body-m-strong);color:var(--text-black);margin:32px 0 14px;}
+.subhead:first-child{margin-top:0;}
+ul.bullets{margin:0 0 0 2px;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+ul.bullets li{position:relative;padding-left:18px;font:var(--type-body-m);color:var(--text-secondary);}
+ul.bullets li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--text-inactive);}
+ul.bullets li b{color:var(--text-primary);}
+code.tok{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;color:var(--primary);background:var(--primary-bg);padding:1px 6px;border-radius:5px;}
+/* playground */
+.panel.pg{padding:0;overflow:hidden;display:grid;}
+.pg__stage{display:flex;align-items:stretch;min-height:300px;padding:24px 26px;min-width:0;}
+.pg__stagebox{width:100%;display:flex;flex-direction:column;min-width:0;}
+.ctl{display:flex;flex-direction:column;gap:10px;}
+.ctl.is-off{display:none;}
+.ctl>.lbl{font:600 11px/1 var(--font-text),sans-serif;color:var(--text-inactive);text-transform:uppercase;letter-spacing:.06em;}
+.pg-text input{width:100%;height:40px;padding:0 14px;border:1px solid var(--border-primary);border-radius:9px;background:var(--bg-tile);color:var(--text-primary);font:var(--type-body-m);}
+.pg-text input:focus-visible{outline:2px solid var(--primary);outline-offset:1px;}
+.pg-select{position:relative;}
+.pg-select select{appearance:none;-webkit-appearance:none;width:100%;height:40px;padding:0 38px 0 14px;border:1px solid var(--border-primary);border-radius:9px;background:var(--bg-tile);color:var(--text-primary);font:var(--type-body-m);cursor:pointer;}
+.pg-select select:focus-visible{outline:2px solid var(--primary);outline-offset:1px;}
+.pg-select::after{content:"";position:absolute;right:15px;top:50%;width:9px;height:9px;border-right:2px solid var(--text-secondary);border-bottom:2px solid var(--text-secondary);transform:translateY(-65%) rotate(45deg);pointer-events:none;}
+.pg-toggle{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font:var(--type-body-m);color:var(--text-primary);user-select:none;}
+.pg-toggle input{position:absolute;opacity:0;pointer-events:none;}
+.pg-toggle__sw{width:36px;height:20px;border-radius:999px;background:var(--c-cgrey-200);position:relative;flex:none;transition:.15s;}
+.pg-toggle__sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:.15s;}
+.pg-toggle input:checked~.pg-toggle__sw{background:var(--primary);}
+.pg-toggle input:checked~.pg-toggle__sw::after{transform:translateX(16px);}
+/* mock screen */
+.mock-screen{position:relative;border-radius:12px;border:1px solid var(--border-light);background:var(--bg-page);overflow:hidden;min-height:380px;display:flex;flex-direction:column;}
+.mock-topbar{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:var(--bg-tile);border-bottom:1px solid var(--border-light);flex:none;}
+.mock-title{font:var(--type-body-m-strong);color:var(--text-black);}
+.mock-time{font:var(--type-body-xs);color:var(--text-inactive);}
+.mock-body{flex:1;padding:14px;}
+.mock-rows{display:flex;flex-direction:column;gap:8px;}
+.mock-row{height:11px;border-radius:5px;background:color-mix(in srgb,var(--c-swamp-400) 13%,transparent);}
+.mock-row:nth-child(2){width:88%;}.mock-row:nth-child(3){width:72%;}.mock-row:nth-child(4){width:82%;}.mock-row:nth-child(5){width:66%;}.mock-row:nth-child(6){width:79%;}
+.snack-demo-layer{position:absolute;top:14px;right:14px;width:272px;display:flex;flex-direction:column;gap:10px;pointer-events:none;z-index:10;}
+.snack-demo-layer .snack{pointer-events:all;}
+.ws-cap{font:var(--type-body-xs);color:var(--text-inactive);margin:12px 0 0;text-wrap:pretty;}
+/* anatomy */
+.anat{display:grid;grid-template-columns:1fr 280px;gap:40px;align-items:start;}
+@media(max-width:760px){.anat{grid-template-columns:1fr;}}
+.anat__stage{background:color-mix(in srgb,var(--primary) 5%,#fff);border:1px solid var(--border-light);border-radius:14px;padding:50px 44px;display:flex;justify-content:center;}
+.anat-dia{position:relative;display:inline-block;}
+.anat-dia .snack{width:252px;}
+.mk{position:absolute;width:22px;height:22px;border-radius:50%;background:var(--text-black);color:#fff;font:700 12px/22px var(--font-text),sans-serif;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);z-index:5;pointer-events:none;}
+.anat__legend{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
+.anat__legend li{display:flex;gap:12px;align-items:flex-start;}
+.anat__legend li .n{width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;font:700 12px/22px var(--font-text),sans-serif;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px;}
+.anat__legend li .k{font:var(--type-body-m-strong);color:var(--text-black);display:block;}
+.anat__legend li .d{font:var(--type-body-s);color:var(--text-secondary);}
+/* states */
+.states-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+@media(max-width:900px){.states-grid{grid-template-columns:repeat(2,1fr);}}
+.stg-label{font:var(--type-body-xs);color:var(--text-inactive);text-transform:uppercase;letter-spacing:.06em;text-align:center;margin-bottom:4px;}
+.states-sep{grid-column:1/-1;height:1px;background:var(--border-light);margin:4px 0;}
+.stack-demo{display:flex;flex-direction:column;gap:10px;max-width:320px;}
+/* ref table */
+.ref-table{width:100%;border-collapse:collapse;}
+.ref-table th,.ref-table td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--border-light);font:var(--type-body-m);color:var(--text-primary);vertical-align:middle;}
+.ref-table th{font:var(--type-body-s-strong);color:var(--text-secondary);text-transform:uppercase;letter-spacing:.04em;font-size:12px;}
+.ref-table tr:last-child td{border-bottom:none;}
+/* code blocks */
+.code-wrap{position:relative;background:var(--c-cgrey-800);border-radius:12px;padding:20px 22px;margin:0;overflow-x:auto;}
+.code-wrap code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--text-on-dark);white-space:pre;display:block;line-height:1.65;}
+.copy-btn{position:absolute;top:12px;right:12px;appearance:none;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;font:var(--type-button-xs);border-radius:7px;padding:5px 11px;cursor:pointer;transition:.15s;}
+.copy-btn:hover{background:rgba(255,255,255,.2);}
+.copy-btn.is-copied{border-color:rgba(100,220,150,.5);background:rgba(100,220,150,.15);}
+/* guide */
+.guide{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:700px){.guide{grid-template-columns:1fr;}}
+.guide-card{border-radius:12px;overflow:hidden;border:1px solid var(--border-light);background:var(--bg-tile);}
+.guide-card__bar{height:4px;}
+.guide-card.bad .guide-card__bar{background:var(--error);}
+.guide-card.good .guide-card__bar{background:var(--success);}
+.guide-card__tag{font:var(--type-body-s-strong);padding:12px 18px 0;}
+.guide-card.bad .guide-card__tag{color:var(--error-dark);}
+.guide-card.good .guide-card__tag{color:var(--success-dark);}
+.guide-card__body{padding:20px 18px;display:flex;justify-content:center;}
+.guide-card__cap{padding:0 18px 16px;font:var(--type-body-xs);color:var(--text-inactive);}
+/* colors */
+.cref{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+@media(max-width:700px){.cref{grid-template-columns:1fr;}}
+.cref-group{background:var(--bg-tile);border:1px solid var(--border-light);border-radius:14px;overflow:hidden;}
+.cref-group>h3{font:var(--type-body-m-strong);margin:0;padding:14px 18px;border-bottom:1px solid var(--border-light);color:var(--text-black);}
+.cref-row{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center;padding:10px 18px;border-bottom:1px solid var(--border-light);font:var(--type-body-s);color:var(--text-secondary);}
+.cref-row:last-child{border-bottom:none;}
+.cref-row .sw{width:16px;height:16px;border-radius:4px;border:1px solid rgba(40,50,55,.1);}
+.cref-row b{color:var(--text-primary);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;font-weight:600;}
+/* off-screen sample for redline */
+.rl-sample{position:absolute;top:-9999px;left:0;width:320px;}
+footer.page-foot{margin-top:90px;padding-top:26px;border-top:1px solid var(--border-light);font:var(--type-body-s);color:var(--text-inactive);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+</style>
+<style>
+/* unified-template: бывшие h2-разделы, понижены до подразделов */
+.section .subsec{margin-top:48px;}
+.section .subsec>h3{font:var(--type-h4-strong);margin:0 0 8px;color:var(--text-black);}
+.section .subsec>p.desc{font:var(--type-body-m);color:var(--text-secondary);margin:0 0 24px;max-width:82ch;text-wrap:pretty;}
+.section .subsec>p.desc.tight{margin-bottom:20px;}
+.section .subsec>p.desc+p.desc{margin-top:-16px;}
+</style>
+</head>
+<body>
+<main class="page" data-screen-label="SnackBar">
+
+<header class="masthead">
+  <a class="crumb" href="../../refs/imported-index.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Обзор компонентов
+  </a>
+  <div class="meta">
+    <span>Версия <b>v1.0</b></span>
+    <span>Обновлено <b>08.07.2026</b></span>
+    <span>CSS <b>styles/snackbar.css</b></span>
+    <span>Зависимости <b>button, link</b></span>
+  </div>
+  <div class="eyebrow">Дизайн-система · Организмы</div>
+  <h1>SnackBar</h1>
+  <p class="lead">Стек всплывающих уведомлений в правом верхнем углу экрана. Четыре тона: Info · Warning · Error · Success. Живёт поверх всех слоёв — модалок, тостбара и поповеров.</p>
+</header>
+
+<!-- 1. КОНСТРУКТОР -->
+<section class="section" id="constructor" data-screen-label="Конструктор">
+  <h2>Конструктор</h2>
+  <div class="panel pg">
+    <div class="pg__controls">
+      <div class="ctl">
+        <div class="lbl">Тон</div>
+        <div class="pg-select"><select id="ctl-tone">
+          <option value="error">Error</option>
+          <option value="info">Info</option>
+          <option value="warning">Warning</option>
+          <option value="success">Success</option>
+        </select></div>
+      </div>
+      <div class="ctl">
+        <div class="lbl">Кнопки</div>
+        <div class="pg-select"><select id="ctl-btns">
+          <option value="none">Нет</option>
+          <option value="one">Одна</option>
+          <option value="two">Две</option>
+          <option value="link">Ссылка</option>
+        </select></div>
+      </div>
+      <div class="ctl">
+        <div class="lbl">Заголовок</div>
+        <div class="pg-text"><input id="ctl-title" type="text" placeholder="По тону" maxlength="60"></div>
+      </div>
+      <div class="ctl">
+        <div class="lbl">Текст</div>
+        <div class="pg-text"><input id="ctl-text" type="text" placeholder="Описание события" maxlength="120"></div>
+      </div>
+      <div class="ctl">
+        <div class="lbl">Дедупликация</div>
+        <label class="pg-toggle">
+          <input id="ctl-dedup" type="checkbox" checked>
+          <span class="pg-toggle__sw"></span>
+          <span>Схлопывать дубли ×N</span>
+        </label>
+      </div>
+      <button class="btn btn--accent btn--s" id="btn-show" style="margin-top:8px;">Показать снек</button>
+    </div>
+    <div class="pg__stage">
+      <div class="pg__stagebox">
+        <div class="mock-screen" id="mock-screen">
+          <div class="mock-topbar">
+            <span class="mock-title">IBP — Сделки</span>
+            <span class="mock-time">10:34</span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-rows">
+              <div class="mock-row"></div>
+              <div class="mock-row"></div>
+              <div class="mock-row"></div>
+              <div class="mock-row"></div>
+              <div class="mock-row"></div>
+              <div class="mock-row"></div>
+            </div>
+          </div>
+          <div class="snack-demo-layer" id="demo-layer" aria-live="polite" aria-atomic="false"></div>
+        </div>
+        <p class="ws-cap">Нажмите «Показать снек» несколько раз — снеки укладываются в стек (до 5, затем «+N»). Hover — пауза авто-скрытия. Esc — закрыть верхний.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- 2. ИСПОЛЬЗОВАНИЕ -->
+<section class="section" id="usage" data-screen-label="Использование">
+  <h2>Использование</h2>
+  <p class="desc">SnackBar сообщает о событии, которое уже произошло. В отличие от Toast — всегда цветной, поддерживает действия, живёт поверх модалок.</p>
+  <div class="panel">
+    <table class="ref-table">
+      <thead><tr><th>Компонент</th><th>Позиция</th><th>Когда</th></tr></thead>
+      <tbody>
+        <tr><td><b>SnackBar</b></td><td>Правый верхний угол, поверх всего</td><td>Событие произошло; может требовать реакции</td></tr>
+        <tr><td>Toast</td><td>Верхний центр, ниже SnackBar</td><td>Фоновый процесс запущен/завершён; реакция не нужна</td></tr>
+        <tr><td>Modal</td><td>Центр экрана с затемнением</td><td>Нужно принудительное решение пользователя</td></tr>
+      </tbody>
+    </table>
+    <p class="subhead">Слои (z-index)</p>
+    <ul class="bullets">
+      <li><b>ToastBar — 800</b>, верхний центр, фоновые процессы</li>
+      <li><b>Modal — 900</b>, центр с затемнением, блокирующие диалоги</li>
+      <li><b>SnackBar — 9900</b>, правый верхний угол, поверх модалок</li>
+      <li><b>ToastLoader — 9999</b>, поверх SnackBar, с затемнением страницы</li>
+    </ul>
+    <p class="subhead">Авто-скрытие</p>
+    <ul class="bullets">
+      <li>Снек <b>без кнопок</b> — скрывается через <b>5 с</b>. Hover или фокус ставят таймер на паузу.</li>
+      <li>Снек <b>с кнопками</b> — висит до ручного закрытия пользователем.</li>
+    </ul>
+  </div>
+</section>
+
+  <!-- 3. АНАТОМИЯ -->
+<section class="section" id="anatomy" data-screen-label="Анатомия">
+  <h2>Анатомия</h2>
+  <div class="anat">
+    <div class="anat__stage">
+      <div class="anat-dia">
+        <div class="snack snack--error">
+          <span class="snack__icon" aria-hidden="true"><i data-icon="alert-circle-filled"></i></span>
+          <div class="snack__body">
+            <div class="snack__title">Ошибка</div>
+            <div class="snack__text">Плановая дата подписания находится в прошлом году. Измените сроки.</div>
+            <div class="snack__buttons">
+              <button type="button" class="btn btn--outline btn--xs"><span class="btn__label">Изменить</span></button>
+            </div>
+          </div>
+          <button type="button" class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+        </div>
+        <span class="mk" style="left:26px;top:22px;">1</span>
+        <span class="mk" style="left:60px;top:22px;">2</span>
+        <span class="mk" style="left:100px;top:50px;">3</span>
+        <span class="mk" style="left:80px;top:85px;">4</span>
+        <span class="mk" style="left:240px;top:22px;">5</span>
+      </div>
+    </div>
+    <ul class="anat__legend">
+      <li><span class="n">1</span><div><span class="k">Иконка тона</span><span class="d">20px, выровнена по первой строке заголовка; цвет — токен тона (<code class="tok">--error</code>, <code class="tok">--info</code>…)</span></div></li>
+      <li><span class="n">2</span><div><span class="k">Заголовок</span><span class="d">Body S (400), <code class="tok">--text-primary</code>; 1–3 слова, суть события</span></div></li>
+      <li><span class="n">3</span><div><span class="k">Текст</span><span class="d">Body XS, <code class="tok">--text-secondary</code>; опционален; подробности события</span></div></li>
+      <li><span class="n">4</span><div><span class="k">Кнопки действий</span><span class="d">Опциональны: Button xs outline/transparent или Link; цвет — тон снека</span></div></li>
+      <li><span class="n">5</span><div><span class="k">Закрыть</span><span class="d">Всегда присутствует; close 16px, цвет тона, opacity 0.65 → 1 при hover</span></div></li>
+    </ul>
+  </div>
+</section>
+
+  <!-- VARIANTS (STUB) -->
+  <section class="section" data-screen-label="Variants">
+    <h2>Варианты</h2>
+    <p class="desc">Не применимо: компонент существует в единственной конфигурации, отдельных вариантов нет.</p>
+  </section>
+
+  <!-- 4. РАЗМЕРЫ -->
+<section class="section" id="sizes" data-screen-label="Размеры">
+  <h2>Размеры</h2>
+  <p class="desc">Значения измеряются из реально отрендеренного экземпляра через getComputedStyle.</p>
+  <div class="panel" style="padding:0;overflow:hidden;">
+    <table class="ref-table">
+      <thead><tr><th>Свойство</th><th>Значение</th><th>Токен / описание</th></tr></thead>
+      <tbody>
+        <tr><td>Ширина</td><td>320px</td><td>фиксированная (.snackbar-layer)</td></tr>
+        <tr><td>Padding</td><td id="rl-padding">—</td><td>14px top/bottom · 16px left · 12px right</td></tr>
+        <tr><td>Border-radius</td><td id="rl-radius">—</td><td><code class="tok">--radius-card</code> → <code class="tok">--radius-2xl</code> (16px)</td></tr>
+        <tr><td>Box-shadow</td><td><code class="tok">--elevation-2</code></td><td>0 10px 30px rgba(40,50,55,.16)</td></tr>
+        <tr><td>Column-gap</td><td id="rl-colgap">—</td><td>Icon ↔ Body ↔ Close</td></tr>
+        <tr><td>Body gap</td><td id="rl-bodygap">—</td><td>Title ↔ Text</td></tr>
+        <tr><td>Buttons margin-top</td><td id="rl-btnmt">—</td><td>Text ↔ Buttons</td></tr>
+        <tr><td>Buttons gap</td><td id="rl-btngap">—</td><td>Между кнопками в ряду</td></tr>
+        <tr><td>Иконка тона</td><td>20×20px</td><td>align-items: start, margin-top 1px</td></tr>
+        <tr><td>Иконка close</td><td>16×16px</td><td>в контейнере 20×20px</td></tr>
+        <tr><td>Gap стека</td><td>12px</td><td>между карточками в .snackbar-layer</td></tr>
+        <tr><td>Offset от краёв</td><td>24px</td><td>top и right в .snackbar-layer</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="rl-sample" aria-hidden="true">
+    <div class="snack snack--error" id="rl-snack">
+      <span class="snack__icon"><i data-icon="alert-circle-filled"></i></span>
+      <div class="snack__body">
+        <div class="snack__title">Ошибка</div>
+        <div class="snack__text">Текст</div>
+        <div class="snack__buttons"><button class="btn btn--outline btn--xs"><span class="btn__label">Действие</span></button></div>
+      </div>
+      <button class="snack__close"><i data-icon="close"></i></button>
+    </div>
+  </div>
+</section>
+
+  <!-- 5. КОНТЕНТ -->
+<section class="section" id="content" data-screen-label="Контент">
+  <h2>Контент</h2>
+  <p class="desc">Правила формулировок заголовка и текста снека.</p>
+  <div class="guide">
+    <div class="guide-card good">
+      <div class="guide-card__bar"></div>
+      <div class="guide-card__tag">✓ Правильно</div>
+      <div class="guide-card__body">
+        <div class="snack snack--error" style="width:100%;max-width:280px;">
+          <span class="snack__icon" aria-hidden="true"><i data-icon="alert-circle-filled"></i></span>
+          <div class="snack__body"><div class="snack__title">Ошибка загрузки</div><div class="snack__text">Не удалось получить данные сделки. Попробуйте обновить страницу.</div></div>
+          <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+        </div>
+      </div>
+      <p class="guide-card__cap">Заголовок — 1–3 слова, суть события. Текст — одно-два предложения с деталями.</p>
+    </div>
+    <div class="guide-card bad">
+      <div class="guide-card__bar"></div>
+      <div class="guide-card__tag">✗ Неправильно</div>
+      <div class="guide-card__body">
+        <div class="snack snack--error" style="width:100%;max-width:280px;">
+          <span class="snack__icon" aria-hidden="true"><i data-icon="alert-circle-filled"></i></span>
+          <div class="snack__body"><div class="snack__title">Произошла непредвиденная ошибка при попытке загрузить данные по текущей сделке из базы данных сервера</div></div>
+          <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+        </div>
+      </div>
+      <p class="guide-card__cap">Заголовок — не длинное предложение; для деталей — поле «Текст».</p>
+    </div>
+  </div>
+  <div class="panel" style="margin-top:20px;">
+    <p class="subhead" style="margin-top:0;">Corner cases</p>
+    <ul class="bullets">
+      <li><b>Только заголовок без текста</b> — допустимо для коротких уведомлений («Сохранено», «Скопировано»).</li>
+      <li><b>Длинный текст</b> — переносится, ширина фиксирована. Если нужно >4 строк — вынести в модалку.</li>
+      <li><b>Две кнопки</b> — первая Outline (главное действие), вторая Transparent (второстепенное). Третья кнопка не допускается.</li>
+    </ul>
+  </div>
+</section>
+
+  <!-- BEHAVIOR (STUB) -->
+  <section class="section" data-screen-label="Behavior">
+    <h2>Поведение</h2>
+    <p class="desc">Не применимо: специфического поведения (позиционирование, анимация, адаптивность) у компонента нет.</p>
+  </section>
+
+  <!-- 6. СОСТОЯНИЯ -->
+<section class="section" id="states" data-screen-label="Состояния">
+  <h2>Состояния</h2>
+  <p class="desc">Четыре тона × два варианта наполнения.</p>
+  <div class="states-grid">
+    <div class="stg-label">Info</div>
+    <div class="stg-label">Warning</div>
+    <div class="stg-label">Error</div>
+    <div class="stg-label">Success</div>
+    <!-- row 1: title + text -->
+    <div class="snack snack--info" role="status">
+      <span class="snack__icon" aria-hidden="true"><i data-icon="Info-circle-filled"></i></span>
+      <div class="snack__body"><div class="snack__title">Информация</div><div class="snack__text">Плановая дата подписания находится в прошлом году.</div></div>
+      <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+    </div>
+    <div class="snack snack--warning" role="alert">
+      <span class="snack__icon" aria-hidden="true"><i data-icon="alert-triangle-filled"></i></span>
+      <div class="snack__body"><div class="snack__title">Внимание</div><div class="snack__text">Плановая дата подписания находится в прошлом году.</div></div>
+      <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+    </div>
+    <div class="snack snack--error" role="alert">
+      <span class="snack__icon" aria-hidden="true"><i data-icon="alert-circle-filled"></i></span>
+      <div class="snack__body"><div class="snack__title">Ошибка</div><div class="snack__text">Плановая дата подписания находится в прошлом году.</div></div>
+      <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+    </div>
+    <div class="snack snack--success" role="status">
+      <span class="snack__icon" aria-hidden="true"><i data-icon="check-circle-filled"></i></span>
+      <div class="snack__body"><div class="snack__title">Операция выполнена</div><div class="snack__text">Плановая дата подписания находится в прошлом году.</div></div>
+      <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+    </div>
+    <div class="states-sep"></div>
+    <!-- row 2: with buttons -->
+    <div class="snack snack--info" role="status">
+      <span class="snack__icon" aria-hidden="true"><i data-icon="Info-circle-filled"></i></span>
+      <div class="snack__body"><div class="snack__title">Информация</div><div class="snack__text">Плановая дата подписания в прошлом году.</div><div class="snack__buttons"><button class="btn btn--outline btn--xs"><span class="btn__label">Подробнее</span></button></div></div>
+      <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+    </div>
+    <div class="snack snack--warning" role="alert">
+      <span class="snack__icon" aria-hidden="true"><i data-icon="alert-triangle-filled"></i></span>
+      <div class="snack__body"><div class="snack__title">Внимание</div><div class="snack__text">Плановая дата подписания в прошлом году.</div><div class="snack__buttons"><button class="btn btn--outline btn--xs"><span class="btn__label">Изменить</span></button></div></div>
+      <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+    </div>
+    <div class="snack snack--error" role="alert">
+      <span class="snack__icon" aria-hidden="true"><i data-icon="alert-circle-filled"></i></span>
+      <div class="snack__body"><div class="snack__title">Ошибка</div><div class="snack__text">Плановая дата подписания в прошлом году.</div><div class="snack__buttons"><button class="btn btn--outline btn--xs"><span class="btn__label">Изменить</span></button><button class="btn btn--transparent btn--xs"><span class="btn__label">Отмена</span></button></div></div>
+      <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+    </div>
+    <div class="snack snack--success" role="status">
+      <span class="snack__icon" aria-hidden="true"><i data-icon="check-circle-filled"></i></span>
+      <div class="snack__body"><div class="snack__title">Операция выполнена</div><div class="snack__text">Сделка успешно обновлена.</div><div class="snack__buttons"><a class="link" href="#">Перейти к сделке</a></div></div>
+      <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+    </div>
+  </div>
+
+  <div style="margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;">
+    <div>
+      <p style="font:var(--type-body-s);color:var(--text-inactive);margin:0 0 10px;">Стек: 3 снека (новый — сверху)</p>
+      <div class="stack-demo">
+        <div class="snack snack--error" role="alert"><span class="snack__icon" aria-hidden="true"><i data-icon="alert-circle-filled"></i></span><div class="snack__body"><div class="snack__title">Ошибка</div><div class="snack__text">Сделка №3841 просрочена.</div></div><button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button></div>
+        <div class="snack snack--warning" role="alert"><span class="snack__icon" aria-hidden="true"><i data-icon="alert-triangle-filled"></i></span><div class="snack__body"><div class="snack__title">Внимание</div><div class="snack__text">Требуется согласование.</div></div><button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button></div>
+        <div class="snack snack--info" role="status"><span class="snack__icon" aria-hidden="true"><i data-icon="Info-circle-filled"></i></span><div class="snack__body"><div class="snack__title">Информация</div><div class="snack__text">Обновлены данные контрагента.</div></div><button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button></div>
+      </div>
+    </div>
+    <div>
+      <p style="font:var(--type-body-s);color:var(--text-inactive);margin:0 0 10px;">Дедупликация — снек ×3</p>
+      <div class="snack snack--error" role="alert">
+        <span class="snack__icon" aria-hidden="true"><i data-icon="alert-circle-filled"></i></span>
+        <div class="snack__body"><div class="snack__title">Ошибка <span class="snack__dupe">×3</span></div><div class="snack__text">Плановая дата подписания просрочена.</div></div>
+        <button class="snack__close" aria-label="Закрыть"><i data-icon="close"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- 7. ДОСТУПНОСТЬ -->
+<section class="section" id="a11y" data-screen-label="Доступность">
+  <h2>Доступность</h2>
+  <div class="panel">
+    <ul class="bullets">
+      <li><b>role="alert" aria-live="assertive"</b> — на Error и Warning: скринридер озвучивает немедленно.</li>
+      <li><b>role="status" aria-live="polite"</b> — на Info и Success: объявление при паузе.</li>
+      <li><b>aria-label="Закрыть"</b> — обязателен на .snack__close (кнопка без текста).</li>
+      <li><b>Авто-скрытие и фокус</b> — снек с активным фокусом внутри не скрывается. После закрытия фокус возвращается к последнему активному элементу страницы.</li>
+      <li><b>Esc</b> — закрывает верхний снек в стеке.</li>
+      <li><b>Клавиатура</b> — кнопки снека входят в общий порядок Tab; фокус-обводка 2px solid <code class="tok">var(--primary)</code>, offset 2px.</li>
+      <li><b>prefers-reduced-motion</b> — анимации translateX заменяются на fade; спиннеры не используются.</li>
+    </ul>
+  </div>
+</section>
+
+  <!-- TYPOGRAPHY (STUB) -->
+  <section class="section" data-screen-label="Typography">
+    <h2>Типографика</h2>
+    <p class="desc">Раздел требует ревизии: токены типографики компонента — в redline-таблице раздела «Для разработчиков».</p>
+  </section>
+
+  <!-- 8. ЦВЕТА -->
+<section class="section" id="colors" data-screen-label="Цвета">
+  <h2>Цвета</h2>
+  <div class="cref">
+    <div class="cref-group">
+      <h3>Error</h3>
+      <div class="cref-row"><span class="sw" style="background:var(--error-bg-light);"></span><b>--error-bg-light</b><span>Фон карточки</span></div>
+      <div class="cref-row"><span class="sw" style="background:var(--error);"></span><b>--error</b><span>Иконка, close, кнопки</span></div>
+      <div class="cref-row"><span class="sw" style="background:var(--error-dark);"></span><b>--error-dark</b><span>Hover кнопок</span></div>
+    </div>
+    <div class="cref-group">
+      <h3>Warning</h3>
+      <div class="cref-row"><span class="sw" style="background:var(--warning-bg);"></span><b>--warning-bg</b><span>Фон карточки</span></div>
+      <div class="cref-row"><span class="sw" style="background:var(--warning);"></span><b>--warning</b><span>Иконка, close, кнопки</span></div>
+      <div class="cref-row"><span class="sw" style="background:var(--warning-dark);"></span><b>--warning-dark</b><span>Hover кнопок</span></div>
+    </div>
+    <div class="cref-group">
+      <h3>Info</h3>
+      <div class="cref-row"><span class="sw" style="background:var(--info-bg);"></span><b>--info-bg</b><span>Фон карточки</span></div>
+      <div class="cref-row"><span class="sw" style="background:var(--info);"></span><b>--info</b><span>Иконка, close, кнопки</span></div>
+      <div class="cref-row"><span class="sw" style="background:var(--info-dark);"></span><b>--info-dark</b><span>Hover кнопок</span></div>
+    </div>
+    <div class="cref-group">
+      <h3>Success</h3>
+      <div class="cref-row"><span class="sw" style="background:var(--success-bg);"></span><b>--success-bg</b><span>Фон карточки</span></div>
+      <div class="cref-row"><span class="sw" style="background:var(--success);"></span><b>--success</b><span>Иконка, close, кнопки</span></div>
+      <div class="cref-row"><span class="sw" style="background:var(--success-dark);"></span><b>--success-dark</b><span>Hover кнопок</span></div>
+    </div>
+  </div>
+  <div class="panel" style="margin-top:16px;padding:0;overflow:hidden;">
+    <div class="cref-row"><span class="sw" style="background:var(--text-primary);border-radius:50%;"></span><b>--text-primary</b><span>Заголовок (Body S)</span></div>
+    <div class="cref-row" style="border-bottom:none;"><span class="sw" style="background:var(--text-secondary);border-radius:50%;"></span><b>--text-secondary</b><span>Текст (Body XS)</span></div>
+  </div>
+</section>
+
+  <!-- 9. ДЛЯ РАЗРАБОТЧИКОВ -->
+<section class="section" id="dev" data-screen-label="Для разработчиков">
+  <h2>Для разработчиков</h2>
+
+  <p class="subhead">Точные размеры (redline)</p>
+  <div class="panel" style="padding:0;overflow:hidden;">
+    <table class="ref-table">
+      <thead><tr><th>Свойство</th><th>Значение</th><th>Токен / описание</th></tr></thead>
+      <tbody>
+        <tr><td>Ширина</td><td>320px</td><td>фиксированная</td></tr>
+        <tr><td>Padding</td><td id="rl2-padding">—</td><td>top 14 · right 12 · bottom 14 · left 16</td></tr>
+        <tr><td>Border-radius</td><td id="rl2-radius">—</td><td><code class="tok">--radius-card</code> (16px)</td></tr>
+        <tr><td>Column-gap</td><td id="rl2-colgap">—</td><td>icon ↔ body ↔ close</td></tr>
+        <tr><td>Body gap</td><td id="rl2-bodygap">—</td><td>title ↔ text</td></tr>
+        <tr><td>Buttons margin-top</td><td id="rl2-btnmt">—</td><td>text ↔ buttons</td></tr>
+        <tr><td>Buttons gap</td><td id="rl2-btngap">—</td><td>между кнопками</td></tr>
+        <tr><td>Иконка тона</td><td>20×20px</td><td>align-items start, margin-top 1px</td></tr>
+        <tr><td>Иконка close</td><td>16×16px</td><td>в контейнере 20×20px</td></tr>
+        <tr><td>Gap стека</td><td>12px</td><td>.snackbar-layer gap</td></tr>
+        <tr><td>Offset от краёв</td><td>24px top / 24px right</td><td>.snackbar-layer position</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="subhead">Анатомия DOM</p>
+  <div class="code-wrap">
+    <button class="copy-btn" data-copy="dom">Скопировать</button>
+    <code id="code-dom">&lt;!-- Слой поверх всего: фиксирован, правый верхний угол --&gt;
+&lt;div class="snackbar-layer" aria-label="Уведомления"&gt;
+
+  &lt;!-- Карточка: role=alert для error/warning; role=status для info/success --&gt;
+  &lt;div class="snack snack--error" role="alert" aria-live="assertive"&gt;
+    &lt;span class="snack__icon" aria-hidden="true"&gt;&lt;svg…&gt;&lt;/svg&gt;&lt;/span&gt;
+    &lt;div class="snack__body"&gt;
+      &lt;div class="snack__title"&gt;
+        Ошибка
+        &lt;span class="snack__dupe"&gt;×2&lt;/span&gt;  &lt;!-- при дедупликации --&gt;
+      &lt;/div&gt;
+      &lt;div class="snack__text"&gt;Плановая дата подписания просрочена.&lt;/div&gt;
+      &lt;div class="snack__buttons"&gt;
+        &lt;button type="button" class="btn btn--outline btn--xs"&gt;
+          &lt;span class="btn__label"&gt;Изменить сроки&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;button type="button" class="snack__close" aria-label="Закрыть"&gt;
+      &lt;svg…&gt;&lt;/svg&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Overflow-плашка при стеке &gt; 5 --&gt;
+  &lt;div class="snack-more"&gt;
+    Ещё &lt;span class="snack-more__count"&gt;3&lt;/span&gt; уведомл.
+    &lt;div class="snack-more__actions"&gt;
+      &lt;button class="snack-more__btn" aria-label="Развернуть"&gt;&lt;svg…&gt;&lt;/svg&gt;&lt;/button&gt;
+      &lt;button class="snack-more__btn" aria-label="Закрыть все"&gt;&lt;svg…&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code>
+  </div>
+
+  <p class="subhead">Поведение (псевдокод)</p>
+  <div class="code-wrap">
+    <button class="copy-btn" data-copy="logic">Скопировать</button>
+    <code id="code-logic">MAX = 5; AUTO_MS = 5000;
+stack = []; hiddenCount = 0;
+
+function push(snack):
+  key = tone + title + text
+  existing = stack.find(key)
+  if existing and dedup:
+    existing.count++; updateDupeEl(); restartTimer(); return
+
+  visibleCount = stack.filter(!hidden).length
+  if visibleCount >= MAX:
+    oldest = stack.filter(!hidden).last
+    oldest.hide(); hiddenCount++; updateOverflow()
+
+  stack.prepend(snack)  // новый — сверху
+  if !hasButtons: startTimer(snack, AUTO_MS)
+
+function startTimer(s): s.timer = setTimeout(() => dismiss(s.id), AUTO_MS)
+function clearTimer(s): clearTimeout(s.timer)
+
+// hover / focus pause
+snack.el.on('mouseenter focusin',  () => clearTimer(s))
+snack.el.on('mouseleave focusout', () => { if !hasButtons: startTimer(s) })
+
+// Esc — закрыть верхний
+document.on('keydown', e => { if e.key==='Escape': dismiss(stack[0].id) })
+
+// dismiss → анимация ухода → удаление → reveal следующего из скрытых
+function dismiss(id):
+  s = stack.find(id); clearTimer(s)
+  s.el.classList.add('snack--leave')
+  s.el.on('animationend', () => {
+    s.el.remove(); stack.remove(s)
+    if hiddenCount > 0: revealOldest(); hiddenCount--
+    updateOverflow()
+  }, { once: true })
+
+// Reduced motion: только fade (snk-fi / snk-fo), без translateX</code>
+  </div>
+
+  <p class="subhead">Рекомендуемый React API</p>
+  <div class="code-wrap">
+    <button class="copy-btn" data-copy="api">Скопировать</button>
+    <code id="code-api">type SnackTone = 'info' | 'warning' | 'error' | 'success';
+
+interface SnackOptions {
+  tone: SnackTone;
+  title: string;
+  text?: string;
+  buttons?: React.ReactNode;  // Button xs outline/transparent или Link
+  dedup?: boolean;            // схлопывать одинаковые (по умолчанию true)
+  onClose?: () => void;
+}
+
+// Провайдер на уровне приложения:
+interface SnackbarController {
+  show(opts: SnackOptions): string;     // возвращает id
+  dismiss(id: string): void;
+  dismissAll(): void;
+}
+// Использование: const { show } = useSnackbar();</code>
+  </div>
+
+  <p class="subhead">Справочник классов и атрибутов</p>
+  <div class="panel" style="padding:0;overflow:hidden;">
+    <table class="ref-table">
+      <thead><tr><th>Класс / атрибут</th><th>На чём</th><th>Назначение</th></tr></thead>
+      <tbody>
+        <tr><td><code class="tok">.snackbar-layer</code></td><td>div</td><td>fixed-контейнер, top/right 24px, z-index 9900, width 320px</td></tr>
+        <tr><td><code class="tok">.snack</code></td><td>div</td><td>Карточка снека: grid 3-col, анимация, pointer-events: all</td></tr>
+        <tr><td><code class="tok">.snack--info/warning/error/success</code></td><td>div</td><td>Тон: фон + цвет иконки/close/кнопок/ссылок</td></tr>
+        <tr><td><code class="tok">.snack--leave</code></td><td>div</td><td>Анимация ухода; удалить узел по animationend</td></tr>
+        <tr><td><code class="tok">.snack__icon</code></td><td>span</td><td>Иконка тона 20px, aria-hidden</td></tr>
+        <tr><td><code class="tok">.snack__body</code></td><td>div</td><td>flex-колонка: title + text + buttons; gap 4px</td></tr>
+        <tr><td><code class="tok">.snack__title</code></td><td>div</td><td>Body S 400, --text-primary</td></tr>
+        <tr><td><code class="tok">.snack__dupe</code></td><td>span</td><td>Счётчик дублей ×N; вставляется в конец .snack__title</td></tr>
+        <tr><td><code class="tok">.snack__text</code></td><td>div</td><td>Body XS, --text-secondary; опционален</td></tr>
+        <tr><td><code class="tok">.snack__buttons</code></td><td>div</td><td>flex-ряд кнопок; переопределяет --primary на цвет тона</td></tr>
+        <tr><td><code class="tok">.snack__close</code></td><td>button</td><td>Кнопка закрытия; обязателен aria-label="Закрыть"</td></tr>
+        <tr><td><code class="tok">.snack-more</code></td><td>div</td><td>Overflow-плашка при стеке &gt; 5</td></tr>
+        <tr><td><code class="tok">role="alert"</code></td><td>snack</td><td>Error/Warning → assertive live-region</td></tr>
+        <tr><td><code class="tok">role="status"</code></td><td>snack</td><td>Info/Success → polite live-region</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · SnackBar</span>
+    <span>Info · Warning · Error · Success — стек, дедупликация, авто-скрытие</span>
+  </footer>
+</main><!-- .page -->
+
+<script src="../../scripts/icons-data.js"></script>
+<script src="../../scripts/ds-icons.js"></script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+<script>
+/* ---- icon helper ---- */
+function getIcon(name, size) {
+  size = size || 20;
+  if (!window.DS_ICONS) return '';
+  var raw = window.DS_ICONS[name] || ''; if (!raw) return '';
+  var d = document.createElement('div'); d.innerHTML = raw;
+  var s = d.firstElementChild; if (!s) return '';
+  s.setAttribute('width', size); s.setAttribute('height', size); s.setAttribute('aria-hidden', 'true');
+  return s.outerHTML;
+}
+function esc(str) { return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ---- tone data ---- */
+var ICONS  = { info:'Info-circle-filled', warning:'alert-triangle-filled', error:'alert-circle-filled', success:'check-circle-filled' };
+var TITLES = { info:'Информация', warning:'Внимание', error:'Ошибка', success:'Операция выполнена' };
+var TEXTS  = { info:'Плановая дата подписания находится в прошлом году.', warning:'Плановая дата подписания находится в прошлом году. Проверьте условия.', error:'Плановая дата подписания находится в прошлом году. Измените сроки или обновите статус сделки.', success:'Сделка успешно обновлена.' };
+var BTNLBL = { info:'Подробнее', warning:'Изменить', error:'Изменить сроки', success:'К сделке' };
+
+/* ---- stack ---- */
+var stack = [], hiddenCount = 0, overflowEl = null, MAX_V = 5, AUTO_MS = 5000;
+
+function startTimer(s) { s.timer = setTimeout(function(){ dismiss(s.id); }, AUTO_MS); }
+function clearTimer(s) { if (s.timer) { clearTimeout(s.timer); s.timer = null; } }
+
+function dismiss(id) {
+  var idx = stack.findIndex(function(s){ return s.id === id; });
+  if (idx < 0) return;
+  var s = stack[idx]; clearTimer(s);
+  s.el.classList.add('snack--leave');
+  s.el.addEventListener('animationend', function() {
+    s.el.remove(); stack.splice(idx, 1);
+    if (hiddenCount > 0) {
+      var nxt = stack.find(function(x){ return x.hidden; });
+      if (nxt) { nxt.el.style.display = ''; nxt.hidden = false; hiddenCount--; }
+    }
+    updateOverflow();
+  }, { once: true });
+}
+
+function updateOverflow() {
+  var layer = document.getElementById('demo-layer'); if (!layer) return;
+  if (hiddenCount > 0) {
+    if (!overflowEl) {
+      overflowEl = document.createElement('div'); overflowEl.className = 'snack-more';
+      overflowEl.innerHTML = 'Ещё <span class="snack-more__count">0</span> уведомл.<div class="snack-more__actions"><button class="snack-more__btn" aria-label="Развернуть">' + getIcon('chevron-down',16) + '</button><button class="snack-more__btn" aria-label="Закрыть все">' + getIcon('close',16) + '</button></div>';
+      overflowEl.querySelectorAll('.snack-more__btn')[0].addEventListener('click', function(){
+        stack.forEach(function(s){ if(s.hidden){s.el.style.display='';s.hidden=false;} }); hiddenCount=0; updateOverflow();
+      });
+      overflowEl.querySelectorAll('.snack-more__btn')[1].addEventListener('click', function(){
+        var ids = stack.map(function(s){return s.id;});
+        ids.forEach(function(id){dismiss(id);}); hiddenCount=0; if(overflowEl){overflowEl.remove();overflowEl=null;}
+      });
+      layer.appendChild(overflowEl);
+    }
+    overflowEl.querySelector('.snack-more__count').textContent = hiddenCount;
+  } else if (overflowEl) { overflowEl.remove(); overflowEl = null; }
+}
+
+function makeSnackEl(tone, title, text, btnType, count) {
+  var el = document.createElement('div');
+  el.className = 'snack snack--' + tone;
+  el.setAttribute('role', (tone==='error'||tone==='warning') ? 'alert' : 'status');
+  el.setAttribute('aria-live', (tone==='error'||tone==='warning') ? 'assertive' : 'polite');
+  var dupeHtml = count > 1 ? '<span class="snack__dupe">\u00d7' + count + '</span>' : '';
+  var btnsHtml = '';
+  if (btnType === 'one')  btnsHtml = '<div class="snack__buttons"><button type="button" class="btn btn--outline btn--xs"><span class="btn__label">' + esc(BTNLBL[tone]) + '</span></button></div>';
+  if (btnType === 'two')  btnsHtml = '<div class="snack__buttons"><button type="button" class="btn btn--outline btn--xs"><span class="btn__label">Изменить</span></button><button type="button" class="btn btn--transparent btn--xs"><span class="btn__label">Отмена</span></button></div>';
+  if (btnType === 'link') btnsHtml = '<div class="snack__buttons"><a class="link" href="#" onclick="return false">Перейти к сделке</a></div>';
+  el.innerHTML =
+    '<span class="snack__icon" aria-hidden="true">' + getIcon(ICONS[tone], 20) + '</span>' +
+    '<div class="snack__body"><div class="snack__title">' + esc(title) + dupeHtml + '</div>' +
+    (text ? '<div class="snack__text">' + esc(text) + '</div>' : '') + btnsHtml + '</div>' +
+    '<button type="button" class="snack__close" aria-label="Закрыть">' + getIcon('close', 16) + '</button>';
+  return el;
+}
+
+function showSnack() {
+  var layer = document.getElementById('demo-layer'); if (!layer) return;
+  var tone   = document.getElementById('ctl-tone').value;
+  var btnType= document.getElementById('ctl-btns').value;
+  var title  = (document.getElementById('ctl-title').value.trim()) || TITLES[tone];
+  var text   = (document.getElementById('ctl-text').value.trim()) || TEXTS[tone];
+  var dedup  = document.getElementById('ctl-dedup').checked;
+  var hasBtn = btnType !== 'none';
+  var key    = tone + '|' + title + '|' + text;
+
+  if (dedup) {
+    var ex = stack.find(function(s){ return s.key===key; });
+    if (ex) {
+      ex.count++;
+      var d = ex.el.querySelector('.snack__dupe');
+      if (d) d.textContent = '\u00d7' + ex.count;
+      else { var t = ex.el.querySelector('.snack__title'); if(t) t.insertAdjacentHTML('beforeend','<span class="snack__dupe">\u00d7'+ex.count+'</span>'); }
+      clearTimer(ex); if(!hasBtn) startTimer(ex);
+      return;
+    }
+  }
+
+  var visibleCount = stack.filter(function(s){ return !s.hidden; }).length;
+  if (visibleCount >= MAX_V) {
+    var visible = stack.filter(function(s){ return !s.hidden; });
+    var oldest  = visible[visible.length-1];
+    if (oldest) { oldest.el.style.display='none'; oldest.hidden=true; hiddenCount++; updateOverflow(); }
+  }
+
+  var id = Date.now();
+  var el = makeSnackEl(tone, title, text, btnType, 1);
+  var s  = { id:id, el:el, key:key, tone:tone, hasButtons:hasBtn, timer:null, count:1, hidden:false };
+  el.querySelector('.snack__close').addEventListener('click', function(){ dismiss(id); });
+  el.addEventListener('mouseenter', function(){ clearTimer(s); });
+  el.addEventListener('mouseleave', function(){ if(!s.hasButtons) startTimer(s); });
+  el.addEventListener('focusin',    function(){ clearTimer(s); });
+  el.addEventListener('focusout',   function(){ if(!s.hasButtons) startTimer(s); });
+  stack.unshift(s);
+  layer.prepend(el);
+  if (!hasBtn) startTimer(s);
+}
+
+document.getElementById('btn-show').addEventListener('click', showSnack);
+document.addEventListener('keydown', function(e) { if (e.key==='Escape' && stack.length>0) dismiss(stack[0].id); });
+
+/* ---- redline ---- */
+function measureRedline() {
+  var sn = document.getElementById('rl-snack'); if (!sn) return;
+  var cs = getComputedStyle(sn);
+  var body = sn.querySelector('.snack__body');
+  var btns = sn.querySelector('.snack__buttons');
+  function setEl(id, v) { var e=document.getElementById(id); if(e) e.textContent=v; }
+  var pad = cs.paddingTop+' '+cs.paddingRight+' '+cs.paddingBottom+' '+cs.paddingLeft;
+  setEl('rl-padding', pad);  setEl('rl2-padding', pad);
+  setEl('rl-radius',  cs.borderRadius); setEl('rl2-radius', cs.borderRadius);
+  setEl('rl-colgap',  cs.columnGap);    setEl('rl2-colgap',  cs.columnGap);
+  var bg = body ? getComputedStyle(body).gap : '—';
+  setEl('rl-bodygap', bg); setEl('rl2-bodygap', bg);
+  var bmt = btns ? getComputedStyle(btns).marginTop : '—';
+  setEl('rl-btnmt', bmt); setEl('rl2-btnmt', bmt);
+  var bgap = btns ? getComputedStyle(btns).gap : '—';
+  setEl('rl-btngap', bgap); setEl('rl2-btngap', bgap);
+}
+setTimeout(measureRedline, 300);
+
+/* ---- copy buttons ---- */
+document.querySelectorAll('.copy-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var el = document.getElementById('code-' + btn.getAttribute('data-copy')); if (!el) return;
+    navigator.clipboard.writeText(el.textContent).then(function() {
+      btn.textContent = 'Скопировано ✓'; btn.classList.add('is-copied');
+      setTimeout(function(){ btn.textContent = 'Скопировать'; btn.classList.remove('is-copied'); }, 2000);
+    });
+  });
+});
+</script>
+</body>
+</html>

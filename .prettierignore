@@ -1,0 +1,23 @@
+node_modules
+dist
+build
+out
+.next
+.tauri
+target
+coverage
+*.tsbuildinfo
+bun.lockb
+refs/
+
+# Demo projects keep their own formatting and tooling.
+projects/
+
+# R09 (0136) — intentionally invalid JSON: the 0083 typecheck gate asserts that
+# tsc refuses to load this program. Prettier must not touch or "fix" it.
+tests/fixtures/0083-typecheck-broken/tsconfig.json
+
+# Recorded runtime traces and eval fixtures are byte-exact contracts: they are
+# replayed and compared, so reformatting them would rewrite the expectation.
+tests/fixtures/runtime-traces/
+tests/fixtures/0080-eval/

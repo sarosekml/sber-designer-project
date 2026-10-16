@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "traces": [
+    {
+      "traceId": "claude-code/auth-401-stream",
+      "runtime": "claude-code",
+      "outcome": "error",
+      "sha256": "192964a6f9db7ca7da0688f635dd70dbeb6958da015296da2103e9a4d4aa56d1",
+      "bytes": 207,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "stream-json",
+      "anonymization": "redacted"
+    },
+    {
+      "traceId": "claude-code/minimal-success",
+      "runtime": "claude-code",
+      "outcome": "success",
+      "sha256": "fc1f47c2997fac2acbc50fbcdba6e2774e0add60f6207960e0f70fd86e30622e",
+      "bytes": 192,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "stream-json",
+      "anonymization": "none"
+    },
+    {
+      "traceId": "claude-code/permission-143",
+      "runtime": "claude-code",
+      "outcome": "error",
+      "sha256": "fb94529e6568fca95cec29c1a8107d69e852f549467851618bed56f228ab80c7",
+      "bytes": 235,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "stream-json",
+      "anonymization": "none"
+    },
+    {
+      "traceId": "codex/duplicate-final",
+      "runtime": "codex",
+      "outcome": "needs_review",
+      "sha256": "a7a0d4065beb1b2e8640d24595832748d16f7bc3516cff76d974f13f48f859e7",
+      "bytes": 314,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "jsonl",
+      "anonymization": "none"
+    },
+    {
+      "traceId": "codex/mcp-auth-stderr-exit0",
+      "runtime": "codex",
+      "outcome": "error",
+      "sha256": "5f1d0dffb0bce5d7bdf8795697b759db57006ab91ff236e0b55dbd129f0ff958",
+      "bytes": 484,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "jsonl",
+      "anonymization": "redacted"
+    },
+    {
+      "traceId": "codex/minimal-success",
+      "runtime": "codex",
+      "outcome": "success",
+      "sha256": "eba98bd9a449c7f5195f38df08f3f72c7e43973d571a65f9737c8b3621673baa",
+      "bytes": 143,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "jsonl",
+      "anonymization": "none"
+    },
+    {
+      "traceId": "codex/thread-started",
+      "runtime": "codex",
+      "outcome": "success",
+      "sha256": "6e45b399c58de54baa7e665ce895a5291705bdde7ed83df0fe3fec53e3ec0c5e",
+      "bytes": 219,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "jsonl",
+      "anonymization": "none"
+    },
+    {
+      "traceId": "gigacode/failure-exit-zero",
+      "runtime": "gigacode",
+      "outcome": "error",
+      "sha256": "1290cd2c48087ce5829f71bd1b6b9a7b36802f384779e3c7d0a06026cf924e4a",
+      "bytes": 445,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "stream-json",
+      "anonymization": "none"
+    },
+    {
+      "traceId": "gigacode/minimal-success",
+      "runtime": "gigacode",
+      "outcome": "success",
+      "sha256": "b72f5207a20ea69ea40b0bdcc571850711c1d4d7a0894205532d2d4d272cc1c6",
+      "bytes": 685,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "stream-json",
+      "anonymization": "none"
+    },
+    {
+      "traceId": "gigacode/tool-call-keychain-noise",
+      "runtime": "gigacode",
+      "outcome": "success",
+      "sha256": "f7290400cd38c7362f7349319a416fa4d87771e08904a6cc6980ece2cccc6b69",
+      "bytes": 1111,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "stream-json",
+      "anonymization": "none"
+    },
+    {
+      "traceId": "opencode/minimal-success",
+      "runtime": "opencode",
+      "outcome": "success",
+      "sha256": "eca89f913941dda7ffc84e3d272a55fcd3a35e674dde2c25bf4311a9fa3f74d3",
+      "bytes": 187,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "jsonl",
+      "anonymization": "none"
+    },
+    {
+      "traceId": "opencode/stdout-error-exit0",
+      "runtime": "opencode",
+      "outcome": "error",
+      "sha256": "8a1b0184661d2a0b13b338ae1212cb58ff78099e12a893d40dc43f3f7c0cba27",
+      "bytes": 237,
+      "skills": [],
+      "multiTurn": false,
+      "captured": "manual",
+      "protocol": "jsonl",
+      "anonymization": "none"
+    }
+  ]
+}

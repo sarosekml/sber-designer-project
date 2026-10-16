@@ -1,0 +1,87 @@
+{
+  "name": "swap-component-from-index",
+  "description": "Look up an indexed component before swapping a selected JSX element.",
+  "workspace": "generated-readable-screen",
+  "input": "Swap the selected action component with the indexed MetricCard component.",
+  "editorState": {
+    "selection": {
+      "loc": "src/screens/QueueScreen.tsx:9:9",
+      "sourceKind": "react-source",
+      "tagName": "Button",
+      "text": "Approve",
+      "attributes": {
+        "className": "primary-action"
+      },
+      "rect": {
+        "x": 48,
+        "y": 160,
+        "width": 120,
+        "height": 36
+      }
+    },
+    "activeScreen": {
+      "id": "queue-screen",
+      "name": "Queue Screen",
+      "kind": "story",
+      "implementationFilePath": "src/screens/QueueScreen.tsx"
+    }
+  },
+  "permission": {
+    "*": "allow"
+  },
+  "mockResponses": [
+    {
+      "toolCalls": [
+        {
+          "name": "load_agent_skill",
+          "arguments": {
+            "name": "storybook-component-work"
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "search_project_index",
+          "arguments": {
+            "query": "MetricCard",
+            "types": ["component"],
+            "limit": 3
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "apply_patch",
+          "arguments": {
+            "ops": [
+              {
+                "kind": "swap-component",
+                "file": "src/screens/QueueScreen.tsx",
+                "loc": {
+                  "line": 9,
+                  "column": 9
+                },
+                "newName": "MetricCard"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "text": "Swapped the action with the indexed MetricCard component."
+    }
+  ],
+  "expectedToolSequence": ["load_agent_skill", "search_project_index", "apply_patch"],
+  "expectedFinalResponseContains": "indexed MetricCard",
+  "expectedFiles": [
+    {
+      "path": "src/screens/QueueScreen.tsx",
+      "contains": "<MetricCard className=\"primary-action\">Approve</MetricCard>"
+    }
+  ]
+}

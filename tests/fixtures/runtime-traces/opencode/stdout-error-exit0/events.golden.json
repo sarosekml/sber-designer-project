@@ -1,0 +1,48 @@
+[
+  {
+    "type": "iteration-start",
+    "iteration": 1
+  },
+  {
+    "type": "error",
+    "message": "Model provider returned 500 after retries."
+  },
+  {
+    "type": "usage",
+    "iteration": 1,
+    "usage": {
+      "inputTokens": 28,
+      "outputTokens": 0,
+      "costUsd": 0.01
+    }
+  },
+  {
+    "type": "iteration-end",
+    "iteration": 1,
+    "hadToolCalls": false,
+    "finishReason": "stop"
+  },
+  {
+    "type": "done",
+    "iterations": 1,
+    "truncated": false,
+    "hadErrors": false,
+    "stoppedAfterPermissionDeny": false,
+    "finalResponse": {
+      "text": "",
+      "provider": "opencode-runtime",
+      "model": "default",
+      "finishReason": "stop",
+      "usage": {
+        "inputTokens": 28,
+        "outputTokens": 0,
+        "costUsd": 0.01
+      }
+    },
+    "usage": {
+      "inputTokens": 28,
+      "outputTokens": 0,
+      "costUsd": 0.01
+    }
+  }
+]

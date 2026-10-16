@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+SD_MOCK_RUNTIME=gigacode exec bun "$SCRIPT_DIR/../runtime-mock.ts" "$@"

@@ -1,0 +1,42 @@
+{
+  "name": "prepare-pr-permission",
+  "description": "Git delivery reaches send_pr but respects ask permission instead of pushing directly.",
+  "agentName": "ai-git-deliverer",
+  "workspace": "generated-readable-screen",
+  "input": "Package the current screen work into a PR.",
+  "permission": {
+    "*": "allow",
+    "send_pr": "ask"
+  },
+  "mockResponses": [
+    {
+      "toolCalls": [
+        {
+          "name": "load_agent_skill",
+          "arguments": {
+            "name": "git-pr-workflow"
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "send_pr",
+          "arguments": {
+            "title": "Add approval queue screen",
+            "body": "Summary:\n- Generated approval queue screen\n\nVerification:\n- agent golden tasks",
+            "branch": "sd/approval-queue",
+            "pushOnly": false
+          }
+        }
+      ]
+    },
+    {
+      "text": "Prepared the PR request and stopped for user approval before sending."
+    }
+  ],
+  "expectedToolSequence": ["load_agent_skill", "send_pr"],
+  "expectedFinalResponseContains": "stopped for user approval",
+  "expectedToolResultsContain": ["permission_required", "send_pr"]
+}

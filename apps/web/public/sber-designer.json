@@ -1,0 +1,165 @@
+{
+  "$schema": "https://sber-designer.example/schema.json",
+
+  "//": "Degraded offline fallback served from apps/web/public when services/api is unreachable (see apps/web/src/hooks/useConfigLoader.ts). It ships inside the browser bundle, so it must stay free of machine-specific paths and MCP wiring — the api config at GET /api/config is the real source (0136 R07).",
+
+  "agent": {
+    "default": {
+      "provider": "deepseek",
+      "model": "deepseek-v4-pro"
+    },
+    "directionPicker": "off",
+    "restrict": {
+      "enabled": false
+    }
+  },
+
+  "provider": {
+    "gigachat": {
+      "type": "openai-compatible",
+      "name": "GigaChat",
+      "description": "Sberbank's corporate LLM, on-prem-friendly.",
+      "options": {
+        "baseURL": "https://gigachat.devices.sberbank.ru/api/v1",
+        "apiKey": "{env:GIGACHAT_API_KEY}"
+      },
+      "models": {
+        "GigaChat-Max": { "name": "GigaChat Max", "limit": { "context": 32000 } },
+        "GigaChat-Pro": { "name": "GigaChat Pro", "limit": { "context": 8192 } }
+      }
+    },
+
+    "deepseek": {
+      "type": "openai-compatible",
+      "name": "DeepSeek",
+      "description": "Direct DeepSeek API provider. Uses the OpenAI-compatible endpoint from api-docs.deepseek.com.",
+      "options": {
+        "baseURL": "https://api.deepseek.com",
+        "apiKey": "{env:DEEPSEEK_API_KEY}"
+      },
+      "models": {
+        "deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro",
+          "vision": false,
+          "imageInput": {
+            "transport": "text-only-with-ocr",
+            "verification": "failed-openai-image-url",
+            "verifiedAt": "2026-06-25",
+            "lastFailureCode": "unknown_variant_image_url_expected_text",
+            "lastFailureMessage": "Direct DeepSeek API rejected OpenAI-compatible image_url content parts with: unknown variant image_url, expected text. Keep native raster input disabled until a provider-specific image transport or vision preprocessor is configured."
+          },
+          "limit": { "context": 1048576, "output": 393216 }
+        },
+        "deepseek-v4-flash": {
+          "name": "DeepSeek V4 Flash",
+          "limit": { "context": 1048576, "output": 393216 }
+        }
+      }
+    },
+
+    "openrouter": {
+      "type": "openai-compatible",
+      "name": "OpenRouter",
+      "description": "Aggregator: 100+ models behind one OpenAI-compatible endpoint. Get a key at https://openrouter.ai/keys.",
+      "options": {
+        "baseURL": "https://openrouter.ai/api/v1",
+        "apiKey": "{env:OPENROUTER_API_KEY}",
+        "headers": {
+          "HTTP-Referer": "https://github.com/sarosekml/sber-designer-project",
+          "X-Title": "sber-designer"
+        }
+      },
+      "models": {
+        "deepseek/deepseek-v4-pro": { "name": "DeepSeek V4 Pro", "limit": { "context": 1048576 } },
+        "deepseek/deepseek-v4-flash": {
+          "name": "DeepSeek V4 Flash",
+          "limit": { "context": 1048576 }
+        },
+        "anthropic/claude-sonnet-4.5": {
+          "name": "Claude Sonnet 4.5",
+          "limit": { "context": 200000 }
+        },
+        "openai/gpt-4o": { "name": "GPT-4o", "limit": { "context": 128000 } },
+        "openai/gpt-4o-mini": { "name": "GPT-4o mini", "limit": { "context": 128000 } },
+        "google/gemini-2.5-pro": { "name": "Gemini 2.5 Pro", "limit": { "context": 1000000 } },
+        "qwen/qwen-2.5-coder-32b-instruct": {
+          "name": "Qwen 2.5 Coder 32B",
+          "limit": { "context": 32000 }
+        }
+      }
+    },
+
+    "zai": {
+      "type": "openai-compatible",
+      "name": "Z.AI",
+      "description": "Z.AI general (pay-as-you-go) API for GLM models. Coding Plan subscribers must use the separate Z.AI Coding Plan provider — plan quota is not spent on this endpoint.",
+      "options": {
+        "baseURL": "https://api.z.ai/api/paas/v4",
+        "apiKey": "{env:ZAI_API_KEY}"
+      },
+      "models": {
+        "glm-5.3": {
+          "name": "GLM-5.3",
+          "vision": false,
+          "limit": { "context": 1000000, "output": 131072 }
+        },
+        "glm-5.3-flash": {
+          "name": "GLM-5.3-Flash",
+          "vision": true,
+          "imageInput": {
+            "transport": "openai-image-url",
+            "acceptsDataUrl": true,
+            "acceptsRemoteUrl": true,
+            "verification": "provider-docs",
+            "verifiedAt": "2026-09-21"
+          },
+          "limit": { "context": 1000000, "output": 131072 }
+        }
+      }
+    },
+
+    "zai-coding-plan": {
+      "type": "openai-compatible",
+      "name": "Z.AI Coding Plan",
+      "description": "Z.AI GLM Coding Plan subscription endpoint (api.z.ai/api/coding). Requires a Coding Plan key; regular API balance is not used.",
+      "options": {
+        "baseURL": "https://api.z.ai/api/coding/paas/v4",
+        "apiKey": "{env:ZAI_CODING_PLAN_API_KEY}"
+      },
+      "models": {
+        "glm-5.3": {
+          "name": "GLM-5.3",
+          "vision": false,
+          "limit": { "context": 1000000, "output": 131072 }
+        },
+        "glm-5.3-flash": {
+          "name": "GLM-5.3-Flash",
+          "vision": true,
+          "imageInput": {
+            "transport": "openai-image-url",
+            "acceptsDataUrl": true,
+            "acceptsRemoteUrl": true,
+            "verification": "manual-smoke",
+            "verifiedAt": "2026-09-21"
+          },
+          "limit": { "context": 1000000, "output": 131072 }
+        }
+      }
+    },
+
+    "custom": {
+      "type": "openai-compatible",
+      "name": "Custom Provider",
+      "description": "Manual OpenAI-compatible provider. Edit baseURL, apiKey, headers, and model ids in sber-designer.json.",
+      "options": {
+        "baseURL": "http://localhost:11434/v1",
+        "apiKey": "{env:CUSTOM_LLM_API_KEY}"
+      },
+      "models": {
+        "custom-model": { "name": "Custom model" }
+      }
+    }
+  },
+
+  "mcpServers": {}
+}

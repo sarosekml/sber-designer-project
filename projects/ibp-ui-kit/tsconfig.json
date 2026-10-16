@@ -1,0 +1,24 @@
+{
+  "extends": "@sber-ibp/core/build/configs/tsconfig.libraries.json",
+  "compilerOptions": {
+    // building options
+    "module": "ES2020",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    // d.ts file results options
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    // ts rule options
+    "skipLibCheck": true,
+    "noImplicitReturns": true,
+    "isolatedModules": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src"
+  ]
+}

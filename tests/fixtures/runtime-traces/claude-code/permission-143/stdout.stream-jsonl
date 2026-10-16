@@ -1,0 +1,2 @@
+{"type":"system","subtype":"init"}
+{"type":"assistant","message":{"content":[{"type":"tool_result","tool_use_id":"toolu_permission","content":"permission_required: Bash tool requires approval to use shell command.","is_error":true}]}}

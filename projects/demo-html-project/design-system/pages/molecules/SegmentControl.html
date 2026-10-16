@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SegmentControl — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/segment-control.css">
+<link rel="stylesheet" href="../../styles/tab.css">
+<link rel="stylesheet" href="../../styles/button.css">
+<link rel="stylesheet" href="../../styles/button-group.css">
+<link rel="stylesheet" href="../../styles/badge.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    margin: 0; font-family: var(--font-text), system-ui, sans-serif;
+    color: var(--text-primary); background: var(--bg-page); background-attachment: fixed;
+  }
+  .page { max-width: 1320px; margin: 0 auto; padding: clamp(40px,7vw,96px) clamp(24px,5vw,72px) 140px; }
+
+  /* masthead */
+  .masthead { border-bottom: 1px solid var(--border-light); padding-bottom: 30px; }
+  .masthead .meta { font: var(--type-body-xs); color: var(--text-inactive); display:flex; gap:24px; margin:0 0 22px; }
+  .masthead .meta b { color: var(--text-secondary); font: var(--type-body-xs); font-weight:600; }
+  .eyebrow { font: var(--type-button-xs); letter-spacing:.14em; text-transform:uppercase; color: var(--primary); margin:0 0 14px; }
+  .masthead h1 { font: var(--type-h1); margin:0 0 14px; color: var(--text-black); }
+  @media (max-width:600px){ .masthead h1{ font-size:40px; line-height:48px; } }
+  .masthead p.lead { font: var(--type-body-l); color: var(--text-secondary); margin:0; max-width:66ch; text-wrap:pretty; }
+
+  /* breadcrumb back link */
+  .crumb { display:inline-flex; align-items:center; gap:7px; font: var(--type-body-s); color: var(--text-inactive); text-decoration:none; margin-bottom:20px; }
+  .crumb:hover { color: var(--primary); }
+  .crumb svg { width:16px; height:16px; }
+
+  /* section */
+  .section { margin-top: 76px; }
+  .section > h2 { font: var(--type-h3-strong); margin:0 0 8px; color: var(--text-black); display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .section > p.desc { font: var(--type-body-m); color: var(--text-secondary); margin:0 0 28px; max-width:80ch; text-wrap:pretty; }
+  .section > p.desc.tight { margin-bottom:20px; }
+  .addon { font: var(--type-button-xs); letter-spacing:.06em; text-transform:uppercase; color: var(--primary); background: var(--primary-bg); padding:5px 10px; border-radius:999px; }
+
+  .panel { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; padding: 32px 34px; }
+  .panel + .panel { margin-top: 20px; }
+  .row { display:flex; flex-wrap:wrap; align-items:center; gap:20px; }
+  .row + .row { margin-top: 24px; }
+
+  ul.bullets { margin: 0 0 0 2px; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  ul.bullets li { position:relative; padding-left:18px; font: var(--type-body-m); color: var(--text-secondary); }
+  ul.bullets li::before { content:""; position:absolute; left:2px; top:8px; width:5px; height:5px; border-radius:50%; background: var(--text-inactive); }
+  ul.bullets li b { color: var(--text-primary); }
+
+  code.tok { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.86em; color: var(--primary); background: var(--primary-bg); padding:1px 6px; border-radius:5px; }
+
+  .subhead { font: var(--type-body-m-strong); color: var(--text-black); margin:0 0 16px; }
+  .subhead.mt { margin-top: 30px; }
+  .demo-rowlabel { font: var(--type-body-xs); color: var(--text-inactive); margin-bottom:10px; }
+
+  /* ---------- playground ---------- */
+  .panel.pg { padding:0; overflow:hidden; display:grid; grid-template-columns: 320px 1fr; }
+  @media (max-width:820px){ .panel.pg { grid-template-columns:1fr; } }
+  .pg__controls { padding:30px 30px; display:flex; flex-direction:column; gap:20px; border-right:1px solid var(--border-light); }
+  @media (max-width:820px){ .pg__controls { border-right:none; border-bottom:1px solid var(--border-light); } }
+  .pg__stage { padding:48px 40px; display:flex; align-items:center; justify-content:center; min-height:220px;
+    background:
+      linear-gradient(var(--bg-tile),var(--bg-tile)) padding-box,
+      repeating-conic-gradient(#f2f5f5 0% 25%, #fbfcfc 0% 50%) 0 / 22px 22px; }
+  .pg__stagebox { width:100%; max-width:560px; display:flex; align-items:center; justify-content:center; }
+
+  .ctl { display:flex; flex-direction:column; gap:10px; }
+  .ctl > .lbl { font: var(--type-body-s-strong); color: var(--text-inactive); text-transform:uppercase; letter-spacing:.05em; font-size:11px; }
+
+  .toggles { display:flex; flex-direction:column; gap:9px; }
+  .toggle { display:inline-flex; align-items:center; gap:11px; padding:9px 12px; border:1px solid var(--border-light); border-radius:9px; font: var(--type-body-m); color: var(--text-primary); cursor:pointer; user-select:none; background: var(--bg-tile); transition:.12s; }
+  .toggle:hover { border-color: var(--border-primary); }
+  .toggle[aria-pressed="true"] { border-color: var(--primary); color: var(--primary); }
+  .toggle .sw { width:36px; height:20px; border-radius:999px; background: var(--c-cgrey-200); position:relative; transition:.15s; flex:none; }
+  .toggle .sw::after { content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.2); transition:.15s; }
+  .toggle[aria-pressed="true"] .sw { background: var(--primary); }
+  .toggle[aria-pressed="true"] .sw::after { transform: translateX(16px); }
+
+  .pg-select { position:relative; }
+  .pg-select select {
+    appearance:none; -webkit-appearance:none;
+    width:100%; height:40px; padding:0 38px 0 14px;
+    border:1px solid var(--border-primary); border-radius:9px;
+    background: var(--bg-tile); color: var(--text-primary);
+    font: var(--type-body-m); cursor:pointer;
+  }
+  .pg-select select:focus-visible { outline:2px solid var(--primary); outline-offset:1px; }
+  .pg-select::after {
+    content:""; position:absolute; right:15px; top:50%; width:9px; height:9px;
+    border-right:2px solid var(--text-secondary); border-bottom:2px solid var(--text-secondary);
+    transform:translateY(-65%) rotate(45deg); pointer-events:none;
+  }
+
+  .pg__code { margin-top:14px; font: var(--type-body-s); color: var(--text-inactive); }
+  .pg__code code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; color: var(--text-secondary); background: var(--bgtable-row-focus); padding:3px 7px; border-radius:6px; display:inline-block; word-break:break-all; }
+
+  /* ---------- matrices / grids ---------- */
+  .matrix-wrap { overflow-x:auto; }
+  .sizes-grid { display:grid; grid-template-columns: 130px repeat(3, 1fr); gap:18px 16px; align-items:center; min-width:560px; }
+  .sizes-grid .col-head { font: var(--type-body-s-strong); color: var(--primary); text-align:center; }
+  .sizes-grid .row-head { font: var(--type-body-s); color: var(--text-inactive); }
+  .sizes-grid .cell { display:flex; align-items:center; justify-content:center; padding:6px 0; }
+
+  /* two-column comparison */
+  .cols2 { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:20px; }
+  @media (max-width:680px){ .cols2{ grid-template-columns:1fr; } }
+  .demo-col__title { font: var(--type-h5-strong); color: var(--text-black); margin:0 0 4px; }
+  .demo-col__sub { font: var(--type-body-s); color: var(--text-secondary); margin:0 0 18px; text-wrap:pretty; }
+
+  /* mock surfaces */
+  .surface { border:1px solid var(--border-light); border-radius:12px; background:var(--bg-tile); padding:0; overflow:hidden; box-shadow:0 6px 26px -18px rgba(40,50,55,.4); min-width:0; }
+  .surface__cap { font:var(--type-body-xs); color:var(--text-inactive); margin:14px 2px 0; text-wrap:pretty; }
+  .mock-toolbar { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 20px; border-bottom:1px solid var(--border-light); flex-wrap:wrap; }
+  .mock-toolbar__title { font:var(--type-h6-strong); color:var(--text-black); }
+  .mock-chart { padding:22px 22px 26px; }
+  .mock-chart__bars { display:flex; align-items:flex-end; gap:8px; height:120px; margin-top:16px; }
+  .mock-chart__bars span { flex:1; background: linear-gradient(180deg, var(--primary-light), var(--primary)); border-radius:5px 5px 0 0; opacity:.85; }
+  .mock-list { padding:16px 20px 20px; display:flex; flex-direction:column; gap:10px; }
+  .mock-list__row { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; background: var(--tertiary-light); border-radius:9px; font:var(--type-body-s); color:var(--text-secondary); }
+
+  /* anatomy */
+  .anat { display:grid; grid-template-columns: minmax(260px,1fr) minmax(240px,360px); gap:40px; align-items:center; }
+  @media (max-width:760px){ .anat { grid-template-columns:1fr; } }
+  .anat__stage { background: var(--tertiary-light); border:1px solid var(--border-light); border-radius:14px; padding:70px 44px; display:flex; justify-content:center; }
+  .anat-dia { position:relative; }
+  .anat-dia .mk { position:absolute; width:22px; height:22px; border-radius:50%; background:var(--text-black); color:#fff; font:var(--type-body-xs); font-weight:600; display:flex; align-items:center; justify-content:center; transform:translate(-50%,-50%); }
+  .anat__legend { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; counter-reset:a; }
+  .anat__legend li { display:flex; gap:14px; align-items:flex-start; }
+  .anat__legend li .n { counter-increment:a; flex:none; width:24px; height:24px; border-radius:50%; background: var(--primary); color:#fff; font: var(--type-body-s-strong); display:flex; align-items:center; justify-content:center; }
+  .anat__legend li .n::before { content:counter(a); }
+  .anat__legend li .t .k { font: var(--type-body-m-strong); color: var(--text-black); display:block; }
+  .anat__legend li .t .d { font: var(--type-body-s); color: var(--text-secondary); }
+
+  /* state spec tables */
+  .spec { border:1px solid var(--border-light); border-radius:14px; overflow:hidden; }
+  .spec + .spec { margin-top:16px; }
+  .spec__row { display:grid; grid-template-columns: 210px 200px 1fr; align-items:center; gap:16px; padding:20px; }
+  @media (max-width:760px){ .spec__row{ grid-template-columns:1fr; gap:14px; } }
+  .spec__state { font:var(--type-body-m-strong); color:var(--text-black); }
+  .spec__sample { display:flex; justify-content:center; }
+  .spec__colors { display:flex; flex-direction:column; gap:7px; }
+  .spec__cline { display:grid; grid-template-columns: 150px 18px 150px 1fr; align-items:center; gap:10px; font:var(--type-body-s); color:var(--text-secondary); }
+  @media (max-width:560px){ .spec__cline{ grid-template-columns: 100px 16px 1fr; } .spec__cline .raw{ display:none; } }
+  .spec__cline b { color:var(--text-primary); font-weight:600; }
+  .spec__sw { width:16px; height:16px; border-radius:4px; border:1px solid rgba(40,50,55,.12); }
+  .spec__cline .tnm { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px; color:var(--text-primary); }
+  .spec__cline .raw { font-variant-numeric:tabular-nums; }
+
+  /* reference tables */
+  .ref-table { width:100%; border-collapse:collapse; }
+  .ref-table th, .ref-table td { text-align:left; padding:15px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:middle; }
+  .ref-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .ref-table tr:last-child td { border-bottom:none; }
+  .ref-table .rt-num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+
+  /* do / don't */
+  .guide { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:720px){ .guide { grid-template-columns:1fr; } }
+  .guide-card { border:1px solid var(--border-light); border-radius:12px; overflow:hidden; background: var(--bg-tile); display:flex; flex-direction:column; }
+  .guide-card__bar { height:4px; }
+  .guide-card.bad  .guide-card__bar { background: var(--error); }
+  .guide-card.good .guide-card__bar { background: var(--success); }
+  .guide-card__tag { display:inline-flex; align-items:center; gap:7px; font: var(--type-body-s-strong); padding:14px 20px 0; }
+  .guide-card.bad  .guide-card__tag { color: var(--error-dark); }
+  .guide-card.good .guide-card__tag { color: var(--success-dark); }
+  .guide-card__tag .ic { width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; flex:none; }
+  .guide-card.bad  .guide-card__tag .ic { background: var(--error); }
+  .guide-card.good .guide-card__tag .ic { background: var(--success); }
+  .guide-card__tag .ic svg { width:12px; height:12px; }
+  .guide-card__body { padding:28px 20px; flex:1; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; min-height:96px; }
+  .guide-card__cap { padding:0 20px 18px; font: var(--type-body-xs); color: var(--text-inactive); text-wrap:pretty; }
+  .guide-solo { max-width:460px; margin-top:22px; }
+
+  /* color reference */
+  .color-ref { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
+  @media (max-width:760px){ .color-ref { grid-template-columns:1fr; } }
+  .cref-group { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; overflow:hidden; }
+  .cref-group > h3 { font: var(--type-h5-strong); margin:0; color: var(--text-primary); padding:18px 22px; border-bottom:1px solid var(--border-light); }
+  .cref-rows { padding:6px 0; }
+  .cref-row { display:grid; grid-template-columns: 36px 1fr auto; gap:14px; align-items:center; padding:9px 22px; }
+  .cref-row:hover { background: var(--bgtable-row-hover); }
+  .cref-sw { width:36px; height:36px; border-radius:8px; border:1px solid rgba(40,50,55,.12); position:relative; overflow:hidden; flex:none; }
+  .cref-sw .cf { position:absolute; inset:0; }
+  .cref-meta { min-width:0; }
+  .cref-meta .role { font: var(--type-body-s); color: var(--text-inactive); margin:0; }
+  .cref-meta .tname { font: var(--type-body-m-strong); color: var(--text-primary); margin:1px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; word-break:break-all; }
+  .cref-hex { font: var(--type-body-s-strong); color: var(--text-secondary); font-variant-numeric: tabular-nums; text-align:right; flex:none; }
+
+  /* differentiation cards (SegmentControl vs Tab vs ButtonGroup) */
+  .diff { display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
+  @media (max-width:900px){ .diff { grid-template-columns:1fr; } }
+  .diff__card { border:1px solid var(--border-light); border-radius:14px; padding:22px 22px 24px; background: var(--bg-tile); display:flex; flex-direction:column; gap:12px; }
+  .diff__card.is-current { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary) inset; }
+  .diff__card h4 { font: var(--type-h6-strong); color: var(--text-black); margin:0; display:flex; align-items:center; gap:8px; }
+  .diff__card h4 .star { font: var(--type-button-xs); text-transform:uppercase; letter-spacing:.06em; color: var(--primary); background: var(--primary-bg); padding:3px 8px; border-radius:999px; }
+  .diff__card p { font: var(--type-body-s); color: var(--text-secondary); margin:0; text-wrap:pretty; }
+  .diff__card .stage { min-height:52px; display:flex; align-items:center; }
+
+  footer.page-foot { margin-top:90px; padding-top:26px; border-top:1px solid var(--border-light);
+    font: var(--type-body-s); color: var(--text-inactive); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+
+  /* ---------- developer code panels ---------- */
+  .dev-intro { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:-6px 0 22px; }
+  .dev-intro .req { font: var(--type-body-s); color: var(--text-inactive); }
+  .dev-intro code.tok { font-size:.86em; }
+
+  .code-panel { background: var(--c-cgrey-800); border-radius: 12px; overflow:hidden; }
+  .code-panel + .code-panel { margin-top:20px; }
+  .code-panel__head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 16px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .code-panel__name { font: var(--type-body-s-strong); color: rgba(255,255,255,.72); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; letter-spacing:.02em; }
+  .code-panel__copy {
+    display:inline-flex; align-items:center; gap:6px; border:0; padding:6px 11px; border-radius:7px;
+    background: rgba(255,255,255,.08); color: rgba(255,255,255,.86); font: var(--type-body-xs); cursor:pointer;
+    transition: background-color .12s ease;
+  }
+  .code-panel__copy:hover { background: rgba(255,255,255,.16); }
+  .code-panel__copy svg { width:14px; height:14px; flex:none; }
+  .code-panel__copy.is-copied { background: color-mix(in srgb, var(--success) 30%, transparent); color:#fff; }
+  .code-panel pre { margin:0; padding:18px 20px; overflow-x:auto; }
+  .code-panel code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; line-height:1.65;
+    color: rgba(255,255,255,.82); white-space:pre;
+  }
+  .code-panel .tk-tag  { color:#79D9C9; }
+  .code-panel .tk-attr { color:#9FC1FF; }
+  .code-panel .tk-val  { color:#F2C879; }
+  .code-panel .tk-cm   { color: rgba(255,255,255,.4); font-style:italic; }
+
+  .dev-table { width:100%; border-collapse:collapse; }
+  .dev-table th, .dev-table td { text-align:left; padding:13px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:top; }
+  .dev-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .dev-table tr:last-child td { border-bottom:none; }
+  .dev-table code.tok { white-space:nowrap; }
+  .dev-table td.dsc { color: var(--text-secondary); font: var(--type-body-s); }
+
+  .dev-note { font: var(--type-body-s); color: var(--text-inactive); margin:16px 2px 0; text-wrap:pretty; }
+</style>
+  <link rel="stylesheet" href="../../styles/ds-nav.css">
+  <link rel="stylesheet" href="../../styles/ds-toc.css">
+<link rel="stylesheet" href="../../styles/pg-kit.css">
+<style>
+/* unified-template: бывшие h2-разделы, понижены до подразделов */
+.section .subsec{margin-top:48px;}
+.section .subsec>h3{font:var(--type-h4-strong);margin:0 0 8px;color:var(--text-black);}
+.section .subsec>p.desc{font:var(--type-body-m);color:var(--text-secondary);margin:0 0 24px;max-width:82ch;text-wrap:pretty;}
+.section .subsec>p.desc.tight{margin-bottom:20px;}
+.section .subsec>p.desc+p.desc{margin-top:-16px;}
+</style>
+</head>
+<body>
+<main class="page" data-screen-label="SegmentControl">
+
+  <header class="masthead">
+    <a class="crumb" href="../../refs/imported-index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Дизайн-система</a>
+    <div class="meta"><span>Версия: <b>v1.1</b></span><span>Обновлено: <b>08.07.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Компоненты</p>
+    <h1>SegmentControl</h1>
+    <p class="lead">Компактный контрол для переключения одного значения параметра — периода, единиц, режима отображения — из 2–6 взаимоисключающих опций. Сегменты лежат в общем треке (rail); выбранный сегмент отмечен плавающим индикатором (thumb), который анимированно переезжает при переключении. Размеры <b>M</b>, <b>S</b>, <b>XS</b>, опциональная ведущая иконка и вариант «только иконки».</p>
+  </header>
+
+  <!-- PLAYGROUND (сразу после шапки) -->
+  <section class="section" data-screen-label="Playground">
+    <h2>Конструктор</h2>
+    <p class="desc">Соберите контрол: размер, количество сегментов, контент, состояние и Fullwidth — превью и код обновляются мгновенно. Кликните по сегменту в превью, чтобы увидеть анимацию индикатора.</p>
+    <div class="panel pg">
+      <div class="pg__controls" id="pg-controls"></div>
+      <div class="pg__stage"><div class="pg__stagebox" id="pg-preview"></div></div>
+    </div>
+    <p class="pg__code" id="pg-code"></p>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" data-screen-label="Usage">
+    <h2>Использование</h2>
+    <p class="desc tight">SegmentControl переключает <b>значение одного параметра</b> в пределах текущего контекста — период графика, единицы измерения, режим отображения списка. В отличие от навигационных сущностей он не меняет набор разделов страницы и не открывает новый раздел контента — он выбирает, <i>как</i> показать один и тот же контент.</p>
+    <div class="panel">
+      <ul class="bullets" style="margin-bottom:26px;">
+        <li><b>Период / диапазон.</b> Переключатель над графиком или таблицей: День / Неделя / Месяц / Год.</li>
+        <li><b>Режим отображения.</b> Список / Плитка / График — компактный вариант с иконками, часто в углу карточки или тулбара.</li>
+        <li><b>Взаимоисключающий выбор.</b> Всегда выбран ровно один сегмент — как радиокнопки, но в компактной горизонтальной форме.</li>
+        <li>2–6 сегментов в одном контроле. Больше — переносите в <code class="tok">Select</code>.</li>
+      </ul>
+      <div class="cols2">
+        <div>
+          <p class="demo-rowlabel">Период над графиком</p>
+          <div class="surface">
+            <div class="mock-toolbar"><span class="mock-toolbar__title">Динамика портфеля</span><div id="use-period"></div></div>
+            <div class="mock-chart"><div class="mock-chart__bars">
+              <span style="height:38%"></span><span style="height:62%"></span><span style="height:50%"></span><span style="height:80%"></span>
+              <span style="height:66%"></span><span style="height:92%"></span><span style="height:74%"></span>
+            </div></div>
+          </div>
+          <p class="surface__cap">Контент не меняет структуру — меняется только диапазон данных на графике.</p>
+        </div>
+        <div>
+          <p class="demo-col__title" style="font:var(--type-h6-strong); margin-bottom:4px;">Режим отображения списка</p>
+          <p class="demo-rowlabel">Только иконки, компактный размер S</p>
+          <div class="surface">
+            <div class="mock-toolbar"><span class="mock-toolbar__title">Сделки ДИД</span><div id="use-view"></div></div>
+            <div class="mock-list">
+              <div class="mock-list__row"><span>ООО «Акрон Трейд»</span><span>142,5 млн ₽</span></div>
+              <div class="mock-list__row"><span>ПАО «Севмет»</span><span>68,0 млн ₽</span></div>
+              <div class="mock-list__row"><span>АО «Балт-Инвест»</span><span>310,2 млн ₽</span></div>
+            </div>
+          </div>
+          <p class="surface__cap">Иконка задаёт понятный смысл, тексту в паре с иконкой можно и не быть.</p>
+        </div>
+      </div>
+    </div>
+  
+<div class="subsec" data-screen-label="Differentiation">
+    <h3>SegmentControl, Tab и ButtonGroup — в чём разница</h3>
+    <p class="desc">Все три компонента внешне похожи на «ряд опций», но решают разные задачи. Выбирайте по смыслу действия, а не по внешнему виду.</p>
+    <div class="diff">
+      <div class="diff__card is-current">
+        <h4>SegmentControl <span class="star">Этот компонент</span></h4>
+        <p>Переключает <b>значение параметра</b> — период, единицы, режим отображения. Общий трек с фоном и один плавающий индикатор. <code class="tok">role="radiogroup"</code>.</p>
+        <div class="stage" id="diff-seg"></div>
+      </div>
+      <div class="diff__card">
+        <h4>Tab</h4>
+        <p>Переключает <b>раздел / вьюху</b> страницы или модалки — меняется набор контента целиком. Индикатор — тонкая полоса на общем рейле, без фона-«трека». <code class="tok">role="tablist"</code>.</p>
+        <div class="stage" id="diff-tab"></div>
+      </div>
+      <div class="diff__card">
+        <h4>ButtonGroup <span class="addon" style="margin:0;">toggle</span></h4>
+        <p>Набор независимых кнопок с общей рамкой — годится, когда сегменты это по сути <b>Button</b> с заливкой Accent и своей семантикой действия, без общего трека. <code class="tok">aria-pressed</code>.</p>
+        <div class="stage" id="diff-btg"></div>
+      </div>
+    </div>
+  </div>
+
+<div class="subsec" data-screen-label="Guidelines">
+    <h3>Правила</h3>
+    <p class="desc">SegmentControl переключает значение одного параметра, а не разделы страницы. Каждая пара «так / не так» раскрывает одну конкретную ситуацию.</p>
+    <div class="guide">
+      <div class="guide-card good">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic" id="ic-good1"></span>Так</div>
+        <div class="guide-card__body" id="guide-good1"></div>
+        <p class="guide-card__cap">Короткие взаимоисключающие значения одного параметра — день / неделя / месяц.</p>
+      </div>
+      <div class="guide-card bad">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic" id="ic-bad1"></span>Не так</div>
+        <div class="guide-card__body" id="guide-bad1"></div>
+        <p class="guide-card__cap">Длинные названия разделов — это задача Tab, а не SegmentControl.</p>
+      </div>
+      <div class="guide-card good">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic" id="ic-good2"></span>Так</div>
+        <div class="guide-card__body" id="guide-good2"></div>
+        <p class="guide-card__cap">2–6 сегментов — контрол легко считывается целиком.</p>
+      </div>
+      <div class="guide-card bad">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic" id="ic-bad2"></span>Не так</div>
+        <div class="guide-card__body" id="guide-bad2"></div>
+        <p class="guide-card__cap">7 и больше сегментов не помещаются в трек без переноса — замените на Select.</p>
+      </div>
+    </div>
+    <p class="demo-rowlabel" style="margin-top:30px;">Дополнительно — без пары «не так»</p>
+    <div class="guide-solo">
+      <div class="guide-card good">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic" id="ic-good3"></span>Так</div>
+        <div class="guide-card__body" id="guide-good3"></div>
+        <p class="guide-card__cap">Fullwidth уместен для пары взаимоисключающих действий на всю ширину контейнера.</p>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="section" data-screen-label="Anatomy">
+    <h2>Анатомия</h2>
+    <p class="desc">Контрол — это общий трек с сегментами и одним индикатором, который абсолютно спозиционирован под текущим выбранным сегментом и анимированно едет к новому при переключении.</p>
+    <div class="panel">
+      <div class="anat">
+        <div class="anat__stage"><div class="anat-dia" id="anat-diagram"></div></div>
+        <ul class="anat__legend">
+          <li><span class="n"></span><span class="t"><span class="k">Трек (rail)</span><span class="d">полупрозрачная нейтральная заливка — остаётся читаемым на любом фоне, включая серый фон страницы</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Индикатор (thumb)</span><span class="d">плавающая заливка выбранного сегмента — белый + мягкая тень</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Сегмент</span><span class="d">текст и/или ведущая иконка — интерактивная зона</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Разделитель</span><span class="d">тонкая линия между соседними невыбранными сегментами — скрыта у индикатора</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Счётчик (опционально)</span><span class="d">Badge в варианте без заливки — количество элементов внутри сегмента</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- VARIANTS (STUB) -->
+  <section class="section" data-screen-label="Variants">
+    <h2>Варианты</h2>
+    <p class="desc">Не применимо: компонент существует в единственной конфигурации, отдельных вариантов нет.</p>
+  </section>
+
+  <!-- SIZES -->
+  <section class="section" data-screen-label="Sizes">
+    <h2>Размеры</h2>
+    <p class="desc">Три размера, высота и типографика согласованы с Button того же размера, чтобы контрол ровно вставал в один ряд с кнопками в тулбаре. <b>M</b> — базовый, над графиками и таблицами. <b>S</b> — плотные тулбары и карточки виджетов. <b>XS</b> — инлайн-контролы рядом с текстом.</p>
+    <div class="panel">
+      <div class="matrix-wrap"><div class="sizes-grid" id="sizes-grid"></div></div>
+    </div>
+    <div class="panel" style="padding:8px 10px; margin-top:20px;">
+      <table class="ref-table" id="sizes-table">
+        <thead><tr><th>Размер</th><th>Высота</th><th>Типографика</th><th>Иконка</th><th>Применение</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="section" data-screen-label="Content">
+    <h2>Контент</h2>
+    <p class="desc">Сегмент — это текст, иконка с текстом, только иконка или та же связка с числовым счётчиком. Для сегмента только с иконкой обязателен <code class="tok">aria-label</code> — видимого текста нет.</p>
+    <div class="panel">
+      <p class="demo-rowlabel">Текст</p>
+      <div id="content-text" style="margin-bottom:26px;"></div>
+      <p class="demo-rowlabel">Иконка + текст</p>
+      <div id="content-icontext" style="margin-bottom:26px;"></div>
+      <p class="demo-rowlabel">Только иконки</p>
+      <div id="content-icononly" style="margin-bottom:26px;"></div>
+      <p class="demo-rowlabel">Со счётчиком содержимого — Badge, вариант без заливки</p>
+      <div id="content-badge"></div>
+    </div>
+  </section>
+
+  <!-- ПОВЕДЕНИЕ -->
+  <section class="section" data-screen-label="Behavior">
+    <h2>Поведение</h2>
+    <p class="desc">Правила поведения: позиционирование, переполнение, анимация, адаптивность.</p>
+  
+<div class="subsec" data-screen-label="Count">
+    <h3>Количество сегментов и равная ширина</h3>
+    <p class="desc">От 2 до 6 сегментов в одном контроле — больше усложняет считывание и требует замены на <code class="tok">Select</code>. По умолчанию ширина каждого сегмента зависит от контента; модификатор <b>Fullwidth</b> растягивает контрол на всю ширину контейнера с равными сегментами — удобно для двух-трёх опций на всю ширину карточки или нижней панели модалки.</p>
+    <div class="panel">
+      <p class="demo-rowlabel">2 · 3 · 4 · 6 сегментов</p>
+      <div class="row" id="count-row"></div>
+      <p class="subhead mt">Fullwidth — равные сегменты на всю ширину контейнера</p>
+      <div style="max-width:420px;" id="fullwidth-demo"></div>
+    </div>
+  </div>
+
+<div class="subsec" data-screen-label="Animation">
+    <h3>Анимация индикатора</h3>
+    <p class="desc">При переключении индикатор анимированно едет к новому сегменту и меняет ширину под его контент — <code class="tok">transform</code> и <code class="tok">width</code>, 180&nbsp;мс, <code class="tok">cubic-bezier(.4,0,.2,1)</code>. Анимация отключается при <code class="tok">prefers-reduced-motion: reduce</code>, оставляя только смену прозрачности.</p>
+    <div class="panel">
+      <p class="demo-rowlabel">Переключайте сегменты — индикатор едет и меняет ширину</p>
+      <div id="anim-demo"></div>
+    </div>
+  </div>
+  
+<div class="subsec" data-screen-label="ItemDisabled">
+    <h3>Отключение одного сегмента <span class="addon">Расширение</span></h3>
+    <p class="desc">Частный случай: один сегмент временно недоступен (например, тариф вне подписки), при этом остальной контрол активен. Такой сегмент нельзя выбрать и сфокусировать — используйте точечно, по умолчанию Disabled действует на весь контрол.</p>
+    <div class="panel"><div id="item-disabled-demo"></div></div>
+  </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="section" data-screen-label="States">
+    <h2>Состояния</h2>
+    <p class="desc">Невыбранный сегмент проходит через Default и Hover; выбранный сегмент подсвечен индикатором и <b>не имеет отдельного hover</b> — он уже визуально выделен. Disabled применяется на весь контрол целиком.</p>
+    <div id="state-specs"></div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" data-screen-label="A11y">
+    <h2>Доступность <span class="addon">Расширение</span></h2>
+    <p class="desc">Контейнер получает <code class="tok">role="radiogroup"</code> и осмысленный <code class="tok">aria-label</code> (например «Период»); каждый сегмент — <code class="tok">role="radio"</code> с <code class="tok">aria-checked</code>. Фокус — по одному активному сегменту (roving tabindex), переключение между сегментами и смена выбора — стрелками ← → (или ↑ ↓), <code class="tok">Home</code> / <code class="tok">End</code> — к первому/последнему. Сегмент только с иконкой обязан иметь <code class="tok">aria-label</code>.</p>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="section" data-screen-label="Typography">
+    <h2>Типографика</h2>
+    <p class="desc">Текст сегмента набирается токенами кнопок — <b>SB Sans Screen</b>, начертание Regular, во всех состояниях включая выбранный.</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="ref-table" id="typo-table">
+        <thead><tr><th>Размер</th><th>Образец</th><th>Токен</th><th>Кегль / line-height</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section class="section" data-screen-label="Colors">
+    <h2>Цвета</h2>
+    <p class="desc">Трек — полупрозрачная нейтральная заливка (Swamp_400, 16%) — так контрол остаётся отчётливым на любой подложке, включая серый фон страницы, а не только на белой плашке. Индикатор — белая заливка BG_Tile с мягкой тенью (та же тень, что и активный чип сегмент-контрола в спецификации теней ДС). Текст невыбранного сегмента — Text_Secondary, при наведении — Text_Primary с лёгкой заливкой Active·PrimaryBG; выбранный — Primary (Emerald). Счётчик — Badge без заливки (--text), цвет наследует Text_Primary. Disabled — на рампе StDisabled.</p>
+    <div class="color-ref" id="color-ref"></div>
+  </section>
+
+  <!-- DEVELOPER HANDOFF -->
+  <section class="section" data-screen-label="Dev">
+    <h2>Для разработчиков <span class="addon">Расширение</span></h2>
+    <p class="desc">Эта страница ДС собрана на чистых CSS-классах и vanilla JS — но всё ниже не привязано к стеку: команда, которая верстает компонент на React (или любом другом фреймворке), может взять отсюда анатомию, точные размеры, состояния и цвета, чтобы собрать свою реализацию, не заглядывая в этот код построчно.</p>
+
+    <p class="subhead">Точные размеры (redline)</p>
+    <p class="desc tight">Все значения — токены ДС, не хардкод; ссылки на переменные — в файле <code class="tok">styles/segment-control.css</code>.</p>
+    <div class="panel" style="padding:8px 10px; margin-bottom:36px;">
+      <table class="dev-table" id="dev-spec-table">
+        <thead><tr><th>Параметр</th><th>M</th><th>S</th><th>XS</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="dev-intro">
+      <span class="req">Подключить (если переиспользуете этот CSS напрямую):</span>
+      <code class="tok">styles/typography.css</code>
+      <code class="tok">styles/colors.css</code>
+      <code class="tok">styles/radius.css</code>
+      <code class="tok">styles/segment-control.css</code>
+      <span class="req">— и <code class="tok">styles/badge.css</code>, если используется счётчик.</span>
+    </div>
+
+    <p class="subhead">Анатомия DOM <span class="req" style="font-weight:400;">— эталонная структура, имена классов условны, важны сами элементы и их роли/состояния</span></p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Разметка · HTML (эталонная реализация ДС)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-html"><span class="tk-cm">&lt;!-- thumb идёт первым ребёнком — сегменты .segctrl__item начинаются со второго --&gt;</span>
+<span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"segctrl segctrl--m"</span> <span class="tk-attr">role=</span><span class="tk-val">"radiogroup"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Период"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"segctrl__thumb"</span><span class="tk-tag">&gt;&lt;/div&gt;</span>
+
+  <span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">class=</span><span class="tk-val">"segctrl__item"</span> <span class="tk-attr">role=</span><span class="tk-val">"radio"</span> <span class="tk-attr">aria-checked=</span><span class="tk-val">"false"</span> <span class="tk-attr">tabindex=</span><span class="tk-val">"-1"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"segctrl__label"</span><span class="tk-tag">&gt;</span>Неделя<span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;/button&gt;</span>
+
+  <span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">class=</span><span class="tk-val">"segctrl__item"</span> <span class="tk-attr">role=</span><span class="tk-val">"radio"</span> <span class="tk-attr">aria-checked=</span><span class="tk-val">"true"</span> <span class="tk-attr">tabindex=</span><span class="tk-val">"0"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"segctrl__label"</span><span class="tk-tag">&gt;</span>Месяц<span class="tk-tag">&lt;/span&gt;</span>
+    <span class="tk-cm">&lt;!-- опциональный счётчик — реальный Badge, вариант --text (без заливки) --&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"badge badge--text badge--s"</span><span class="tk-tag">&gt;</span>12<span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;/button&gt;</span>
+
+  <span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">class=</span><span class="tk-val">"segctrl__item"</span> <span class="tk-attr">role=</span><span class="tk-val">"radio"</span> <span class="tk-attr">aria-checked=</span><span class="tk-val">"false"</span> <span class="tk-attr">tabindex=</span><span class="tk-val">"-1"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"segctrl__label"</span><span class="tk-tag">&gt;</span>Год<span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;/button&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span></code></pre>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Поведение · псевдокод (framework-agnostic)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-js"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-js"><span class="tk-cm">// 1. Позиция индикатора = позиция выбранного сегмента внутри трека.</span>
+<span class="tk-cm">//    Это НЕ фиксированные проценты — ширина сегмента зависит от контента</span>
+<span class="tk-cm">//    (текст/иконка/бейдж), поэтому позицию нужно ИЗМЕРЯТЬ, а не вычислять по индексу:</span>
+selectedEl = track.children[selectedIndex] <span class="tk-cm">// ref на DOM-узел выбранного сегмента</span>
+thumb.width     = selectedEl.offsetWidth
+thumb.translateX = selectedEl.offsetLeft
+
+<span class="tk-cm">// 2. Пересчитывать при: смене value, смене набора items/size,</span>
+<span class="tk-cm">//    ResizeObserver на треке (адаптивная ширина) и после загрузки шрифтов</span>
+<span class="tk-cm">//    (метрики шрифта меняют offsetWidth уже после первого рендера).</span>
+
+<span class="tk-cm">// React: измерение — побочный эффект после layout, не во время рендера</span>
+useLayoutEffect(() => {
+  <span class="tk-attr">const</span> el = itemRefs.current[selectedIndex];
+  <span class="tk-attr">if</span> (!el) <span class="tk-attr">return</span>;
+  setThumbRect({ width: el.offsetWidth, left: el.offsetLeft });
+}, [value, items, size]);
+
+useEffect(() => {
+  <span class="tk-attr">const</span> ro = <span class="tk-attr">new</span> ResizeObserver(() => recalc());
+  ro.observe(trackRef.current);
+  <span class="tk-attr">return</span> () => ro.disconnect();
+}, []);
+
+<span class="tk-cm">// 3. Клавиатура (roving tabindex) — на контейнере [role="radiogroup"]:</span>
+<span class="tk-cm">//    ArrowRight/ArrowDown  → следующий доступный сегмент (зациклено)</span>
+<span class="tk-cm">//    ArrowLeft/ArrowUp     → предыдущий доступный сегмент (зациклено)</span>
+<span class="tk-cm">//    Home / End            → первый / последний доступный сегмент</span>
+<span class="tk-cm">//    В фокус-последовательности таба участвует только выбранный сегмент —</span>
+<span class="tk-cm">//    у остальных tabIndex = -1.</span></code></pre>
+    </div>
+    <p class="dev-note">Это не готовый сниппет для вставки — алгоритм, который нужно реализовать поверх вашего стека (в этом ДС он написан на vanilla JS, см. <code class="tok">segment-control.page.js</code>, функции <code class="tok">positionThumb</code> и <code class="tok">wireSegControl</code>, если нужен рабочий референс).</p>
+
+    <p class="subhead mt">Рекомендуемый API компонента (React)</p>
+    <p class="desc tight">Форма пропсов — предложение, а не обязательный контракт; адаптируйте под конвенции вашей кодовой базы.</p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">SegmentControl.types.ts</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-api"><span class="tk-attr">type</span> SegmentControlSize = <span class="tk-val">'m'</span> | <span class="tk-val">'s'</span> | <span class="tk-val">'xs'</span>;
+
+<span class="tk-attr">interface</span> SegmentControlItem {
+  value: <span class="tk-attr">string</span>;              <span class="tk-cm">// уникальный ключ сегмента</span>
+  label?: <span class="tk-attr">string</span>;              <span class="tk-cm">// опустить для icon-only</span>
+  icon?: React.ReactNode;      <span class="tk-cm">// 20/18/16px по размеру</span>
+  badge?: <span class="tk-attr">number</span> | <span class="tk-attr">string</span>;      <span class="tk-cm">// счётчик — рендерить как Badge variant="text"</span>
+  disabled?: <span class="tk-attr">boolean</span>;           <span class="tk-cm">// точечное отключение сегмента</span>
+  ariaLabel?: <span class="tk-attr">string</span>;           <span class="tk-cm">// обязателен, если label не задан</span>
+}
+
+<span class="tk-attr">interface</span> SegmentControlProps {
+  items: SegmentControlItem[];
+  value: <span class="tk-attr">string</span>;                              <span class="tk-cm">// controlled-компонент</span>
+  onChange: (value: <span class="tk-attr">string</span>) => <span class="tk-attr">void</span>;
+  size?: SegmentControlSize;                     <span class="tk-cm">// по умолчанию 'm'</span>
+  fullWidth?: <span class="tk-attr">boolean</span>;                         <span class="tk-cm">// по умолчанию false</span>
+  disabled?: <span class="tk-attr">boolean</span>;                          <span class="tk-cm">// отключает весь контрол</span>
+  <span class="tk-val">'aria-label'</span>: <span class="tk-attr">string</span>;                      <span class="tk-cm">// обязателен на радиогруппе</span>
+}</code></pre>
+    </div>
+
+    <p class="subhead mt">Справочник классов и атрибутов</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table" id="dev-classes-table">
+        <thead><tr><th>Класс / атрибут</th><th>На чём</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code class="tok">.segctrl</code></td><td>контейнер</td><td class="dsc">Трек — <code class="tok">role="radiogroup"</code>, обязателен <code class="tok">aria-label</code></td></tr>
+          <tr><td><code class="tok">.segctrl--m / --s / --xs</code></td><td>контейнер</td><td class="dsc">Размер: высота, паддинги, типографика, иконка</td></tr>
+          <tr><td><code class="tok">.segctrl--fullwidth</code></td><td>контейнер</td><td class="dsc">Сегменты растягиваются на равную ширину на 100% контейнера</td></tr>
+          <tr><td><code class="tok">.segctrl--disabled</code> / <code class="tok">[aria-disabled="true"]</code></td><td>контейнер</td><td class="dsc">Отключает весь контрол целиком</td></tr>
+          <tr><td><code class="tok">.segctrl__thumb</code></td><td>div, первый ребёнок</td><td class="dsc">Плавающий индикатор; ширина/позиция задаются JS (<code class="tok">positionThumb</code>)</td></tr>
+          <tr><td><code class="tok">.segctrl__item</code></td><td>button</td><td class="dsc">Сегмент — <code class="tok">role="radio"</code>, roving <code class="tok">tabindex</code></td></tr>
+          <tr><td><code class="tok">.segctrl__item--icon-only</code></td><td>button</td><td class="dsc">Сегмент без текста — обязателен <code class="tok">aria-label</code> на кнопке</td></tr>
+          <tr><td><code class="tok">.segctrl__label</code></td><td>span</td><td class="dsc">Текст сегмента, обрезается многоточием при нехватке места</td></tr>
+          <tr><td><code class="tok">[aria-checked="true"]</code></td><td>button</td><td class="dsc">Выбранный сегмент — под ним стоит индикатор</td></tr>
+          <tr><td><code class="tok">[aria-disabled="true"]</code></td><td>button (точечно)</td><td class="dsc">Отключает один сегмент, остальной контрол активен</td></tr>
+          <tr><td><code class="tok">.badge.badge--text.badge--{s|xs|xxs}</code></td><td>span в сегменте</td><td class="dsc">Опциональный счётчик содержимого — компонент Badge, вариант без заливки</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · SegmentControl</span>
+    <span>M / S / XS — Default / Hover / Selected / Disabled — Fullwidth</span>
+  </footer>
+</main>
+
+<script src="../../scripts/icons-data.js"></script>
+<script src="../../scripts/segment-control.page.js"></script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+</body>
+</html>

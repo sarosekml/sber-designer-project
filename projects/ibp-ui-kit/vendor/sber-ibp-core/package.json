@@ -1,0 +1,9 @@
+{
+  "name": "@sber-ibp/core",
+  "version": "9.49.0-stub",
+  "description": "Local stub for @sber-ibp/core (no private registry access)",
+  "main": "./index.js",
+  "module": "./index.js",
+  "types": "./index.d.ts",
+  "sideEffects": false
+}

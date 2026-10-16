@@ -1,0 +1,10 @@
+{
+  "exists": true,
+  "configPaths": [
+    ".storybook/main.ts"
+  ],
+  "storiesGlobs": [
+    "../src/**/*.stories.@(ts|tsx)"
+  ],
+  "source": "detected"
+}

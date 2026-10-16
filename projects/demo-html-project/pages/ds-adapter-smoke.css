@@ -1,0 +1,19 @@
+.smoke-shell {
+  min-height: 100vh;
+  padding: 32px;
+  display: grid;
+  align-content: start;
+  gap: 24px;
+  color: var(--text-primary);
+  background: var(--bg-page);
+  font: var(--type-body-m);
+}
+.smoke-section {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  background: var(--bg-tile);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-card);
+}
+.smoke-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }

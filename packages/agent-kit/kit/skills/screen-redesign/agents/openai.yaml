@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Screen Redesign'
+  short_description: 'Redesign screens without losing product facts'
+  default_prompt: 'Use $screen-redesign to redesign the current screen while preserving its information architecture, data, and product facts.'

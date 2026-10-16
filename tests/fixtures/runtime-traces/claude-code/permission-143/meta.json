@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "runtime": "claude-code",
+  "command": "claude",
+  "argsSnapshot": [
+    "-p",
+    "--verbose",
+    "--permission-mode",
+    "acceptEdits",
+    "--output-format",
+    "stream-json"
+  ],
+  "exitCode": 143,
+  "durationMs": 0,
+  "notes": "Incident trace: Claude Code stops after a non-interactive tool permission prompt."
+}

@@ -1,0 +1,66 @@
+export const rolesMock = [
+  {
+    name: 'BusinessAdmin',
+    pprbName: 'pprbmer_BusinessAdmin',
+    roleName: 'Бизнес-администратор ДИД',
+    roleNameEn: 'Business Admin DID',
+    description: 'Сотрудник департамента ДИД, имеющий полномоночия управлять справочниками',
+  },
+  {
+    name: 'Financier',
+    pprbName: 'pprbmer_Financier',
+    roleName: 'Финансист ДИД',
+    roleNameEn: 'Financier DID',
+    description: 'Финансист департамента ДИД, имеющий полномоночия согласовывать сделки',
+  },
+  {
+    name: 'Auditor',
+    pprbName: 'pprbmer_Auditor',
+    roleName: 'Аудитор ДИД',
+    roleNameEn: 'Auditor DID',
+    description: 'Аудитор департамента ДИД, имеющий полномоночия на просмотр всех данных в системе',
+  },
+  {
+    name: 'Analyst',
+    pprbName: 'pprbmer_Analyst',
+    roleName: 'Аналитик ДИД',
+    roleNameEn: 'Analyst DID',
+    description: 'Аналитик департамента ДИД, имеющий полномоночия управлять процессом всех сделок',
+  },
+  {
+    name: 'DgrDkkDkkk',
+    pprbName: 'pprbmer_DgrDkkDkkk',
+    roleName: 'Сотрудник ДГР, ДКК, ДККК',
+    roleNameEn: 'DGR, DKK, DKKK employee',
+    description: 'Сотрудник ДГР, ДКК, ДККК, имеющий полномоночия создания, просмотра Pre-Trade сделок своего деска',
+  },
+  {
+    name: 'pmc',
+    pprbName: 'pprbmer_pmc',
+    roleName: 'Сотрудник ЦУП',
+    roleNameEn: 'PMC employee',
+    description: 'Сотрудник ЦУП, имеющий полномоночия управлять процессом ЦУП всех сделок',
+  },
+  {
+    name: 'ItSupportDid',
+    pprbName: 'pprbmer_ItSupportDid',
+    roleName: 'ИТ-сопровождение ДИД',
+    roleNameEn: 'IT support DID',
+    description: 'Сотрудник сопровождения от IT по процессам ДИД и пайплайн',
+  },
+  {
+    name: 'RealtyHypothec',
+    pprbName: 'pprbmer_RealtyHypothec',
+    roleName: 'Кредитный инспектор по ипотечным закладным',
+    roleNameEn: 'Credit inspector on realty hypothec',
+    description: 'Кредитный инспектор занимающийся проверкой ипотечных закладных',
+  },
+  {
+    name: 'HeadDgrDkkDkkk',
+    pprbName: 'pprbmer_HeadDgrDkkDkkk',
+    roleName: 'Руководитель деска ДГР, ДКК, ДККК',
+    roleNameEn: 'Head of DGR, DKK, DKKK',
+    description:
+      'Руководитель деска ДГР, ДКК, ДККК имеющий полномоночия создания, редактирования, просмотра Pre-Trade сделок своего деска',
+  },
+];

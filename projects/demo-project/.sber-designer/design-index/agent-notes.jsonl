@@ -1,0 +1,4 @@
+{"id":"legacy-component-map-1","targetType":"project","note":"`components.jsonl` and `component-groups.json` for component choice.","intent":"usage","source":"legacy-component-selection-map","createdAt":1784797601180,"updatedAt":1784797601180}
+{"id":"legacy-component-map-2","targetType":"project","note":"`screens.jsonl` for editable screen implementation paths.","intent":"usage","source":"legacy-component-selection-map","createdAt":1784797601180,"updatedAt":1784797601180}
+{"id":"legacy-component-map-3","targetType":"project","note":"`agent-notes.jsonl` for project and component guidance.","intent":"usage","source":"legacy-component-selection-map","createdAt":1784797601180,"updatedAt":1784797601180}
+{"id":"legacy-component-map-4","targetType":"project","note":"`prompt-summary.md` for compact prompt context.","intent":"usage","source":"legacy-component-selection-map","createdAt":1784797601180,"updatedAt":1784797601180}

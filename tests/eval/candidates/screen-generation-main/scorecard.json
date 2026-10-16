@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-07-23T09:35:00.000Z",
+  "totals": {
+    "cells": 2,
+    "completed": 2,
+    "failed": 0,
+    "planned": 0
+  },
+  "byProfile": {
+    "html-css": {
+      "cells": 1,
+      "completed": 1,
+      "failed": 0,
+      "planned": 0
+    },
+    "react-storybook": {
+      "cells": 1,
+      "completed": 1,
+      "failed": 0,
+      "planned": 0
+    }
+  },
+  "byModel": {
+    "deepseek/deepseek-v4-pro": {
+      "cells": 2,
+      "completed": 2,
+      "failed": 0,
+      "planned": 0
+    }
+  },
+  "byFixture": {
+    "0114-html-jury-r2": {
+      "cells": 1,
+      "completed": 1,
+      "failed": 0,
+      "planned": 0
+    },
+    "0114-react-jury-r7": {
+      "cells": 1,
+      "completed": 1,
+      "failed": 0,
+      "planned": 0
+    }
+  },
+  "averages": {
+    "componentReuseScore": 1,
+    "craftBlockingCount": 0,
+    "languageFactFidelityScore": 1,
+    "jury_composite": 7.55,
+    "promptTokens": 195233,
+    "completionTokens": 11518
+  }
+}

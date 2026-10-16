@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo Html Project3 - Screens Index</title>
+    <link rel="stylesheet" href="./design-system/tokens.css" />
+    <link rel="stylesheet" href="./design-system/components.css" />
+    <style>
+      .screen-index-shell {
+        box-sizing: border-box;
+        min-height: 100vh;
+        padding: clamp(32px, 5vw, 72px);
+      }
+
+      .screen-index-header {
+        display: grid;
+        gap: 12px;
+        max-width: 880px;
+        padding-bottom: 28px;
+        border-bottom: 1px solid var(--color-border, #d1d5db);
+      }
+
+      .screen-index-eyebrow {
+        margin: 0;
+        color: var(--color-accent, #14532d);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .screen-index-title {
+        margin: 0;
+        color: var(--color-text, #111827);
+        font-size: clamp(32px, 4vw, 52px);
+        line-height: 1.05;
+      }
+
+      .screen-index-lead {
+        margin: 0;
+        color: var(--color-muted, #6b7280);
+        font-size: 17px;
+        line-height: 1.6;
+      }
+
+      .screen-index-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+        margin-top: 32px;
+      }
+
+      .screen-index-card {
+        display: grid;
+        gap: 12px;
+        min-height: 160px;
+        padding: 20px;
+        color: inherit;
+        text-decoration: none;
+        border: 1px solid var(--color-border, #d1d5db);
+        border-radius: var(--radius-control, 8px);
+        background: var(--color-bg, #ffffff);
+      }
+
+      .screen-index-card:hover {
+        border-color: var(--color-accent, #14532d);
+      }
+
+      .screen-index-card h2 {
+        margin: 0;
+        color: var(--color-text, #111827);
+        font-size: 20px;
+        line-height: 1.25;
+      }
+
+      .screen-index-card p {
+        margin: 0;
+        color: var(--color-muted, #6b7280);
+        line-height: 1.5;
+      }
+
+      .screen-index-path {
+        align-self: end;
+        color: var(--color-muted, #6b7280);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 12px;
+      }
+
+      .screen-index-empty {
+        margin-top: 32px;
+        max-width: 520px;
+        padding: 20px;
+        color: var(--color-muted, #6b7280);
+        border: 1px dashed var(--color-border, #d1d5db);
+        border-radius: var(--radius-control, 8px);
+      }
+    </style>
+  </head>
+  <body data-sd-screen-root data-sd-managed-screen-index>
+    <main class="screen-index-shell" aria-label="Screens Index">
+      <header class="screen-index-header">
+        <p class="screen-index-eyebrow">HTML-first project</p>
+        <h1 class="screen-index-title">Screens Index</h1>
+        <p class="screen-index-lead">Demo Html Project3 pages live in dedicated HTML files. Use this page as the project home and navigation index.</p>
+      </header>
+                                                            <!-- sber-designer:screen-index:start -->
+      <section class="screen-index-grid" aria-label="Project screens">
+        <a class="screen-index-card" href="./pages/ds-adapter-smoke.html" data-screen-id="page-pages-ds-adapter-smoke">
+          <h2>IBP DS adapter smoke</h2>
+          <p>Static HTML page.</p>
+          <span class="screen-index-path">pages/ds-adapter-smoke.html</span>
+        </a>
+      </section>
+      <!-- sber-designer:screen-index:end -->
+    </main>
+  </body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Type" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Типографика — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --ink:        var(--text-black);
+    --ink-2:      var(--text-primary);
+    --ink-3:      var(--text-secondary);
+    --line:       var(--border-light);
+    --line-2:     var(--border-light);
+    --bg:         var(--bg-tile);
+    --bg-soft:    var(--bgtable-row-hover);
+    --accent:     var(--primary);
+    --chip-bg:    var(--tertiary);
+    --pad:        clamp(24px, 5vw, 72px);
+  }
+
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    margin: 0;
+    font-family: var(--font-text), system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg-page);
+    background-attachment: fixed;
+  }
+
+  /* ---------- Page frame ---------- */
+  .page { max-width: 1240px; margin: 0 auto; padding: clamp(40px, 7vw, 96px) var(--pad) 120px; }
+
+  .masthead { border-bottom: 1px solid var(--line); padding-bottom: 40px; margin-bottom: 8px; }
+  .masthead .meta { font: var(--type-body-xs); color: var(--text-inactive); display:flex; gap:24px; margin:0 0 18px; }
+  .masthead .meta b { color: var(--text-secondary); font-weight:600; }
+  .eyebrow {
+    font: var(--type-button-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  .masthead h1 { font: var(--type-h1); letter-spacing: 0; margin: 0 0 20px; color: var(--ink); }
+  @media (max-width: 600px) { .masthead h1 { font-size: 40px; line-height: 48px; } }
+  .masthead p {
+    font: var(--type-body-l);
+    color: var(--ink-2);
+    max-width: 56ch;
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  /* meta strip */
+  .families {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    margin: 48px 0 8px;
+  }
+  @media (max-width: 760px) { .families { grid-template-columns: 1fr; } }
+  .family { background: var(--bg); padding: 28px 30px; }
+  .family .glyphs { font-family: var(--font-display); font-size: 46px; line-height: 1; color: var(--ink); margin-bottom: 18px; }
+  .family.text .glyphs   { font-family: var(--font-text); }
+  .family.screen .glyphs { font-family: var(--font-screen); }
+  .family h3 { font: var(--type-h6-strong); margin: 0 0 6px; }
+  .family .role { font: var(--type-body-s); color: var(--ink-3); margin: 0 0 14px; }
+  .family .weights { display: flex; flex-wrap: wrap; gap: 6px; }
+  .family .weights span {
+    font: var(--type-button-xs);
+    color: var(--ink-2);
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
+
+  /* ---------- Section ---------- */
+  .section { margin-top: 72px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 8px;
+    padding-bottom: 16px;
+  }
+  .section-head h2 { font: var(--type-h4-strong); margin: 0; }
+  .section-head .count { font: var(--type-body-s); color: var(--ink-3); }
+  .section-head .fam {
+    margin-left: auto;
+    font: var(--type-button-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* ---------- Specimen rows ---------- */
+  .rows { border-top: 1px solid var(--line); }
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 40px;
+    align-items: center;
+    padding: 26px 4px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .row:hover { background: var(--bg-soft); }
+  .specimen { min-width: 0; overflow: hidden; }
+  .specimen .name {
+    font: var(--type-body-xs);
+    color: var(--accent);
+    margin: 0 0 10px;
+    letter-spacing: 0.04em;
+  }
+  .specimen .sample { color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .specimen .usage {
+    font: var(--type-body-s);
+    color: var(--ink-3);
+    margin: 12px 0 0;
+    max-width: 64ch;
+    text-wrap: pretty;
+    white-space: normal;
+  }
+
+  .spec {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 4px 22px;
+    align-content: center;
+    justify-content: end;
+  }
+  .spec .pair { text-align: right; }
+  .spec .k { font: var(--type-button-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .spec .v { font: var(--type-body-s-strong); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .spec .v.font { color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .row { grid-template-columns: 1fr; gap: 18px; }
+    .spec { justify-content: start; grid-template-columns: repeat(4, auto); gap: 4px 18px; }
+    .spec .pair { text-align: left; }
+    .specimen .sample { white-space: normal; }
+  }
+
+  footer.page-foot {
+    margin-top: 96px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font: var(--type-body-s);
+    color: var(--ink-3);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>
+  <link rel="stylesheet" href="../../styles/ds-nav.css">
+</head>
+<body>
+<main class="page" data-screen-label="Typography">
+
+  <header class="masthead">
+    <div class="meta"><span>Версия: <b>v1.0</b></span><span>Обновлено: <b>30.06.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Основы</p>
+    <h1>Типографика</h1>
+    <p>Три гарнитуры SB Sans формируют всю текстовую иерархию продукта. Display — для заголовков, Text — для контента, Screen — для элементов управления. Letter spacing везде равен 0.</p>
+  </header>
+
+  <section class="families">
+    <div class="family display">
+      <div class="glyphs">Ag</div>
+      <h3>SB Sans Display</h3>
+      <p class="role">Заголовки H1–H6</p>
+      <div class="weights"><span>Light</span><span>Regular</span><span>Semibold</span></div>
+    </div>
+    <div class="family text">
+      <div class="glyphs">Ag</div>
+      <h3>SB Sans Text</h3>
+      <p class="role">Основной текст Body</p>
+      <div class="weights"><span>Regular</span><span>Semibold</span></div>
+    </div>
+    <div class="family screen">
+      <div class="glyphs">Ag</div>
+      <h3>SB Sans Screen</h3>
+      <p class="role">Текст кнопок Button</p>
+      <div class="weights"><span>Regular</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== HEADINGS ===================== -->
+  <section class="section" data-screen-label="Headings">
+    <div class="section-head">
+      <h2>Заголовки</h2>
+      <span class="count">10 стилей</span>
+      <span class="fam">SB Sans Display</span>
+    </div>
+    <div class="rows" id="headings"></div>
+  </section>
+
+  <!-- ===================== BODY ===================== -->
+  <section class="section" data-screen-label="Body">
+    <div class="section-head">
+      <h2>Основной текст</h2>
+      <span class="count">9 стилей</span>
+      <span class="fam">SB Sans Text</span>
+    </div>
+    <div class="rows" id="body"></div>
+  </section>
+
+  <!-- ===================== BUTTONS ===================== -->
+  <section class="section" data-screen-label="Buttons">
+    <div class="section-head">
+      <h2>Текст кнопок</h2>
+      <span class="count">3 стиля</span>
+      <span class="fam">SB Sans Screen</span>
+    </div>
+    <div class="rows" id="buttons"></div>
+  </section>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · Типографика</span>
+    <span>SB Sans Display · Text · Screen — Letter spacing 0</span>
+  </footer>
+
+</main>
+
+<script>
+  // token: [class, name, sample, font, weight, size, line-height, usage]
+  const headings = [
+    ["ds-h1",        "H1",        "Заголовок",     "Display", "Light",    52, 68, "В редких случаях для экранов ошибки"],
+    ["ds-h2",        "H2",        "Заголовок",     "Display", "Light",    42, 52, "—"],
+    ["ds-h3-strong", "H3 Strong", "Заголовок",     "Display", "Semibold", 28, 32, "Основной заголовок страницы"],
+    ["ds-h3",        "H3",        "Заголовок",     "Display", "Regular",  28, 32, "—"],
+    ["ds-h4-strong", "H4 Strong", "Заголовок",     "Display", "Semibold", 22, 24, "Заголовок шапки модального окна"],
+    ["ds-h4",        "H4",        "Заголовок",     "Display", "Regular",  22, 24, "—"],
+    ["ds-h5-strong", "H5 Strong", "Заголовок",     "Display", "Semibold", 18, 24, "Заголовок информационных карточек-плиток на страницах"],
+    ["ds-h5",        "H5",        "Заголовок",     "Display", "Regular",  18, 24, "—"],
+    ["ds-h6-strong", "H6 Strong", "Заголовок",     "Display", "Semibold", 16, 20, "Заголовки разделов внутри модального окна · заголовок в интерактивных плитках (например Card_contractor)"],
+    ["ds-h6",        "H6",        "Заголовок",     "Display", "Regular",  16, 20, "Подзаголовок некоторых блоков и разделов, где избыточно применение более акцентного H6 Strong"],
+  ];
+
+  const body = [
+    ["ds-body-xl",        "Body XL",        "Основной текст", "Text", "Regular",  24, 32, "—"],
+    ["ds-body-xl-strong", "Body XL Strong", "Основной текст", "Text", "Semibold", 24, 32, "—"],
+    ["ds-body-l",         "Body L",         "Основной текст", "Text", "Regular",  18, 24, "Заголовки в алертах"],
+    ["ds-body-l-strong",  "Body L Strong",  "Основной текст", "Text", "Semibold", 18, 24, "—"],
+    ["ds-body-m",         "Body M",         "Основной текст", "Text", "Regular",  16, 20, "Основной текст на всех страницах · текст чекбоксов и радио-кнопок · текст в инпутах и информационных полях размера M · текст в табах размера M"],
+    ["ds-body-m-strong",  "Body M Strong",  "Основной текст", "Text", "Semibold", 16, 20, "Акцентный текст на страницах"],
+    ["ds-body-s",         "Body S",         "Основной текст", "Text", "Regular",  14, 16, "Текст в хлебных крошках · текст в чипах размера S · заголовки в снек-баре · текст в тултипах · текст в ячейках таблиц"],
+    ["ds-body-s-strong",  "Body S Strong",  "Основной текст", "Text", "Semibold", 14, 16, "—"],
+    ["ds-body-xs",        "Body XS",        "Основной текст", "Text", "Regular",  12, 16, "Лейбл инпутов, дропдаун-инпутов и информационных полей · текст в алертах · текст в снек-баре"],
+  ];
+
+  const buttons = [
+    ["ds-button-m",  "Button M",  "Текст кнопки", "Screen", "Regular", 16, 24, "Текст в кнопках размера M"],
+    ["ds-button-s",  "Button S",  "Текст кнопки", "Screen", "Regular", 14, 20, "Текст в кнопках размера S и XS"],
+    ["ds-button-xs", "Button XS", "Текст кнопки", "Screen", "Regular", 12, 16, "—"],
+  ];
+
+  function specPair(k, v, isFont) {
+    return `<div class="pair"><div class="k">${k}</div><div class="v${isFont ? ' font' : ''}">${v}</div></div>`;
+  }
+
+  function render(targetId, tokens) {
+    const html = tokens.map(([cls, name, sample, font, weight, size, lh, usage]) => {
+      const usageHtml = usage === "—"
+        ? `<p class="usage">—</p>`
+        : `<p class="usage">${usage}</p>`;
+      return `
+      <div class="row">
+        <div class="specimen">
+          <p class="name">${name}</p>
+          <div class="sample ${cls}">${sample}</div>
+          ${usageHtml}
+        </div>
+        <div class="spec">
+          ${specPair("Font", "SB Sans " + font, true)}
+          ${specPair("Weight", weight)}
+          ${specPair("Size", size)}
+          ${specPair("Line", lh)}
+        </div>
+      </div>`;
+    }).join("");
+    document.getElementById(targetId).innerHTML = html;
+  }
+
+  render("headings", headings);
+  render("body", body);
+  render("buttons", buttons);
+</script>
+<script src="../../scripts/ds-nav.js"></script>
+</body>
+</html>

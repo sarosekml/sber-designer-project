@@ -1,0 +1,330 @@
+{
+  "molecules": {
+    "inputtext": {
+      "borderRadius": {
+        "value": "4",
+        "type": "borderRadius"
+      },
+      "border": {
+        "width": {
+          "value": "1",
+          "type": "borderWidth"
+        },
+        "style": {
+          "value": "solid",
+          "type": "other"
+        }
+      },
+      "size": {
+        "lg": {
+          "input": {
+            "height": {
+              "value": "48",
+              "type": "sizing"
+            },
+            "padding": {
+              "value": "12",
+              "type": "spacing"
+            }
+          },
+          "content": {
+            "height": {
+              "value": "24",
+              "type": "sizing"
+            },
+            "fontSize": {
+              "value": "{font.size.18}",
+              "type": "fontSizes"
+            },
+            "lineHeight": {
+              "value": "{font.lineHeight.24}",
+              "type": "lineHeights"
+            }
+          },
+          "total": {
+            "noHelper": {
+              "value": "68",
+              "type": "sizing"
+            },
+            "withHelper": {
+              "value": "88",
+              "type": "sizing"
+            }
+          }
+        },
+        "md": {
+          "input": {
+            "height": {
+              "value": "40",
+              "type": "sizing"
+            },
+            "padding": {
+              "value": "10",
+              "type": "spacing"
+            }
+          },
+          "content": {
+            "height": {
+              "value": "20",
+              "type": "sizing"
+            },
+            "fontSize": {
+              "value": "{font.size.16}",
+              "type": "fontSizes"
+            },
+            "lineHeight": {
+              "value": "{font.lineHeight.20}",
+              "type": "lineHeights"
+            }
+          },
+          "total": {
+            "noHelper": {
+              "value": "60",
+              "type": "sizing"
+            },
+            "withHelper": {
+              "value": "80",
+              "type": "sizing"
+            }
+          }
+        },
+        "sm": {
+          "input": {
+            "height": {
+              "value": "32",
+              "type": "sizing"
+            },
+            "padding": {
+              "value": "8",
+              "type": "spacing"
+            }
+          },
+          "content": {
+            "height": {
+              "value": "16",
+              "type": "sizing"
+            },
+            "fontSize": {
+              "value": "{font.size.14}",
+              "type": "fontSizes"
+            },
+            "lineHeight": {
+              "value": "{font.lineHeight.16}",
+              "type": "lineHeights"
+            }
+          },
+          "total": {
+            "noHelper": {
+              "value": "52",
+              "type": "sizing"
+            },
+            "withHelper": {
+              "value": "72",
+              "type": "sizing"
+            }
+          }
+        }
+      },
+      "label": {
+        "height": {
+          "value": "16",
+          "type": "sizing"
+        },
+        "gap": {
+          "value": "4",
+          "type": "spacing"
+        }
+      },
+      "helper": {
+        "height": {
+          "value": "16",
+          "type": "sizing"
+        },
+        "gap": {
+          "value": "4",
+          "type": "spacing"
+        },
+        "typography": {
+          "value": "{typography.BodyXSReg}",
+          "type": "typography"
+        }
+      },
+      "state": {
+        "default": {
+          "bg": {
+            "value": "{palette.BG.BGPopup}",
+            "type": "color"
+          },
+          "border": {
+            "value": "{palette.Border.BorderPrimary}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextPrimary}",
+            "type": "color"
+          },
+          "label": {
+            "value": "{palette.Text.TextSecondary}",
+            "type": "color"
+          }
+        },
+        "hover": {
+          "bg": {
+            "value": "{palette.BG.BGPopup}",
+            "type": "color"
+          },
+          "border": {
+            "value": "{palette.Primary.Primary}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextPrimary}",
+            "type": "color"
+          }
+        },
+        "focus": {
+          "bg": {
+            "value": "{palette.BG.BGPopup}",
+            "type": "color"
+          },
+          "border": {
+            "value": "{palette.Primary.Primary}",
+            "type": "color"
+          },
+          "outline": {
+            "value": "{palette.Primary.Primary}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextPrimary}",
+            "type": "color"
+          }
+        },
+        "error": {
+          "bg": {
+            "value": "{palette.BG.BGPopup}",
+            "type": "color"
+          },
+          "border": {
+            "value": "{palette.Error.Error}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextPrimary}",
+            "type": "color"
+          }
+        },
+        "error.focus": {
+          "bg": {
+            "value": "{palette.BG.BGPopup}",
+            "type": "color"
+          },
+          "border": {
+            "value": "{palette.Error.Error}",
+            "type": "color"
+          },
+          "outline": {
+            "value": "{palette.Error.Error}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextPrimary}",
+            "type": "color"
+          }
+        },
+        "warning": {
+          "bg": {
+            "value": "{palette.BG.BGPopup}",
+            "type": "color"
+          },
+          "border": {
+            "value": "{palette.Warning.Warning}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextPrimary}",
+            "type": "color"
+          }
+        },
+        "disabled": {
+          "bg": {
+            "value": "{palette.BG.BGPopup}",
+            "type": "color"
+          },
+          "border": {
+            "value": "{palette.Disabled.DisabledBorder}",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextInactive}",
+            "type": "color"
+          },
+          "label": {
+            "value": "{palette.Text.TextInactive}",
+            "type": "color"
+          }
+        },
+        "disabled.coloredBg": {
+          "bg": {
+            "value": "{palette.Disabled.DisabledBGSemiTransparent}",
+            "type": "color"
+          },
+          "border": {
+            "value": "#00000000",
+            "type": "color"
+          },
+          "text": {
+            "value": "{palette.Text.TextInactive}",
+            "type": "color"
+          },
+          "label": {
+            "value": "{palette.Text.TextInactive}",
+            "type": "color"
+          }
+        }
+      },
+      "icon": {
+        "color": {
+          "value": "{palette.Secondary.Secondary}",
+          "type": "color"
+        },
+        "color.disabled": {
+          "value": "{palette.Disabled.Disabled}",
+          "type": "color"
+        }
+      },
+      "readMode": {
+        "borderRadius": {
+          "value": "4",
+          "type": "borderRadius"
+        },
+        "bg.error": {
+          "value": "{palette.Error.ErrorBG}",
+          "type": "color"
+        },
+        "bg.error.hover": {
+          "value": "{palette.Error.ErrorBGDark}",
+          "type": "color"
+        },
+        "present": {
+          "border.dashed.color.default": {
+            "value": "{palette.Border.BorderPrimary}",
+            "type": "color"
+          },
+          "border.dashed.color.error": {
+            "value": "{palette.Error.Error}",
+            "type": "color"
+          },
+          "border.dashed.style": {
+            "value": "dashed",
+            "type": "other"
+          },
+          "border.dashed.width": {
+            "value": "1",
+            "type": "borderWidth"
+          }
+        }
+      }
+    }
+  }
+}

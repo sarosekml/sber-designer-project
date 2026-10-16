@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Активы · Equitas</title>
+<link rel="stylesheet" href="design-system.css" />
+<link rel="stylesheet" href="_shell.css" />
+<style>
+.tree-toggle { width: 14px; height: 14px; display: inline-grid; place-items: center; color: var(--c-text-3); transition: transform 120ms; cursor: pointer; }
+.tree-toggle.open { transform: rotate(90deg); }
+.industry-row td { background: var(--c-surface-2); font-weight: 600; font-size: 12px; color: var(--c-text); }
+.industry-row .cnt { color: var(--c-text-3); font-weight: 400; margin-left: 8px; }
+.bar-mini { height: 6px; border-radius: 999px; background: var(--c-surface-3); overflow: hidden; min-width: 80px; }
+.bar-mini > span { display: block; height: 100%; background: var(--c-accent); border-radius: 999px; }
+.geo-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--c-text-2); }
+.geo-pill .flag { width: 14px; height: 10px; border-radius: 2px; background: var(--c-surface-3); display: inline-block; }
+</style></head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><div class="bm">E</div><div class="n">Equitas</div></div>
+    <nav class="crumbs-top"><a href="Screens Index.html">Главная</a><span class="sep">/</span><span class="current">Активы</span></nav>
+    <div class="spacer"></div>
+    <label class="search-top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Поиск по фондам, активам, идеям…"/><span class="kbd">⌘K</span></label>
+    <button class="topbar-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5zM12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/></svg></button>
+    <button class="topbar-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dot-new"></span></button>
+    <div class="avatar avatar-sm avatar-emerald" style="margin-left: 4px;">АК</div>
+  </div>
+
+  <aside class="rail">
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 3l9 6v11a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
+    <button class="rail-ic is-active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5zM12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 6-6"/></svg></button>
+    <div class="foot"><button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg></button></div>
+  </aside>
+
+  <aside class="nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Виды</div>
+      <a href="#" class="nav-item active"><span class="n-l">Все активы</span><span class="num">186</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Избранные</span><span class="num">12</span></a>
+      <a href="#" class="nav-item"><span class="n-l">С идеями</span><span class="num">23</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Новые (30 дней)</span><span class="num">8</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">По фонду</div>
+      <a href="#" class="nav-item"><span class="n-l">Интеррос</span><span class="num">24</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Sigma Growth</span><span class="num">18</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Vostok Frontier</span><span class="num">14</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Север-Инфра</span><span class="num">9</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">По отрасли</div>
+      <a href="#" class="nav-item"><span class="n-l">Металлы и руды</span><span class="num">21</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Банки</span><span class="num">17</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Фармацевтика</span><span class="num">14</span></a>
+      <a href="#" class="nav-item"><span class="n-l">IT-услуги</span><span class="num">26</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Hospitality</span><span class="num">9</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">
+      <div class="ph-l"><h1>Активы</h1><div class="sub">186 активов · 12 отраслей · общая оценка 2,84 трлн ₽</div></div>
+      <div class="ph-r">
+        <div class="seg"><button><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button><button class="is-active"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button></div>
+        <button class="btn btn-secondary btn-sm">Экспорт</button>
+        <button class="btn btn-primary btn-sm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Добавить актив</button>
+      </div>
+    </div>
+
+    <div class="block" style="margin-bottom: 14px;">
+      <div class="block-body" style="padding: 12px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <label class="search-top" style="background: var(--c-surface-2); width: 280px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Найти актив или ISIN…"/></label>
+        <div class="select-wrap" style="width: 180px;"><select class="select" style="height: 32px; font-size: 12px;"><option>Все фонды</option><option>Интеррос</option><option>Sigma Growth</option></select></div>
+        <div class="select-wrap" style="width: 180px;"><select class="select" style="height: 32px; font-size: 12px;"><option>Все отрасли</option></select></div>
+        <div class="select-wrap" style="width: 140px;"><select class="select" style="height: 32px; font-size: 12px;"><option>Год: любой</option><option>2024</option><option>2025</option></select></div>
+        <div class="seg" style="margin-left: auto;"><button class="is-active">Активные</button><button>На паузе</button><button>Архив</button></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <div><div class="block-title">Активы по отраслям</div><div class="block-sub">сгруппировано · 13 строк</div></div>
+        <div class="row-sm"><button class="btn btn-ghost btn-sm">Свернуть всё</button><button class="btn btn-ghost btn-sm">Колонки</button></div>
+      </div>
+      <div class="block-body flush" style="overflow-x: auto;">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th class="cell-check"><label class="check"><input type="checkbox"/><span class="box"></span></label></th>
+              <th>Актив <span class="sort">↕</span></th>
+              <th>Фонд</th>
+              <th>География</th>
+              <th>Год</th>
+              <th class="is-num">Доля</th>
+              <th class="is-num">Инвестиции, ₽ <span class="sort">↕</span></th>
+              <th class="is-num">Текущая ст-ть, ₽</th>
+              <th class="is-num">Δ</th>
+              <th>Статус</th>
+              <th class="cell-actions"></th>
+            </tr>
+          </thead>
+          <tbody id="assets-body"></tbody>
+        </table>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-top: 1px solid var(--c-divider);">
+        <span class="t-caption">Показано 13 строк (3 группы свёрнуты)</span>
+        <div class="pager"><button disabled>‹</button><button class="is-active">1</button><button>2</button><button>3</button><button>›</button></div>
+      </div>
+    </div>
+  </main>
+
+  <aside class="ctx">
+    <div class="ctx-head"><div class="ctx-title">Аналитика портфеля</div><button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="ctx-body">
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">Доходность отраслей YTD</div></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 12.5px;">IT-услуги</span><span class="delta-up">+24,1%</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 12.5px;">Металлы и руды</span><span class="delta-up">+18,4%</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 12.5px;">Фармацевтика</span><span class="delta-up">+12,1%</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 12.5px;">Банки</span><span class="delta-up">+6,7%</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 12.5px;">Hospitality</span><span class="delta-down">−3,2%</span></div>
+        </div>
+      </div>
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">Концентрация</div></div>
+        <div class="ctx-meta-row"><span class="k">Топ-1 актив</span><span class="v">12,4%</span></div>
+        <div class="ctx-meta-row"><span class="k">Топ-5 активов</span><span class="v">38,2%</span></div>
+        <div class="ctx-meta-row"><span class="k">Топ-10 активов</span><span class="v">61,7%</span></div>
+      </div>
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">Идеи по активам</div><a class="title-act">Все →</a></div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; gap: 10px;"><span class="ai-badge" style="flex-shrink:0;">AI</span><div style="font-size: 12px;"><b>Buy-side</b> Порт Мурманск<div class="t-micro">Триггер: налоговая льгота</div></div></div>
+          <div style="display: flex; gap: 10px;"><span class="pill pill-strategic" style="flex-shrink:0;">SELL</span><div style="font-size: 12px;"><b>Снизить долю</b> в Atlas<div class="t-micro">Просадка 2 квартала подряд</div></div></div>
+          <div style="display: flex; gap: 10px;"><span class="pill pill-growth" style="flex-shrink:0;">HOLD</span><div style="font-size: 12px;"><b>Удерживать</b> Норникель<div class="t-micro">Цены металлов растут</div></div></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+const GROUPS = [
+  ['tag-metal', 'Металлы и руды', 21, [
+    ['Норильский Никель','RU0007288411','Интеррос','🇷🇺 Россия',1994,'31,9%','2 845 000','3 612 000', 27.0,'active'],
+    ['ГРК Быстринское','—','Интеррос','🇷🇺 Россия',2005,'50,1%','1 245 000','1 480 000', 18.9,'active'],
+    ['Полюс','RU000A0J','Север-Инфра','🇷🇺 Россия',2018,'4,8%','680 000','712 000', 4.7,'active'],
+  ]],
+  ['tag-bank', 'Банки', 17, [
+    ['Росбанк','RU0009029540','Интеррос','🇷🇺 Россия',2022,'8,1%','950 000','1 010 000', 6.3,'active'],
+    ['Т-банк','RU000A106','Sigma Growth','🇷🇺 Россия',2022,'2,4%','320 000','398 000', 24.4,'active'],
+    ['Банк Точка','—','Sigma Growth','🇷🇺 Россия',2025,'12,0%','320 000','315 000', -1.5,'paused'],
+  ]],
+  ['tag-pharma', 'Фармацевтика', 14, [
+    ['Петровакс Фарм','—','Газпром Pharma','🇷🇺 Россия',2014,'45,0%','320 000','512 000', 60.0,'active'],
+    ['Sea Biotech','US81421','Sea Biotech Fund','🇺🇸 США',2023,'6,2%','280 000','341 000', 21.7,'active'],
+  ]],
+  ['tag-it', 'Информационно-технологические услуги', 26, [
+    ['Яндекс','RU000A107','Sigma Growth','🇷🇺 Россия',2025,'9,9%','950 000','1 184 000', 24.6,'active'],
+    ['Орион Cloud','—','Орион AI','🇷🇺 Россия',2024,'18,5%','120 000','164 000', 36.7,'active'],
+    ['Рексофт','RU000A105','Технополис I','🇷🇺 Россия',2022,'14,2%','120 000','128 000', 6.7,'active'],
+  ]],
+  ['tag-hotel', 'Отели, рестораны и объекты досуга', 9, [
+    ['Реза Хутор','—','Север-Инфра','🇷🇺 Россия',2010,'30,0%','245 000','268 000', 9.4,'active'],
+    ['Турьев Хутор','—','Север-Инфра','🇷🇺 Россия',2025,'25,0%','145 000','142 000', -2.1,'paused'],
+  ]],
+];
+const STATUS = { active: ['status-active','Активен'], paused: ['status-paused','На паузе'], archived: ['status-archived','Архив'] };
+let html = '';
+GROUPS.forEach((g, gi) => {
+  const [tagCls, name, total, rows] = g;
+  html += `<tr class="industry-row"><td colspan="11">
+    <span class="tree-toggle open" data-grp="${gi}">▶</span>
+    <span class="tag ${tagCls}" style="margin-left: 8px;">${name}</span>
+    <span class="cnt">${total} активов · показано ${rows.length}</span>
+  </td></tr>`;
+  rows.forEach(r => {
+    const [aname, isin, fund, geo, year, share, inv, val, delta, st] = r;
+    const [stCls, stLbl] = STATUS[st];
+    const dCls = delta >= 0 ? 'delta-up' : 'delta-down';
+    const dSym = delta >= 0 ? '+' : '';
+    html += `<tr data-grp="${gi}" class="grp-row">
+      <td class="cell-check"><label class="check"><input type="checkbox"/><span class="box"></span></label></td>
+      <td><div style="display:flex;flex-direction:column;"><a href="Asset Page.html" style="font-weight:500;color:inherit;">${aname}</a><span class="t-micro mono">${isin}</span></div></td>
+      <td><span class="t-caption">${fund}</span></td>
+      <td><span class="geo-pill">${geo}</span></td>
+      <td class="is-muted tnum">${year}</td>
+      <td class="is-num tnum">${share}</td>
+      <td class="is-num tnum">${inv}</td>
+      <td class="is-num tnum">${val}</td>
+      <td class="is-num"><span class="${dCls}">${dSym}${delta.toFixed(1)}%</span></td>
+      <td><span class="status ${stCls}"><span class="d"></span>${stLbl}</span></td>
+      <td class="cell-actions"><button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button>
+    </tr>`;
+  });
+});
+document.getElementById('assets-body').innerHTML = html;
+
+document.querySelectorAll('.tree-toggle').forEach(t => t.addEventListener('click', e => {
+  const gi = t.dataset.grp;
+  t.classList.toggle('open');
+  document.querySelectorAll(`tr.grp-row[data-grp="${gi}"]`).forEach(r => {
+    r.style.display = t.classList.contains('open') ? '' : 'none';
+  });
+}));
+</script>
+</body></html>

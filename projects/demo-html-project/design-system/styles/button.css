@@ -1,0 +1,168 @@
+/* =========================================================================
+   Design System — Button
+   Types:  accent · outline · transparent
+   Sizes:  m (40) · s (32) · xs (24)
+   States: default · hover · active · disabled · loading
+   Text uses the Button M/S/XS typography tokens (SB Sans Screen).
+   Requires: typography.css, colors.css
+   ========================================================================= */
+
+:root {
+  /* derived button tints (from --primary) */
+  --btn-hover-bg:  color-mix(in srgb, var(--primary) 10%, #fff);
+  --btn-active-bg: color-mix(in srgb, var(--primary) 18%, #fff);
+  --btn-pale:      color-mix(in srgb, var(--primary) 45%, #fff);
+}
+
+.btn {
+  /* layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--btn-gap);
+  height: var(--btn-h);
+  padding: 0 var(--btn-px);
+  border-radius: var(--btn-radius);
+  border: 1px solid transparent;
+  box-sizing: border-box;
+
+  /* type — overridden per size below */
+  font: var(--type-button-m);
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* icons */
+.btn svg { flex: none; width: var(--btn-icon); height: var(--btn-icon); display: block; }
+.btn .btn__chevron { width: calc(var(--btn-icon) * .8); height: calc(var(--btn-icon) * .8); }
+
+/* ---------- sizes ---------------------------------------------------------- */
+.btn--m  { --btn-h: 40px; --btn-px: 16px; --btn-gap: 8px; --btn-iconpad: 8px; --btn-icon: 20px; --btn-radius: var(--radius-control); font: var(--type-button-m); }
+.btn--s  { --btn-h: 32px; --btn-px: 12px; --btn-gap: 6px; --btn-iconpad: 6px; --btn-icon: 18px; --btn-radius: var(--radius-control); font: var(--type-button-s); }
+.btn--xs { --btn-h: 24px; --btn-px: 8px;  --btn-gap: 4px; --btn-iconpad: 4px; --btn-icon: 16px; --btn-radius: var(--radius-control-s); font: var(--type-button-xs); }
+
+/* icon-only: square-ish, padding from icon-pad token */
+.btn--icon-only { padding: 0 var(--btn-iconpad); gap: 0; }
+
+/* ---------- type: ACCENT --------------------------------------------------- */
+.btn--accent {
+  background: var(--primary);
+  color: var(--text-on-dark);
+  border-color: var(--primary);
+}
+.btn--accent svg { color: var(--text-on-dark); }
+.btn--accent:hover  { background: var(--primary-dark); border-color: var(--primary-dark); }
+.btn--accent:active { background: var(--btn-pale);     border-color: var(--btn-pale); }
+
+/* ---------- type: OUTLINE -------------------------------------------------- */
+.btn--outline {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.btn--outline svg { color: var(--primary); }
+.btn--outline:hover  { background: var(--btn-hover-bg); }
+.btn--outline:active { background: var(--btn-active-bg); color: var(--btn-pale); border-color: var(--btn-pale); }
+.btn--outline:active svg { color: var(--btn-pale); }
+
+/* ---------- type: TRANSPARENT ---------------------------------------------- */
+.btn--transparent {
+  background: transparent;
+  color: var(--primary);
+  border-color: transparent;
+}
+.btn--transparent svg { color: var(--primary); }
+.btn--transparent:hover  { background: var(--btn-hover-bg); }
+.btn--transparent:active { background: var(--btn-active-bg); color: var(--btn-pale); }
+.btn--transparent:active svg { color: var(--btn-pale); }
+
+/* ---------- state: DISABLED ------------------------------------------------ */
+.btn:disabled,
+.btn--disabled { cursor: default; pointer-events: none; }
+
+.btn--accent:disabled,      .btn--accent.btn--disabled {
+  background: var(--disabled); border-color: var(--disabled); color: var(--text-on-dark);
+}
+.btn--accent:disabled svg,  .btn--accent.btn--disabled svg { color: var(--text-on-dark); }
+
+.btn--outline:disabled,     .btn--outline.btn--disabled {
+  background: transparent; border-color: var(--disabled); color: var(--text-inactive);
+}
+.btn--outline:disabled svg, .btn--outline.btn--disabled svg { color: var(--text-inactive); }
+
+.btn--transparent:disabled, .btn--transparent.btn--disabled {
+  background: transparent; color: var(--text-inactive);
+}
+.btn--transparent:disabled svg, .btn--transparent.btn--disabled svg { color: var(--text-inactive); }
+
+/* ---------- modifier: DANGER (деструктивное намерение) --------------------
+   Комбинируется с любым из трёх типов — меняет только цвет на токены Error,
+   форма/размер/паддинги не трогаются. Для диалогов подтверждения удаления. */
+.btn--danger.btn--accent {
+  background: var(--error); border-color: var(--error); color: var(--text-on-dark);
+}
+.btn--danger.btn--accent svg { color: var(--text-on-dark); }
+.btn--danger.btn--accent:hover  { background: var(--error-dark); border-color: var(--error-dark); }
+.btn--danger.btn--accent:active { background: var(--error-light); border-color: var(--error-light); }
+
+.btn--danger.btn--outline {
+  color: var(--error); border-color: var(--error);
+}
+.btn--danger.btn--outline svg { color: var(--error); }
+.btn--danger.btn--outline:hover  { background: var(--error-bg-light); }
+.btn--danger.btn--outline:active { background: var(--error-bg); color: var(--error-dark); border-color: var(--error-dark); }
+.btn--danger.btn--outline:active svg { color: var(--error-dark); }
+
+.btn--danger.btn--transparent { color: var(--error); }
+.btn--danger.btn--transparent svg { color: var(--error); }
+.btn--danger.btn--transparent:hover  { background: var(--error-bg-light); }
+.btn--danger.btn--transparent:active { background: var(--error-bg); color: var(--error-dark); }
+.btn--danger.btn--transparent:active svg { color: var(--error-dark); }
+
+/* forced states (документация) */
+.btn--danger.btn--accent.is-hover  { background: var(--error-dark); border-color: var(--error-dark); }
+.btn--danger.btn--accent.is-active { background: var(--error-light); border-color: var(--error-light); }
+.btn--danger.btn--outline.is-hover  { background: var(--error-bg-light); }
+.btn--danger.btn--outline.is-active { background: var(--error-bg); color: var(--error-dark); border-color: var(--error-dark); }
+.btn--danger.btn--transparent.is-hover  { background: var(--error-bg-light); }
+.btn--danger.btn--transparent.is-active { background: var(--error-bg); color: var(--error-dark); }
+
+/* ---------- modifier: FULLWIDTH -------------------------------------------- */
+.btn--fullwidth { width: 100%; }
+.btn--fullwidth.btn--icon-only { width: auto; }   /* icon-only never stretches */
+
+/* ---------- forced states (for documentation/specimens) -------------------- */
+.btn--accent.is-hover       { background: var(--primary-dark); border-color: var(--primary-dark); }
+.btn--accent.is-active      { background: var(--btn-pale); border-color: var(--btn-pale); }
+.btn--outline.is-hover      { background: var(--btn-hover-bg); }
+.btn--outline.is-active     { background: var(--btn-active-bg); color: var(--btn-pale); border-color: var(--btn-pale); }
+.btn--outline.is-active svg { color: var(--btn-pale); }
+.btn--transparent.is-hover  { background: var(--btn-hover-bg); }
+.btn--transparent.is-active { background: var(--btn-active-bg); color: var(--btn-pale); }
+.btn--transparent.is-active svg { color: var(--btn-pale); }
+
+/* ---------- state: LOADING ------------------------------------------------- */
+/* While loading the button is non-interactive (treated as disabled). */
+.btn--loading { pointer-events: none; }
+.btn__spinner {
+  flex: none;
+  width: var(--btn-icon);
+  height: var(--btn-icon);
+  border-radius: var(--radius-circle);
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  opacity: .9;
+  animation: btn-spin .7s linear infinite;
+}
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .btn__spinner { animation-duration: 1.6s; } }

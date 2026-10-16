@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Mock `gh` CLI for git route tests (task 0110 A6/A7). Deterministic, offline.
+#   gh --version                     → succeeds so ghAvailable() is true
+#   gh pr create …                   → prints a fixed PR URL
+#   gh pr view <n> --json state,url  → prints JSON; state from $GH_MOCK_PR_STATE
+#   gh pr edit …                     → no-op success
+set -euo pipefail
+
+if [ "${1:-}" = "--version" ]; then
+  echo "gh version 2.40.0 (mock)"
+  exit 0
+fi
+
+if [ "${1:-}" = "pr" ]; then
+  case "${2:-}" in
+    create)
+      echo "https://github.com/acme/demo/pull/7"
+      exit 0
+      ;;
+    view)
+      echo "{\"state\":\"${GH_MOCK_PR_STATE:-OPEN}\",\"url\":\"https://github.com/acme/demo/pull/7\"}"
+      exit 0
+      ;;
+    edit)
+      if [ "${GH_MOCK_EDIT_FAIL:-}" = "1" ]; then
+        echo "edit failed" >&2
+        exit 1
+      fi
+      exit 0
+      ;;
+  esac
+fi
+
+exit 0

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InputText — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/shadow.css">
+<link rel="stylesheet" href="../../styles/label-helper.css">
+<link rel="stylesheet" href="../../styles/chip.css">
+<link rel="stylesheet" href="../../styles/tooltip.css">
+<link rel="stylesheet" href="../../styles/table-cell.css">
+<link rel="stylesheet" href="../../styles/input.css">
+<link rel="stylesheet" href="../../styles/input-pages.css">
+<link rel="stylesheet" href="../../styles/ds-nav.css">
+<link rel="stylesheet" href="../../styles/ds-toc.css">
+<link rel="stylesheet" href="../../styles/pg-kit.css">
+</head>
+<body>
+<main class="page" data-screen-label="InputText">
+
+  <header class="masthead">
+    <div class="meta"><span>Версия: <b>v1.1</b></span><span>Обновлено: <b>09.07.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Компоненты</p>
+    <h1>InputText</h1>
+    <p class="lead">Базовое поле ввода произвольного текста. Собирается из компонентов подкачки <a class="inl" href="../loading/LabelHelper.html">LabelHelper</a> (метка и хелпер) и Input_Content (поле с рамкой: префикс / текст / постфикс, иконки и действия). На той же базе построены <a class="inl" href="InputDate.html">InputDate</a> и <a class="inl" href="InputAutocomplete.html">InputAutocomplete</a>, а также числовой вариант InputAmount.</p>
+  </header>
+
+  <!-- PLAYGROUND -->
+  <section class="section" data-screen-label="Playground">
+    <h2>Конструктор</h2>
+    <p class="desc">Соберите поле: размер, состояние, наполнение текстового слоя (префикс, постфикс, иконка поиска), действия и многострочный режим.</p>
+    <div class="panel pg">
+      <div class="pg__controls" id="pg-controls"></div>
+      <div class="pg__stage" id="pg-stage"></div>
+    </div>
+    <p class="pg__code" id="pg-code"></p>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" data-screen-label="Usage">
+    <h2>Использование</h2>
+    <p class="desc">InputText — поле для свободного текста: наименования, комментарии, реквизиты. Основной размер — M; размер S используется только внутри таблиц (Table Edit).</p>
+    <div class="panel">
+      <div class="use-grid">
+        <div class="use-block">
+          <div class="use-block__stage" id="use-form"></div>
+          <div class="use-block__cap">В форме — с меткой и хелпером; ширина поля задаётся сеткой формы.</div>
+        </div>
+        <div class="use-block">
+          <div class="use-block__stage" id="use-table"></div>
+          <div class="use-block__cap">Table Edit — размер S внутри ячейки таблицы, без метки и хелпера.</div>
+        </div>
+        <div class="use-block">
+          <div class="use-block__stage" id="use-amount"></div>
+          <div class="use-block__cap">InputAmount — числовой вариант с разрядами и постфиксом валюты.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsec" data-screen-label="WhenToUse">
+      <h3>Когда использовать</h3>
+      <ul class="bullets" style="margin-bottom:26px;">
+        <li>ввод произвольного текста, который нельзя выбрать из перечня: наименование, комментарий, реквизит;</li>
+        <li>ввод чисел и сумм — вариант InputAmount (разряды, запятая, децималы);</li>
+        <li>редактирование значения прямо в ячейке таблицы — размер S (Table Edit).</li>
+      </ul>
+      <p class="desc">Если значение выбирается из справочника — возьмите <a class="inl" href="InputAutocomplete.html">InputAutocomplete</a> или <a class="inl" href="Select.html">Select</a>. Для даты — <a class="inl" href="InputDate.html">InputDate</a>. Показ значения без редактирования — <a class="inl" href="ReadOnlyField.html">ReadOnlyField</a>.</p>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="section" data-screen-label="Anatomy">
+    <h2>Анатомия</h2>
+    <p class="desc">Поле состоит из метки, контейнера Input_Content с текстовым слоем и действиями, и хелпер-текста. Все части, кроме самого поля, опциональны.</p>
+    <div class="panel">
+      <div class="anat">
+        <div class="anat__stage" id="anat-diagram"></div>
+        <ul class="anat__legend">
+          <li><span class="n"></span><span class="t"><span class="k">Label</span><span class="d"> — метка поля, компонент подкачки <code class="tok">.ds-label</code> (Body XS)</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Поле (Input_Content)</span><span class="d"> — рамка 1px, радиус 8px, высота 40px (M)</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Текстовый слой (Text_MASTER)</span><span class="d"> — иконка поиска · префикс · текст · постфикс</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Действия (Input_Action)</span><span class="d"> — информер и крестик очистки, справа (информер левее крестика)</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Helper</span><span class="d"> — подсказка под полем, <code class="tok">.ds-helper</code> (Body XS)</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- VARIANTS -->
+  <section class="section" data-screen-label="Variants">
+    <h2>Варианты</h2>
+    <p class="desc">Оси конфигурации: наполнение текстового слоя, многострочный режим, числовой InputAmount и табличный Table Edit.</p>
+
+    <div class="subsec" data-screen-label="ContentVariants">
+      <h3>Текстовый слой</h3>
+      <p class="desc">Слой Text_MASTER комбинирует префикс, текст и постфикс с иконкой поиска слева. Все элементы независимы; лишние не показываются.</p>
+      <div class="panel"><div class="demo-grid" id="var-content"></div></div>
+    </div>
+
+    <div class="subsec" data-screen-label="Multiline">
+      <h3>Многострочный</h3>
+      <p class="desc">Для длинного текста (комментарии, описания) поле растёт по высоте. Действия прижаты к верхней строке.</p>
+      <div class="panel"><div class="demo-grid" id="var-multiline"></div></div>
+    </div>
+
+    <div class="subsec" data-screen-label="InputAmount">
+      <h3>InputAmount</h3>
+      <p class="desc tight">Вариант для ввода числовых значений; полностью наследует стили InputText. Правила ввода:</p>
+      <ul class="bullets" style="margin-bottom:26px;">
+        <li>вводятся только цифры, точка, запятая и минус — остальные знаки игнорируются;</li>
+        <li>точка при вводе заменяется на запятую;</li>
+        <li>целая часть разделяется на разряды по 3 знака;</li>
+        <li>по умолчанию после запятой два знака; длина децималов настраивается;</li>
+        <li>незначащие нули убираются при потере фокуса («01» → «1», «…,010» → «…,01»); запись «1,00» с двумя нулями допустима.</li>
+      </ul>
+      <div class="panel"><div class="demo-grid" id="var-amount"></div></div>
+    </div>
+
+    <div class="subsec" data-screen-label="TableEdit">
+      <h3>Table Edit</h3>
+      <p class="desc">Вариант поля в таблице: размер S, никогда не содержит метку и хелпер. В остальном полностью идентичен обычному полю — со всеми состояниями и видами контента.</p>
+      <div class="panel"><div id="var-table"></div></div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="section" data-screen-label="Sizes">
+    <h2>Размеры</h2>
+    <p class="desc">Два размера. M — основной размер поля в формах и фильтрах. S — только для вариантов, используемых в таблицах (Table Edit). Ширина поля задаётся контейнером.</p>
+    <div class="panel"><div class="demo-grid" id="sizes-demo"></div></div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="section" data-screen-label="Content">
+    <h2>Контент</h2>
+    <p class="desc tight">Правила текста в поле и вокруг него:</p>
+    <ul class="bullets" style="margin-bottom:26px;">
+      <li>метка — существительное без двоеточия: «ИНН контрагента», не «Введите ИНН:»;</li>
+      <li>плейсхолдер не дублирует метку — это формат или пример значения («Например, 7707083893»);</li>
+      <li>хелпер — короткое правило заполнения; в состоянии Error заменяется текстом ошибки;</li>
+      <li>префикс и постфикс — единицы и неизменяемые части значения (₽, %, «От»), не вводятся пользователем;</li>
+      <li>текст длиннее поля прокручивается внутри однострочного поля; для заведомо длинного текста берите многострочный вариант.</li>
+    </ul>
+    <div class="panel"><div class="demo-grid" id="content-demo"></div></div>
+  </section>
+
+  <!-- BEHAVIOR -->
+  <section class="section" data-screen-label="Behavior">
+    <h2>Поведение</h2>
+    <p class="desc">Плейсхолдер, очистка и адаптивность. Все примеры живые — печатайте в полях.</p>
+
+    <div class="subsec" data-screen-label="PlaceholderClear">
+      <h3>Плейсхолдер и очистка</h3>
+      <p class="desc">Пустое поле по умолчанию не отображает ничего; при необходимости в него помещается плейсхолдер. Плейсхолдер виден, пока поле не перейдёт в Focus и не начнётся ввод. Крестик появляется только у заполненного поля; если пользователь очистил поле — по потере фокуса оно возвращается в пустое состояние.</p>
+      <div class="panel"><div class="demo-grid" id="beh-live"></div></div>
+    </div>
+
+    <div class="subsec" data-screen-label="Adaptive">
+      <h3>Адаптивность</h3>
+      <p class="desc">Собственной ширины у поля нет — её задаёт контейнер (сетка формы, ячейка таблицы). Высота фиксирована по размеру; растёт только многострочный вариант.</p>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="section" data-screen-label="States">
+    <h2>Состояния</h2>
+    <p class="desc">Восемь состояний, общих для всех типов поля (InputText, InputDate, InputAutocomplete). Тултип с текстом ошибки или предупреждения появляется в состояниях ErrorFocus и WarningFocus.</p>
+    <div class="panel"><div class="demo-grid" id="states-demo"></div></div>
+
+    <div class="subsec" data-screen-label="FillStates">
+      <h3>Пусто · Плейсхолдер · Заполнено</h3>
+      <div class="panel"><div class="demo-grid" id="states-fill"></div></div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" data-screen-label="A11y">
+    <h2>Доступность</h2>
+    <p class="desc">Метка связывается с контролом через <code class="tok">label[for]</code>, хелпер и текст ошибки — через <code class="tok">aria-describedby</code>. Ошибка помечается <code class="tok">aria-invalid="true"</code> и передаётся не только цветом: текст ошибки выводится в хелпере или тултипе. Крестик очистки — настоящая кнопка с <code class="tok">aria-label</code>.</p>
+    <div class="panel" style="max-width:640px;">
+      <p class="desc tight" style="margin-bottom:18px;">Клавиатура</p>
+      <table class="ref-table" id="kbd-table"><tbody>
+        <tr><td style="width:180px;"><kbd>Tab</kbd></td><td class="dsc">фокус в поле; следующий Tab — на крестик очистки (если есть)</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td class="dsc">отменяет незафиксированный ввод (если реализовано формой)</td></tr>
+        <tr><td><kbd>Enter</kbd></td><td class="dsc">подтверждает значение / отправляет форму</td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="section" data-screen-label="Typography">
+    <h2>Типографика</h2>
+    <p class="desc">Текст поля набирается гарнитурой <b>SB Sans Text</b>. Метка и хелпер — Body XS.</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="ref-table" id="typo-table">
+        <thead><tr><th>Часть</th><th>Образец</th><th>Токен</th><th>Размер / интерлиньяж</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section class="section" data-screen-label="Colors">
+    <h2>Цвета</h2>
+    <p class="desc">Компонент использует только семантические токены. Рамка — <code class="tok">--border-primary</code>, фокус — <code class="tok">--primary</code>, ошибка — <code class="tok">--error</code>, предупреждение — <code class="tok">--warning</code>.</p>
+    <div class="color-ref" id="color-ref"></div>
+  </section>
+
+  <!-- DEVELOPER HANDOFF -->
+  <section class="section" data-screen-label="Dev">
+    <h2>Для разработчиков</h2>
+    <p class="desc">Хендофф-пакет: точные размеры, эталонная структура DOM, поведение и рекомендуемый API. Не привязан к стеку — команда, которая собирает компонент на React, берёт отсюда нужное для вёрстки.</p>
+
+    <p class="subhead">Точные размеры (redline)</p>
+    <p class="desc tight">Значения измерены на живом экземпляре компонента (<code class="tok">getComputedStyle</code>), источник — токены в <code class="tok">styles/input.css</code>.</p>
+    <div class="panel" style="padding:8px 10px; margin-bottom:34px;">
+      <table class="dev-table" id="dev-spec-table">
+        <thead><tr><th>Параметр</th><th>M</th><th>S (Table Edit)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="dev-intro">
+      <span class="req">Подключить (если переиспользуете этот CSS напрямую):</span>
+      <code class="tok">styles/typography.css</code>
+      <code class="tok">styles/colors.css</code>
+      <code class="tok">styles/radius.css</code>
+      <code class="tok">styles/label-helper.css</code>
+      <code class="tok">styles/input.css</code>
+    </div>
+
+    <p class="subhead">Анатомия DOM <span class="req">— эталонная структура, имена классов условны, важны сами элементы и их роли/состояния</span></p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Разметка · HTML (эталонная реализация ДС)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-html"><span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"inp inp--m"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;label</span> <span class="tk-attr">class=</span><span class="tk-val">"ds-label ds-label--left"</span> <span class="tk-attr">for=</span><span class="tk-val">"inn"</span><span class="tk-tag">&gt;&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"ds-label__text"</span><span class="tk-tag">&gt;</span>ИНН контрагента<span class="tk-tag">&lt;/span&gt;&lt;/label&gt;</span>
+
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__field"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-cm">&lt;!-- текстовый слой: каждый элемент опционален --&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__lead"</span><span class="tk-tag">&gt;</span>…svg поиск…<span class="tk-tag">&lt;/span&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__prefix"</span><span class="tk-tag">&gt;</span>Pref<span class="tk-tag">&lt;/span&gt;</span>
+    <span class="tk-tag">&lt;input</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__control"</span> <span class="tk-attr">id=</span><span class="tk-val">"inn"</span> <span class="tk-attr">aria-describedby=</span><span class="tk-val">"inn-helper"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__postfix"</span><span class="tk-tag">&gt;</span>Postf<span class="tk-tag">&lt;/span&gt;</span>
+
+    <span class="tk-cm">&lt;!-- действия слева направо: информер, крестик очистки --&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__acts"</span><span class="tk-tag">&gt;</span>
+      <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__act inp__act--static"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Подсказка"</span><span class="tk-tag">&gt;</span>…ⓘ…<span class="tk-tag">&lt;/button&gt;</span>
+      <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__act"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Очистить поле"</span><span class="tk-tag">&gt;</span>…✕…<span class="tk-tag">&lt;/button&gt;</span>
+    <span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;/div&gt;</span>
+
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"ds-helper ds-helper--left"</span> <span class="tk-attr">id=</span><span class="tk-val">"inn-helper"</span><span class="tk-tag">&gt;</span>10 или 12 цифр<span class="tk-tag">&lt;/span&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span>
+
+<span class="tk-cm">&lt;!-- состояния: модификаторы на корне --&gt;</span>
+<span class="tk-cm">&lt;!-- .inp--error · .inp--warning · .inp--disabled · .is-focus/.is-hover (форсированно) --&gt;</span>
+<span class="tk-cm">&lt;!-- Table Edit: .inp.inp--s без label и helper --&gt;</span>
+<span class="tk-cm">&lt;!-- многострочный: .inp--multiline + textarea.inp__control --&gt;</span></code></pre>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Поведение · псевдокод (framework-agnostic)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-js"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-js"><span class="tk-cm">// 1. Крестик очистки: показывать только когда поле непустое и не disabled.</span>
+<span class="tk-cm">//    Клик → очистить значение, вернуть фокус в поле, вызвать onChange('').</span>
+
+<span class="tk-cm">// 2. Плейсхолдер: нативный placeholder; исчезает при вводе, а не при фокусе.</span>
+<span class="tk-cm">//    Очищенное поле по потере фокуса возвращается в пустое состояние.</span>
+
+<span class="tk-cm">// 3. Ошибка/предупреждение: тултип с текстом показывается при фокусе поля</span>
+<span class="tk-cm">//    (ErrorFocus / WarningFocus) и скрывается по потере фокуса.</span>
+
+<span class="tk-cm">// 4. InputAmount: фильтровать ввод [0-9.,-]; '.' → ','; группировать целую</span>
+<span class="tk-cm">//    часть по 3 знака; на blur — обрезать децималы и незначащие нули.</span>
+
+<span class="tk-cm">// 5. Многострочный: авторост textarea по scrollHeight до max-высоты,</span>
+<span class="tk-cm">//    дальше — внутренний скролл.</span></code></pre>
+    </div>
+
+    <p class="subhead mt">Рекомендуемый API компонента (React)</p>
+    <p class="desc tight">Форма пропсов — предложение, а не обязательный контракт; адаптируйте под конвенции вашей кодовой базы.</p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">InputText.types.ts</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-api"><span class="tk-attr">type</span> InputSize   = <span class="tk-val">'m'</span> | <span class="tk-val">'s'</span>;            <span class="tk-cm">// s — только Table Edit</span>
+<span class="tk-attr">type</span> InputStatus = <span class="tk-val">'default'</span> | <span class="tk-val">'error'</span> | <span class="tk-val">'warning'</span>;
+
+<span class="tk-attr">interface</span> InputTextProps {
+  value: <span class="tk-attr">string</span>;
+  onChange(value: <span class="tk-attr">string</span>): <span class="tk-attr">void</span>;
+  size?: InputSize;                 <span class="tk-cm">// по умолчанию 'm'</span>
+  label?: <span class="tk-attr">string</span>;                  <span class="tk-cm">// не рендерится в Table Edit</span>
+  helper?: <span class="tk-attr">string</span>;
+  placeholder?: <span class="tk-attr">string</span>;
+  status?: InputStatus;
+  statusMessage?: <span class="tk-attr">string</span>;          <span class="tk-cm">// тултип при фокусе (Error/Warning)</span>
+  prefix?: <span class="tk-attr">string</span>;
+  postfix?: <span class="tk-attr">string</span>;
+  searchIcon?: <span class="tk-attr">boolean</span>;            <span class="tk-cm">// иконка поиска слева</span>
+  clearable?: <span class="tk-attr">boolean</span>;             <span class="tk-cm">// по умолчанию true</span>
+  informer?: React.ReactNode;       <span class="tk-cm">// кнопка ⓘ + содержимое подсказки</span>
+  multiline?: <span class="tk-attr">boolean</span>;
+  amount?: <span class="tk-attr">boolean</span>;                <span class="tk-cm">// режим InputAmount</span>
+  decimals?: <span class="tk-attr">number</span>;               <span class="tk-cm">// длина дробной части, по умолчанию 2</span>
+  disabled?: <span class="tk-attr">boolean</span>;
+}</code></pre>
+    </div>
+
+    <p class="subhead mt">Справочник классов и атрибутов</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table">
+        <thead><tr><th>Класс / атрибут</th><th>На чём</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code class="tok">.inp</code></td><td>div</td><td class="dsc">Корень: метка + поле + хелпер; ширина задаётся контейнером</td></tr>
+          <tr><td><code class="tok">.inp--m / .inp--s</code></td><td>div</td><td class="dsc">Размер: 40px / 32px (S — только Table Edit)</td></tr>
+          <tr><td><code class="tok">.inp--error / .inp--warning</code></td><td>div</td><td class="dsc">Статус: рамка и хелпер в тоне ошибки / предупреждения</td></tr>
+          <tr><td><code class="tok">.inp--disabled</code></td><td>div</td><td class="dsc">Отключено: серый фон, pointer-events: none</td></tr>
+          <tr><td><code class="tok">.inp--multiline</code></td><td>div</td><td class="dsc">Многострочный: textarea, авто-высота</td></tr>
+          <tr><td><code class="tok">.is-hover / .is-focus / .is-open</code></td><td>div</td><td class="dsc">Форсированные состояния (для доков/тестов)</td></tr>
+          <tr><td><code class="tok">.inp__field</code></td><td>div</td><td class="dsc">Input_Content: рамка, радиус, фон, flex-строка</td></tr>
+          <tr><td><code class="tok">.inp__lead</code></td><td>span</td><td class="dsc">Иконка поиска слева (20/18px)</td></tr>
+          <tr><td><code class="tok">.inp__prefix / .inp__postfix</code></td><td>span</td><td class="dsc">Неизменяемые части значения (Text-Inactive)</td></tr>
+          <tr><td><code class="tok">.inp__control</code></td><td>input / textarea</td><td class="dsc">Нативный контрол без рамки; несёт placeholder, id, aria-*</td></tr>
+          <tr><td><code class="tok">.inp__acts</code></td><td>span</td><td class="dsc">Группа действий справа (gap 4px)</td></tr>
+          <tr><td><code class="tok">.inp__act</code></td><td>button</td><td class="dsc">Действие-иконка: крестик очистки; модификатор <code class="tok">--static</code> — информер</td></tr>
+          <tr><td><code class="tok">.ds-label / .ds-helper</code></td><td>label / span</td><td class="dsc">Метка и хелпер — компоненты подкачки LabelHelper</td></tr>
+          <tr><td><code class="tok">aria-invalid / aria-describedby / label[for]</code></td><td>input</td><td class="dsc">Доступность: связь метки, хелпера и статуса ошибки</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BACKLOG -->
+  <div class="backlog" data-screen-label="Backlog">
+    <h2>Что предлагаем добавить</h2>
+    <p class="desc">Кейсы, которых нет в текущей документации; все собираются на существующих токенах:</p>
+    <ul class="bullets">
+      <li>маска ввода (телефон, счёт, ИНН) — как у InputDate, но с настраиваемым шаблоном;</li>
+      <li>счётчик символов при ограничении длины — справа под полем, Body XS;</li>
+      <li>вариант для пароля — действие «показать/скрыть» вместо крестика;</li>
+      <li>required-метка — звёздочка <code class="tok">.ds-label__req</code> уже есть в LabelHelper.</li>
+    </ul>
+  </div>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · InputText</span>
+    <span>m / s · prefix / postfix / search · clear / informer · error / warning / disabled · multiline · amount</span>
+  </footer>
+</main>
+
+<script src="../../scripts/icons-data.js"></script>
+<script src="../../scripts/input-kit.js"></script>
+<script src="../../scripts/input-text.page.js"></script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+</body>
+</html>

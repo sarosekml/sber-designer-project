@@ -1,0 +1,1 @@
+MCP server figma returned 401 Unauthorized; reconnect the integration.

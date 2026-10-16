@@ -1,0 +1,29 @@
+{
+  "terms": [
+    {
+      "label": "customer kit fixture name",
+      "pattern": "\\bibp-ui-kit\\b",
+      "flags": "iu"
+    },
+    {
+      "label": "customer kit fixture name",
+      "pattern": "\\bibp ui kit\\b",
+      "flags": "iu"
+    },
+    {
+      "label": "customer/model fixture name",
+      "pattern": "\\bdeepseekv\\d+",
+      "flags": "iu"
+    },
+    {
+      "label": "customer screen fixture name",
+      "pattern": "\\bclientinfopage\\b",
+      "flags": "iu"
+    },
+    {
+      "label": "third-party UI library import in universal source",
+      "pattern": "from\\s+['\"]@mui/material(?:/[^'\"]*)?['\"]|require\\(['\"]@mui/material(?:/[^'\"]*)?['\"]\\)",
+      "flags": "iu"
+    }
+  ]
+}

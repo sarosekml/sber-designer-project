@@ -1,0 +1,29 @@
+sber-designer — Internal Use License
+
+Copyright (c) 2026 Mikhail Sarosek <sarosekml@gmail.com>. All rights reserved.
+
+1. Grant. Employees and contractors of the organization to which this copy of
+   sber-designer (the "Software") was handed over may use, copy, modify, build,
+   run and deploy the Software, and create derivative works of it, solely for
+   the internal purposes of that organization.
+
+2. Restrictions. Without prior written permission of the copyright holder you
+   may not distribute, publish, sublicense, sell or otherwise make the Software,
+   any part of it, or any derivative work available to any third party outside
+   that organization, including as a hosted service offered to third parties.
+
+3. Notices. This notice and the attribution in THIRD_PARTY_NOTICES.md must be
+   kept in all copies and derivative works of the Software.
+
+4. Third-party components. Third-party code included in or used by the Software
+   is licensed under its own terms, listed in THIRD_PARTY_NOTICES.md and in the
+   respective packages. Nothing in this license restricts rights granted by
+   those licenses.
+
+5. No warranty. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO
+   EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES
+   OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+   ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+   DEALINGS IN THE SOFTWARE.

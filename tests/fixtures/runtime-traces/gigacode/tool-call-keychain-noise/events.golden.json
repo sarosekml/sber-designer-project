@@ -1,0 +1,70 @@
+[
+  {
+    "type": "iteration-start",
+    "iteration": 1
+  },
+  {
+    "type": "runtime-session",
+    "sessionId": "s-mock-2",
+    "captureEvent": "system.init"
+  },
+  {
+    "type": "tool-call",
+    "iteration": 1,
+    "call": {
+      "id": "t-1",
+      "name": "write_file",
+      "arguments": "{\"path\":\"src/App.tsx\",\"content\":\"export const App = () => null;\\n\"}"
+    }
+  },
+  {
+    "type": "tool-result",
+    "iteration": 1,
+    "toolCallId": "t-1",
+    "content": "Wrote 31 bytes to src/App.tsx",
+    "isError": false
+  },
+  {
+    "type": "text-delta",
+    "iteration": 1,
+    "delta": "Created the app shell."
+  },
+  {
+    "type": "usage",
+    "iteration": 1,
+    "usage": {
+      "inputTokens": 420,
+      "outputTokens": 88,
+      "totalTokens": 508
+    }
+  },
+  {
+    "type": "iteration-end",
+    "iteration": 1,
+    "hadToolCalls": true,
+    "finishReason": "stop"
+  },
+  {
+    "type": "done",
+    "iterations": 1,
+    "truncated": false,
+    "hadErrors": false,
+    "stoppedAfterPermissionDeny": false,
+    "finalResponse": {
+      "text": "Created the app shell.",
+      "provider": "gigacode-runtime",
+      "model": "vllm/DeepSeek-V4-Flash-262k",
+      "finishReason": "stop",
+      "usage": {
+        "inputTokens": 420,
+        "outputTokens": 88,
+        "totalTokens": 508
+      }
+    },
+    "usage": {
+      "inputTokens": 420,
+      "outputTokens": 88,
+      "totalTokens": 508
+    }
+  }
+]

@@ -1,0 +1,11 @@
+/* =========================================================================
+   DID Design System — global entry point
+   Consumers link this single file. It only @imports the token & component
+   foundations; never declare rules directly here.
+   Order matters: typography + colors define the tokens that button.css uses.
+   ========================================================================= */
+
+@import url("styles/typography.css");
+@import url("styles/colors.css");
+@import url("styles/button.css");
+@import url("styles/checkbox.css");

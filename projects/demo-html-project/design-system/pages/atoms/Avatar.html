@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avatar — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/badge.css">
+<link rel="stylesheet" href="../../styles/avatar.css">
+<script src="../../scripts/image-slot.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    margin: 0; font-family: var(--font-text), system-ui, sans-serif;
+    color: var(--text-primary); background: var(--bg-page); background-attachment: fixed;
+  }
+  a.inl { color: var(--link); text-decoration: none; font-weight: 600; border-bottom: 1px solid color-mix(in srgb, var(--link) 35%, transparent); }
+  a.inl:hover { color: var(--link-dark); }
+  .page { max-width: 1320px; margin: 0 auto; padding: clamp(40px,7vw,96px) clamp(24px,5vw,72px) 140px; }
+
+  /* masthead */
+  .masthead { border-bottom: 1px solid var(--border-light); padding-bottom: 30px; }
+  .masthead .meta { font: var(--type-body-xs); color: var(--text-inactive); display:flex; gap:24px; margin:0 0 22px; }
+  .masthead .meta b { color: var(--text-secondary); font: var(--type-body-xs); font-weight:600; }
+  .eyebrow { font: var(--type-button-xs); letter-spacing:.14em; text-transform:uppercase; color: var(--primary); margin:0 0 14px; }
+  .masthead h1 { font: var(--type-h1); margin:0 0 14px; color: var(--text-black); }
+  @media (max-width:600px){ .masthead h1{ font-size:40px; line-height:48px; } }
+  .masthead p.lead { font: var(--type-body-l); color: var(--text-secondary); margin:0; max-width:66ch; text-wrap:pretty; }
+
+  /* section */
+  .section { margin-top: 76px; }
+  .section > h2 { font: var(--type-h3-strong); margin:0 0 8px; color: var(--text-black); }
+  .section > p.desc { font: var(--type-body-m); color: var(--text-secondary); margin:0 0 28px; max-width:78ch; text-wrap:pretty; }
+  .section > p.desc.tight { margin-bottom:20px; }
+  .section > p.desc + p.desc { margin-top:-16px; }
+  .badge-new { display:inline-block; font: var(--type-button-xs); letter-spacing:.06em; text-transform:uppercase; color: var(--primary); background: var(--primary-bg); border:1px solid color-mix(in srgb, var(--primary) 22%, transparent); padding:3px 9px; border-radius:999px; margin-left:12px; vertical-align:middle; }
+
+  .panel { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; padding: 32px 34px; }
+  .panel + .panel { margin-top: 20px; }
+  .row { display:flex; flex-wrap:wrap; align-items:flex-start; gap:20px; }
+
+  ul.bullets { margin: 0 0 0 2px; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  ul.bullets li { position:relative; padding-left:18px; font: var(--type-body-m); color: var(--text-secondary); }
+  ul.bullets li::before { content:""; position:absolute; left:2px; top:8px; width:5px; height:5px; border-radius:50%; background: var(--text-inactive); }
+
+  code.tok { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.86em; color: var(--primary); background: var(--primary-bg); padding:1px 6px; border-radius:5px; }
+
+  /* ---------- playground ---------- */
+  .panel.pg { padding:0; overflow:hidden; display:grid; grid-template-columns: 320px 1fr; }
+  @media (max-width:820px){ .panel.pg { grid-template-columns:1fr; } }
+  .pg__controls { padding:30px 30px; display:flex; flex-direction:column; gap:22px; border-right:1px solid var(--border-light); }
+  @media (max-width:820px){ .pg__controls { border-right:none; border-bottom:1px solid var(--border-light); } }
+  .pg__stage { padding:48px 40px; display:flex; align-items:center; justify-content:center; min-height:240px;
+    background:
+      linear-gradient(var(--bg-tile),var(--bg-tile)) padding-box,
+      repeating-conic-gradient(#f2f5f5 0% 25%, #fbfcfc 0% 50%) 0 / 22px 22px; }
+  .pg__stagebox { display:flex; align-items:center; justify-content:center; }
+
+  .ctl { display:flex; flex-direction:column; gap:10px; }
+  .ctl > .lbl { font: var(--type-body-s-strong); color: var(--text-inactive); text-transform:uppercase; letter-spacing:.05em; font-size:11px; }
+
+  .pg-select { position:relative; }
+  .pg-select select {
+    appearance:none; -webkit-appearance:none;
+    width:100%; height:40px; padding:0 38px 0 14px;
+    border:1px solid var(--border-primary); border-radius:9px;
+    background: var(--bg-tile); color: var(--text-primary);
+    font: var(--type-body-m); cursor:pointer;
+  }
+  .pg-select select:focus-visible { outline:2px solid var(--primary); outline-offset:1px; }
+  .pg-select::after {
+    content:""; position:absolute; right:15px; top:50%; width:9px; height:9px;
+    border-right:2px solid var(--text-secondary); border-bottom:2px solid var(--text-secondary);
+    transform:translateY(-65%) rotate(45deg); pointer-events:none;
+  }
+  .pg__code { margin-top:4px; font: var(--type-body-s); color: var(--text-inactive); }
+  .pg__code code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; color: var(--text-secondary); background: var(--bgtable-row-focus); padding:3px 7px; border-radius:6px; display:inline-block; word-break:break-all; }
+
+  /* ---------- sizes matrix ---------- */
+  .matrix-wrap { overflow-x:auto; }
+  .size-matrix { display:grid; grid-template-columns: 70px repeat(4, 1fr); gap:26px 16px; align-items:center; min-width:560px; text-align:center; }
+  .size-matrix .col-head { font: var(--type-body-s-strong); color: var(--primary); }
+  .size-matrix .col-head .sub { font:var(--type-body-xs); color:var(--text-inactive); display:block; }
+  .size-matrix .rowname { font: var(--type-body-s-strong); color: var(--text-secondary); text-align:right; }
+  .size-matrix .cell { display:flex; justify-content:center; }
+
+  /* ---------- content type cards ---------- */
+  .type-cards { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
+  @media (max-width:760px){ .type-cards{ grid-template-columns:1fr; } }
+  .type-card { border:1px solid var(--border-light); border-radius:14px; padding:28px 24px; background:var(--bg-tile); display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center; }
+  .type-card .nm { font:var(--type-h5-strong); color:var(--text-black); }
+  .type-card .ds { font:var(--type-body-s); color:var(--text-secondary); text-wrap:pretty; }
+
+  /* ---------- usage tiles ---------- */
+  .use-tiles { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:680px){ .use-tiles{ grid-template-columns:1fr; } }
+  .use-tile { border:1px solid var(--border-light); border-radius:12px; overflow:hidden; background:var(--bg-tile); }
+  .use-tile__stage { padding:24px; display:flex; align-items:center; justify-content:center; background: var(--tertiary-light); min-height:120px; }
+  .use-tile__cap { padding:14px 18px; font:var(--type-body-xs); color:var(--text-secondary); border-top:1px solid var(--border-light); }
+
+  /* entity row */
+  .entity { display:flex; align-items:center; gap:12px; }
+  .entity .ent-txt { display:flex; flex-direction:column; gap:2px; min-width:0; text-align:left; }
+  .entity .ent-name { font:var(--type-body-m-strong); color:var(--text-black); }
+  .entity .ent-role { font:var(--type-body-xs); color:var(--text-secondary); }
+  /* comment */
+  .comment { display:flex; gap:12px; max-width:340px; }
+  .comment .cm-body { background:var(--bg-tile); border:1px solid var(--border-light); border-radius:0 12px 12px 12px; padding:10px 14px; }
+  .comment .cm-name { font:var(--type-body-s-strong); color:var(--text-black); margin:0 0 3px; }
+  .comment .cm-text { font:var(--type-body-s); color:var(--text-secondary); margin:0; }
+
+  /* presence legend */
+  .presence { display:grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap:16px; }
+  .presence-cell { border:1px solid var(--border-light); border-radius:12px; padding:18px; display:flex; align-items:center; gap:14px; background:var(--bg-tile); }
+  .presence-cell .pc-txt { display:flex; flex-direction:column; gap:2px; }
+  .presence-cell .pc-nm { font:var(--type-body-m-strong); color:var(--text-black); }
+  .presence-cell .pc-rl { font:var(--type-body-xs); color:var(--text-secondary); }
+
+  /* fallback chain */
+  .fallback { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .fallback .arrow { color:var(--text-inactive); display:flex; }
+  .fallback .arrow svg { width:22px; height:22px; }
+  .fallback .step { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .fallback .step .cap { font:var(--type-body-xs); color:var(--text-secondary); }
+
+  /* ---------- anatomy ---------- */
+  .anat { display:grid; grid-template-columns: minmax(260px,1fr) minmax(240px,360px); gap:40px; align-items:center; }
+  @media (max-width:760px){ .anat { grid-template-columns:1fr; } }
+  .anat__stage { background: var(--tertiary-light); border:1px solid var(--border-light); border-radius:14px; padding:54px 44px; display:flex; justify-content:center; }
+  .anat__legend { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; counter-reset:a; }
+  .anat__legend li { display:flex; gap:14px; align-items:flex-start; }
+  .anat__legend li .n { counter-increment:a; flex:none; width:24px; height:24px; border-radius:50%; background: var(--primary); color:#fff; font: var(--type-body-s-strong); display:flex; align-items:center; justify-content:center; }
+  .anat__legend li .n::before { content:counter(a); }
+  .anat__legend li .t .k { font: var(--type-body-m-strong); color: var(--text-black); display:block; }
+  .anat__legend li .t .d { font: var(--type-body-s); color: var(--text-secondary); }
+  .anat-dia { position:relative; }
+  .anat-dia .mk { position:absolute; width:22px; height:22px; border-radius:50%; background:var(--text-black); color:#fff; font:var(--type-body-xs); font-weight:600; display:flex; align-items:center; justify-content:center; transform:translate(-50%,-50%); }
+
+  /* ---------- do / don't ---------- */
+  .guide { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:720px){ .guide { grid-template-columns:1fr; } }
+  .guide-card { border:1px solid var(--border-light); border-radius:12px; overflow:hidden; background: var(--bg-tile); display:flex; flex-direction:column; }
+  .guide-card__bar { height:4px; }
+  .guide-card.bad  .guide-card__bar { background: var(--error); }
+  .guide-card.good .guide-card__bar { background: var(--success); }
+  .guide-card__tag { display:inline-flex; align-items:center; gap:7px; font: var(--type-body-s-strong); padding:14px 20px 0; }
+  .guide-card.bad  .guide-card__tag { color: var(--error-dark); }
+  .guide-card.good .guide-card__tag { color: var(--success-dark); }
+  .guide-card__tag .ic { width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; flex:none; }
+  .guide-card.bad  .guide-card__tag .ic { background: var(--error); }
+  .guide-card.good .guide-card__tag .ic { background: var(--success); }
+  .guide-card__tag .ic svg { width:12px; height:12px; }
+  .guide-card__body { padding:28px 20px; flex:1; display:flex; align-items:center; justify-content:center; gap:18px; }
+  .guide-card__cap { padding:0 20px 18px; font: var(--type-body-xs); color: var(--text-inactive); text-wrap:pretty; }
+
+  /* ---------- reference tables ---------- */
+  .ref-table { width:100%; border-collapse:collapse; }
+  .ref-table th, .ref-table td { text-align:left; padding:15px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:middle; }
+  .ref-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .ref-table tr:last-child td { border-bottom:none; }
+  .ref-table .rt-num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+
+  .color-ref { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
+  @media (max-width:760px){ .color-ref { grid-template-columns:1fr; } }
+  .cref-group { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; overflow:hidden; }
+  .cref-group > h3 { font: var(--type-h5-strong); margin:0; color: var(--text-primary); padding:18px 22px; border-bottom:1px solid var(--border-light); }
+  .cref-rows { padding:6px 0; }
+  .cref-row { display:grid; grid-template-columns: 36px 1fr auto; gap:14px; align-items:center; padding:9px 22px; }
+  .cref-row:hover { background: var(--bgtable-row-hover); }
+  .cref-sw { width:36px; height:36px; border-radius:8px; border:1px solid rgba(40,50,55,.12); position:relative; overflow:hidden; flex:none; }
+  .cref-sw .cf { position:absolute; inset:0; }
+  .cref-meta { min-width:0; }
+  .cref-meta .role { font: var(--type-body-s); color: var(--text-inactive); margin:0; }
+  .cref-meta .tname { font: var(--type-body-m-strong); color: var(--text-primary); margin:1px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; word-break:break-all; }
+  .cref-hex { font: var(--type-body-s-strong); color: var(--text-secondary); font-variant-numeric: tabular-nums; text-align:right; flex:none; }
+
+  footer.page-foot { margin-top:90px; padding-top:26px; border-top:1px solid var(--border-light);
+    font: var(--type-body-s); color: var(--text-inactive); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+
+  /* ---------- developer handoff ---------- */
+  .subhead2 { font: var(--type-body-m-strong); color: var(--text-black); margin:0 0 16px; }
+  .subhead2.mt { margin-top: 34px; }
+  .subhead2 .req { font: var(--type-body-s); color: var(--text-inactive); font-weight:400; }
+  .dev-intro { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:-6px 0 22px; }
+  .dev-intro .req { font: var(--type-body-s); color: var(--text-inactive); }
+  .dev-intro code.tok { font-size:.86em; }
+  .code-panel { background: var(--c-cgrey-800); border-radius: 12px; overflow:hidden; }
+  .code-panel + .code-panel { margin-top:20px; }
+  .code-panel__head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 16px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .code-panel__name { color: rgba(255,255,255,.72); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; letter-spacing:.02em; font-weight:600; }
+  .code-panel__copy { display:inline-flex; align-items:center; gap:6px; border:0; padding:6px 11px; border-radius:7px; background: rgba(255,255,255,.08); color: rgba(255,255,255,.86); font: var(--type-body-xs); cursor:pointer; transition: background-color .12s ease; }
+  .code-panel__copy:hover { background: rgba(255,255,255,.16); }
+  .code-panel__copy svg { width:14px; height:14px; flex:none; }
+  .code-panel__copy.is-copied { background: color-mix(in srgb, var(--success) 30%, transparent); color:#fff; }
+  .code-panel pre { margin:0; padding:18px 20px; overflow-x:auto; }
+  .code-panel code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; line-height:1.65; color: rgba(255,255,255,.82); white-space:pre; }
+  .code-panel .tk-tag  { color:#79D9C9; }
+  .code-panel .tk-attr { color:#9FC1FF; }
+  .code-panel .tk-val  { color:#F2C879; }
+  .code-panel .tk-cm   { color: rgba(255,255,255,.4); font-style:italic; }
+  .dev-table { width:100%; border-collapse:collapse; }
+  .dev-table th, .dev-table td { text-align:left; padding:13px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:top; }
+  .dev-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .dev-table tr:last-child td { border-bottom:none; }
+  .dev-table code.tok { white-space:nowrap; }
+  .dev-table td.dsc { color: var(--text-secondary); font: var(--type-body-s); }
+  .dev-table td.rt-num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  .dev-note { font: var(--type-body-s); color: var(--text-inactive); margin:16px 2px 0; text-wrap:pretty; }
+</style>
+  <link rel="stylesheet" href="../../styles/ds-nav.css">
+  <link rel="stylesheet" href="../../styles/ds-toc.css">
+<link rel="stylesheet" href="../../styles/pg-kit.css">
+<style>
+/* unified-template: бывшие h2-разделы, понижены до подразделов */
+.section .subsec{margin-top:48px;}
+.section .subsec>h3{font:var(--type-h4-strong);margin:0 0 8px;color:var(--text-black);}
+.section .subsec>p.desc{font:var(--type-body-m);color:var(--text-secondary);margin:0 0 24px;max-width:82ch;text-wrap:pretty;}
+.section .subsec>p.desc.tight{margin-bottom:20px;}
+.section .subsec>p.desc+p.desc{margin-top:-16px;}
+</style>
+</head>
+<body>
+<main class="page" data-screen-label="Avatar">
+
+  <header class="masthead">
+    <div class="meta"><span>Версия: <b>v1.1</b></span><span>Обновлено: <b>08.07.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Компоненты</p>
+    <h1>Avatar</h1>
+    <p class="lead">Аватар — компактное визуальное представление пользователя или сущности. Содержит инициалы (Text), запасную иконку (Icon) или фотографию (Image). Две формы — Circular и Rounded — четыре размера и опциональный бейдж: счётчик или индикатор статуса.</p>
+  </header>
+
+  <!-- PLAYGROUND -->
+  <section class="section" data-screen-label="Playground">
+    <h2>Конструктор</h2>
+    <p class="desc">Соберите аватар: форма, размер, тип содержимого и бейдж. Для типа «Изображение» перетащите фото в область превью.</p>
+    <div class="panel pg">
+      <div class="pg__controls" id="pg-controls"></div>
+      <div class="pg__stage"><div class="pg__stagebox" id="pg-preview"></div></div>
+    </div>
+    <p class="pg__code" id="pg-code"></p>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" data-screen-label="Usage">
+    <h2>Использование</h2>
+    <p class="desc">Может использоваться как самостоятельный компонент, так и в составе другого — например, в сущности (Entity): строка пользователя, автор комментария, участник в ячейке таблицы. Группа аватаров показывает несколько участников компактным стеком.</p>
+    <div class="panel">
+      <div class="use-tiles">
+        <div class="use-tile">
+          <div class="use-tile__stage" id="use-entity"></div>
+          <div class="use-tile__cap">Сущность (Entity): аватар + имя и роль</div>
+        </div>
+        <div class="use-tile">
+          <div class="use-tile__stage" id="use-comment"></div>
+          <div class="use-tile__cap">Автор комментария</div>
+        </div>
+        <div class="use-tile">
+          <div class="use-tile__stage" id="use-table"></div>
+          <div class="use-tile__cap">Участник в ячейке таблицы</div>
+        </div>
+        <div class="use-tile">
+          <div class="use-tile__stage" id="use-group"></div>
+          <div class="use-tile__cap">Группа участников в шапке карточки</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="section" data-screen-label="Anatomy">
+    <h2>Анатомия</h2>
+    <p class="desc">Аватар — это фигура-контейнер фиксированного размера с содержимым по центру и опциональным бейджем поверх. В группе у каждого аватара появляется белое кольцо-разделитель.</p>
+    <div class="panel">
+      <div class="anat">
+        <div class="anat__stage"><div class="anat-dia" id="anat-diagram"></div></div>
+        <ul class="anat__legend">
+          <li><span class="n"></span><span class="t"><span class="k">Контейнер</span><span class="d">квадрат фиксированного размера; форма Circular (50%) или Rounded</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Содержимое</span><span class="d">инициалы, иконка-фолбэк или изображение, центрированы</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Бейдж</span><span class="d">опционально — счётчик (сверху-справа) или статус-точка (снизу-справа)</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ВАРИАНТЫ -->
+  <section class="section" data-screen-label="Variants">
+    <h2>Варианты</h2>
+    <p class="desc">Оси конфигурации компонента — каждая описана отдельным подразделом.</p>
+  
+<div class="subsec" data-screen-label="ContentTypes">
+    <h3>Типы содержимого</h3>
+    <p class="desc">Тип определяется доступными данными. Приоритет — изображение; если его нет, показываем инициалы; если нет и имени — нейтральную иконку.</p>
+    <div class="type-cards">
+      <div class="type-card">
+        <div id="tc-text"></div>
+        <div class="nm">Text</div>
+        <div class="ds">Инициалы — одна или две заглавные буквы имени/названия. Базовый вариант для пользователей.</div>
+      </div>
+      <div class="type-card">
+        <div id="tc-icon"></div>
+        <div class="nm">Icon</div>
+        <div class="ds">Нейтральный глиф — когда нет ни фото, ни имени. Для сущностей используется тематическая иконка.</div>
+      </div>
+      <div class="type-card">
+        <div id="tc-image"></div>
+        <div class="nm">Image</div>
+        <div class="ds">Фотография, обрезанная по форме (object-fit: cover). Перетащите изображение в область выше.</div>
+      </div>
+    </div>
+  </div>
+
+<div class="subsec" data-screen-label="Shape">
+    <h3>Форма</h3>
+    <p class="desc"><b>Circular</b> — для людей (инициалы, фото). <b>Rounded</b> (скруглённый квадрат) — для сущностей, организаций, ботов. Радиус скругления у Rounded пропорционален размеру: 28 / 12 / 10 / 8 px для XL / L / M / S.</p>
+    <div class="panel">
+      <div class="row" style="gap:48px; justify-content:center; align-items:flex-end; padding:8px 0;" id="shape-demo"></div>
+    </div>
+  </div>
+
+<div class="subsec" data-screen-label="Badge">
+    <h3>Бейдж на аватаре<span class="badge-new">Новое</span></h3>
+    <p class="desc">Аватар может нести дочерний <a class="inl" href="../atoms/Badge.html">Badge</a>. <b>Counter</b> ставится в правый верхний угол — непрочитанные сообщения, количество задач. <b>Dot</b> ставится в правый нижний угол как индикатор присутствия. На фото у бейджа всегда белая обводка (<code class="tok">badge--bordered</code>).</p>
+    <div class="panel">
+      <div class="row" style="gap:44px; justify-content:center; align-items:center; padding:8px 0 28px;" id="badge-demo"></div>
+      <p class="desc tight" style="margin:0 0 18px;">Индикатор присутствия — соответствие тона и статуса:</p>
+      <div class="presence" id="presence"></div>
+    </div>
+  </div>
+
+<div class="subsec" data-screen-label="Group">
+    <h3>Группа аватаров<span class="badge-new">Новое</span></h3>
+    <p class="desc">Несколько участников показываются перекрывающимся стеком: левый аватар лежит поверх следующего, между ними — белое кольцо. Если участников больше лимита, остаток сворачивается в нейтральный чип «+N». Рекомендуемый лимит — 3–5 видимых аватаров.</p>
+    <div class="panel">
+      <div class="row" style="flex-direction:column; gap:26px; align-items:flex-start;" id="group-sizes"></div>
+    </div>
+    <div class="panel" style="margin-top:20px;">
+      <div class="guide">
+        <div class="guide-card bad">
+          <div class="guide-card__bar"></div>
+          <div class="guide-card__tag"><span class="ic" id="ic-bad1"></span>Не так</div>
+          <div class="guide-card__body" id="group-bad"></div>
+          <p class="guide-card__cap">Длинный нестриженный ряд — занимает место и не читается.</p>
+        </div>
+        <div class="guide-card good">
+          <div class="guide-card__bar"></div>
+          <div class="guide-card__tag"><span class="ic" id="ic-good1"></span>Так</div>
+          <div class="guide-card__body" id="group-good"></div>
+          <p class="guide-card__cap">3–4 аватара и «+N» — компактно и считываемо.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="section" data-screen-label="Sizes">
+    <h2>Размеры</h2>
+    <p class="desc">Четыре размера. Выбирайте по контексту: XL — карточка профиля, L — строки списков и шапки, M — таблицы и навигация, S — плотные перечисления и инлайн-упоминания.</p>
+    <div class="panel">
+      <div class="matrix-wrap"><div class="size-matrix" id="size-matrix"></div></div>
+    </div>
+    <div class="panel" style="padding:8px 10px; margin-top:20px;">
+      <table class="ref-table" id="sizes-table">
+        <thead><tr><th>Размер</th><th>Сторона</th><th>Инициалы</th><th>Иконка</th><th>Радиус Rounded</th><th>Применение</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="section" data-screen-label="Content">
+    <h2>Контент</h2>
+    <p class="desc tight">Содержимое аватара определяется доступными данными, а не выбирается произвольно — см. цепочку деградации в разделе «Заглушки и фолбэк» выше. Правила текста:</p>
+    <ul class="bullets" style="margin-bottom:26px;">
+      <li><b>Инициалы</b> — 1–2 заглавные буквы. Для человека — первая буква имени и первая буква фамилии («Игорь Белов» → «ИБ»); для однословного имени или организации — одна буква;</li>
+      <li>инициалы вычисляются автоматически из имени — не задавайте их произвольным текстом и не используйте цифры, эмодзи или более двух знаков;</li>
+      <li><b>Иконка (Icon)</b> — нейтральный глиф <code class="tok">user</code> для людей без имени; тематический глиф (например, <code class="tok">entity</code>) — для организаций и ботов;</li>
+      <li><b>Группа «+N»</b> — только целое число оставшихся участников, без знака «людей» или подписи;</li>
+      <li>полное имя выносите рядом текстом (см. Entity) — сам аватар не заменяет подпись, а дополняет её.</li>
+    </ul>
+  </section>
+
+  <!-- ПОВЕДЕНИЕ -->
+  <section class="section" data-screen-label="Behavior">
+    <h2>Поведение</h2>
+    <p class="desc">Правила поведения: позиционирование, переполнение, анимация, адаптивность.</p>
+  
+<div class="subsec" data-screen-label="Fallback">
+    <h3>Заглушки и фолбэк<span class="badge-new">Новое</span></h3>
+    <p class="desc">Содержимое выбирается по цепочке деградации: если есть фотография — показываем её; если фото нет или не загрузилось — инициалы; если нет и имени — нейтральную иконку. Это гарантирует, что аватар никогда не остаётся пустым.</p>
+    <div class="panel">
+      <div class="fallback" id="fallback"></div>
+    </div>
+  </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="section" data-screen-label="States">
+    <h2>Состояния<span class="badge-new">Новое</span></h2>
+    <p class="desc">Аватар может быть интерактивным — вести на профиль. В этом случае у него есть состояния Hover, Focus (обводка <code class="tok">--primary</code>) и Pressed. Неактивный аватар приглушается.</p>
+    <div class="panel">
+      <div class="row" style="gap:40px; align-items:flex-start;" id="states-demo"></div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" data-screen-label="A11y">
+    <h2>Доступность</h2>
+    <p class="desc">Сам по себе аватар — визуальный, декоративный элемент. Доступность определяется контекстом использования.</p>
+    <div class="panel">
+      <ul class="bullets">
+        <li><b>Интерактивный аватар</b> (<code class="tok">av--button</code>, ведёт на профиль) — фокусируемый элемент с <code class="tok">aria-label</code>, называющим человека или сущность («Открыть профиль Игоря Белова»);</li>
+        <li><b>Аватар рядом с видимым именем</b> (Entity, комментарий, ячейка таблицы) — сам аватар помечается <code class="tok">aria-hidden="true"</code>, чтобы скрин-ридер не озвучивал инициалы отдельно от имени;</li>
+        <li><b>Изображение</b> — если фото несёт смысл сверх имени, добавьте содержательный <code class="tok">alt</code>; в остальных случаях <code class="tok">alt=""</code>, так как имя уже есть рядом текстом;</li>
+        <li><b>Индикатор присутствия (Dot)</b> — сам по себе не имеет текстовой альтернативы; статус («В сети», «Не беспокоить») дублируйте в <code class="tok">aria-label</code> родителя;</li>
+        <li><b>Группа участников</b> — контейнеру <code class="tok">.av-group</code> присваивается <code class="tok">role="group"</code> и <code class="tok">aria-label</code> со списком имён или их количеством; отдельные аватары внутри — <code class="tok">aria-hidden</code>;</li>
+        <li><code class="tok">:focus-visible</code> у интерактивного аватара — обводка 2px <code class="tok">--primary</code>, отступ 2px.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="section" data-screen-label="Typography">
+    <h2>Типографика</h2>
+    <p class="desc">Инициалы набираются гарнитурой <b>SB Sans Text</b> начертанием Semibold. Кегль пропорционален размеру аватара (около ⅓ стороны). Используются 1–2 заглавные буквы.</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="ref-table" id="typo-table">
+        <thead><tr><th>Размер</th><th>Образец</th><th>Гарнитура</th><th>Кегль / вес</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section class="section" data-screen-label="Colors">
+    <h2>Цвета</h2>
+    <p class="desc">Аватар по умолчанию использует нейтральную «болотную» подложку. Для сущностей доступен акцентный тон. Индикаторы статуса наследуют семантические токены из <a class="inl" href="../atoms/Badge.html">Badge</a>.</p>
+    <div class="color-ref" id="color-ref"></div>
+  </section>
+
+  <!-- DEVELOPER HANDOFF -->
+  <section class="section" data-screen-label="Dev">
+    <h2>Для разработчиков</h2>
+    <p class="desc">Хендофф-пакет: точные размеры, эталонная структура DOM, поведение и рекомендуемый API. Не привязан к стеку — команда, которая собирает компонент на React, берёт отсюда нужное для вёрстки, не читая код этой страницы построчно.</p>
+
+    <p class="subhead2">Точные размеры (redline)</p>
+    <p class="desc tight">Значения измерены на живом экземпляре компонента (<code class="tok">getComputedStyle</code>), источник — токены в <code class="tok">styles/avatar.css</code>.</p>
+    <div class="panel" style="padding:8px 10px; margin-bottom:34px;">
+      <table class="dev-table" id="dev-spec-table">
+        <thead><tr><th>Параметр</th><th>XL</th><th>L</th><th>M</th><th>S</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="panel" style="padding:8px 10px; margin-bottom:34px;">
+      <table class="dev-table" id="dev-group-table">
+        <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="dev-intro">
+      <span class="req">Подключить (если переиспользуете этот CSS напрямую):</span>
+      <code class="tok">styles/typography.css</code>
+      <code class="tok">styles/colors.css</code>
+      <code class="tok">styles/radius.css</code>
+      <code class="tok">styles/badge.css</code>
+      <code class="tok">styles/avatar.css</code>
+    </div>
+
+    <p class="subhead2">Анатомия DOM <span class="req">— эталонная структура, имена классов условны, важны сами элементы и их роли/состояния</span></p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Разметка · HTML (эталонная реализация ДС)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-html"><span class="tk-cm">&lt;!-- самостоятельный аватар с инициалами --&gt;</span>
+<span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"av av--circular av--l"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"av__text"</span><span class="tk-tag">&gt;</span>ИБ<span class="tk-tag">&lt;/span&gt;</span>
+<span class="tk-tag">&lt;/span&gt;</span>
+
+<span class="tk-cm">&lt;!-- с бейджем: обёртка .av-stack даёт position:relative для абсолютного позиционирования --&gt;</span>
+<span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"av-stack"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Мария А., в сети"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"av av--circular av--xl"</span> <span class="tk-attr">aria-hidden=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"badge badge--dot badge--success badge--bordered"</span> <span class="tk-attr">aria-hidden=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;&lt;/span&gt;</span>
+<span class="tk-tag">&lt;/span&gt;</span>
+
+<span class="tk-cm">&lt;!-- группа участников с переполнением --&gt;</span>
+<span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"av-group av-group--m"</span> <span class="tk-attr">role=</span><span class="tk-val">"group"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Участники: ИБ, ВБ, МА, КГ и ещё 3"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"av av--circular av--m"</span> <span class="tk-attr">aria-hidden=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-cm">&lt;!-- ещё 3–4 &lt;span class="av"&gt; — каждый смещается на -–av-overlap --&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"av-group__more"</span> <span class="tk-attr">aria-hidden=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;</span>+3<span class="tk-tag">&lt;/span&gt;</span>
+<span class="tk-tag">&lt;/span&gt;</span>
+
+<span class="tk-cm">&lt;!-- интерактивный аватар-ссылка на профиль --&gt;</span>
+<span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">class=</span><span class="tk-val">"av av--circular av--l av--button"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Открыть профиль Игоря Белова"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/button&gt;</span></code></pre>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Поведение · псевдокод (framework-agnostic)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-js"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-js"><span class="tk-cm">// 1. Фолбэк-цепочка содержимого (при монтировании и при ошибке загрузки фото):</span>
+<span class="tk-cm">//    есть URL изображения и оно загрузилось → content = 'image'</span>
+<span class="tk-cm">//    иначе, есть имя/название → content = 'text' (вычислить инициалы)</span>
+<span class="tk-cm">//    иначе → content = 'icon' (нейтральный глиф)</span>
+<span class="tk-cm">//    обработать &lt;img&gt;.onerror — при ошибке загрузки переключиться на следующее звено цепочки</span>
+
+<span class="tk-cm">// 2. Инициалы: разбить полное имя на слова, взять первый символ первого</span>
+<span class="tk-cm">//    и первого символа последнего слова, привести к верхнему регистру; одно слово → 1 буква</span>
+
+<span class="tk-cm">// 3. Группа аватаров с переполнением:</span>
+<span class="tk-cm">//    рендерить первые limit участников (рекомендуемо 3–5);</span>
+<span class="tk-cm">//    остаток = total - limit; если &gt; 0 — добавить .av-group__more с текстом '+'+остаток;</span>
+<span class="tk-cm">//    z-index каждого аватара = (общее число видимых узлов − индекс), чтобы левый лежал сверху</span>
+
+<span class="tk-cm">// 4. Бейдж позиционируется через CSS относительно .av-stack — отдельного JS не требуется;</span>
+<span class="tk-cm">//    Counter — правый верхний угол (translate 40%,-40%); Dot — правый нижний (7% / 7%)</span>
+
+<span class="tk-cm">// 5. Disabled: класс .av--disabled (opacity .5 + grayscale + pointer-events: none)</span></code></pre>
+    </div>
+    <p class="dev-note">Это не готовый сниппет для вставки — алгоритм, который реализуется поверх вашего стека (рабочий референс на vanilla JS — функции <code class="tok">makeAvatar</code> / <code class="tok">makeGroup</code> в коде этой страницы).</p>
+
+    <p class="subhead2 mt">Рекомендуемый API компонента (React)</p>
+    <p class="desc tight">Форма пропсов — предложение, а не обязательный контракт; адаптируйте под конвенции вашей кодовой базы.</p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Avatar.types.ts</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-api"><span class="tk-attr">type</span> AvatarShape = <span class="tk-val">'circular'</span> | <span class="tk-val">'rounded'</span>;
+<span class="tk-attr">type</span> AvatarSize  = <span class="tk-val">'xl'</span> | <span class="tk-val">'l'</span> | <span class="tk-val">'m'</span> | <span class="tk-val">'s'</span>;
+
+<span class="tk-attr">interface</span> AvatarProps {
+  shape?: AvatarShape;             <span class="tk-cm">// по умолчанию 'circular'</span>
+  size?: AvatarSize;               <span class="tk-cm">// по умолчанию 'm'</span>
+  name?: <span class="tk-attr">string</span>;                 <span class="tk-cm">// источник для авто-инициалов и aria-label</span>
+  src?: <span class="tk-attr">string</span>;                  <span class="tk-cm">// URL фото; при отсутствии/ошибке — фолбэк на инициалы/иконку</span>
+  icon?: React.ReactNode;          <span class="tk-cm">// переопределяет глиф фолбэка (иначе — нейтральный user)</span>
+  tone?: <span class="tk-val">'accent'</span>;                <span class="tk-cm">// акцентная подложка для Entity</span>
+  badge?: { type: <span class="tk-val">'counter'</span> | <span class="tk-val">'dot'</span>; value?: <span class="tk-attr">number</span>; tone?: <span class="tk-attr">string</span> };
+  interactive?: <span class="tk-attr">boolean</span>;         <span class="tk-cm">// рендерится как &lt;button&gt;, требует aria-label</span>
+  disabled?: <span class="tk-attr">boolean</span>;
+  decorative?: <span class="tk-attr">boolean</span>;          <span class="tk-cm">// true — рядом уже есть видимое имя → aria-hidden</span>
+}
+
+<span class="tk-attr">interface</span> AvatarGroupProps {
+  items: { name: <span class="tk-attr">string</span>; src?: <span class="tk-attr">string</span> }[];
+  size?: <span class="tk-val">'l'</span> | <span class="tk-val">'m'</span> | <span class="tk-val">'s'</span>;
+  shape?: AvatarShape;
+  limit?: <span class="tk-attr">number</span>;                <span class="tk-cm">// сколько аватаров показать явно; остаток → «+N»</span>
+  'aria-label'?: <span class="tk-attr">string</span>;
+}</code></pre>
+    </div>
+
+    <p class="subhead2 mt">Справочник классов и атрибутов</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table">
+        <thead><tr><th>Класс / атрибут</th><th>На чём</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code class="tok">.av</code></td><td>span/button</td><td class="dsc">Контейнер-фигура фиксированного размера; размер через CSS-переменные <code class="tok">--av-*</code></td></tr>
+          <tr><td><code class="tok">.av--circular / --rounded</code></td><td>span</td><td class="dsc">Форма</td></tr>
+          <tr><td><code class="tok">.av--xl / --l / --m / --s</code></td><td>span</td><td class="dsc">Размер</td></tr>
+          <tr><td><code class="tok">.av--accent</code></td><td>span</td><td class="dsc">Акцентная подложка для Entity/иконки</td></tr>
+          <tr><td><code class="tok">.av--button</code></td><td>button</td><td class="dsc">Интерактивный аватар: hover/focus-visible, требует <code class="tok">aria-label</code></td></tr>
+          <tr><td><code class="tok">.av--disabled</code></td><td>span</td><td class="dsc"><code class="tok">pointer-events:none</code>, opacity .5, grayscale</td></tr>
+          <tr><td><code class="tok">.av__text / __icon / __img</code></td><td>span/img</td><td class="dsc">Слоты содержимого по типу</td></tr>
+          <tr><td><code class="tok">.av-stack</code></td><td>span</td><td class="dsc">Обёртка для аватара с <a class="inl" href="../atoms/Badge.html">Badge</a>; <code class="tok">position:relative</code></td></tr>
+          <tr><td><code class="tok">.av-stack--square</code></td><td>span</td><td class="dsc">Меняет позицию Dot для Rounded-аватара (в угол, не на кольце)</td></tr>
+          <tr><td><code class="tok">.av-group</code></td><td>span</td><td class="dsc">Контейнер группы; парой <code class="tok">role="group"</code> + <code class="tok">aria-label</code></td></tr>
+          <tr><td><code class="tok">.av-group--l / --m / --s</code></td><td>span</td><td class="dsc">Размер и шаг перекрытия (<code class="tok">--av-overlap</code>)</td></tr>
+          <tr><td><code class="tok">.av-group--rounded</code></td><td>span</td><td class="dsc">Скругление «+N»-чипа под форму Rounded</td></tr>
+          <tr><td><code class="tok">.av-group__more</code></td><td>span</td><td class="dsc">Нейтральный чип остатка — та же геометрия, что и аватар</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · Avatar</span>
+    <span>Circular / Rounded — XL / L / M / S · Text / Icon / Image · Badge · Avatar Group</span>
+  </footer>
+</main>
+
+<script src="../../scripts/icons-data.js"></script>
+<script>
+/* ---------- icons ---------- */
+const ICONS = {
+  user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>',
+  entity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l6-3v4l6-3v15"/><path d="M21 21V11l-6-3"/><path d="M7 11v0M7 14v0M7 17v0"/></svg>',
+  arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  bad:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  good: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>',
+};
+/* подставляем иконки из библиотеки ДС, где есть эквивалент */
+(function(){ const L=window.DS_ICONS||{}; const m={user:'user',entity:'building-02',arrow:'arrow-right',bad:'close',good:'check'};
+  for(const k in m){ if(L[m[k]]) ICONS[k]=L[m[k]]; } })();
+
+/* ---------- avatar factory ----------
+   o: { shape, size, content, text, tone, button, disabled, imgId, imgSrc } */
+function makeAvatar(o = {}) {
+  const { shape='circular', size='m', content='text', text='ИБ', tone=null,
+          button=false, disabled=false, imgId=null, imgSrc=null, label=null } = o;
+  const a = document.createElement(button ? 'button' : 'span');
+  a.className = 'av av--' + shape + ' av--' + size;
+  if (tone)     a.classList.add('av--' + tone);
+  if (disabled) a.classList.add('av--disabled');
+  if (button)   { a.classList.add('av--button'); a.type = 'button'; a.setAttribute('aria-label', label || text); }
+
+  if (content === 'text') {
+    const t = document.createElement('span'); t.className = 'av__text'; t.textContent = text; a.appendChild(t);
+  } else if (content === 'icon') {
+    const i = document.createElement('span'); i.className = 'av__icon'; i.innerHTML = o.icon || ICONS.user; a.appendChild(i);
+  } else if (content === 'image') {
+    const s = document.createElement('image-slot');
+    s.id = imgId || ('av-img-' + Math.random().toString(36).slice(2));
+    s.setAttribute('shape', shape === 'circular' ? 'circle' : 'rounded');
+    s.setAttribute('placeholder', 'Фото');
+    if (imgSrc) s.setAttribute('src', imgSrc);
+    a.appendChild(s);
+  }
+  return a;
+}
+
+/* wrap avatar + badge */
+function avStack(av, badge, square=false) {
+  const s = document.createElement('span');
+  s.className = 'av-stack' + (square ? ' av-stack--square' : '');
+  s.appendChild(av); s.appendChild(badge);
+  return s;
+}
+function dot(tone, sz='') { const b=document.createElement('span'); b.className='badge badge--dot badge--'+tone+' badge--bordered'+(sz?' '+sz:''); return b; }
+
+/* avatar group */
+function makeGroup({ size='m', shape='circular', items=[], more=0 }) {
+  const g = document.createElement('span');
+  g.className = 'av-group av-group--' + size + (shape==='rounded' ? ' av-group--rounded' : '');
+  items.forEach(txt => g.appendChild(makeAvatar({ shape, size, content:'text', text:txt })));
+  if (more > 0) { const m=document.createElement('span'); m.className='av-group__more'; m.textContent='+'+more; g.appendChild(m); }
+  [...g.children].forEach((el,i)=> el.style.zIndex = String(g.children.length - i));
+  return g;
+}
+
+/* ---------- PLAYGROUND ---------- */
+(function(){
+  const state = { shape:'circular', size:'l', content:'text', badge:'none' };
+  const controls = document.getElementById('pg-controls');
+  const preview  = document.getElementById('pg-preview');
+  const codeEl   = document.getElementById('pg-code');
+
+  function select(label, options, getCur, onPick){
+    const wrap=document.createElement('div'); wrap.className='ctl';
+    const l=document.createElement('div'); l.className='lbl'; l.textContent=label; wrap.appendChild(l);
+    const box=document.createElement('div'); box.className='pg-select';
+    const sel=document.createElement('select');
+    options.forEach(([val,txt])=>{ const op=document.createElement('option'); op.value=val; op.textContent=txt; if(val===getCur()) op.selected=true; sel.appendChild(op); });
+    sel.addEventListener('change',()=>{ onPick(sel.value); render(); });
+    box.appendChild(sel); wrap.appendChild(box); return wrap;
+  }
+  controls.appendChild(select('Форма', [['circular','Circular'],['rounded','Rounded']], ()=>state.shape, v=>state.shape=v));
+  controls.appendChild(select('Размер', [['xl','XL · 96'],['l','L · 40'],['m','M · 32'],['s','S · 24']], ()=>state.size, v=>state.size=v));
+  controls.appendChild(select('Содержимое', [['text','Text · инициалы'],['icon','Icon · глиф'],['image','Image · фото']], ()=>state.content, v=>state.content=v));
+  controls.appendChild(select('Бейдж', [['none','Нет'],['counter','Counter'],['dot','Статус-точка']], ()=>state.badge, v=>state.badge=v));
+
+  function render(){
+    const av = makeAvatar({ shape:state.shape, size:state.size, content:state.content, text:'ИБ', imgId:'pg-av-img' });
+    preview.innerHTML='';
+    const square = state.shape==='rounded';
+    if (state.badge==='counter') {
+      const b=document.createElement('span'); b.className='badge badge--'+ (state.size==='s'?'xxs':state.size==='xl'?'m':'xs') +' badge--accent badge--bordered'; b.textContent='5';
+      preview.appendChild(avStack(av, b, false));
+    } else if (state.badge==='dot') {
+      preview.appendChild(avStack(av, dot('success', state.size==='xl'?'badge--dot-l':''), square));
+    } else {
+      preview.appendChild(av);
+    }
+    const cls=['av','av--'+state.shape,'av--'+state.size];
+    const inner = state.content==='text' ? '<span class="av__text">ИБ</span>'
+                : state.content==='icon' ? '<span class="av__icon">…</span>'
+                : '<image-slot …></image-slot>';
+    codeEl.innerHTML = '<code>&lt;span class="'+cls.join(' ')+'"&gt;'+inner+'&lt;/span&gt;</code>';
+  }
+  render();
+})();
+
+/* ---------- USAGE ---------- */
+(function(){
+  // entity row
+  const e = document.getElementById('use-entity');
+  const ent=document.createElement('div'); ent.className='entity';
+  ent.appendChild(makeAvatar({shape:'circular',size:'l',content:'text',text:'ИБ'}));
+  const et=document.createElement('div'); et.className='ent-txt';
+  et.innerHTML='<span class="ent-name">Игорь Б.</span><span class="ent-role">Менеджер сделки</span>';
+  ent.appendChild(et); e.appendChild(ent);
+
+  // comment
+  const c = document.getElementById('use-comment');
+  const cm=document.createElement('div'); cm.className='comment';
+  cm.appendChild(makeAvatar({shape:'circular',size:'m',content:'text',text:'МА'}));
+  const cb=document.createElement('div'); cb.className='cm-body';
+  cb.innerHTML='<p class="cm-name">Мария А.</p><p class="cm-text">Согласовала, можно отправлять клиенту.</p>';
+  cm.appendChild(cb); c.appendChild(cm);
+
+  // table cell
+  const t = document.getElementById('use-table');
+  const tc=document.createElement('div'); tc.className='entity';
+  tc.appendChild(makeAvatar({shape:'circular',size:'s',content:'text',text:'КГ'}));
+  const tt=document.createElement('div'); tt.className='ent-txt';
+  tt.innerHTML='<span class="ent-name" style="font:var(--type-body-s-strong)">Кирилл Г.</span>';
+  tc.appendChild(tt); t.appendChild(tc);
+
+  // group
+  const g = document.getElementById('use-group');
+  g.appendChild(makeGroup({ size:'m', items:['ИБ','ВБ','МА','КГ'], more:3 }));
+})();
+
+/* ---------- ANATOMY ---------- */
+(function(){
+  const d = document.getElementById('anat-diagram');
+  const av = makeAvatar({shape:'circular',size:'xl',content:'text',text:'ИБ'});
+  const stack = avStack(av, dot('success','badge--dot-l'), false);
+  d.appendChild(stack);
+  [['1','-10px','-10px'],['2','50%','50%'],['3','calc(100% - 6px)','calc(100% - 6px)']].forEach(([n,left,top])=>{
+    const m=document.createElement('span'); m.className='mk'; m.textContent=n; m.style.left=left; m.style.top=top; d.appendChild(m);
+  });
+})();
+
+/* ---------- CONTENT TYPES ---------- */
+(function(){
+  document.getElementById('tc-text').appendChild(makeAvatar({shape:'circular',size:'xl',content:'text',text:'ИБ'}));
+  document.getElementById('tc-icon').appendChild(makeAvatar({shape:'rounded',size:'xl',content:'icon',icon:ICONS.entity,tone:'accent'}));
+  document.getElementById('tc-image').appendChild(makeAvatar({shape:'circular',size:'xl',content:'image',imgId:'tc-img-1'}));
+})();
+
+/* ---------- SHAPE ---------- */
+(function(){
+  const s = document.getElementById('shape-demo');
+  [['circular','Circular','ИБ','text',null],['rounded','Rounded','',  'icon','accent']].forEach(([shape,label,text,content,tone])=>{
+    const col=document.createElement('div'); col.style.cssText='display:flex;flex-direction:column;align-items:center;gap:14px;';
+    col.appendChild(makeAvatar({shape,size:'xl',content,text,tone,icon:ICONS.entity}));
+    const cap=document.createElement('span'); cap.style.cssText='font:var(--type-body-m-strong);color:var(--text-black);'; cap.textContent=label;
+    col.appendChild(cap); s.appendChild(col);
+  });
+})();
+
+/* ---------- SIZES ---------- */
+(function(){
+  const m = document.getElementById('size-matrix');
+  const cols = [['XL','96px'],['L','40px'],['M','32px'],['S','24px']];
+  const sizes = ['xl','l','m','s'];
+  m.appendChild(Object.assign(document.createElement('div'),{className:'col-head'}));
+  cols.forEach(([n,px])=>{ const h=document.createElement('div'); h.className='col-head'; h.innerHTML=n+'<span class="sub">'+px+'</span>'; m.appendChild(h); });
+  [['Circular','circular','text','ИБ'],['Rounded','rounded','icon','']].forEach(([name,shape,content])=>{
+    const rn=document.createElement('div'); rn.className='rowname'; rn.textContent=name; m.appendChild(rn);
+    sizes.forEach(sz=>{ const c=document.createElement('div'); c.className='cell'; c.appendChild(makeAvatar({shape,size:sz,content,text:'ИБ',icon:ICONS.entity,tone:content==='icon'?'accent':null})); m.appendChild(c); });
+  });
+
+  const rows = [
+    ['XL','96 px','32 px','48 px','28 px','Карточка / экран профиля'],
+    ['L','40 px','16 px','22 px','12 px','Строки списков, шапки, Entity'],
+    ['M','32 px','13 px','18 px','10 px','Таблицы, навигация, комментарии'],
+    ['S','24 px','11 px','14 px','8 px','Плотные перечисления, инлайн'],
+  ];
+  document.querySelector('#sizes-table tbody').innerHTML = rows.map(r=>`
+    <tr><td><b>${r[0]}</b></td><td class="rt-num">${r[1]}</td><td class="rt-num">${r[2]}</td><td class="rt-num">${r[3]}</td><td class="rt-num">${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+})();
+
+/* ---------- BADGE ON AVATAR ---------- */
+(function(){
+  const d = document.getElementById('badge-demo');
+  // counter top-right
+  const c1 = avStack(makeAvatar({shape:'circular',size:'xl',content:'text',text:'ИБ'}),
+    Object.assign(document.createElement('span'),{className:'badge badge--m badge--accent badge--bordered',textContent:'8'}), false);
+  // dot bottom-right (online)
+  const c2 = avStack(makeAvatar({shape:'circular',size:'xl',content:'text',text:'МА'}), dot('success','badge--dot-l'), false);
+  // rounded entity with warning dot at corner
+  const c3 = avStack(makeAvatar({shape:'rounded',size:'xl',content:'icon',icon:ICONS.entity,tone:'accent'}), dot('warning','badge--dot-l'), true);
+  [c1,c2,c3].forEach(el=>{
+    const col=document.createElement('div'); col.style.cssText='display:flex;flex-direction:column;align-items:center;gap:12px;';
+    col.appendChild(el); d.appendChild(col);
+  });
+
+  const pres = document.getElementById('presence');
+  [['success','В сети','online'],['warning','Нет на месте','away'],['error','Не беспокоить','busy'],['neutral','Не в сети','offline']].forEach(([tone,nm,rl])=>{
+    const cell=document.createElement('div'); cell.className='presence-cell';
+    cell.appendChild(avStack(makeAvatar({shape:'circular',size:'l',content:'text',text:'ИБ'}), dot(tone), false));
+    const tx=document.createElement('div'); tx.className='pc-txt'; tx.innerHTML='<span class="pc-nm">'+nm+'</span><span class="pc-rl">'+rl+'</span>';
+    cell.appendChild(tx); pres.appendChild(cell);
+  });
+})();
+
+/* ---------- AVATAR GROUP ---------- */
+(function(){
+  const gs = document.getElementById('group-sizes');
+  [['l','L · 40'],['m','M · 32'],['s','S · 24']].forEach(([size,lbl])=>{
+    const wrap=document.createElement('div'); wrap.style.cssText='display:flex;align-items:center;gap:20px;';
+    wrap.appendChild(makeGroup({ size, items:['ИБ','ВБ','МА','КГ'], more:3 }));
+    const cap=document.createElement('span'); cap.style.cssText='font:var(--type-body-s);color:var(--text-inactive);'; cap.textContent=lbl;
+    wrap.appendChild(cap); gs.appendChild(wrap);
+  });
+
+  document.getElementById('ic-bad1').innerHTML  = ICONS.bad;
+  document.getElementById('ic-good1').innerHTML = ICONS.good;
+  document.getElementById('group-bad').appendChild(makeGroup({ size:'m', items:['ИБ','ВБ','МА','КГ','АЛ','ДС','РТ','НК'], more:0 }));
+  document.getElementById('group-good').appendChild(makeGroup({ size:'m', items:['ИБ','ВБ','МА','КГ'], more:4 }));
+})();
+
+/* ---------- FALLBACK ---------- */
+(function(){
+  const f = document.getElementById('fallback');
+  const steps = [
+    [makeAvatar({shape:'circular',size:'l',content:'image',imgId:'fb-img'}), 'Image — есть фото'],
+    [makeAvatar({shape:'circular',size:'l',content:'text',text:'ИБ'}), 'Text — есть имя'],
+    [makeAvatar({shape:'circular',size:'l',content:'icon'}), 'Icon — нет данных'],
+  ];
+  steps.forEach(([av,cap],i)=>{
+    const st=document.createElement('div'); st.className='step';
+    st.appendChild(av);
+    const c=document.createElement('span'); c.className='cap'; c.textContent=cap; st.appendChild(c);
+    f.appendChild(st);
+    if (i<steps.length-1){ const ar=document.createElement('span'); ar.className='arrow'; ar.innerHTML=ICONS.arrow; f.appendChild(ar); }
+  });
+})();
+
+/* ---------- STATES ---------- */
+(function(){
+  const d = document.getElementById('states-demo');
+  const items = [
+    ['Default', makeAvatar({shape:'circular',size:'l',content:'text',text:'ИБ',button:true})],
+    ['Hover', (()=>{ const a=makeAvatar({shape:'circular',size:'l',content:'text',text:'ИБ',button:true}); a.style.filter='brightness(.97)'; return a; })()],
+    ['Focus', (()=>{ const a=makeAvatar({shape:'circular',size:'l',content:'text',text:'ИБ',button:true}); a.style.outline='2px solid var(--primary)'; a.style.outlineOffset='2px'; return a; })()],
+    ['Disabled', makeAvatar({shape:'circular',size:'l',content:'text',text:'ИБ',disabled:true})],
+  ];
+  items.forEach(([lbl,av])=>{
+    const col=document.createElement('div'); col.style.cssText='display:flex;flex-direction:column;align-items:center;gap:12px;';
+    col.appendChild(av);
+    const c=document.createElement('span'); c.style.cssText='font:var(--type-body-s);color:var(--text-secondary);'; c.textContent=lbl;
+    col.appendChild(c); d.appendChild(col);
+  });
+})();
+
+/* ---------- TYPOGRAPHY ---------- */
+(function(){
+  const rows = [['XL','32 px / Semibold','xl'],['L','16 px / Semibold','l'],['M','13 px / Semibold','m'],['S','11 px / Semibold','s']];
+  const tb = document.querySelector('#typo-table tbody');
+  rows.forEach(([nm,spec,sz])=>{
+    const tr=document.createElement('tr');
+    const td0=document.createElement('td'); td0.innerHTML='<b>'+nm+'</b>';
+    const td1=document.createElement('td'); td1.appendChild(makeAvatar({shape:'circular',size:sz,content:'text',text:'ИБ'}));
+    const td2=document.createElement('td'); td2.textContent='SB Sans Text';
+    const td3=document.createElement('td'); td3.className='rt-num'; td3.textContent=spec;
+    tr.append(td0,td1,td2,td3); tb.appendChild(tr);
+  });
+})();
+
+/* ---------- COLORS REFERENCE ---------- */
+(function(){
+  const probe = document.createElement('span');
+  probe.style.cssText = 'position:absolute;left:-9999px;width:0;height:0;';
+  document.body.appendChild(probe);
+  function resolveHex(cssValue){
+    probe.style.backgroundColor = 'transparent';
+    probe.style.backgroundColor = cssValue;
+    const v = getComputedStyle(probe).backgroundColor;
+    let r,g,b,a=1, m=v.match(/color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/i);
+    if (m){ r=+m[1]*255; g=+m[2]*255; b=+m[3]*255; if(m[4]!==undefined) a=+m[4]; }
+    else { const n=v.match(/[\d.]+/g); if(!n) return cssValue; r=+n[0]; g=+n[1]; b=+n[2]; if(n[3]!==undefined) a=+n[3]; }
+    const hx=n=>Math.round(n).toString(16).padStart(2,'0').toUpperCase();
+    let s='#'+hx(r)+hx(g)+hx(b); if(a<1) s+=' · '+Math.round(a*100)+'%'; return s;
+  }
+  const groups = [
+    { name:'Подложка', rows:[
+      ['Нейтральная (по умолчанию)', '--c-swamp-100'],
+      ['Инициалы / иконка', '--text-on-tertiary'],
+      ['Акцентная (Entity)', '--primary'],
+    ]},
+    { name:'Группа', rows:[
+      ['Кольцо-разделитель', '--bg-tile'],
+      ['Чип «+N» — фон', '--c-cgrey-100'],
+      ['Чип «+N» — текст', '--text-secondary'],
+    ]},
+    { name:'Статус (Dot)', rows:[
+      ['В сети', '--success'],
+      ['Нет на месте', '--warning'],
+      ['Не беспокоить', '--error'],
+      ['Не в сети', '--c-cgrey-100'],
+    ]},
+    { name:'Интерактив', rows:[
+      ['Фокус', '--primary'],
+    ]},
+  ];
+  const root = document.getElementById('color-ref');
+  root.innerHTML = groups.map(g=>`
+    <section class="cref-group">
+      <h3>${g.name}</h3>
+      <div class="cref-rows">
+        ${g.rows.map(([role,tok])=>`
+          <div class="cref-row">
+            <div class="cref-sw"><div class="cf" style="background:var(${tok});"></div></div>
+            <div class="cref-meta"><p class="role">${role}</p><p class="tname">${tok}</p></div>
+            <div class="cref-hex">${resolveHex('var('+tok+')')}</div>
+          </div>`).join('')}
+      </div>
+    </section>`).join('');
+  probe.remove();
+})();
+
+/* ---------- DEV: redline measured from live component ---------- */
+(function(){
+  const host = document.createElement('div');
+  host.style.cssText = 'position:absolute;left:-9999px;top:0;';
+  document.body.appendChild(host);
+  function measure(sz){
+    const a = makeAvatar({ shape:'circular', size:sz, content:'text', text:'ИБ' });
+    host.appendChild(a);
+    const cs = getComputedStyle(a);
+    return { size:cs.width, font:cs.fontSize };
+  }
+  function measureIcon(sz){
+    const a = makeAvatar({ shape:'circular', size:sz, content:'icon', icon:ICONS.user });
+    host.appendChild(a);
+    return getComputedStyle(a.querySelector('.av__icon')).width;
+  }
+  function measureRounded(sz){
+    const a = makeAvatar({ shape:'rounded', size:sz, content:'icon', icon:ICONS.entity, tone:'accent' });
+    host.appendChild(a);
+    return getComputedStyle(a).borderTopLeftRadius;
+  }
+  const sizes = ['xl','l','m','s'];
+  const d = {}; sizes.forEach(sz => d[sz] = measure(sz));
+  const icon = {}; sizes.forEach(sz => icon[sz] = measureIcon(sz));
+  const rad = {}; sizes.forEach(sz => rad[sz] = measureRounded(sz));
+
+  // group + ring + badge offsets
+  const ring = document.createElement('span'); ring.className='av-group';
+  const av1 = makeAvatar({shape:'circular',size:'m',content:'text',text:'A'});
+  const av2 = makeAvatar({shape:'circular',size:'m',content:'text',text:'B'});
+  ring.appendChild(av1); ring.appendChild(av2);
+  host.appendChild(ring);
+  const ringW = getComputedStyle(av1).boxShadow.match(/[\d.]+px/g);
+  const ringPx = ringW ? ringW[ringW.length-1] : '—';
+  const overlapPx = getComputedStyle(av2).marginLeft;
+
+  const stack = avStack(makeAvatar({shape:'circular',size:'xl',content:'text',text:'ИБ'}), (()=>{ const b=document.createElement('span'); b.className='badge badge--m badge--accent badge--bordered'; b.textContent='5'; return b; })());
+  host.appendChild(stack);
+  const counterTransform = getComputedStyle(stack.querySelector('.badge')).transform;
+
+  host.remove();
+  const r = n => Math.round(n*10)/10;
+  const px = v => { const n = parseFloat(v); return isNaN(n) ? v : r(n)+' px'; };
+
+  const rows = [
+    ['Сторона (av-size)', z => px(d[z].size)],
+    ['Кегль инициалов', z => px(d[z].font)],
+    ['Иконка-фолбэк', z => px(icon[z])],
+    ['Радиус Rounded', z => px(rad[z])],
+  ];
+  document.querySelector('#dev-spec-table tbody').innerHTML = rows.map(([label,fn]) =>
+    `<tr><td>${label}</td><td class="rt-num">${fn('xl')}</td><td class="rt-num">${fn('l')}</td><td class="rt-num">${fn('m')}</td><td class="rt-num">${fn('s')}</td></tr>`
+  ).join('');
+
+  const groupRows = [
+    ['Кольцо-разделитель (box-shadow)', ringPx],
+    ['Сдвиг перекрытия (M, margin-left)', overlapPx],
+    ['Badge Counter — сдвиг (transform)', counterTransform],
+  ];
+  document.querySelector('#dev-group-table tbody').innerHTML = groupRows.map(([p,v]) =>
+    `<tr><td>${p}</td><td class="rt-num">${v}</td></tr>`).join('');
+})();
+
+/* ---------- DEV: copy-to-clipboard on code panels ---------- */
+(function(){
+  document.querySelectorAll('.code-panel__copy').forEach(btn => {
+    const target = document.getElementById(btn.dataset.copyTarget);
+    if (!target) return;
+    const label = btn.querySelector('.copy-label');
+    btn.addEventListener('click', async () => {
+      const text = target.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (e2) {}
+        ta.remove();
+      }
+      btn.classList.add('is-copied');
+      const prev = label.textContent;
+      label.textContent = 'Скопировано';
+      setTimeout(() => { btn.classList.remove('is-copied'); label.textContent = prev; }, 1600);
+    });
+  });
+})();
+</script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+</body>
+</html>

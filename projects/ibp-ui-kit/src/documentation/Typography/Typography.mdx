@@ -1,0 +1,20 @@
+import { Meta, Unstyled } from '@storybook/blocks'
+import { ThemeProvider } from '../../components/atoms/Theme';
+import { Typography } from './Typography'
+
+<Meta
+  title='Documentation/Theme/Typography'
+  subtitle='subtitle'
+  parameters={{
+    previewTabs: {
+      canvas: { hidden: true }
+    }
+  }}
+/>
+
+
+<Unstyled>
+    <ThemeProvider>
+        <Typography />
+    </ThemeProvider>
+</Unstyled>

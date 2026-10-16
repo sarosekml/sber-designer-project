@@ -1,0 +1,19 @@
+{
+  "name": "@sber-designer/babel-plugin-sd-loc",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Babel plugin that tags every JSX opening element with data-sd-loc=\"file:line:col\". Fallback for sber-designer's DOM↔AST bridge when React Fiber __source isn't available — Webpack-based Storybook 6, production builds, non-React frameworks. ADR-0007.",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.0",
+    "@types/babel__core": "^7.20.0"
+  }
+}

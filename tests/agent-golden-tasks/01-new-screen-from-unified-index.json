@@ -1,0 +1,80 @@
+{
+  "name": "new-screen-from-unified-index",
+  "description": "Generate a new Design-readable screen after consulting the unified project index.",
+  "workspace": "no-storybook-static",
+  "input": "Create an approval queue screen using indexed project components and validate that Design mode can read it.",
+  "permission": {
+    "*": "allow"
+  },
+  "mockResponses": [
+    {
+      "toolCalls": [
+        {
+          "name": "load_agent_skill",
+          "arguments": {
+            "name": "product-screen-generation"
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "get_project_index_status",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "search_project_index",
+          "arguments": {
+            "query": "DataTable approval queue",
+            "types": ["component"],
+            "limit": 5
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "write_file",
+          "arguments": {
+            "path": "src/screens/ApprovalQueueScreen.tsx",
+            "contents": "import { DataTable } from '../components/DataTable';\nimport EmptyState from '../components/EmptyState';\n\nexport function ApprovalQueueScreen() {\n  return (\n    <main className=\"approval-queue-screen\" data-testid=\"approval-queue-screen\">\n      <header className=\"approval-queue-header\">\n        <h1>Approval queue</h1>\n        <p>Review queued requests before release.</p>\n      </header>\n      <section className=\"approval-queue-panel\" aria-label=\"Pending approvals\">\n        <DataTable />\n        <EmptyState />\n      </section>\n    </main>\n  );\n}\n"
+          }
+        }
+      ]
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "validate_design_screen",
+          "arguments": {
+            "implementationFilePath": "src/screens/ApprovalQueueScreen.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "text": "Created a Design-readable approval queue screen from the unified index."
+    }
+  ],
+  "expectedToolSequence": [
+    "load_agent_skill",
+    "get_project_index_status",
+    "search_project_index",
+    "write_file",
+    "validate_design_screen"
+  ],
+  "expectedFinalResponseContains": "Design-readable approval queue",
+  "expectedToolResultsContain": ["\"status\":\"compatible\""],
+  "expectedFiles": [
+    {
+      "path": "src/screens/ApprovalQueueScreen.tsx",
+      "contains": "export function ApprovalQueueScreen"
+    }
+  ]
+}

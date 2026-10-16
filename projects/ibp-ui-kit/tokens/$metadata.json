@@ -1,0 +1,10 @@
+{
+  "tokenSetOrder": [
+    "primitive/color",
+    "semantic/palette",
+    "semantic/typography",
+    "component/button",
+    "component/inputtext",
+    "component/modal"
+  ]
+}

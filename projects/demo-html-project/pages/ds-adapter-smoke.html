@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Реестр договоров — HTML Profile</title>
+    <link rel="stylesheet" href="../design-system/ds.css" />
+    <style>
+      .page { max-width: 1200px; margin: 0 auto; padding: 24px 32px; }
+      .masthead { margin-bottom: 20px; }
+      .toolbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+      .toolbar .search { flex: 1 1 300px; max-width: 420px; }
+      .content-table { width: 100%; border-collapse: collapse; }
+      .content-table tbody td { padding-block: 8px; }
+      .content-table td:last-child,
+      .content-table th:last-child { width: 80px; text-align: right; }
+      .content-table td:nth-child(3),
+      .content-table th:nth-child(3) { text-align: right; }
+    </style>
+  </head>
+  <body data-sd-screen-root>
+    <main class="page" data-screen-label="IBP DS adapter smoke">
+      <header class="masthead">
+        <p class="eyebrow">Договоры · Реестр</p>
+        <h1>Реестр договоров</h1>
+        <div class="meta"><span>Записей: <b>42</b></span></div>
+      </header>
+
+      <div class="toolbar">
+        <label class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" placeholder="Поиск по номеру или контрагенту…" autocomplete="off" spellcheck="false">
+        </label>
+        <span class="chip chip--readonly chip--m chip--rounded chip--success"><span class="chip__label">Действует</span></span>
+        <span class="chip chip--readonly chip--m chip--rounded chip--warning"><span class="chip__label">На подписании</span></span>
+        <span class="chip chip--readonly chip--m chip--rounded chip--error"><span class="chip__label">Расторгнут</span></span>
+        <button type="button" class="btn btn--accent btn--m"><span class="btn__label">Добавить</span></button>
+      </div>
+
+      <!-- Reference-backed content from the attached image. -->
+      <table class="content-table" aria-label="Реестр договоров">
+        <thead><tr><th>Номер</th><th>Контрагент</th><th>Сумма</th><th>Дата</th><th>Статус</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Д-2024/001</td><td>ООО «ПромЭнерго»</td><td>12 450 000 ₽</td><td>15.01.2024</td><td><span class="badge badge--xs badge--success">Действует</span></td><td><button class="ibtn ibtn--m" aria-label="Действия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td></tr>
+          <tr><td>Д-2024/002</td><td>АО «СибГаз»</td><td>8 900 000 ₽</td><td>03.02.2024</td><td><span class="badge badge--xs badge--success">Действует</span></td><td><button class="ibtn ibtn--m" aria-label="Действия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td></tr>
+          <tr><td>Д-2024/003</td><td>ПАО «НефтеХим»</td><td>23 100 000 ₽</td><td>22.02.2024</td><td><span class="badge badge--xs badge--warning">На подписании</span></td><td><button class="ibtn ibtn--m" aria-label="Действия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td></tr>
+          <tr><td>Д-2024/004</td><td>ООО «МеталлТорг»</td><td>5 670 000 ₽</td><td>10.03.2024</td><td><span class="badge badge--xs badge--error">Расторгнут</span></td><td><button class="ibtn ibtn--m" aria-label="Действия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td></tr>
+          <tr><td>Д-2024/005</td><td>ЗАО «ТрансЛогистик»</td><td>15 200 000 ₽</td><td>05.04.2024</td><td><span class="badge badge--xs badge--success">Действует</span></td><td><button class="ibtn ibtn--m" aria-label="Действия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td></tr>
+          <tr><td>Д-2024/006</td><td>ООО «СтройИнвест»</td><td>19 800 000 ₽</td><td>18.04.2024</td><td><span class="badge badge--xs badge--info">Продлён</span></td><td><button class="ibtn ibtn--m" aria-label="Действия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td></tr>
+          <tr><td>Д-2024/007</td><td>АО «ЭнергоСбыт»</td><td>7 350 000 ₽</td><td>29.04.2024</td><td><span class="badge badge--xs badge--success">Действует</span></td><td><button class="ibtn ibtn--m" aria-label="Действия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td></tr>
+          <tr><td>Д-2024/008</td><td>ООО «ИТ-Решения»</td><td>3 450 000 ₽</td><td>12.05.2024</td><td><span class="badge badge--xs badge--success">Действует</span></td><td><button class="ibtn ibtn--m" aria-label="Действия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td></tr>
+        </tbody>
+      </table>
+
+      <div class="pgn-row">
+        <div class="pgn-row__left">
+          <div class="pgn-info">
+            <span class="pgn-info__item">Показано <b>1–8</b> из <b>42</b></span>
+          </div>
+        </div>
+        <div class="pgn-row__right">
+          <div class="pgn">
+            <button class="pgn__arrow" aria-label="Предыдущая страница" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="pgn__nav">
+              <button class="pgn__num" aria-current="page">1</button>
+              <button class="pgn__num">2</button>
+              <button class="pgn__num">3</button>
+              <span class="pgn__ellipsis">…</span>
+              <button class="pgn__num">6</button>
+            </div>
+            <button class="pgn__arrow" aria-label="Следующая страница">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="../design-system/scripts/icons-data.js"></script>
+    <script src="../design-system/scripts/ds-icons.js"></script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "source": "html-css-catalog",
+  "htmlFiles": [],
+  "cssFiles": [],
+  "classes": [],
+  "selectors": [],
+  "tokenNames": [],
+  "customElements": [],
+  "components": [],
+  "distillation": {
+    "values": [],
+    "classFrequencies": [],
+    "inlineStyleViolations": []
+  },
+  "designSystemSignals": {
+    "rootTokenCount": 0,
+    "declaredTokenCount": 0,
+    "themeOverride": false,
+    "themeOverrideSelectors": [],
+    "componentClassCount": 0,
+    "hasComponentsStylesheet": false,
+    "pagesTotal": 0,
+    "pagesOnTokens": 0,
+    "pagesWithInlineHardcodes": 0
+  },
+  "counts": {
+    "components": 0,
+    "classes": 0,
+    "selectors": 0,
+    "tokensDeclared": 0,
+    "customElements": 0,
+    "htmlFiles": 0,
+    "cssFiles": 0,
+    "distillationValues": 0,
+    "distillationClasses": 0,
+    "inlineStyleViolations": 0
+  }
+}

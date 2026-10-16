@@ -1,0 +1,5 @@
+{"type":"turn.started"}
+{"type":"agent_message_delta","delta":"First final."}
+{"type":"turn.completed","usage":{"input_tokens":20,"output_tokens":4}}
+{"type":"agent_message_delta","delta":"Second final should be ignored by finalizer policy."}
+{"type":"turn.completed","usage":{"input_tokens":1,"output_tokens":7}}

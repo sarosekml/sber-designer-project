@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [],
+  "references": [
+    { "path": "./apps/web" },
+    { "path": "./packages/shared-types" },
+    { "path": "./packages/llm-gateway" },
+    { "path": "./packages/proj-mcp" },
+    { "path": "./packages/design-indexer" },
+    { "path": "./services/sandbox" },
+    { "path": "./services/api" },
+    { "path": "./packages/storybook-indexer" },
+    { "path": "./packages/ast-bridge" },
+    { "path": "./packages/babel-plugin-sd-loc" }
+  ]
+}

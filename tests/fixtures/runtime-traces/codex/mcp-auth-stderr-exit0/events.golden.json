@@ -1,0 +1,62 @@
+[
+  {
+    "type": "iteration-start",
+    "iteration": 1
+  },
+  {
+    "type": "tool-call",
+    "iteration": 1,
+    "call": {
+      "id": "mcp_auth_1",
+      "name": "figma.get_file",
+      "arguments": "{\"fileKey\":\"redacted\"}"
+    }
+  },
+  {
+    "type": "tool-result",
+    "iteration": 1,
+    "toolCallId": "mcp_auth_1",
+    "content": "401 Unauthorized: reconnect Figma MCP",
+    "isError": true
+  },
+  {
+    "type": "text-delta",
+    "iteration": 1,
+    "delta": "MCP auth failed; reconnect the integration."
+  },
+  {
+    "type": "usage",
+    "iteration": 1,
+    "usage": {
+      "inputTokens": 42,
+      "outputTokens": 9
+    }
+  },
+  {
+    "type": "iteration-end",
+    "iteration": 1,
+    "hadToolCalls": false,
+    "finishReason": "stop"
+  },
+  {
+    "type": "done",
+    "iterations": 1,
+    "truncated": false,
+    "hadErrors": false,
+    "stoppedAfterPermissionDeny": false,
+    "finalResponse": {
+      "text": "MCP auth failed; reconnect the integration.",
+      "provider": "codex-runtime",
+      "model": "default",
+      "finishReason": "stop",
+      "usage": {
+        "inputTokens": 42,
+        "outputTokens": 9
+      }
+    },
+    "usage": {
+      "inputTokens": 42,
+      "outputTokens": 9
+    }
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "kind": "react-storybook",
+  "screenUnit": {
+    "sourceGlob": "src/**/*.{tsx,jsx}",
+    "storyRequired": true,
+    "rootMarker": "data-sd-screen-root"
+  },
+  "componentModel": "react-index",
+  "renderProbe": "storybook",
+  "packageManager": "bun",
+  "frameworks": [
+    "react",
+    "storybook",
+    "vite"
+  ],
+  "sourceRoots": [
+    "src",
+    "public"
+  ],
+  "styling": [
+    "css"
+  ],
+  "aliases": {},
+  "packageScripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -p tsconfig.json && vite build",
+    "storybook": "storybook dev -p 6006 --host 0.0.0.0",
+    "build-storybook": "storybook build",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "allowedUiPackages": [
+    "@storybook/addon-docs",
+    "@storybook/react-vite",
+    "react",
+    "react-dom",
+    "storybook"
+  ]
+}

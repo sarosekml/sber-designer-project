@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "runtime": "claude-code",
+  "command": "claude",
+  "argsSnapshot": [
+    "-p",
+    "--verbose",
+    "--permission-mode",
+    "acceptEdits",
+    "--output-format",
+    "stream-json"
+  ],
+  "exitCode": 1,
+  "durationMs": 0,
+  "notes": "Incident trace: Claude Code stream-json emits an authentication error and exits non-zero."
+}

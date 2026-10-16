@@ -1,0 +1,181 @@
+/* =========================================================================
+   Alert — компонент подкачки: инлайновое (встроенное в контент) сообщение
+   о состоянии. В отличие от Toast / SnackBar не всплывает, а занимает место
+   в потоке страницы и остаётся, пока пользователь его не закроет или не
+   исчезнет причина. Четыре тона (Info · Warning · Error · Success), два
+   размера (M · S), опциональные части: иконка, заголовок, текст, кнопки,
+   действия (свернуть / закрыть).
+
+   Только токены ДС. Кнопки и ссылки внутри Алерта перекрашиваются в тон
+   через переопределение --primary/--primary-dark/--primary-bg на .alert
+   (тот же приём, что и в SnackBar).
+   Зависимости: button.css, link.css (для .alert__buttons), icons — <i data-icon>.
+   ========================================================================= */
+
+.alert {
+  /* тон по умолчанию — Info; тоновые модификаторы переопределяют переменные */
+  --alert-accent:  var(--info);
+  --alert-surface: var(--info-bg);
+  --primary:       var(--info);
+  --primary-dark:  var(--info-dark);
+  --primary-bg:    color-mix(in srgb, var(--info) 12%, transparent);
+
+  /* ссылки внутри Алерта — в тон (link.css читает --link/--link-dark) */
+  --link:          var(--alert-accent);
+  --link-dark:     var(--primary-dark);
+
+  /* размер по умолчанию — M */
+  --alert-pad:      16px;
+  --alert-gap:      12px;
+  --alert-icon:     20px;
+  --alert-body-gap: 4px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--alert-gap);
+  padding: var(--alert-pad);
+  border-radius: var(--radius-m);
+  background: var(--alert-surface);
+  color: var(--text-primary);
+}
+
+/* ---------- тоны ---------- */
+.alert--info {
+  --alert-accent:  var(--info);
+  --alert-surface: var(--info-bg);
+  --primary:       var(--info);
+  --primary-dark:  var(--info-dark);
+  --primary-bg:    color-mix(in srgb, var(--info) 12%, transparent);
+}
+.alert--warning {
+  --alert-accent:  var(--warning);
+  --alert-surface: var(--warning-bg);
+  --primary:       var(--warning);
+  --primary-dark:  var(--warning-dark);
+  --primary-bg:    color-mix(in srgb, var(--warning) 14%, transparent);
+}
+.alert--error {
+  --alert-accent:  var(--error);
+  --alert-surface: var(--error-bg-light);
+  --primary:       var(--error);
+  --primary-dark:  var(--error-dark);
+  --primary-bg:    color-mix(in srgb, var(--error) 12%, transparent);
+}
+.alert--success {
+  --alert-accent:  var(--success);
+  --alert-surface: var(--success-bg);
+  --primary:       var(--success);
+  --primary-dark:  var(--success-dark);
+  --primary-bg:    color-mix(in srgb, var(--success) 14%, transparent);
+}
+
+/* ---------- иконка (Alert_Icon) ---------- */
+.alert__icon {
+  flex: none;
+  width: var(--alert-icon);
+  height: var(--alert-icon);
+  color: var(--alert-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.alert__icon > i,
+.alert__icon > svg { width: 100%; height: 100%; display: block; }
+
+/* ---------- тело ---------- */
+.alert__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--alert-body-gap);
+  /* совмещение с иконкой по верхней строке заголовка/текста */
+  padding-top: 0;
+}
+
+.alert__title {
+  font: var(--type-body-m-strong);
+  color: var(--text-black);
+  margin: 0;
+  text-wrap: pretty;
+}
+.alert__text {
+  font: var(--type-body-s);
+  color: var(--text-secondary);
+  margin: 0;
+  text-wrap: pretty;
+}
+/* зазор перед кнопками чуть больше, чем между заголовком и текстом */
+.alert__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* ---------- действия (Alert_Actions): свернуть / закрыть ---------- */
+.alert__actions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.alert__act {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-inactive);
+  border-radius: var(--radius-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color .12s ease, background-color .12s ease;
+}
+.alert__act:hover {
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--alert-accent) 12%, transparent);
+}
+.alert__act:active { color: var(--alert-accent); }
+.alert__act:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
+.alert__act > i,
+.alert__act > svg { width: 16px; height: 16px; display: block; }
+
+/* поворот шеврона у свёрнутого Алерта */
+.alert__collapse > i,
+.alert__collapse > svg { transition: transform .15s ease; }
+.alert--collapsed .alert__collapse > i,
+.alert--collapsed .alert__collapse > svg { transform: rotate(180deg); }
+.alert--collapsed .alert__text,
+.alert--collapsed .alert__buttons { display: none; }
+
+/* ---------- размеры ---------- */
+.alert--m {
+  --alert-pad: 16px;
+  --alert-gap: 12px;
+  --alert-icon: 20px;
+}
+.alert--s {
+  --alert-pad: 12px 14px;
+  --alert-gap: 10px;
+  --alert-icon: 18px;
+}
+.alert--s .alert__title { font: var(--type-body-s-strong); }
+.alert--s .alert__text  { font: var(--type-body-xs); }
+.alert--s .alert__buttons { margin-top: 4px; }
+.alert--s .alert__act { width: 22px; height: 22px; }
+
+/* ---------- кнопки/ссылки внутри Алерта — в тон ---------- */
+/* .alert уже переопределяет --primary*; DS-кнопки (btn--outline/--transparent)
+   и ссылки (link--accent) внутри .alert__buttons наследуют тон автоматически. */
+
+@media (prefers-reduced-motion: reduce) {
+  .alert__collapse > i,
+  .alert__collapse > svg,
+  .alert__act { transition: none; }
+}

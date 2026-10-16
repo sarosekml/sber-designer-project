@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "screen-generation-main",
+      "description": "Main screen generation, redesign, and craft quality matrix.",
+      "status": "active",
+      "baselineScorecard": "tests/eval/baselines/screen-generation-main/v1/scorecard.json",
+      "currentScorecard": "tests/eval/candidates/screen-generation-main/scorecard.json",
+      "appliesTo": [
+        "packages/agent-kit/kit/agents/ai-product-designer.md",
+        "packages/agent-kit/kit/skills/product-screen-generation/**",
+        "packages/agent-kit/kit/skills/screen-redesign/**",
+        "packages/agent-kit/kit/skills/screen-polish/**",
+        "packages/agent-kit/kit/knowledge/craft/**",
+        "services/api/src/prompt-builder.ts",
+        "services/api/src/prompt-blocks.ts",
+        "services/api/src/agent-runtimes/agent-kit-handoff.ts",
+        "services/api/src/agent-runtimes/agent-kit-handoff-contracts.ts",
+        "services/api/src/agent-runtimes/agent-kit-handoff-context.ts",
+        "services/api/src/agent-runtimes/agent-kit-handoff-session.ts",
+        "services/api/src/agent-runtimes/agent-kit-handoff-budget.ts",
+        "services/api/src/screen-craft.ts",
+        "services/api/src/screen-craft-reuse.ts",
+        "services/api/src/component-intelligence/**"
+      ],
+      "thresholds": {
+        "maxFidelityDrop": 0.02,
+        "maxReuseDrop": 0.05,
+        "maxCraftIncrease": 0
+      }
+    }
+  ]
+}

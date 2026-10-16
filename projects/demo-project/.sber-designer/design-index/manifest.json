@@ -1,0 +1,141 @@
+{
+  "version": 3,
+  "generatedAt": 1784797601185,
+  "projectName": "0114-react-jury-r7",
+  "projectProfile": {
+    "kind": "react-storybook",
+    "screenUnit": {
+      "sourceGlob": "src/**/*.{tsx,jsx}",
+      "storyRequired": true,
+      "rootMarker": "data-sd-screen-root"
+    },
+    "componentModel": "react-index",
+    "renderProbe": "storybook",
+    "allowedUiPackages": [
+      "@storybook/addon-docs",
+      "@storybook/react-vite",
+      "react",
+      "react-dom",
+      "storybook"
+    ]
+  },
+  "sources": {
+    "storybookCatalog": false,
+    "staticScan": true,
+    "designMd": true,
+    "componentNotes": false,
+    "legacyComponentSelectionMap": true,
+    "lucideFallback": true,
+    "assetPacks": false,
+    "iconSources": false,
+    "externalIconSources": false,
+    "usageScan": true,
+    "screenTemplates": false
+  },
+  "counts": {
+    "components": 128,
+    "componentGroups": 7,
+    "tokens": 120,
+    "icons": 1535,
+    "iconCandidates": 1536,
+    "iconSources": 0,
+    "workspaceIconSources": 0,
+    "externalIconSources": 0,
+    "externalIcons": 0,
+    "projectIconContracts": 1,
+    "fallbackIcons": 1535,
+    "assets": 0,
+    "illustrations": 0,
+    "routes": 0,
+    "screens": 20,
+    "examples": 0,
+    "usageSnippets": 183,
+    "usageCards": 108,
+    "describedComponents": 0,
+    "patterns": 0,
+    "notes": 4,
+    "agentNotes": 4,
+    "diagnostics": 0
+  },
+  "fingerprint": "206cf05b5102924ff7cd4a438c4285898c0b014151948f6189468d69817eed4b",
+  "artifacts": {
+    "manifest": ".sber-designer/design-index/manifest.json",
+    "promptSummary": ".sber-designer/design-index/prompt-summary.md",
+    "projectProfile": ".sber-designer/design-index/project-profile.json",
+    "designBrief": ".sber-designer/design-index/design-brief.md",
+    "components": ".sber-designer/design-index/components.jsonl",
+    "htmlCssCatalogManifest": ".sber-designer/design-index/html-css-catalog-manifest.json",
+    "componentGroups": ".sber-designer/design-index/component-groups.json",
+    "tokens": ".sber-designer/design-index/tokens.json",
+    "icons": ".sber-designer/design-index/icons.json",
+    "iconCandidates": ".sber-designer/design-index/icon-candidates.jsonl",
+    "externalIcons": ".sber-designer/design-index/external-icons.jsonl",
+    "iconCatalog": ".sber-designer/design-index/icon-catalog.md",
+    "assets": ".sber-designer/design-index/assets.jsonl",
+    "routes": ".sber-designer/design-index/routes.json",
+    "screens": ".sber-designer/design-index/screens.jsonl",
+    "storybook": ".sber-designer/design-index/storybook.json",
+    "usageExamples": ".sber-designer/design-index/usage-examples.jsonl",
+    "usageSnippets": ".sber-designer/design-index/usage-snippets.jsonl",
+    "usageCards": ".sber-designer/design-index/usage-cards.jsonl",
+    "descriptionMap": ".sber-designer/design-index/description-map.json",
+    "componentSelectionMap": ".sber-designer/design-index/component-selection-map.json",
+    "patterns": ".sber-designer/design-index/patterns.jsonl",
+    "agentNotes": ".sber-designer/design-index/agent-notes.jsonl",
+    "diagnostics": ".sber-designer/design-index/diagnostics.json",
+    "fingerprints": ".sber-designer/design-index/fingerprints.json"
+  },
+  "quality": {
+    "score": 0.97,
+    "checks": [
+      {
+        "id": "prompt-summary",
+        "label": "Prompt summary",
+        "score": 1,
+        "detail": "Prompt summary artifact is declared in the manifest.",
+        "recommendation": "Regenerate the design index so prompt-summary.md is emitted.",
+        "status": "passed"
+      },
+      {
+        "id": "description-coverage",
+        "label": "Description coverage",
+        "score": 1,
+        "detail": "128 of 128 indexed components have Description for AI coverage.",
+        "recommendation": "Add Description for AI layers to high-traffic components or enrich the CSS catalog component docs.",
+        "status": "passed"
+      },
+      {
+        "id": "usage-cards",
+        "label": "Usage cards",
+        "score": 0.84,
+        "detail": "108 usage cards are available for 128 components.",
+        "recommendation": "Run the usage scanner on representative source files or add focused component examples.",
+        "status": "warning"
+      },
+      {
+        "id": "token-context",
+        "label": "Token context",
+        "score": 1,
+        "detail": "120 design token records are indexed.",
+        "recommendation": "Expose project color, spacing, radius, and typography tokens to the index.",
+        "status": "passed"
+      },
+      {
+        "id": "diagnostics",
+        "label": "Diagnostics",
+        "score": 1,
+        "detail": "No warning or error diagnostics are present.",
+        "recommendation": "Resolve index diagnostics before relying on broad generation context.",
+        "status": "passed"
+      }
+    ],
+    "violations": [
+      {
+        "id": "usage-cards",
+        "severity": "warning",
+        "message": "Usage cards: 108 usage cards are available for 128 components.",
+        "recommendation": "Run the usage scanner on representative source files or add focused component examples."
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+export { replaceDisallowedSymbols } from './InputTextDecorator';

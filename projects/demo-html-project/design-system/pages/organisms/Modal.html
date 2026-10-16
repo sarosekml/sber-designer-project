@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modal — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/shadow.css">
+<link rel="stylesheet" href="../../styles/button.css">
+<link rel="stylesheet" href="../../styles/icon-button.css">
+<link rel="stylesheet" href="../../styles/checkbox.css">
+<link rel="stylesheet" href="../../styles/label-helper.css">
+<link rel="stylesheet" href="../../styles/modal.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    margin: 0; font-family: var(--font-text), system-ui, sans-serif;
+    color: var(--text-primary); background: var(--bg-page); background-attachment: fixed;
+  }
+  a.inl { color: var(--link); text-decoration: none; font-weight: 600; border-bottom: 1px solid color-mix(in srgb, var(--link) 35%, transparent); }
+  a.inl:hover { color: var(--link-dark); }
+  .page { max-width: 1320px; margin: 0 auto; padding: clamp(40px,7vw,96px) clamp(24px,5vw,72px) 140px; }
+
+  /* masthead */
+  .masthead { border-bottom: 1px solid var(--border-light); padding-bottom: 30px; }
+  .masthead .meta { font: var(--type-body-xs); color: var(--text-inactive); display:flex; gap:24px; margin:0 0 22px; }
+  .masthead .meta b { color: var(--text-secondary); font: var(--type-body-xs); font-weight:600; }
+  .eyebrow { font: var(--type-button-xs); letter-spacing:.14em; text-transform:uppercase; color: var(--primary); margin:0 0 14px; }
+  .masthead h1 { font: var(--type-h1); margin:0 0 14px; color: var(--text-black); }
+  @media (max-width:600px){ .masthead h1{ font-size:40px; line-height:48px; } }
+  .masthead p.lead { font: var(--type-body-l); color: var(--text-secondary); margin:0; max-width:66ch; text-wrap:pretty; }
+
+  /* section */
+  .section { margin-top: 76px; }
+  .section > h2 { font: var(--type-h3-strong); margin:0 0 8px; color: var(--text-black); }
+  .section > p.desc { font: var(--type-body-m); color: var(--text-secondary); margin:0 0 28px; max-width:76ch; text-wrap:pretty; }
+  .section > p.desc.tight { margin-bottom:20px; }
+  .section > p.desc + p.desc { margin-top:-16px; }
+  .badge-new { display:inline-block; font: var(--type-button-xs); letter-spacing:.06em; text-transform:uppercase; color: var(--primary); background: var(--primary-bg); border:1px solid color-mix(in srgb, var(--primary) 22%, transparent); padding:3px 9px; border-radius:999px; margin-left:12px; vertical-align:middle; }
+
+  .panel { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; padding: 32px 34px; }
+  .panel + .panel { margin-top: 20px; }
+  .row { display:flex; flex-wrap:wrap; align-items:flex-start; gap:40px; }
+
+  ul.bullets { margin: 0 0 0 2px; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  ul.bullets li { position:relative; padding-left:18px; font: var(--type-body-m); color: var(--text-secondary); }
+  ul.bullets li::before { content:""; position:absolute; left:2px; top:8px; width:5px; height:5px; border-radius:50%; background: var(--text-inactive); }
+
+  ul.rules { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; }
+  ul.rules li { font: var(--type-body-m); color: var(--text-primary); padding-left:26px; position:relative; text-wrap:pretty; }
+  ul.rules li::before { content:""; position:absolute; left:2px; top:9px; width:7px; height:7px; border-radius:50%; background: var(--primary); }
+  ul.rules li b { color: var(--text-black); }
+
+  code.tok { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.86em; color: var(--primary); background: var(--primary-bg); padding:1px 6px; border-radius:5px; }
+
+  /* ---------- playground ---------- */
+  .panel.pg { padding:0; overflow:hidden; display:grid; grid-template-columns: 340px 1fr; }
+  @media (max-width:820px){ .panel.pg { grid-template-columns:1fr; } }
+  .pg__controls { padding:30px 30px; display:flex; flex-direction:column; gap:22px; border-right:1px solid var(--border-light); }
+  @media (max-width:820px){ .pg__controls { border-right:none; border-bottom:1px solid var(--border-light); } }
+  .pg__stage { padding:40px 32px; display:flex; align-items:flex-start; justify-content:safe center; min-height:520px; position:relative; overflow:auto;
+    background:
+      linear-gradient(var(--bg-tile),var(--bg-tile)) padding-box,
+      repeating-conic-gradient(#f2f5f5 0% 25%, #fbfcfc 0% 50%) 0 / 22px 22px; }
+  .pg__stage .modal-scrim--inline { position:static; flex:none; }
+
+  .ctl { display:flex; flex-direction:column; gap:8px; }
+  .ctl > .lbl { font: var(--type-body-s-strong); color: var(--text-inactive); text-transform:uppercase; letter-spacing:.05em; font-size:11px; }
+
+  .pg-select { position:relative; }
+  .pg-select select { appearance:none; -webkit-appearance:none; width:100%; height:40px; padding:0 38px 0 14px; border:1px solid var(--border-primary); border-radius:9px; background: var(--bg-tile); color: var(--text-primary); font: var(--type-body-m); cursor:pointer; }
+  .pg-select select:focus-visible { outline:2px solid var(--primary); outline-offset:1px; }
+  .pg-select::after { content:""; position:absolute; right:15px; top:50%; width:9px; height:9px; border-right:2px solid var(--text-secondary); border-bottom:2px solid var(--text-secondary); transform:translateY(-65%) rotate(45deg); pointer-events:none; }
+
+  /* ---------- anatomy ---------- */
+  .anat { display:grid; grid-template-columns: minmax(320px,1fr) minmax(260px,380px); gap:44px; align-items:center; }
+  @media (max-width:820px){ .anat { grid-template-columns:1fr; } }
+  .anat__stage { background: var(--tertiary-light); border:1px solid var(--border-light); border-radius:14px; padding:44px; display:flex; justify-content:center; position:relative; overflow:auto; }
+  .anat__stage .modal-scrim--inline { position:static; background:transparent; padding:0; display:block; }
+  .anat__stage .modal { max-height:420px; box-shadow:0 10px 30px rgba(40,50,55,.14); }
+  .anat__legend { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; counter-reset:a; }
+  .anat__legend li { display:flex; gap:14px; align-items:flex-start; font: var(--type-body-m); color: var(--text-primary); }
+  .anat__legend li .n { counter-increment:a; flex:none; width:24px; height:24px; border-radius:50%; background: var(--primary); color:#fff; font: var(--type-body-s-strong); display:flex; align-items:center; justify-content:center; }
+  .anat__legend li .n::before { content:counter(a); }
+  .anat__legend li .t .k { font: var(--type-body-m-strong); color: var(--text-black); }
+  .anat__legend li .t .d { font: var(--type-body-s); color: var(--text-secondary); }
+
+  /* ---------- sizes ---------- */
+  .size-table { width:100%; border-collapse:collapse; }
+  .size-table th, .size-table td { text-align:left; padding:12px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); }
+  .size-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .size-table tr:last-child td { border-bottom:none; }
+  .size-table td.num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  .size-table td.rec { color: var(--text-inactive); font: var(--type-body-s); }
+  .size-bar { display:inline-block; height:8px; border-radius:4px; background: var(--primary); vertical-align:middle; margin-right:10px; }
+
+  /* ---------- usage: footer combos ---------- */
+  .use-grid { display:grid; grid-template-columns: 1fr 1fr; gap:20px; }
+  @media (max-width:820px){ .use-grid { grid-template-columns:1fr; } }
+  .use-block { border:1px solid var(--border-light); border-radius:14px; overflow:hidden; background: var(--bg-tile); }
+  .use-block__stage { padding:20px; background: var(--tertiary-light); }
+  .use-block__cap { padding:14px 18px; font: var(--type-body-xs); color: var(--text-secondary); border-top:1px solid var(--border-light); }
+
+  /* ---------- states grid ---------- */
+  .states { display:grid; grid-template-columns: repeat(2, 1fr); gap:30px 26px; }
+  @media (max-width:760px){ .states { grid-template-columns: 1fr; } }
+  .state-cell { display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+  .state-cap { font: var(--type-body-s-strong); color: var(--text-secondary); }
+
+  /* ---------- mock content (иллюстративное — не компонент ДС) ---------- */
+  .mock-input { height:40px; display:flex; align-items:center; padding:0 14px; border:1px solid var(--border-primary); border-radius: var(--radius-field); background: var(--bg-tile); font: var(--type-body-m); color: var(--text-primary); }
+  .mock-input--error { border-color: var(--error); }
+
+  /* ---------- do / don't ---------- */
+  .guide { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:720px){ .guide { grid-template-columns:1fr; } }
+  .guide-card { border:1px solid var(--border-light); border-radius:12px; overflow:hidden; background: var(--bg-tile); display:flex; flex-direction:column; }
+  .guide-card__bar { height:4px; }
+  .guide-card.bad  .guide-card__bar { background: var(--error); }
+  .guide-card.good .guide-card__bar { background: var(--success); }
+  .guide-card__tag { display:inline-flex; align-items:center; gap:7px; font: var(--type-body-s-strong); padding:14px 20px 0; }
+  .guide-card.bad  .guide-card__tag { color: var(--error-dark); }
+  .guide-card.good .guide-card__tag { color: var(--success-dark); }
+  .guide-card__tag .ic { width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; flex:none; }
+  .guide-card.bad  .guide-card__tag .ic { background: var(--error); }
+  .guide-card.good .guide-card__tag .ic { background: var(--success); }
+  .guide-card__tag .ic svg { width:12px; height:12px; }
+  .guide-card__body { padding:16px 20px 22px; font: var(--type-body-m); color: var(--text-primary); }
+  .guide-card__cap { padding:0 20px 20px; font: var(--type-body-xs); color: var(--text-inactive); text-wrap:pretty; }
+
+  /* ---------- reference tables ---------- */
+  .ref-table { width:100%; border-collapse:collapse; }
+  .ref-table th, .ref-table td { text-align:left; padding:14px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:top; }
+  .ref-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .ref-table tr:last-child td { border-bottom:none; }
+  kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; color: var(--text-primary); background: var(--bgtable-row-focus); border:1px solid var(--border-primary); border-radius:5px; padding:1px 7px; }
+
+  .color-ref { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
+  @media (max-width:760px){ .color-ref { grid-template-columns:1fr; } }
+  .cref-group { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; overflow:hidden; }
+  .cref-group > h3 { font: var(--type-h5-strong); margin:0; color: var(--text-primary); padding:18px 22px; border-bottom:1px solid var(--border-light); }
+  .cref-rows { padding:6px 0; }
+  .cref-row { display:grid; grid-template-columns: 36px 1fr; gap:14px; align-items:center; padding:9px 22px; }
+  .cref-row:hover { background: var(--bgtable-row-hover); }
+  .cref-sw { width:36px; height:36px; border-radius:8px; border:1px solid rgba(40,50,55,.12); position:relative; overflow:hidden; flex:none; }
+  .cref-sw .cf { position:absolute; inset:0; }
+  .cref-meta { min-width:0; }
+  .cref-meta .role { font: var(--type-body-s); color: var(--text-inactive); margin:0; }
+  .cref-meta .tname { font: var(--type-body-m-strong); color: var(--text-primary); margin:1px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; word-break:break-all; }
+
+  /* ---------- developer handoff ---------- */
+  .subhead { font: var(--type-body-m-strong); color: var(--text-black); margin:0 0 16px; }
+  .subhead.mt { margin-top: 34px; }
+  .subhead .req { font: var(--type-body-s); color: var(--text-inactive); font-weight:400; }
+  .dev-intro { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:-6px 0 22px; }
+  .dev-intro .req { font: var(--type-body-s); color: var(--text-inactive); }
+  .code-panel { background: var(--c-cgrey-800); border-radius: 12px; overflow:hidden; }
+  .code-panel + .code-panel { margin-top:20px; }
+  .code-panel__head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 16px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .code-panel__name { color: rgba(255,255,255,.72); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; letter-spacing:.02em; font-weight:600; }
+  .code-panel__copy { display:inline-flex; align-items:center; gap:6px; border:0; padding:6px 11px; border-radius:7px; background: rgba(255,255,255,.08); color: rgba(255,255,255,.86); font: var(--type-body-xs); cursor:pointer; transition: background-color .12s ease; }
+  .code-panel__copy:hover { background: rgba(255,255,255,.16); }
+  .code-panel__copy svg { width:14px; height:14px; flex:none; }
+  .code-panel__copy.is-copied { background: color-mix(in srgb, var(--success) 30%, transparent); color:#fff; }
+  .code-panel pre { margin:0; padding:18px 20px; overflow-x:auto; }
+  .code-panel code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; line-height:1.65; color: rgba(255,255,255,.82); white-space:pre; }
+  .code-panel .tk-tag  { color:#79D9C9; }
+  .code-panel .tk-attr { color:#9FC1FF; }
+  .code-panel .tk-val  { color:#F2C879; }
+  .code-panel .tk-cm   { color: rgba(255,255,255,.4); font-style:italic; }
+  .dev-table { width:100%; border-collapse:collapse; }
+  .dev-table th, .dev-table td { text-align:left; padding:13px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:top; }
+  .dev-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .dev-table tr:last-child td { border-bottom:none; }
+  .dev-table code.tok { white-space:nowrap; }
+  .dev-table td.dsc { color: var(--text-secondary); font: var(--type-body-s); }
+  .dev-table td.rt-num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  .dev-note { font: var(--type-body-s); color: var(--text-inactive); margin:16px 2px 0; text-wrap:pretty; }
+
+  footer.page-foot { margin-top:90px; padding-top:26px; border-top:1px solid var(--border-light);
+    font: var(--type-body-s); color: var(--text-inactive); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+</style>
+  <link rel="stylesheet" href="../../styles/ds-nav.css">
+  <link rel="stylesheet" href="../../styles/ds-toc.css">
+  <link rel="stylesheet" href="../../styles/pg-kit.css">
+<style>
+/* unified-template: бывшие h2-разделы, понижены до подразделов */
+.section .subsec{margin-top:48px;}
+.section .subsec>h3{font:var(--type-h4-strong);margin:0 0 8px;color:var(--text-black);}
+.section .subsec>p.desc{font:var(--type-body-m);color:var(--text-secondary);margin:0 0 24px;max-width:82ch;text-wrap:pretty;}
+.section .subsec>p.desc.tight{margin-bottom:20px;}
+.section .subsec>p.desc+p.desc{margin-top:-16px;}
+</style>
+</head>
+<body>
+<main class="page" data-screen-label="Modal">
+
+  <header class="masthead">
+    <div class="meta"><span>Версия: <b>v1.0</b></span><span>Обновлено: <b>08.07.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Организмы</p>
+    <h1>Modal</h1>
+    <p class="lead">Modal — не отдельный компонент, а свод правил построения модальных форм. Обязательны две части с фиксированной анатомией — шапка (<b>Modal_Top</b>: заголовок + крестик) и подвал (<b>Modal_Bottom</b>: опциональные кнопки слева, кнопки действий справа). Между ними — контентная область, которая может содержать что угодно: форму, таблицу, пустое состояние.</p>
+  </header>
+
+  <!-- PLAYGROUND -->
+  <section class="section" data-screen-label="Playground">
+    <h2>Конструктор</h2>
+    <p class="desc">Соберите модалку: ширина (12 шагов шкалы), состав подвала слева и справа, тип контента и состояние. Прокрутите превью с длинным контентом, чтобы увидеть тень у шапки/подвала.</p>
+    <div class="panel pg">
+      <div class="pg__controls" id="pg-controls"></div>
+      <div class="pg__stage" id="pg-stage"></div>
+    </div>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" data-screen-label="Usage">
+    <h2>Использование</h2>
+    <p class="desc tight">Модалка прерывает основной сценарий, чтобы получить решение или ввод данных, не уводя пользователя со страницы. Используйте для создания/редактирования сущности, короткой формы, подтверждения действия. Для навигации между разделами или длинных самостоятельных сценариев подходит отдельная страница, а не модалка.</p>
+    <div class="panel" style="margin-bottom:20px;">
+      <p class="desc tight" style="margin-bottom:18px;">Кнопки подвала — правила из исходной документации:</p>
+      <table class="dev-table">
+        <thead><tr><th>Место</th><th>Кнопка</th><th>Правило</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="2">Справа — основные</td><td>Primary (Accent)</td><td class="dsc">Отображается всегда. Текст — глагол целевого действия («Сохранить», «Создать»); для форм на просмотр — «Закрыть».</td></tr>
+          <tr><td>Secondary (Transparent)</td><td class="dsc">Опциональная кнопка альтернативного действия — например «Очистить фильтр» или отказ от маршрутизации.</td></tr>
+          <tr><td rowspan="2">Слева — опциональные</td><td>Изменить</td><td class="dsc">Форма в режиме просмотра — переключает в режим редактирования.</td></tr>
+          <tr><td>Удалить</td><td class="dsc">Форма в режиме редактирования существующей сущности. Открывает диалог подтверждения (см. «Состояния»), не удаляет напрямую.</td></tr>
+        </tbody>
+      </table>
+      <p class="dev-note">Все четыре кнопки подвала одновременно не используются — Изменить и Удалить принадлежат разным режимам одной формы.</p>
+    </div>
+    <div class="use-grid" id="use-foot-combos"></div>
+  
+<div class="subsec" data-screen-label="Guidelines">
+    <h3>Рекомендации</h3>
+    <p class="desc">Модалка — прерывание, а не самостоятельная страница. Не усложняйте то, что можно решить проще.</p>
+    <div class="guide">
+      <div class="guide-card bad">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>Не так</div>
+        <div class="guide-card__body">Модалка внутри модалки для обычного шага формы (не для подтверждения) — пользователь теряет счёт открытым слоям.</div>
+        <p class="guide-card__cap">Вложенные модалки — только для короткого решения (confirm/alert), не для продолжения того же сценария.</p>
+      </div>
+      <div class="guide-card good">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Так</div>
+        <div class="guide-card__body">Многошаговый сценарий — Tab внутри одной модалки или отдельная страница, вложенная модалка — только под confirm/alert.</div>
+        <p class="guide-card__cap">Один слой поверх страницы + один компактный confirm поверх него — предел вложенности.</p>
+      </div>
+      <div class="guide-card bad">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>Не так</div>
+        <div class="guide-card__body">Крестик убран, потому что «внизу и так есть Закрыть» — пользователь ищет привычное место в правом верхнем углу.</div>
+        <p class="guide-card__cap">Крестик в шапке обязателен всегда, независимо от состава подвала.</p>
+      </div>
+      <div class="guide-card good">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Так</div>
+        <div class="guide-card__body">Крестик остаётся всегда, даже если внизу уже есть Primary «Закрыть» для формы в режиме просмотра.</div>
+        <p class="guide-card__cap">Два равнозначных способа закрыть — крестик и, если применимо, кнопка подвала.</p>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="section" data-screen-label="Anatomy">
+    <h2>Анатомия</h2>
+    <p class="desc">Три зоны в вертикальном стеке: шапка и подвал — фиксированная структура (flex: none), контентная область — единственная гибкая зона (flex: 1, со своей прокруткой), которая может быть какой угодно.</p>
+    <div class="panel">
+      <div class="anat">
+        <div class="anat__stage" id="anat-stage"></div>
+        <ul class="anat__legend">
+          <li><span class="n"></span><span class="t"><span class="k">Modal_Top — заголовок</span><span class="d"> — Body H5 Strong, до 2 строк, не обрезается</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Modal_Top — крестик</span><span class="d"> — IconButton Neutral M, закрывает модалку</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Modal_Body</span><span class="d"> — произвольный контент, единственная прокручиваемая зона</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Modal_Bottom_Left</span><span class="d"> — Изменить / Удалить, опционально</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Modal_Bottom_Right</span><span class="d"> — Secondary + Primary, Primary обязателен</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- VARIANTS (STUB) -->
+  <section class="section" data-screen-label="Variants">
+    <h2>Варианты</h2>
+    <p class="desc">Не применимо: компонент существует в единственной конфигурации, отдельных вариантов нет.</p>
+  </section>
+
+  <!-- SIZES -->
+  <section class="section" data-screen-label="Sizes">
+    <h2>Размеры</h2>
+    <p class="desc tight">Ширина — 12 фиксированных шагов шкалы (шаг ≈150px, значения сведены до кратных 10). Высота не фиксирована — модалка растёт по контенту до <code class="tok">calc(100vh − 48px)</code>, дальше контентная область прокручивается.</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="size-table">
+        <thead><tr><th>Шаг</th><th>Токен</th><th>Значение</th><th>Наглядно</th><th>Рекомендация</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code class="tok">--modal-w-1</code></td><td class="num">140px</td><td><span class="size-bar" style="width:14px;"></span></td><td class="rec">Только короткий диалог подтверждения (1 строка + кнопки)</td></tr>
+          <tr><td>2</td><td><code class="tok">--modal-w-2</code></td><td class="num">290px</td><td><span class="size-bar" style="width:29px;"></span></td><td class="rec">Диалог подтверждения с 2–3 строками текста</td></tr>
+          <tr><td>3</td><td><code class="tok">--modal-w-3</code></td><td class="num">440px</td><td><span class="size-bar" style="width:44px;"></span></td><td class="rec">Диалог подтверждения / очень короткая форма (1–2 поля)</td></tr>
+          <tr><td>4</td><td><code class="tok">--modal-w-4</code></td><td class="num">600px</td><td><span class="size-bar" style="width:60px;"></span></td><td class="rec">Короткая форма</td></tr>
+          <tr><td>5</td><td><code class="tok">--modal-w-5</code></td><td class="num">750px</td><td><span class="size-bar" style="width:75px;"></span></td><td class="rec">Форма среднего размера — типичный кейс</td></tr>
+          <tr><td>6</td><td><code class="tok">--modal-w-6</code></td><td class="num">900px</td><td><span class="size-bar" style="width:90px;"></span></td><td class="rec">Форма среднего размера — дефолт конструктора</td></tr>
+          <tr><td>7</td><td><code class="tok">--modal-w-7</code></td><td class="num">1050px</td><td><span class="size-bar" style="width:105px;"></span></td><td class="rec">Форма с несколькими колонками полей</td></tr>
+          <tr><td>8</td><td><code class="tok">--modal-w-8</code></td><td class="num">1200px</td><td><span class="size-bar" style="width:120px;"></span></td><td class="rec">Форма с несколькими колонками полей</td></tr>
+          <tr><td>9</td><td><code class="tok">--modal-w-9</code></td><td class="num">1360px</td><td><span class="size-bar" style="width:136px;"></span></td><td class="rec">Форма с таблицей/сложным составом</td></tr>
+          <tr><td>10</td><td><code class="tok">--modal-w-10</code></td><td class="num">1510px</td><td><span class="size-bar" style="width:151px;"></span></td><td class="rec">Широкая форма — редкий кейс</td></tr>
+          <tr><td>11</td><td><code class="tok">--modal-w-11</code></td><td class="num">1660px</td><td><span class="size-bar" style="width:166px;"></span></td><td class="rec">Широкая форма — редкий кейс</td></tr>
+          <tr><td>12</td><td><code class="tok">--modal-w-12</code></td><td class="num">1820px</td><td><span class="size-bar" style="width:182px;"></span></td><td class="rec">Почти на весь экран — исключительный кейс, проверяйте на реальном вьюпорте</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="dev-note">На узких вьюпортах модалка ограничена <code class="tok">calc(100vw − 48px)</code> и сжимается независимо от выбранного шага — крайние широкие шаги (10–12) требуют десктопного экрана.</p>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="section" data-screen-label="Content">
+    <h2>Контент</h2>
+    <p class="desc tight">Контентная область (Modal_Body) не диктует состав — единственное требование: она прокручивается сама, независимо от шапки и подвала, которые остаются закреплёнными. Правила:</p>
+    <div class="panel">
+      <ul class="rules">
+        <li><b>Заголовок</b> — короткое существительное или конструкция «Действие + объект» («Новая сделка», «Изменить условия»), без точки в конце.</li>
+        <li><b>Крестик обязателен</b> всегда, даже если внизу есть кнопка «Закрыть» — второй способ выйти без решения.</li>
+        <li><b>Body может быть пустым, формой, таблицей или пустым состоянием</b> — модалка не задаёт для него разметку, только паддинг и скролл.</li>
+        <li><b>Длинный контент не тянет модалку выше экрана</b> — после <code class="tok">calc(100vh − 48px)</code> прокручивается только тело; шапка и подвал остаются на месте.</li>
+        <li><b>Ошибка внутри контента</b> не закрывает модалку и не убирает подвал — сообщение об ошибке несёт <a class="inl" href="../loading/LabelHelper.html">Helper</a> конкретного поля.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BEHAVIOR (STUB) -->
+  <section class="section" data-screen-label="Behavior">
+    <h2>Поведение</h2>
+    <p class="desc">Не применимо: специфического поведения (позиционирование, анимация, адаптивность) у компонента нет.</p>
+  </section>
+
+  <!-- STATES -->
+  <section class="section" data-screen-label="States">
+    <h2>Состояния</h2>
+    <p class="desc tight">Закрытие — по крестику, <kbd>Esc</kbd> или клику по скриму. Исключение: если форма содержит несохранённый ввод (guarded), клик по скриму игнорируется — только крестик или <kbd>Esc</kbd>, чтобы случайный клик мимо не стёр данные.</p>
+    <div class="panel" style="margin-bottom:20px;">
+      <table class="dev-table">
+        <thead><tr><th>Способ закрытия</th><th>Модалка по умолчанию</th><th>Модалка с несохранёнными данными (guarded)</th></tr></thead>
+        <tbody>
+          <tr><td>Крестик / кнопка «Закрыть»</td><td class="dsc">Закрывает сразу</td><td class="dsc">Закрывает сразу</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td class="dsc">Закрывает сразу</td><td class="dsc">Закрывает сразу</td></tr>
+          <tr><td>Клик по скриму</td><td class="dsc">Закрывает сразу</td><td class="dsc">Игнорируется — модалка остаётся открытой</td></tr>
+        </tbody>
+      </table>
+      <p class="dev-note">Guarded — свойство конкретного экземпляра формы (флаг «есть несохранённые изменения»), а не отдельный CSS-модификатор: разработчик отключает обработчик клика по скриму, пока форма «грязная».</p>
+    </div>
+    <div class="states" id="states-demo"></div>
+
+    <div class="panel" style="margin-top:30px;">
+      <p class="subhead" style="margin-bottom:10px;">Диалог подтверждения удаления<span class="badge-new">Новое</span></p>
+      <p class="desc tight">Клик по «Удалить» в подвале не удаляет напрямую — открывает вложенный модальный диалог поверх текущей модалки (<code class="tok">--modal-z-nested</code>, скрим складывается с уже открытым и темнеет сильнее). Диалог — компактная ширина (2–4 шаг шкалы), Primary в тоне <code class="tok">.btn--danger</code>.</p>
+      <div id="danger-demo" style="display:flex; flex-direction:column; gap:16px; align-items:flex-start;"></div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" data-screen-label="A11y">
+    <h2>Доступность</h2>
+    <p class="desc">Контейнер получает <code class="tok">role="dialog"</code> (диалог подтверждения — <code class="tok">role="alertdialog"</code>), <code class="tok">aria-modal="true"</code> и <code class="tok">aria-labelledby</code>, указывающий на заголовок. Фокус при открытии переходит на первый интерактивный элемент тела (или на крестик, если тело пустое) и заперт внутри модалки (focus trap) — <kbd>Tab</kbd> по последнему элементу возвращает на первый. <kbd>Esc</kbd> закрывает и возвращает фокус на элемент, открывший модалку.</p>
+    <div class="row">
+      <div class="panel" style="flex:1; min-width:280px;">
+        <p class="desc tight" style="margin-bottom:18px;">Клавиатура</p>
+        <table class="ref-table"><tbody>
+          <tr><td><kbd>Tab</kbd> / <kbd>Shift+Tab</kbd></td><td class="dsc">Перемещение по фокусируемым элементам внутри модалки, зациклено (focus trap)</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td class="dsc">Закрывает модалку (кроме случая, когда открыт вложенный диалог — тогда закрывает сначала его)</td></tr>
+          <tr><td><kbd>Enter</kbd></td><td class="dsc">Активирует Primary, если фокус не на другом интерактивном элементе</td></tr>
+        </tbody></table>
+      </div>
+      <div class="panel" style="flex:1; min-width:260px;">
+        <p class="desc tight" style="margin-bottom:18px;">Скрин-ридер</p>
+        <ul class="bullets">
+          <li>элемент, открывший модалку, получает фокус обратно при закрытии;</li>
+          <li>контент за скримом получает <code class="tok">aria-hidden="true"</code> / <code class="tok">inert</code>, пока модалка открыта;</li>
+          <li>ошибка валидации внутри тела объявляется через <code class="tok">role="alert"</code> на Helper конкретного поля;</li>
+          <li>вложенный диалог подтверждения — <code class="tok">role="alertdialog"</code>, а не обычный <code class="tok">dialog</code>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY (STUB) -->
+  <section class="section" data-screen-label="Typography">
+    <h2>Типографика</h2>
+    <p class="desc">Раздел требует ревизии: токены типографики компонента — в redline-таблице раздела «Для разработчиков».</p>
+  </section>
+
+  <!-- COLORS -->
+  <section class="section" data-screen-label="Colors">
+    <h2>Цвета</h2>
+    <p class="desc">Компонент использует только семантические токены. Скрим — <code class="tok">--modal-scrim</code> (color-mix поверх <code class="tok">--st-grey</code>, конвенция как у <code class="tok">--toast-scrim</code>), тень — именованный токен <code class="tok">--shadow-modal-form</code>, а не собственный <code class="tok">rgba(...)</code>.</p>
+    <div class="color-ref" id="color-ref"></div>
+  </section>
+
+  <!-- DEVELOPER HANDOFF -->
+  <section class="section" data-screen-label="Dev">
+    <h2>Для разработчиков</h2>
+    <p class="desc">Хендофф-пакет: точные размеры, эталонная структура DOM, поведение и рекомендуемый API. Не привязан к стеку — команда, которая собирает компонент на React, берёт отсюда нужное для вёрстки.</p>
+
+    <p class="subhead">Точные размеры (redline)</p>
+    <p class="desc tight">Значения измерены на живом экземпляре компонента (<code class="tok">getComputedStyle</code>), источник — токены в <code class="tok">styles/modal.css</code>.</p>
+    <div class="panel" style="padding:8px 10px; margin-bottom:34px;">
+      <table class="dev-table" id="dev-spec-table">
+        <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="dev-intro">
+      <span class="req">Подключить (если переиспользуете этот CSS напрямую):</span>
+      <code class="tok">styles/typography.css</code>
+      <code class="tok">styles/colors.css</code>
+      <code class="tok">styles/radius.css</code>
+      <code class="tok">styles/shadow.css</code>
+      <code class="tok">styles/button.css</code>
+      <code class="tok">styles/icon-button.css</code>
+      <code class="tok">styles/modal.css</code>
+    </div>
+
+    <p class="subhead">Анатомия DOM <span class="req">— эталонная структура, имена классов условны, важны сами элементы и их роли/состояния</span></p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Разметка · HTML (эталонная реализация ДС)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-html"><span class="tk-cm">&lt;!-- скрим: клик закрывает модалку, КРОМЕ guarded-форм с несохранённым вводом --&gt;</span>
+<span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"modal-scrim"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"modal modal--w6"</span> <span class="tk-attr">role=</span><span class="tk-val">"dialog"</span> <span class="tk-attr">aria-modal=</span><span class="tk-val">"true"</span> <span class="tk-attr">aria-labelledby=</span><span class="tk-val">"modal-title"</span><span class="tk-tag">&gt;</span>
+
+    <span class="tk-cm">&lt;!-- Modal_Top: заголовок + крестик, больше ничего --&gt;</span>
+    <span class="tk-tag">&lt;header</span> <span class="tk-attr">class=</span><span class="tk-val">"modal__head"</span><span class="tk-tag">&gt;</span>
+      <span class="tk-tag">&lt;h2</span> <span class="tk-attr">class=</span><span class="tk-val">"modal__title"</span> <span class="tk-attr">id=</span><span class="tk-val">"modal-title"</span><span class="tk-tag">&gt;</span>Новая сделка<span class="tk-tag">&lt;/h2&gt;</span>
+      <span class="tk-tag">&lt;button</span> <span class="tk-attr">type=</span><span class="tk-val">"button"</span> <span class="tk-attr">class=</span><span class="tk-val">"ibtn ibtn--neutral ibtn--m"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Закрыть"</span><span class="tk-tag">&gt;</span>&lt;svg…&gt;&lt;/svg&gt;<span class="tk-tag">&lt;/button&gt;</span>
+    <span class="tk-tag">&lt;/header&gt;</span>
+
+    <span class="tk-cm">&lt;!-- Modal_Body: единственная гибкая/прокручиваемая зона, контент произвольный --&gt;</span>
+    <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"modal__body"</span><span class="tk-tag">&gt;</span>
+      …любой контент — форма, таблица, пустое состояние…
+    <span class="tk-tag">&lt;/div&gt;</span>
+
+    <span class="tk-cm">&lt;!-- Modal_Bottom: слева опционально, справа Primary обязателен --&gt;</span>
+    <span class="tk-tag">&lt;footer</span> <span class="tk-attr">class=</span><span class="tk-val">"modal__foot"</span><span class="tk-tag">&gt;</span>
+      <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"modal__foot-left"</span><span class="tk-tag">&gt;</span>
+        <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--transparent btn--s"</span><span class="tk-tag">&gt;</span>&lt;svg…&gt;&lt;/svg&gt;Изменить<span class="tk-tag">&lt;/button&gt;</span>
+      <span class="tk-tag">&lt;/div&gt;</span>
+      <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"modal__foot-right"</span><span class="tk-tag">&gt;</span>
+        <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--transparent btn--m"</span><span class="tk-tag">&gt;</span>Очистить фильтр<span class="tk-tag">&lt;/button&gt;</span>
+        <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--accent btn--m"</span><span class="tk-tag">&gt;</span>Сохранить<span class="tk-tag">&lt;/button&gt;</span>
+      <span class="tk-tag">&lt;/div&gt;</span>
+    <span class="tk-tag">&lt;/footer&gt;</span>
+  <span class="tk-tag">&lt;/div&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span>
+
+<span class="tk-cm">&lt;!-- диалог подтверждения — вложенный поверх открытой модалки --&gt;</span>
+<span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"modal-scrim modal-scrim--nested"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"modal modal--w3"</span> <span class="tk-attr">role=</span><span class="tk-val">"alertdialog"</span> <span class="tk-attr">aria-modal=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;</span>
+    …заголовок + сообщение + <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--accent btn--m btn--danger"</span><span class="tk-tag">&gt;</span>Удалить<span class="tk-tag">&lt;/button&gt;</span>
+  <span class="tk-tag">&lt;/div&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span></code></pre>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Поведение · псевдокод (framework-agnostic)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-js"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-js"><span class="tk-cm">// 1. Открытие: смонтировать .modal-scrim в конец body (портал), запомнить activeElement
+//    для возврата фокуса; перевести фокус на первый интерактивный элемент .modal__body
+//    (если тела нет/оно пустое — на крестик); контенту страницы за скримом — aria-hidden/inert</span>
+
+<span class="tk-cm">// 2. Focus trap: перехватывать Tab/Shift+Tab на границах списка фокusируемых
+//    элементов модалки — Tab с последнего уводит на первый, и наоборот</span>
+
+<span class="tk-cm">// 3. Закрытие:
+//    isDirty = форма содержит несохранённый ввод (guarded)
+function onScrimClick():
+  if (!isDirty) close()          // обычная модалка — закрывает сразу
+  // guarded-форма — клик по скриму игнорируется, доступны только крестик и Esc
+
+function onEsc():
+  if (topLayer === nestedDialog) closeNestedDialog()   // Esc сначала закрывает верхний слой
+  else close()</span>
+
+<span class="tk-cm">// 4. Тень у шапки/подвала — наблюдать scrollTop контентной зоны:
+onBodyScroll():
+  head.classList.toggle('is-scrolled', body.scrollTop > 0)
+  foot.classList.toggle('is-scrolled', body.scrollTop + body.clientHeight < body.scrollHeight - 1)</span>
+
+<span class="tk-cm">// 5. Сохранение: Primary → .btn--loading + aria-busy, все поля — <fieldset disabled>
+//    (не просто визуальное затемнение — реально исключить их из табуляции и отправки)</span>
+
+<span class="tk-cm">// 6. Удаление — не прямое действие: клик по «Удалить» открывает вложенный
+//    modal-scrim--nested (role="alertdialog", ширина 2–4 шаг шкалы, Primary
+//    в тоне .btn--danger). Основная модалка остаётся смонтированной под ним.</span>
+
+<span class="tk-cm">// 7. Закрытие: unmount .modal-scrim, вернуть фокус на сохранённый activeElement,
+//    снять aria-hidden/inert с контента страницы</span></code></pre>
+    </div>
+    <p class="dev-note">Это не готовый сниппет для вставки — алгоритм поверх вашего стека. Рабочий референс на vanilla JS — функция <code class="tok">buildModal</code> в <code class="tok">modal.page.js</code>.</p>
+
+    <p class="subhead mt">Рекомендуемый API компонента (React)</p>
+    <p class="desc tight">Форма пропсов — предложение, а не обязательный контракт; адаптируйте под конвенции вашей кодовой базы. Тело — просто <code class="tok">children</code>, компонент не диктует его структуру.</p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Modal.types.ts</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-api"><span class="tk-attr">type</span> ModalWidthStep = <span class="tk-val">1</span>|<span class="tk-val">2</span>|<span class="tk-val">3</span>|<span class="tk-val">4</span>|<span class="tk-val">5</span>|<span class="tk-val">6</span>|<span class="tk-val">7</span>|<span class="tk-val">8</span>|<span class="tk-val">9</span>|<span class="tk-val">10</span>|<span class="tk-val">11</span>|<span class="tk-val">12</span>;
+
+<span class="tk-attr">interface</span> ModalFooterAction {
+  label: <span class="tk-attr">string</span>;
+  onClick(): <span class="tk-attr">void</span>;
+  loading?: <span class="tk-attr">boolean</span>;
+  disabled?: <span class="tk-attr">boolean</span>;
+}
+
+<span class="tk-attr">interface</span> ModalProps {
+  open: <span class="tk-attr">boolean</span>;
+  onClose(): <span class="tk-attr">void</span>;
+  title: <span class="tk-attr">string</span>;
+  widthStep?: ModalWidthStep;         <span class="tk-cm">// по умолчанию 6 (900px)</span>
+  children: React.ReactNode;          <span class="tk-cm">// Modal_Body — произвольный контент</span>
+  primaryAction: ModalFooterAction;   <span class="tk-cm">// обязателен — правый Primary</span>
+  secondaryAction?: ModalFooterAction; <span class="tk-cm">// правый Secondary</span>
+  onEdit?(): <span class="tk-attr">void</span>;                   <span class="tk-cm">// левая «Изменить»; исключает onDelete</span>
+  onDelete?(): <span class="tk-attr">void</span>;                 <span class="tk-cm">// левая «Удалить»; открывает confirm сама</span>
+  isDirty?: <span class="tk-attr">boolean</span>;                 <span class="tk-cm">// guarded — блокирует закрытие по клику на скрим</span>
+  role?: <span class="tk-val">'dialog'</span> | <span class="tk-val">'alertdialog'</span>; <span class="tk-cm">// alertdialog — для confirm/danger</span>
+}</code></pre>
+    </div>
+
+    <p class="subhead mt">Справочник классов и атрибутов</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table">
+        <thead><tr><th>Класс / атрибут</th><th>На чём</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code class="tok">.modal-scrim</code></td><td>div</td><td class="dsc">Оверлей на весь вьюпорт, центрирует модалку, гасит фон</td></tr>
+          <tr><td><code class="tok">.modal-scrim--nested</code></td><td>div</td><td class="dsc">Вложенный слой (confirm/alert) поверх уже открытой модалки — выше z-index</td></tr>
+          <tr><td><code class="tok">.modal-scrim--inline</code></td><td>div</td><td class="dsc">Встраивание превью в статичный контейнер (документация/канвас) вместо fixed-оверлея</td></tr>
+          <tr><td><code class="tok">.modal</code></td><td>div</td><td class="dsc">Контейнер: фон, радиус 24px, тень, flex-колонка из шапки/тела/подвала</td></tr>
+          <tr><td><code class="tok">.modal--w1 … --w12</code></td><td>div</td><td class="dsc">Ширина — 12 шагов шкалы (140–1820px)</td></tr>
+          <tr><td><code class="tok">.modal--saving</code></td><td>div</td><td class="dsc">Тело приглушено и не интерактивно, пока идёт сохранение</td></tr>
+          <tr><td><code class="tok">.modal__head / .modal__foot</code></td><td>header / footer</td><td class="dsc">Фиксированные зоны; разделитель всегда виден, тень — при <code class="tok">.is-scrolled</code></td></tr>
+          <tr><td><code class="tok">.modal__title</code></td><td>h2</td><td class="dsc">Заголовок — Body H5 Strong, переносится на 2 строки, не обрезается</td></tr>
+          <tr><td><code class="tok">.modal__close</code></td><td>span</td><td class="dsc">Обёртка крестика — сама кнопка это <code class="tok">.ibtn.ibtn--neutral.ibtn--m</code></td></tr>
+          <tr><td><code class="tok">.modal__body</code></td><td>div</td><td class="dsc">Единственная гибкая/прокручиваемая зона; контент произвольный</td></tr>
+          <tr><td><code class="tok">.modal__body--flush</code></td><td>div</td><td class="dsc">Без внутреннего паддинга — когда контент сам управляет отступами (таблица во всю ширину)</td></tr>
+          <tr><td><code class="tok">.modal__skeleton</code></td><td>span</td><td class="dsc">Loading-плейсхолдер — шиммер, тот же приём, что и в ReadOnlyField</td></tr>
+          <tr><td><code class="tok">.modal__foot-left / -right</code></td><td>div</td><td class="dsc">Опциональные (Изменить/Удалить) и обязательные (Secondary/Primary) действия</td></tr>
+          <tr><td><code class="tok">.btn--danger</code></td><td>button</td><td class="dsc">Модификатор Button (не только Modal) — для Primary в диалоге подтверждения удаления</td></tr>
+          <tr><td><code class="tok">role="dialog"</code> / <code class="tok">alertdialog</code></td><td>.modal</td><td class="dsc">Обычная модалка / диалог подтверждения соответственно</td></tr>
+          <tr><td><code class="tok">aria-modal</code> / <code class="tok">aria-labelledby</code></td><td>.modal</td><td class="dsc">Связь с заголовком, исключение фона из дерева доступности</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · Modal</span>
+    <span>Modal_Top / Modal_Body / Modal_Bottom · guarded-закрытие · confirm-диалог</span>
+  </footer>
+</main>
+
+<script src="../../scripts/icons-data.js"></script>
+<script src="../../scripts/ds-icons.js"></script>
+<script src="../../scripts/modal.page.js"></script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+</body>
+</html>

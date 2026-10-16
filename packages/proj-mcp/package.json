@@ -1,0 +1,31 @@
+{
+  "name": "@sber-designer/proj-mcp",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Model Context Protocol server (inbound). External agents — Claude Code, Cursor, OpenCode — connect to sber-designer through this and operate on the project: read/patch source, query the component catalog, post messages back into the editor chat. See ADR-0006.",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "bin": {
+    "sber-designer-mcp": "./src/bin.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./component-description-core": "./src/tools/component-description-core.ts",
+    "./tools": "./src/tools/index.ts"
+  },
+  "scripts": {
+    "start": "bun src/bin.ts",
+    "start:http": "bun src/bin.ts --http",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@sber-designer/design-indexer": "workspace:*",
+    "@sber-designer/shared-types": "workspace:*",
+    "@sber-designer/storybook-indexer": "workspace:*",
+    "hono": "^4.6.0",
+    "zod": "^3.23.0",
+    "zod-to-json-schema": "^3.23.0"
+  }
+}

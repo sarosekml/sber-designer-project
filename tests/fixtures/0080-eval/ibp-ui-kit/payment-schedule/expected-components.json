@@ -1,0 +1,94 @@
+{
+  "fixture": "ibp-ui-kit/payment-schedule",
+  "screen": "График платежей (payments registry by deal)",
+  "brief": "brief.md",
+  "reference": "reference.png (human-made screen; keep local — customer UI)",
+  "project": "/Users/dev/Work Dev/ibp-ui-kit",
+  "indexedAt": "2026-06-13 (design-index manifest v3: 244 usage-snippets, 93 usage-cards, 4 patterns)",
+  "note": "Expected component ids are real ibp-ui-kit design-index ids. Some roles accept alternatives; the scorer credits any one id from anyOf. Each entry maps to the gap(s) it closes from the 0080 motivating incident.",
+  "expected": [
+    {
+      "role": "app-shell",
+      "anyOf": [],
+      "gap": "#7 (no shell / Page+Navigation)",
+      "note": "ibp-ui-kit shell/navigation component; resolve from index (Page/Navigation family). Left empty until confirmed against catalog."
+    },
+    {
+      "role": "breadcrumbs",
+      "anyOf": ["molecules-breadcrumbs"],
+      "gap": "shell grammar",
+      "note": "BreadCrumbs — Главная / M&A Pipeline / 325… / График платежей"
+    },
+    {
+      "role": "page-header",
+      "anyOf": ["molecules-pagebar"],
+      "gap": "#3 (title + actions row)",
+      "note": "PageBar carries the title and the action buttons"
+    },
+    {
+      "role": "back-link",
+      "anyOf": ["atoms-buttons-button", "atoms-buttons-productbutton"],
+      "gap": "#3 (В сделку is a small outlined button by the title)",
+      "note": "secondary/outlined Button"
+    },
+    {
+      "role": "primary-action",
+      "anyOf": ["atoms-buttons-button", "atoms-buttons-productbutton"],
+      "gap": "#3 (Добавить платёж — primary contained + startIcon)",
+      "note": "primary Button/ProductButton with a leading icon"
+    },
+    {
+      "role": "secondary-action",
+      "anyOf": ["atoms-buttons-button"],
+      "gap": "#3",
+      "note": "Данные для акта сверки — secondary Button"
+    },
+    {
+      "role": "filter",
+      "anyOf": ["organisms-filterschips", "organisms-filtersmodal"],
+      "gap": "#6 (single Фильтр button, not a chips row by default)",
+      "note": "FiltersChips/FiltersModal — opened from a Фильтр button"
+    },
+    {
+      "role": "data-table",
+      "anyOf": [
+        "organisms-table-basic",
+        "organisms-table-datainteraction",
+        "organisms-table-configuration",
+        "molecules-checkboxtable"
+      ],
+      "gap": "#4 (sortable columns)",
+      "note": "Real Table organism family; sortable headers by default. Confirm canonical export id."
+    },
+    {
+      "role": "status-cell",
+      "anyOf": ["atoms-dictionarybadge", "atoms-dictionarybadgesingle"],
+      "gap": "#1 (status as outlined chip with icon, not colored text)",
+      "note": "DictionaryBadge, variant=outlined — see DictionaryBadge.types.ts BadgeStyleVariant"
+    },
+    {
+      "role": "direction-cell",
+      "anyOf": ["atoms-dictionarybadge", "atoms-dictionarybadgesingle"],
+      "gap": "#2 (direction as outlined chip with arrow, not colored text)",
+      "note": "DictionaryBadge for the Входящий/Исходящий dictionary"
+    },
+    {
+      "role": "table-footer-totals",
+      "anyOf": ["organisms-table-basic", "organisms-table-layout"],
+      "gap": "#5 (totals inline in the table footer, not 3 KPI cards)",
+      "note": "Сумма / НДС / Сумма без НДС in the table footer line"
+    },
+    {
+      "role": "pagination",
+      "anyOf": [],
+      "gap": "footer",
+      "note": "pagination + page-size select; resolve from index (table/pagination family)."
+    }
+  ],
+  "antiPatterns": {
+    "note": "Primitive-heavy output the agent must NOT produce when the above exist.",
+    "rawComponents": ["Paper", "Divider", "Box", "SxBox"],
+    "statusAsText": "colored <Text>/<span> for status/direction instead of DictionaryBadge",
+    "totalsAsCards": "KPI cards under the table instead of a table-footer totals row"
+  }
+}

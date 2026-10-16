@@ -1,0 +1,36 @@
+[
+  {
+    "type": "iteration-start",
+    "iteration": 1
+  },
+  {
+    "type": "tool-result",
+    "iteration": 1,
+    "toolCallId": "toolu_permission",
+    "content": "permission_required: Bash tool requires approval to use shell command.",
+    "isError": true
+  },
+  {
+    "type": "error",
+    "message": "permission_required: Claude Code stopped because a non-interactive tool approval was required. Tool: shell. Detail: permission_required: Bash tool requires approval to use shell command. {\"type\":\"system\",\"subtype\":\"init\"} {\"type\":\"assistant\",\"message\":{\"content\":[{\"type\":\"tool_result\",\"tool_use_id\":\"toolu_permission\",\"content\":\"permission_required: Bash tool requires approval to use shell command.\",\"is_error\":true}]}} Process terminated after permission approval prompt. Retry after granting/configuring non-interactive CLI permissions, or use a runtime that can auto-allow the requested read/edit command."
+  },
+  {
+    "type": "iteration-end",
+    "iteration": 1,
+    "hadToolCalls": false,
+    "finishReason": "other"
+  },
+  {
+    "type": "done",
+    "iterations": 1,
+    "truncated": false,
+    "hadErrors": true,
+    "stoppedAfterPermissionDeny": false,
+    "finalResponse": {
+      "text": "",
+      "provider": "claude-code-runtime",
+      "model": "default",
+      "finishReason": "other"
+    }
+  }
+]

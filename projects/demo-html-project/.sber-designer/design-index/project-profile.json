@@ -1,0 +1,139 @@
+{
+  "kind": "html-css",
+  "screenUnit": {
+    "sourceGlob": "{pages,screens,public,site}/**/*.html",
+    "storyRequired": false,
+    "rootMarker": "data-sd-screen-root"
+  },
+  "componentModel": "css-catalog",
+  "renderProbe": "static-html",
+  "htmlDesignSystem": {
+    "status": "canonical",
+    "folderPath": "design-system",
+    "referencePages": [
+      "design-system/_template/Screen.html",
+      "design-system/_template/smoke-test.html",
+      "design-system/pages/atoms/Avatar.html",
+      "design-system/pages/atoms/Badge.html",
+      "design-system/pages/atoms/Buttons.html",
+      "design-system/pages/atoms/Checkbox.html",
+      "design-system/pages/atoms/Chip.html",
+      "design-system/pages/atoms/Divider.html",
+      "design-system/pages/atoms/IconButton.html",
+      "design-system/pages/atoms/Link.html",
+      "design-system/pages/atoms/ProgressBar.html",
+      "design-system/pages/atoms/Radiobutton.html",
+      "design-system/pages/atoms/Switch.html",
+      "design-system/pages/foundations/Colors.html",
+      "design-system/pages/foundations/Elevation.html",
+      "design-system/pages/foundations/Icons.html",
+      "design-system/pages/foundations/Radius.html",
+      "design-system/pages/foundations/Typography.html",
+      "design-system/pages/loading/Alert.html",
+      "design-system/pages/loading/LabelHelper.html",
+      "design-system/pages/molecules/Breadcrumbs.html",
+      "design-system/pages/molecules/ButtonGroup.html",
+      "design-system/pages/molecules/ContextMenu.html",
+      "design-system/pages/molecules/InputAutocomplete.html",
+      "design-system/pages/molecules/InputDate.html",
+      "design-system/pages/molecules/InputText.html",
+      "design-system/pages/molecules/Pagination.html",
+      "design-system/pages/molecules/ReadOnlyField.html",
+      "design-system/pages/molecules/SegmentControl.html",
+      "design-system/pages/molecules/Select.html",
+      "design-system/pages/molecules/Splitter.html",
+      "design-system/pages/molecules/Tab.html",
+      "design-system/pages/molecules/Toast.html",
+      "design-system/pages/molecules/Tooltip.html",
+      "design-system/pages/organisms/Entity.html",
+      "design-system/pages/organisms/Modal.html",
+      "design-system/pages/organisms/Popover.html",
+      "design-system/pages/organisms/RiskMetric.html",
+      "design-system/pages/organisms/SnackBar.html",
+      "design-system/pages/organisms/TableCell.html",
+      "design-system/pages/patterns/SectionsAudit.html",
+      "design-system/refs/imported-index.html"
+    ],
+    "foundRequired": [
+      "design-md",
+      "tokens-css",
+      "components-css"
+    ],
+    "missingRequired": [],
+    "sources": [
+      {
+        "id": "design-md",
+        "label": "Design.md",
+        "required": true,
+        "canonicalPath": "design-system/Design.md",
+        "aliases": [
+          "Design.md",
+          "DESIGN.md",
+          "design.md",
+          "design/Design.md",
+          "design/DESIGN.md",
+          "design/design.md"
+        ],
+        "status": "found",
+        "foundPath": "design-system/Design.md"
+      },
+      {
+        "id": "tokens-css",
+        "label": "tokens.css",
+        "required": true,
+        "canonicalPath": "design-system/tokens.css",
+        "aliases": [
+          "tokens.css",
+          "design/tokens.css",
+          "styles/tokens.css",
+          "css/tokens.css"
+        ],
+        "status": "found",
+        "foundPath": "design-system/tokens.css"
+      },
+      {
+        "id": "components-css",
+        "label": "components.css",
+        "required": true,
+        "canonicalPath": "design-system/components.css",
+        "aliases": [
+          "components.css",
+          "design/components.css",
+          "styles/components.css",
+          "css/components.css"
+        ],
+        "status": "found",
+        "foundPath": "design-system/components.css"
+      },
+      {
+        "id": "design-system-preview",
+        "label": "design-system/index.html",
+        "required": false,
+        "canonicalPath": "design-system/index.html",
+        "aliases": [
+          "design-system.html",
+          "pages/design-system.html",
+          "design/design-system.html",
+          "preview/design-system.html"
+        ],
+        "status": "found",
+        "foundPath": "design-system/index.html"
+      }
+    ]
+  },
+  "packageManager": "unknown",
+  "frameworks": [
+    "css",
+    "html"
+  ],
+  "sourceRoots": [
+    "pages",
+    "design-system"
+  ],
+  "styling": [
+    "css"
+  ],
+  "aliases": {},
+  "packageScripts": {},
+  "allowedUiPackages": []
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Payment details",
+  "instruction": "Создай компактный экран платежа с пятью информационными блоками и действиями. Используй компонент Tile для информационных панелей. Не используй компонент Grid.",
+  "designBrief": {
+    "version": 1,
+    "source": "user",
+    "axes": {
+      "layout": "Compact payment detail with five clearly separated information regions",
+      "density": "compact",
+      "constraints": [
+        "Не используй текущие экраны проекта как layout/content reference.",
+        "Используй компонент Tile.",
+        "Не используй компонент Grid."
+      ]
+    }
+  },
+  "expected": {
+    "taskKind": "screen-generation",
+    "requiredComponent": "Tile",
+    "forbiddenComponent": "Grid",
+    "denseRoles": ["data-table", "mass-actions", "side-preview"]
+  }
+}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"codex-thread-replay-001"}
+{"type":"turn.started"}
+{"type":"agent_message_delta","delta":"Session captured."}
+{"type":"turn.completed","usage":{"input_tokens":12,"output_tokens":4}}

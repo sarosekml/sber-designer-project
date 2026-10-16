@@ -1,0 +1,3 @@
+{"type":"step_start","sessionID":"s1"}
+{"type":"text","sessionID":"s1","part":{"text":"Done."}}
+{"type":"step_finish","sessionID":"s1","part":{"tokens":{"input":10,"output":3},"cost":0}}

@@ -1,0 +1,130 @@
+{
+  "fixture": "ibp-ui-kit/dcm-draft-deal",
+  "screen": "DcmDraftDealPage",
+  "brief": "brief.md",
+  "reference": "CleanShot 2026-06-25 at 20.11.21@2x.png (manual live result; keep local — customer UI)",
+  "project": "/Users/dev/Work Dev/ibp-ui-kit",
+  "indexedAt": "2026-06-25 (stale/weak component pack was accepted as evidence in the live run)",
+  "source": {
+    "inputMd": "/Users/dev/Work Dev/ibp-ui-kit/tmp/test-cases/DcmDraftDealPage.md",
+    "localScreenshot": "/Users/dev/Desktop/CleanShot 2026-06-25 at 20.11.21@2x.png",
+    "agentLog": "/var/folders/ty/rg8bb29507v2f0vsm5_3n0rh0000gn/T/sber-designer/agent-runs/2026-06-25T17-05-59-023Z-0fb5c455.jsonl",
+    "runManifest": ".sber-designer/runs/run-2026-06-25T17-05-57-374-3f40f468/run-manifest.json"
+  },
+  "runEvidence": {
+    "runId": "run-2026-06-25T17-05-57-374-3f40f468",
+    "status": "needs_review",
+    "model": "DeepSeek V4 Pro",
+    "renderHealth": {
+      "provider": "storybook-http",
+      "weakEvidence": true,
+      "reasonCode": "browser_evidence_unavailable",
+      "expectedSummary": "needs_review: browser evidence unavailable, not root missing"
+    },
+    "componentReuse": {
+      "score": 2.5,
+      "maxScore": 3,
+      "exact": ["BreadCrumbs", "IconButton"],
+      "substituted": [
+        {
+          "expected": "Overlay",
+          "used": ["Grid", "Table"]
+        }
+      ],
+      "skipped": []
+    }
+  },
+  "expectedRegions": ["Клиент", "Условия кредита", "Холдинг", "Комментарии", "Потенциалы холдинга"],
+  "expectedDesignScreen": {
+    "status": "compatible",
+    "category": "design-readable",
+    "inspectableElements": 67,
+    "editableProps": 158,
+    "indexedComponents": [
+      "BreadCrumbs",
+      "Button",
+      "DictionaryBadge",
+      "Grid",
+      "Icon",
+      "IconButton",
+      "Page",
+      "Table",
+      "Text"
+    ]
+  },
+  "note": "Expected component ids are real or canonical ibp-ui-kit design-index ids. Some roles accept alternatives because the current DictionaryBadge index id is still legacy-generic ('atoms') while older eval fixtures use the intended canonical id.",
+  "expected": [
+    {
+      "role": "app-shell",
+      "anyOf": ["organisms-navigation"],
+      "gap": "left navigation rail / product shell",
+      "note": "Collapsed application navigation; acceptable if provided by the surrounding shell."
+    },
+    {
+      "role": "breadcrumbs",
+      "anyOf": ["molecules-breadcrumbs"],
+      "gap": "entity navigation grammar",
+      "note": "BreadCrumbs — Главная / Потенциалы DCM / Черновик сделки DCM..."
+    },
+    {
+      "role": "primary-action",
+      "anyOf": ["atoms-buttons-button", "atoms-buttons-productbutton"],
+      "gap": "header conversion CTA",
+      "note": "Перевести в сделку DCM — primary/accent Button with start icon."
+    },
+    {
+      "role": "header-icon-action",
+      "anyOf": ["atoms-iconbutton"],
+      "gap": "edit and more actions in dense header",
+      "note": "Pencil/edit and overflow/more actions."
+    },
+    {
+      "role": "content-grid",
+      "anyOf": ["atoms-gridtiles-grid"],
+      "gap": "two-column enterprise detail layout",
+      "note": "Responsive grid arranging cards in two columns plus full-width table tile."
+    },
+    {
+      "role": "content-tile",
+      "anyOf": ["molecules-tiles-tile"],
+      "gap": "section cards: Client, Credit Terms, Holding, Comments, Potentials",
+      "note": "Tile/TileCard family with title and optional header action."
+    },
+    {
+      "role": "status-badge",
+      "anyOf": ["atoms-dictionarybadge", "atoms"],
+      "gap": "rating/status chips",
+      "note": "DictionaryBadge for AA/ruAAA/AAA rating markers. 'atoms' is the current legacy-generic id in this index."
+    },
+    {
+      "role": "data-table",
+      "anyOf": [
+        "organisms-table-basic",
+        "organisms-table",
+        "organisms-table-datainteraction",
+        "organisms-table-configuration"
+      ],
+      "gap": "holding potentials tree/table",
+      "note": "Real Table organism family; grouped rows and selected row are required."
+    },
+    {
+      "role": "row-action",
+      "anyOf": ["atoms-iconbutton", "atoms-buttons-button"],
+      "gap": "product-row actions",
+      "note": "Two compact row actions per product row."
+    },
+    {
+      "role": "public-issues-link",
+      "anyOf": ["atoms-buttons-button", "atoms-link-link"],
+      "gap": "current public issues affordance",
+      "note": "Посмотреть текущие выпуски."
+    }
+  ],
+  "antiPatterns": {
+    "rawComponents": ["Paper", "Card", "Box", "SxBox"],
+    "ratingsAsPlainText": "AA/ruAAA/AAA rendered as plain colored text instead of DictionaryBadge-style markers.",
+    "tableAsCards": "Holding potentials rendered as unrelated KPI cards instead of a grouped table/tree.",
+    "missingStateBranches": "BRD has explicit States section; output should not rationalize all states as scalar fallbacks only.",
+    "renderEvidenceMislabel": "Do not label static Storybook HTTP fallback as No data-sd-screen-root when browser JS execution evidence is unavailable."
+  }
+}

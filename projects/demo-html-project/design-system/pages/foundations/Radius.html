@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Foundations" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Скругления — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/ds-nav.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    margin: 0; font-family: var(--font-text), system-ui, sans-serif;
+    color: var(--text-primary); background: var(--bg-page); background-attachment: fixed;
+  }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  .page { max-width: 1320px; margin: 0 auto; padding: clamp(40px,7vw,96px) clamp(24px,5vw,72px) 140px; }
+
+  /* masthead */
+  .masthead { border-bottom: 1px solid var(--border-light); padding-bottom: 30px; }
+  .masthead .meta { font: var(--type-body-xs); color: var(--text-inactive); display:flex; gap:24px; margin:0 0 22px; }
+  .masthead .meta b { color: var(--text-secondary); font-weight:600; }
+  .eyebrow { font: var(--type-button-xs); letter-spacing:.14em; text-transform:uppercase; color: var(--primary); margin:0 0 14px; }
+  .masthead h1 { font: var(--type-h1); margin:0 0 14px; color: var(--text-black); }
+  @media (max-width:600px){ .masthead h1{ font-size:40px; line-height:48px; } }
+  .masthead p.lead { font: var(--type-body-l); color: var(--text-secondary); margin:0; max-width:60ch; text-wrap:pretty; }
+
+  /* section */
+  .section { margin-top: 72px; }
+  .section > h2 { font: var(--type-h3-strong); margin:0 0 8px; color: var(--text-black); }
+  .section > p.desc { font: var(--type-body-m); color: var(--text-secondary); margin:0 0 28px; max-width:72ch; text-wrap:pretty; }
+
+  code.tok { font-size:.86em; color: var(--primary); background: var(--primary-bg); padding:1px 6px; border-radius: var(--radius-xs); }
+
+  /* ---------- playground ---------- */
+  .panel { background: var(--bg-tile); border:1px solid var(--border-light); border-radius: var(--radius-2xl); }
+  .panel.pg { padding:0; overflow:hidden; display:grid; grid-template-columns: 340px 1fr; }
+  @media (max-width:860px){ .panel.pg { grid-template-columns:1fr; } }
+  .pg__controls { padding:30px; display:flex; flex-direction:column; gap:24px; border-right:1px solid var(--border-light); }
+  @media (max-width:860px){ .pg__controls { border-right:none; border-bottom:1px solid var(--border-light); } }
+  .pg__stage { padding:44px 40px; display:flex; align-items:center; justify-content:center; min-height:280px;
+    background:
+      linear-gradient(var(--bg-tile),var(--bg-tile)) padding-box,
+      repeating-conic-gradient(#f2f5f5 0% 25%, #fbfcfc 0% 50%) 0 / 22px 22px; }
+
+  .ctl { display:flex; flex-direction:column; gap:10px; }
+  .ctl > .lbl { font: var(--type-body-s-strong); color: var(--text-inactive); text-transform:uppercase; letter-spacing:.05em; font-size:11px; }
+  .ctl select {
+    appearance:none; -webkit-appearance:none; width:100%;
+    font: var(--type-body-m); color: var(--text-black);
+    background: var(--bg-tile); border:1px solid var(--border-primary); border-radius: var(--radius-field);
+    padding:10px 38px 10px 14px; cursor:pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364787d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 12px center; background-size:18px;
+  }
+  .ctl select:focus-visible { outline:2px solid var(--primary); outline-offset:2px; border-color:var(--primary); }
+  .ctl input[type=range] { width:100%; accent-color: var(--primary); }
+  .ctl .rng-row { display:flex; align-items:center; justify-content:space-between; }
+  .ctl .rng-row .val { font: var(--type-body-s-strong); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+
+  .readout { display:flex; flex-direction:column; gap:6px; padding-top:4px; border-top:1px solid var(--border-light); }
+  .readout .r { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+  .readout .r .k { font: var(--type-body-s); color: var(--text-inactive); }
+  .readout .r .v { font: var(--type-body-m-strong); color: var(--text-black); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; }
+  .readout .r .v.tokv { color: var(--primary); }
+
+  .stagebox {
+    background: color-mix(in srgb, var(--primary) 9%, var(--bg-tile));
+    border:1.5px solid var(--primary-light);
+    width:200px; height:200px; transition: border-radius .18s ease, width .18s ease, height .18s ease;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--primary-dark); font: var(--type-body-s-strong);
+  }
+
+  /* ---------- scale grid ---------- */
+  .scale { display:grid; grid-template-columns: repeat(auto-fill, minmax(184px,1fr)); gap:16px; }
+  .scale-card {
+    background: var(--bg-tile); border:1px solid var(--border-light); border-radius: var(--radius-2xl);
+    padding:16px; display:flex; flex-direction:column; gap:14px;
+    transition: border-color .15s ease;
+  }
+  .scale-card:hover { border-color: var(--border-primary); }
+  .scale-demo { height:104px; display:flex; align-items:flex-start; justify-content:flex-start; }
+  .scale-demo .box {
+    width:100%; height:104px;
+    background: color-mix(in srgb, var(--primary) 8%, var(--bg-tile));
+    border:1.5px solid var(--primary-light);
+  }
+  .scale-info { display:flex; flex-direction:column; gap:3px; }
+  .scale-name { font: var(--type-body-m-strong); color: var(--text-black); display:flex; align-items:baseline; gap:8px; }
+  .scale-name .px { margin-left:auto; font: var(--type-body-s-strong); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+  .scale-token { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px; color: var(--primary); word-break:break-all; }
+  .scale-use { font: var(--type-body-xs); color: var(--text-inactive); margin-top:3px; text-wrap:pretty; }
+
+  /* ---------- tables ---------- */
+  .tbl-wrap { background: var(--bg-tile); border:1px solid var(--border-light); border-radius: var(--radius-2xl); overflow:hidden; }
+  table.ref { width:100%; border-collapse:collapse; }
+  table.ref th, table.ref td { text-align:left; padding:14px 22px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:middle; }
+  table.ref th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:11px; }
+  table.ref tr:last-child td { border-bottom:none; }
+  table.ref tr:hover td { background: var(--bgtable-row-hover); }
+  table.ref td.tok code, table.ref td.map code { font-size:12.5px; color: var(--primary); }
+  table.ref td.map code { color: var(--text-secondary); }
+  table.ref td.num { font-variant-numeric: tabular-nums; color: var(--text-secondary); white-space:nowrap; }
+  table.ref .swatch { width:30px; height:30px; flex:none; background: color-mix(in srgb,var(--primary) 12%, var(--bg-tile)); border:1.5px solid var(--primary-light); }
+  table.ref td.demo { width:54px; }
+
+  /* ---------- guidelines ---------- */
+  .guides { display:grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap:18px; }
+  .guide { background: var(--bg-tile); border:1px solid var(--border-light); border-radius: var(--radius-2xl); padding:24px 26px; }
+  .guide h3 { font: var(--type-h6-strong); color: var(--text-black); margin:0 0 8px; display:flex; align-items:center; gap:9px; }
+  .guide p { font: var(--type-body-s); color: var(--text-secondary); margin:0; text-wrap:pretty; }
+  .guide .ic { width:22px; height:22px; flex:none; color: var(--primary); }
+  .guide.dont .ic { color: var(--error); }
+
+  /* nesting demo */
+  .nest-demo { display:flex; gap:30px; flex-wrap:wrap; margin-top:6px; align-items:flex-start; }
+  .nest-card { background: var(--bg-tile); border:1px solid var(--border-light); border-radius: var(--radius-2xl); padding:16px; width:200px; }
+  .nest-inner { background: color-mix(in srgb,var(--primary) 9%, var(--bg-tile)); border:1.5px solid var(--primary-light); border-radius: var(--radius-m); height:84px; }
+  .nest-card.bad .nest-inner { border-radius: var(--radius-2xl); }
+  .nest-label { font: var(--type-body-xs); color: var(--text-inactive); margin:10px 0 0; text-align:center; }
+</style>
+<link rel="stylesheet" href="../../styles/pg-kit.css">
+</head>
+<body>
+<main class="page" data-screen-label="Radius">
+
+  <header class="masthead">
+    <div class="meta"><span>Версия: <b>v1.0</b></span><span>Обновлено: <b>02.07.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Основы</p>
+    <h1>Скругления</h1>
+    <p class="lead">Единая шкала радиусов скругления. Компоненты и лайауты ссылаются на семантические токены <code class="tok">--radius-*</code>, а не на «магические» пиксели — так скругления остаются согласованными и управляются из одной точки.</p>
+  </header>
+
+  <!-- PLAYGROUND -->
+  <section class="section" data-screen-label="Playground">
+    <h2>Конструктор</h2>
+    <p class="desc">Выберите токен и размер элемента — превью и значения обновляются мгновенно.</p>
+    <div class="panel pg">
+      <div class="pg__controls">
+        <div class="ctl">
+          <span class="lbl">Токен радиуса</span>
+          <select id="pgToken"></select>
+        </div>
+        <div class="ctl">
+          <div class="rng-row"><span class="lbl">Размер элемента</span><span class="val" id="pgSizeVal">200&nbsp;px</span></div>
+          <input type="range" id="pgSize" min="48" max="280" step="4" value="200">
+        </div>
+        <div class="readout">
+          <div class="r"><span class="k">Токен</span><span class="v tokv" id="roToken">--radius-2xl</span></div>
+          <div class="r"><span class="k">Значение</span><span class="v" id="roVal">16px</span></div>
+          <div class="r"><span class="k">CSS</span><span class="v" id="roCss">border-radius</span></div>
+        </div>
+      </div>
+      <div class="pg__stage">
+        <div class="stagebox" id="pgBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCALE -->
+  <section class="section" data-screen-label="Scale">
+    <h2>Шкала</h2>
+    <p class="desc">15 ступеней от острых углов до круга. Шкала расширена с запасом — крупные ступени (<code class="tok">3xl</code>…<code class="tok">7xl</code>) зарезервированы для модальных окон, геро-блоков и будущих поверхностей.</p>
+    <div class="scale" id="scaleGrid"></div>
+  </section>
+
+  <!-- SEMANTIC ALIASES -->
+  <section class="section" data-screen-label="Aliases">
+    <h2>Семантические алиасы</h2>
+    <p class="desc">Прикладные токены, на которые ссылаются компоненты. Меняете алиас — меняется скругление во всех местах сразу. Сами компоненты не должны указывать пиксели напрямую.</p>
+    <div class="tbl-wrap">
+      <table class="ref">
+        <thead><tr><th class="demo"></th><th>Алиас</th><th>Ссылается на</th><th class="num">Значение</th><th>Назначение</th></tr></thead>
+        <tbody id="aliasRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COMPONENT MAPPING -->
+  <section class="section" data-screen-label="Mapping">
+    <h2>Где применяется</h2>
+    <p class="desc">Текущая раскладка скруглений по компонентам системы.</p>
+    <div class="tbl-wrap">
+      <table class="ref">
+        <thead><tr><th class="demo"></th><th>Компонент / поверхность</th><th>Токен</th><th class="num">Значение</th></tr></thead>
+        <tbody id="mapRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- GUIDELINES -->
+  <section class="section" data-screen-label="Guidelines">
+    <h2>Правила</h2>
+    <p class="desc">Несколько принципов, чтобы скругления работали как система.</p>
+    <div class="guides">
+      <div class="guide">
+        <h3><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Только из шкалы</h3>
+        <p>Берите значения из токенов <code class="tok">--radius-*</code>. Произвольные «13px» или «18px» ломают ритм — округлите до ближайшей ступени.</p>
+      </div>
+      <div class="guide">
+        <h3><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Чем крупнее — тем больше</h3>
+        <p>Радиус растёт вместе с размером поверхности: контролы 6–8px, карточки 16px, модалки 24px, геро-блоки 28–32px.</p>
+      </div>
+      <div class="guide">
+        <h3><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Концентричность</h3>
+        <p>Радиус вложенного элемента = радиус контейнера − его внутренний отступ. Так внутренние и внешние углы остаются параллельными.</p>
+      </div>
+      <div class="guide dont">
+        <h3><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Full ≠ большой радиус</h3>
+        <p><code class="tok">--radius-full</code> делает пилюлю/круг при любом размере. Не используйте его там, где нужен фиксированный угол — берите числовую ступень.</p>
+      </div>
+    </div>
+
+    <div class="nest-demo">
+      <div>
+        <div class="nest-card"><div class="nest-inner"></div></div>
+        <p class="nest-label">Верно: 16 − 8 → внутренний 8</p>
+      </div>
+      <div>
+        <div class="nest-card bad"><div class="nest-inner"></div></div>
+        <p class="nest-label">Неверно: внутренний радиус = внешнему</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // ---------- данные шкалы ----------
+  var SCALE = [
+    {token:'--radius-none',   name:'none',   px:'0',   use:'Острые углы: таблицы, врезки, разделители'},
+    {token:'--radius-2xs',    name:'2xs',    px:'2',   use:'Чекбокс, мелкие индикаторы'},
+    {token:'--radius-xs',     name:'xs',     px:'4',   use:'Компактные инпуты, мелкие плашки, фокус ссылки'},
+    {token:'--radius-s',      name:'s',      px:'6',   use:'Кнопка XS, чип S/XS'},
+    {token:'--radius-m',      name:'m',      px:'8',   use:'Кнопка, чип, тултип, поле ввода'},
+    {token:'--radius-l',      name:'l',      px:'10',  use:'Аватар rounded M, средние плашки'},
+    {token:'--radius-xl',     name:'xl',     px:'12',  use:'Меню, поповеры, аватар rounded L'},
+    {token:'--radius-2xl',    name:'2xl',    px:'16',  use:'Карточки, панели, группы'},
+    {token:'--radius-3xl',    name:'3xl',    px:'20',  use:'Крупные карточки, секции'},
+    {token:'--radius-4xl',    name:'4xl',    px:'24',  use:'Модальные окна, листы'},
+    {token:'--radius-5xl',    name:'5xl',    px:'28',  use:'Аватар XL rounded, крупные поверхности'},
+    {token:'--radius-6xl',    name:'6xl',    px:'32',  use:'Геро-блоки, баннеры'},
+    {token:'--radius-7xl',    name:'7xl',    px:'40',  use:'Очень крупные поверхности (резерв)'},
+    {token:'--radius-full',   name:'full',   px:'999', use:'Пилюли: чип-rounded, бейдж, свитч'},
+    {token:'--radius-circle', name:'circle', px:'50%', use:'Круг: аватар, радио, icon-button'}
+  ];
+
+  var ALIASES = [
+    {token:'--radius-control-s', map:'--radius-s',      px:'6',   use:'Кнопка XS, чип S/XS, icon-button S'},
+    {token:'--radius-control',   map:'--radius-m',      px:'8',   use:'Кнопка M/S, чип L/M, тултип'},
+    {token:'--radius-field',     map:'--radius-m',      px:'8',   use:'Поля ввода, селекты'},
+    {token:'--radius-popup',     map:'--radius-xl',     px:'12',  use:'Меню, поповеры, дропдауны'},
+    {token:'--radius-card',      map:'--radius-2xl',    px:'16',  use:'Карточки, панели, группы'},
+    {token:'--radius-modal',     map:'--radius-4xl',    px:'24',  use:'Модальные окна, шиты'},
+    {token:'--radius-pill',      map:'--radius-full',   px:'999', use:'Пилюли'},
+    {token:'--radius-round',     map:'--radius-circle', px:'50%', use:'Круглые элементы'}
+  ];
+
+  var MAP = [
+    ['Button — M / S',        '--radius-m',      '8',   '8'],
+    ['Button — XS',           '--radius-s',      '6',   '6'],
+    ['IconButton — L / M',    '--radius-m',      '8',   '8'],
+    ['IconButton — S',        '--radius-s',      '6',   '6'],
+    ['Chip — L / M',          '--radius-m',      '8',   '8'],
+    ['Chip — S / XS',         '--radius-s',      '6',   '6'],
+    ['Chip — rounded',        '--radius-full',   '999', '20'],
+    ['Link — фокус-обводка',   '--radius-xs',     '4',   '4'],
+    ['Checkbox',              '--radius-2xs',    '2',   '2'],
+    ['Tooltip',               '--radius-m',      '8',   '8'],
+    ['Avatar rounded — L',    '--radius-xl',     '12',  '12'],
+    ['Avatar rounded — XL',   '--radius-5xl',    '28',  '20'],
+    ['Badge / Switch / Tab',  '--radius-full',   '999', '20'],
+    ['Card · Panel · Group',  '--radius-2xl',    '16',  '16'],
+    ['Avatar · Radio — круг', '--radius-circle', '50%', '20']
+  ];
+
+  function px(v){ return v==='50%' ? '50%' : (v==='999' ? '999px' : v+'px'); }
+
+  // ---------- шкала ----------
+  (function(){
+    var host = document.getElementById('scaleGrid');
+    host.innerHTML = SCALE.map(function(s){
+      return '<div class="scale-card">'+
+        '<div class="scale-demo"><div class="box" style="border-radius:var('+s.token+')"></div></div>'+
+        '<div class="scale-info">'+
+          '<div class="scale-name">'+s.name+'<span class="px">'+(s.px==='50%'||s.px==='999'?s.px:s.px+' px')+'</span></div>'+
+          '<div class="scale-token">'+s.token+'</div>'+
+          '<div class="scale-use">'+s.use+'</div>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  })();
+
+  // ---------- алиасы ----------
+  (function(){
+    var host = document.getElementById('aliasRows');
+    host.innerHTML = ALIASES.map(function(a){
+      return '<tr>'+
+        '<td class="demo"><span class="swatch" style="border-radius:'+(a.px==='50%'?'50%':Math.min(parseInt(a.px),14)+'px')+'"></span></td>'+
+        '<td class="tok"><code>'+a.token+'</code></td>'+
+        '<td class="map"><code>'+a.map+'</code></td>'+
+        '<td class="num">'+(a.px==='50%'||a.px==='999'?px(a.px):a.px+' px')+'</td>'+
+        '<td>'+a.use+'</td>'+
+      '</tr>';
+    }).join('');
+  })();
+
+  // ---------- маппинг ----------
+  (function(){
+    var host = document.getElementById('mapRows');
+    host.innerHTML = MAP.map(function(m){
+      var demoR = m[3]==='50%' ? '50%' : m[3]+'px';
+      return '<tr>'+
+        '<td class="demo"><span class="swatch" style="border-radius:'+demoR+'"></span></td>'+
+        '<td>'+m[0]+'</td>'+
+        '<td class="tok"><code>'+m[1]+'</code></td>'+
+        '<td class="num">'+(m[2]==='50%'||m[2]==='999'?px(m[2]):m[2]+' px')+'</td>'+
+      '</tr>';
+    }).join('');
+  })();
+
+  // ---------- конструктор ----------
+  (function(){
+    var sel = document.getElementById('pgToken');
+    sel.innerHTML = SCALE.map(function(s){
+      var lbl = s.token + '  ·  ' + (s.px==='50%'||s.px==='999'?s.px:s.px+'px');
+      return '<option value="'+s.token+'"'+(s.token==='--radius-2xl'?' selected':'')+'>'+lbl+'</option>';
+    }).join('');
+
+    var box   = document.getElementById('pgBox');
+    var size  = document.getElementById('pgSize');
+    var sizeV = document.getElementById('pgSizeVal');
+    var roTok = document.getElementById('roToken');
+    var roVal = document.getElementById('roVal');
+    var roCss = document.getElementById('roCss');
+
+    function find(tok){ for(var i=0;i<SCALE.length;i++){ if(SCALE[i].token===tok) return SCALE[i]; } return SCALE[0]; }
+
+    function render(){
+      var s = find(sel.value);
+      var sz = +size.value;
+      box.style.width = sz+'px';
+      box.style.height = sz+'px';
+      box.style.borderRadius = 'var('+s.token+')';
+      sizeV.innerHTML = sz+'&nbsp;px';
+      roTok.textContent = s.token;
+      roVal.textContent = (s.px==='50%'||s.px==='999'?px(s.px):s.px+'px');
+      roCss.textContent = 'border-radius: var('+s.token+')';
+    }
+    sel.addEventListener('change', render);
+    size.addEventListener('input', render);
+    render();
+  })();
+</script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+</body>
+</html>

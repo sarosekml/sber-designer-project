@@ -1,0 +1,55 @@
+{
+  "name": "sber-designer",
+  "version": "1.0.0-beta",
+  "private": true,
+  "description": "Self-hostable, AI-powered visual UI builder. On-prem analog of Builder.io Fusion.",
+  "author": "Mikhail Sarosek <sarosekml@gmail.com>",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "engines": {
+    "bun": ">=1.2.0",
+    "node": ">=20"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "build": "bun run --cwd apps/web build",
+    "build:server": "SBER_DESIGNER_DEPLOYMENT_MODE=server SBER_DESIGNER_AUTH_MODE=password bun run build",
+    "auth:admin": "bun run scripts/auth-admin.ts",
+    "build:info": "bun run scripts/write-build-info.ts",
+    "dev": "SBER_DESIGNER_DEPLOYMENT_MODE=local SBER_DESIGNER_AUTH_MODE=local bun run scripts/dev-all.ts",
+    "dev:user-mode": "SBER_DESIGNER_DEPLOYMENT_MODE=local SBER_DESIGNER_AUTH_MODE=password SBER_DESIGNER_AUTH_DEV_SEED=1 bun run scripts/dev-all.ts",
+    "dev:server": "SBER_DESIGNER_DEPLOYMENT_MODE=server SBER_DESIGNER_AUTH_MODE=password bun run scripts/dev-all.ts",
+    "dev:web": "bun run --cwd apps/web dev",
+    "dev:api": "bun run --cwd services/api dev",
+    "test": "bun test ./apps ./packages ./services ./tests ./scripts",
+    "test:coverage": "bun test ./apps ./packages ./services ./tests ./scripts --coverage --coverage-reporter=lcov --coverage-dir=coverage",
+    "eval:release-gate": "bun run tests/eval/run-release-gate.ts",
+    "eval:pr-gate": "bun run tests/eval/run-pr-release-gate.ts",
+    "eval:style-memory": "bun run tests/eval/run-style-memory-eval.ts",
+    "dev:sandbox": "bun run --cwd services/sandbox dev",
+    "smoke:local-mvp": "bun run scripts/local-mvp-smoke.ts",
+    "smoke:browser": "bun run scripts/browser-smoke.ts",
+    "clean:local": "bun run scripts/clean-local.ts",
+    "generate:design-context": "bun run scripts/generate-design-context.ts",
+    "generate:lucide-icons": "bun run scripts/generate-lucide-builtin-icons.mjs",
+    "check:lucide-icons": "bun run scripts/generate-lucide-builtin-icons.mjs --check",
+    "validate:design": "bun run scripts/validate-design-md.ts",
+    "lint": "oxlint . --ignore-pattern 'projects/**'",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "typecheck": "bun run scripts/typecheck-workspace.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "oxlint": "^0.10.0",
+    "playwright": "^1.63.0",
+    "prettier": "^3.3.0",
+    "shadcn": "^4.7.0",
+    "typescript": "^5.5.0"
+  },
+  "trustedDependencies": []
+}

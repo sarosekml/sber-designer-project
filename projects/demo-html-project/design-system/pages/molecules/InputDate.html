@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InputDate — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/shadow.css">
+<link rel="stylesheet" href="../../styles/label-helper.css">
+<link rel="stylesheet" href="../../styles/chip.css">
+<link rel="stylesheet" href="../../styles/tooltip.css">
+<link rel="stylesheet" href="../../styles/input.css">
+<link rel="stylesheet" href="../../styles/input-pages.css">
+<link rel="stylesheet" href="../../styles/ds-nav.css">
+<link rel="stylesheet" href="../../styles/ds-toc.css">
+<link rel="stylesheet" href="../../styles/pg-kit.css">
+</head>
+<body>
+<main class="page" data-screen-label="InputDate">
+
+  <header class="masthead">
+    <div class="meta"><span>Версия: <b>v1.1</b></span><span>Обновлено: <b>09.07.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Компоненты</p>
+    <h1>InputDate</h1>
+    <p class="lead">Компонент ввода даты: поле с маской и кнопкой-календарём. При фокусе на поле поднимается DatePicker (календарь — отдельный компонент, будет описан позже). Построен на той же базе Input_Content, что и <a class="inl" href="InputText.html">InputText</a> и <a class="inl" href="InputAutocomplete.html">InputAutocomplete</a>, — состояния и размеры общие.</p>
+  </header>
+
+  <!-- PLAYGROUND -->
+  <section class="section" data-screen-label="Playground">
+    <h2>Конструктор</h2>
+    <p class="desc">Соберите поле даты: размер, состояние, наполнение, информер. Ввод живой — маска форматирует цифры по шаблону.</p>
+    <div class="panel pg">
+      <div class="pg__controls" id="pg-controls"></div>
+      <div class="pg__stage" id="pg-stage"></div>
+    </div>
+    <p class="pg__code" id="pg-code"></p>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" data-screen-label="Usage">
+    <h2>Использование</h2>
+    <p class="desc">InputDate — единственный способ ввода даты в формах: с клавиатуры по маске или выбором в календаре. Основной размер — M; размер S используется только внутри таблиц (Table Edit).</p>
+    <div class="panel">
+      <div class="use-grid">
+        <div class="use-block">
+          <div class="use-block__stage" id="use-form"></div>
+          <div class="use-block__cap">В форме — с меткой и хелпером; пустое поле показывает маску-плейсхолдер.</div>
+        </div>
+        <div class="use-block">
+          <div class="use-block__stage" id="use-filled"></div>
+          <div class="use-block__cap">Заполненное поле — появляется крестик очистки перед календарём.</div>
+        </div>
+        <div class="use-block">
+          <div class="use-block__stage" id="use-table"></div>
+          <div class="use-block__cap">Table Edit — размер S внутри ячейки таблицы, без метки и хелпера.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsec" data-screen-label="WhenToUse">
+      <h3>Когда использовать</h3>
+      <ul class="bullets" style="margin-bottom:26px;">
+        <li>ввод конкретной даты: подписание, транш, плановая дата;</li>
+        <li>редактирование даты в ячейке таблицы — размер S (Table Edit).</li>
+      </ul>
+      <p class="desc">Для произвольного текста — <a class="inl" href="InputText.html">InputText</a>; для выбора из справочника — <a class="inl" href="InputAutocomplete.html">InputAutocomplete</a>. Диапазон дат («с … по …») собирается из двух InputDate с префиксами «От» / «До».</p>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="section" data-screen-label="Anatomy">
+    <h2>Анатомия</h2>
+    <p class="desc">Отличие от InputText — фиксированное действие-календарь в правой части. Крестик очистки появляется у заполненного поля, информер опционален (обычно его нет).</p>
+    <div class="panel">
+      <div class="anat">
+        <div class="anat__stage" id="anat-diagram"></div>
+        <ul class="anat__legend">
+          <li><span class="n"></span><span class="t"><span class="k">Label</span><span class="d"> — метка поля, <code class="tok">.ds-label</code> (Body XS)</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Поле (Input_Content)</span><span class="d"> — рамка 1px, радиус 8px, высота 40px (M)</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Значение / маска</span><span class="d"> — дата по шаблону; пустое поле показывает маску как плейсхолдер</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Действия</span><span class="d"> — информер (опционально) · крестик очистки · календарь (информер всегда левее крестика)</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Helper</span><span class="d"> — подсказка под полем, <code class="tok">.ds-helper</code> (Body XS)</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- VARIANTS -->
+  <section class="section" data-screen-label="Variants">
+    <h2>Варианты</h2>
+    <p class="desc">Оси конфигурации: хелпер, информер и табличный Table Edit.</p>
+
+    <div class="subsec" data-screen-label="HelperVariants">
+      <h3>С хелпером и без</h3>
+      <div class="panel"><div class="demo-grid" id="var-helper"></div></div>
+    </div>
+
+    <div class="subsec" data-screen-label="Informer">
+      <h3>Информер</h3>
+      <p class="desc">Иконка информера опциональна, обычно её нет. Ставится между крестиком и календарём.</p>
+      <div class="panel"><div class="demo-grid" id="var-informer"></div></div>
+    </div>
+
+    <div class="subsec" data-screen-label="TableEdit">
+      <h3>Table Edit</h3>
+      <p class="desc">Вариант поля в таблице: размер S, с иконкой поиска слева, никогда не содержит метку и хелпер. В остальном идентичен обычному полю со всеми его состояниями.</p>
+      <div class="panel"><div class="demo-grid" id="var-table"></div></div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="section" data-screen-label="Sizes">
+    <h2>Размеры</h2>
+    <p class="desc">Два размера. M — основной размер в формах и фильтрах. S — только для вариантов, используемых в таблицах (Table Edit). Ширина поля задаётся контейнером.</p>
+    <div class="panel"><div class="demo-grid" id="sizes-demo"></div></div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="section" data-screen-label="Content">
+    <h2>Контент</h2>
+    <p class="desc tight">Правила контента:</p>
+    <ul class="bullets" style="margin-bottom:26px;">
+      <li>маска — <code class="tok">ММ.ДД.ГГГГ</code>; шаблон настраивается на уровне продукта и одинаков во всех полях экрана;</li>
+      <li>пустое поле показывает маску как плейсхолдер — отдельный плейсхолдер-текст не пишется;</li>
+      <li>метка — существительное: «Дата подписания», не «Введите дату»;</li>
+      <li>хелпер — правило заполнения («Не раньше даты договора»); в состоянии Error заменяется текстом ошибки.</li>
+    </ul>
+    <div class="panel"><div class="demo-grid" id="content-demo"></div></div>
+  </section>
+
+  <!-- BEHAVIOR -->
+  <section class="section" data-screen-label="Behavior">
+    <h2>Поведение</h2>
+    <p class="desc">Маска, календарь и плейсхолдер.</p>
+
+    <div class="subsec" data-screen-label="Mask">
+      <h3>Маска ввода</h3>
+      <p class="desc">Вводятся только цифры — точки-разделители подставляются автоматически. Плейсхолдер-маска отображается, пока поле не перейдёт в состояние Focus и не начнётся ввод. Если пользователь очистил поле — по потере фокуса оно возвращается в пустое состояние. Пример живой — печатайте.</p>
+      <div class="panel"><div class="demo-grid" id="beh-mask"></div></div>
+    </div>
+
+    <div class="subsec" data-screen-label="DatePicker">
+      <h3>DatePicker</h3>
+      <p class="desc">При фокусе на поле под ним поднимается календарь DatePicker; клик по кнопке-календарю открывает его явно. Выбор даты в календаре записывает значение в поле и закрывает календарь. DatePicker — отдельный компонент дизайн-системы; его страница будет добавлена позже, здесь описан только контракт вызова.</p>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="section" data-screen-label="States">
+    <h2>Состояния</h2>
+    <p class="desc">Восемь состояний, общих для всех типов поля. Тултип с текстом ошибки или предупреждения появляется в состояниях ErrorFocus и WarningFocus.</p>
+    <div class="panel"><div class="demo-grid" id="states-demo"></div></div>
+
+    <div class="subsec" data-screen-label="FillStates">
+      <h3>Пусто · Заполнено</h3>
+      <div class="panel"><div class="demo-grid" id="states-fill"></div></div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" data-screen-label="A11y">
+    <h2>Доступность</h2>
+    <p class="desc">Метка связывается с контролом через <code class="tok">label[for]</code>, хелпер — через <code class="tok">aria-describedby</code>, ошибка — <code class="tok">aria-invalid="true"</code>. Кнопка-календарь — настоящая кнопка с <code class="tok">aria-label="Открыть календарь"</code> и <code class="tok">aria-haspopup="dialog"</code>; дата вводима полностью с клавиатуры по маске, без обязательного календаря.</p>
+    <div class="panel" style="max-width:640px;">
+      <p class="desc tight" style="margin-bottom:18px;">Клавиатура</p>
+      <table class="ref-table"><tbody>
+        <tr><td style="width:180px;"><kbd>Tab</kbd></td><td class="dsc">фокус в поле → крестик → календарь</td></tr>
+        <tr><td><kbd>0–9</kbd></td><td class="dsc">ввод даты по маске; разделители подставляются сами</td></tr>
+        <tr><td><kbd>Enter</kbd> / <kbd>Space</kbd></td><td class="dsc">на кнопке-календаре — открыть DatePicker</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td class="dsc">закрыть DatePicker, фокус возвращается в поле</td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="section" data-screen-label="Typography">
+    <h2>Типографика</h2>
+    <p class="desc">Значение набирается гарнитурой <b>SB Sans Text</b> с табличными цифрами маски. Метка и хелпер — Body XS.</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="ref-table" id="typo-table">
+        <thead><tr><th>Часть</th><th>Образец</th><th>Токен</th><th>Размер / интерлиньяж</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section class="section" data-screen-label="Colors">
+    <h2>Цвета</h2>
+    <p class="desc">Токены совпадают с InputText: рамка — <code class="tok">--border-primary</code>, фокус — <code class="tok">--primary</code>, ошибка — <code class="tok">--error</code>, предупреждение — <code class="tok">--warning</code>, маска-плейсхолдер — <code class="tok">--text-inactive</code>.</p>
+    <div class="color-ref" id="color-ref"></div>
+  </section>
+
+  <!-- DEVELOPER HANDOFF -->
+  <section class="section" data-screen-label="Dev">
+    <h2>Для разработчиков</h2>
+    <p class="desc">Хендофф-пакет: точные размеры, эталонная структура DOM, поведение и рекомендуемый API. База (<code class="tok">.inp</code>) общая с InputText — здесь только отличия.</p>
+
+    <p class="subhead">Точные размеры (redline)</p>
+    <p class="desc tight">Значения измерены на живом экземпляре компонента (<code class="tok">getComputedStyle</code>), источник — токены в <code class="tok">styles/input.css</code>.</p>
+    <div class="panel" style="padding:8px 10px; margin-bottom:34px;">
+      <table class="dev-table" id="dev-spec-table">
+        <thead><tr><th>Параметр</th><th>M</th><th>S (Table Edit)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="dev-intro">
+      <span class="req">Подключить (если переиспользуете этот CSS напрямую):</span>
+      <code class="tok">styles/typography.css</code>
+      <code class="tok">styles/colors.css</code>
+      <code class="tok">styles/radius.css</code>
+      <code class="tok">styles/label-helper.css</code>
+      <code class="tok">styles/input.css</code>
+    </div>
+
+    <p class="subhead">Анатомия DOM <span class="req">— эталонная структура, имена классов условны, важны сами элементы и их роли/состояния</span></p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Разметка · HTML (эталонная реализация ДС)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-html"><span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"inp inp--m"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;label</span> <span class="tk-attr">class=</span><span class="tk-val">"ds-label ds-label--left"</span> <span class="tk-attr">for=</span><span class="tk-val">"d1"</span><span class="tk-tag">&gt;&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"ds-label__text"</span><span class="tk-tag">&gt;</span>Дата подписания<span class="tk-tag">&lt;/span&gt;&lt;/label&gt;</span>
+
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__field"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-cm">&lt;!-- маска в placeholder; inputmode=numeric для мобильной клавиатуры --&gt;</span>
+    <span class="tk-tag">&lt;input</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__control"</span> <span class="tk-attr">id=</span><span class="tk-val">"d1"</span> <span class="tk-attr">placeholder=</span><span class="tk-val">"ММ.ДД.ГГГГ"</span> <span class="tk-attr">inputmode=</span><span class="tk-val">"numeric"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__acts"</span><span class="tk-tag">&gt;</span>
+      <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__act"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Очистить поле"</span><span class="tk-tag">&gt;</span>…✕…<span class="tk-tag">&lt;/button&gt;</span>
+      <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"inp__act"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Открыть календарь"</span> <span class="tk-attr">aria-haspopup=</span><span class="tk-val">"dialog"</span><span class="tk-tag">&gt;</span>…📅…<span class="tk-tag">&lt;/button&gt;</span>
+    <span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;/div&gt;</span>
+
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"ds-helper ds-helper--left"</span><span class="tk-tag">&gt;</span>Helper<span class="tk-tag">&lt;/span&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span>
+
+<span class="tk-cm">&lt;!-- состояния и Table Edit — как у InputText: .inp--error/--warning/--disabled, .inp--s --&gt;</span></code></pre>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Поведение · псевдокод (framework-agnostic)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-js"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-js"><span class="tk-cm">// 1. Маска: пропускать только цифры; после 2-го и 4-го знака вставлять «.».</span>
+<span class="tk-cm">//    Backspace удаляет цифру вместе с разделителем.</span>
+
+<span class="tk-cm">// 2. Валидация на blur: существующая дата и попадание в min/max →</span>
+<span class="tk-cm">//    иначе status='error' + statusMessage.</span>
+
+<span class="tk-cm">// 3. DatePicker: открывать при фокусе поля и по кнопке-календарю;</span>
+<span class="tk-cm">//    выбор даты → записать значение, закрыть, вернуть фокус в поле.</span>
+
+<span class="tk-cm">// 4. Крестик очистки: только у заполненного поля; клик → пусто + фокус в поле.</span>
+
+<span class="tk-cm">// 5. Плейсхолдер-маска: нативный placeholder; очищенное поле по blur</span>
+<span class="tk-cm">//    возвращается в пустое состояние.</span></code></pre>
+    </div>
+
+    <p class="subhead mt">Рекомендуемый API компонента (React)</p>
+    <p class="desc tight">Форма пропсов — предложение, а не обязательный контракт; адаптируйте под конвенции вашей кодовой базы.</p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">InputDate.types.ts</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-api"><span class="tk-attr">interface</span> InputDateProps {
+  value: Date | <span class="tk-attr">null</span>;
+  onChange(value: Date | <span class="tk-attr">null</span>): <span class="tk-attr">void</span>;
+  size?: <span class="tk-val">'m'</span> | <span class="tk-val">'s'</span>;               <span class="tk-cm">// s — только Table Edit</span>
+  label?: <span class="tk-attr">string</span>;
+  helper?: <span class="tk-attr">string</span>;
+  mask?: <span class="tk-attr">string</span>;                   <span class="tk-cm">// по умолчанию 'ММ.ДД.ГГГГ'</span>
+  min?: Date;
+  max?: Date;
+  status?: <span class="tk-val">'default'</span> | <span class="tk-val">'error'</span> | <span class="tk-val">'warning'</span>;
+  statusMessage?: <span class="tk-attr">string</span>;          <span class="tk-cm">// тултип при фокусе</span>
+  informer?: React.ReactNode;       <span class="tk-cm">// опционально, обычно нет</span>
+  disabled?: <span class="tk-attr">boolean</span>;
+}</code></pre>
+    </div>
+
+    <p class="subhead mt">Справочник классов и атрибутов</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table">
+        <thead><tr><th>Класс / атрибут</th><th>На чём</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code class="tok">.inp / .inp--m / .inp--s / .inp--error / .inp--warning / .inp--disabled</code></td><td>div</td><td class="dsc">База — общая с InputText (см. её справочник)</td></tr>
+          <tr><td><code class="tok">.inp__act[aria-label="Открыть календарь"]</code></td><td>button</td><td class="dsc">Кнопка-календарь; фиксированная, всегда последняя в ряду действий</td></tr>
+          <tr><td><code class="tok">input[inputmode="numeric"]</code></td><td>input</td><td class="dsc">Цифровая клавиатура на мобильных; маска в placeholder</td></tr>
+          <tr><td><code class="tok">aria-haspopup="dialog" / aria-expanded</code></td><td>button</td><td class="dsc">Связь с DatePicker (отдельный компонент)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BACKLOG -->
+  <div class="backlog" data-screen-label="Backlog">
+    <h2>Что предлагаем добавить</h2>
+    <p class="desc">Кейсы, которых нет в текущей документации:</p>
+    <ul class="bullets">
+      <li>страница компонента DatePicker (календарь) — контракт вызова уже описан здесь;</li>
+      <li>диапазон дат DateRange — два поля «От» / «До» с одним календарём;</li>
+      <li>ввод времени (ЧЧ:ММ) — расширение маски.</li>
+    </ul>
+  </div>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · InputDate</span>
+    <span>m / s · маска ММ.ДД.ГГГГ · calendar / clear / informer · error / warning / disabled</span>
+  </footer>
+</main>
+
+<script src="../../scripts/icons-data.js"></script>
+<script src="../../scripts/input-kit.js"></script>
+<script src="../../scripts/input-date.page.js"></script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+</body>
+</html>

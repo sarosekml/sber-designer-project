@@ -1,0 +1,25 @@
+{
+  "$schema": "https://sber-designer.example/schema.json",
+
+  "//": "0136 R07 — copy to sber-designer.local.json (gitignored) for anything that only works on this machine. Deep-merged over the tracked sber-designer.json: objects merge key by key, arrays and scalars replace, and null removes a key from the template.",
+
+  "agent": {
+    "default": {
+      "provider": "deepseek",
+      "model": "deepseek-v4-pro"
+    }
+  },
+
+  "mcpServers": {
+    "pixso-desktop": {
+      "enabled": true
+    },
+    "my-local-adapter": {
+      "type": "stdio",
+      "command": "bun",
+      "args": ["run", "./dist/server.js"],
+      "cwd": "/absolute/path/on/this/machine",
+      "enabled": true
+    }
+  }
+}

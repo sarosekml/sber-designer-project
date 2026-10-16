@@ -1,0 +1,184 @@
+@import url("./ds.css");
+
+/* =========================================================================
+   Style-Scout Proposal: components.css
+   Proposal ID: style-scout-0114-live-20260723
+   Evidence: 19 component stylesheets under design-system/styles/
+
+   This file captures only the *repeated cross-component patterns* that are
+   evidence-backed and not already defined in the existing component CSS.
+   It does NOT re-export or duplicate the full component library — screen
+   authors should import the existing ds.css entrypoint for that.
+
+   Purpose: document shared conventions so future components and screen-local
+   CSS follow the same patterns.
+   ========================================================================= */
+
+/* =========================================================================
+   1. UNIVERSAL FOCUS RING
+   Applied by every interactive component (Button, Chip, Input action, Link
+   inline variant excepted, Modal close, Tab, etc.)
+   ========================================================================= */
+
+.sd-focus-ring:focus-visible,
+[class*="btn"]:focus-visible,
+[class*="chip--edit"]:focus-visible,
+[class*="inp__act"]:focus-visible,
+[class*="alert__act"]:focus-visible,
+[class*="chip__info"]:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* =========================================================================
+   2. STATE LAYER PATTERN
+   color-mix(in srgb, var(--semantic-token) N%, transparent) for hover/focus
+   fills that composite on any background. Used by Button, Chip, Tab,
+   SegmentedControl, Alert actions, and modal skeleton shimmer.
+   ========================================================================= */
+
+.sd-state-layer {
+  /* Placeholder class — actual values are component-scoped:
+     Button:  color-mix(in srgb, var(--primary) 10%, #fff) for hover
+     Tab:     var(--primary-bg) = color-mix(in srgb, var(--primary) 6%, transparent)
+     Alert:   color-mix(in srgb, var(--alert-accent) 12%, transparent)
+     Modal:   linear-gradient with var(--st-disabled-light/midlight)
+
+     The pattern is:
+       background: color-mix(in srgb, var(--accent-color) OPACITY%, transparent);
+     where OPACITY is typically 6% (subtle fill), 10–12% (hover), or 18% (active).
+  */
+}
+
+/* =========================================================================
+   3. UNIFORM TRANSITION SPEED
+   Every component uses the same timing for interactive property changes.
+   ========================================================================= */
+
+.sd-transition {
+  /* Standard interactive transition (color, background, border, shadow) */
+  transition: background-color .15s ease, border-color .15s ease,
+              color .15s ease, box-shadow .15s ease;
+}
+
+/* =========================================================================
+   4. DISABLED STATE PATTERN
+   pointer-events: none disables interaction; colors shift to --text-inactive
+   and --disabled / --st-disabled-* tokens.
+   ========================================================================= */
+
+.sd-disabled {
+  cursor: default;
+  pointer-events: none;
+  /* Individual components also set:
+     color: var(--text-inactive) or var(--st-disabled-dark)
+     background: var(--disabled) or var(--st-disabled-light)
+     border-color: var(--disabled-border) or var(--st-disabled-mid)
+  */
+}
+
+/* =========================================================================
+   5. SKELETON / SHIMMER LOADING PATTERN
+   Used by Modal skeleton and ReadOnlyField. Animated gradient with
+   disabled-state tokens.
+   ========================================================================= */
+
+.sd-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--st-disabled-light) 25%,
+    var(--st-disabled-midlight) 37%,
+    var(--st-disabled-light) 63%
+  );
+  background-size: 400% 100%;
+  animation: sd-shimmer 1.6s ease infinite;
+  border-radius: var(--radius-xs);
+}
+
+@keyframes sd-shimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sd-shimmer {
+    animation-duration: 3.2s;
+  }
+}
+
+/* =========================================================================
+   6. REDUCED MOTION GUARD
+   Every component CSS that defines an animation also includes a reduced-
+   motion override. This is the canonical guard for screen-local CSS.
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .sd-animate {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* =========================================================================
+   7. ELLIPSIS TRUNCATION PATTERN
+   Used by Chip labels, Link--truncate, Tab labels, Breadcrumb crumbs.
+   ========================================================================= */
+
+.sd-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* =========================================================================
+   8. TABULAR NUMBERS PATTERN
+   Used by Badge counters, Chip counters, Tab badge counters, and table cells.
+   ========================================================================= */
+
+.sd-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================================
+   9. ICON SLOT SIZING PATTERN
+   Inside components, SVG icons fill their container via width/height: 100%.
+   The slot itself is sized by a component-scoped --icon custom property.
+   ========================================================================= */
+
+.sd-icon-slot {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sd-icon-slot > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* =========================================================================
+   10. LOADING SPINNER PATTERN
+   Button (.btn__spinner) and Chip (.chip__spinner) share the same technique:
+   border-radius: 50%, border with transparent top-color, spin animation.
+   ========================================================================= */
+
+.sd-spinner {
+  border-radius: var(--radius-round);
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  opacity: .9;
+  animation: sd-spin .7s linear infinite;
+}
+
+@keyframes sd-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sd-spinner {
+    animation-duration: 1.6s;
+  }
+}

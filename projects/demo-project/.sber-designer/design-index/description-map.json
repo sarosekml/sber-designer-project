@@ -1,0 +1,1668 @@
+{
+  "entries": [
+    {
+      "componentId": "static-src-App-tsx",
+      "shortName": "App",
+      "keywords": [
+        "static",
+        "src",
+        "app"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/App.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-AssistantWidgetPrompt",
+      "shortName": "AssistantWidgetPrompt",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-ChangePanel",
+      "shortName": "ChangePanel",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-ChecklistPanel",
+      "shortName": "ChecklistPanel",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-CommentsCard",
+      "shortName": "CommentsCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-ContactListCard",
+      "shortName": "ContactListCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-DealPanel",
+      "shortName": "DealPanel",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-DetailsCard",
+      "shortName": "DetailsCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-DropTargetCard",
+      "shortName": "DropTargetCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-FeedEventList",
+      "shortName": "FeedEventList",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-MetricsCard",
+      "shortName": "MetricsCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-NewsPanel",
+      "shortName": "NewsPanel",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-ParticipantsCard",
+      "shortName": "ParticipantsCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-RelatedEntitiesCard",
+      "shortName": "RelatedEntitiesCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-SearchHero",
+      "shortName": "SearchHero",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-SearchResultsCard",
+      "shortName": "SearchResultsCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-StatusList",
+      "shortName": "StatusList",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-StatusListCard",
+      "shortName": "StatusListCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-SummaryCard",
+      "shortName": "SummaryCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-TaskPanel",
+      "shortName": "TaskPanel",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-ThesisCard",
+      "shortName": "ThesisCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-TimelineCard",
+      "shortName": "TimelineCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-business-cards-tsx-WidgetCatalogCard",
+      "shortName": "WidgetCatalogCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/business-cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-AssetsTable",
+      "shortName": "AssetsTable",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-Card",
+      "shortName": "Card",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-ChangesCard",
+      "shortName": "ChangesCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-IdeaCard",
+      "shortName": "IdeaCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-InteractionHistory",
+      "shortName": "InteractionHistory",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-InvestmentReportCard",
+      "shortName": "InvestmentReportCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-cards-tsx-KpiCard",
+      "shortName": "KpiCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/cards.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-charts-tsx-BarChart",
+      "shortName": "BarChart",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/charts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-charts-tsx-DonutChart",
+      "shortName": "DonutChart",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/charts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-charts-tsx-Heatmap",
+      "shortName": "Heatmap",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/charts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-charts-tsx-LineChart",
+      "shortName": "LineChart",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/charts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-charts-tsx-Sparkline",
+      "shortName": "Sparkline",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/charts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-BuildingIcon",
+      "shortName": "BuildingIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/icons.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-CalendarIcon",
+      "shortName": "CalendarIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/icons.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-CheckIcon",
+      "shortName": "CheckIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/icons.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-DocIcon",
+      "shortName": "DocIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/icons.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-HashIcon",
+      "shortName": "HashIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/icons.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-PendingIcon",
+      "shortName": "PendingIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/icons.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-PercentIcon",
+      "shortName": "PercentIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/icons.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-ShieldIcon",
+      "shortName": "ShieldIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/icons.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-TargetIcon",
+      "shortName": "TargetIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/icons.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-icons-tsx-UsersIcon",
+      "shortName": "UsersIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/icons.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-layout-tsx-AppShell",
+      "shortName": "AppShell",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/layout.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-layout-tsx-Breadcrumbs",
+      "shortName": "Breadcrumbs",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/layout.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-layout-tsx-PageHeader",
+      "shortName": "PageHeader",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/layout.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-layout-tsx-Tabs",
+      "shortName": "Tabs",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/layout.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-layout-tsx-TopToolbar",
+      "shortName": "TopToolbar",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/layout.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-GlobeIcon",
+      "shortName": "GlobeIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/meta-list.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-MessageIcon",
+      "shortName": "MessageIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/meta-list.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-MetaItem",
+      "shortName": "MetaItem",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/meta-list.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-MetaList",
+      "shortName": "MetaList",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/meta-list.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-TrendIcon",
+      "shortName": "TrendIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/meta-list.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-meta-list-tsx-UserIcon",
+      "shortName": "UserIcon",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/meta-list.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-CardGrid",
+      "shortName": "CardGrid",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/page-layouts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-ContentGrid",
+      "shortName": "ContentGrid",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/page-layouts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-FilterPanel",
+      "shortName": "FilterPanel",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/page-layouts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-PageBlock",
+      "shortName": "PageBlock",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/page-layouts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-PageStack",
+      "shortName": "PageStack",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/page-layouts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-SplitLayout",
+      "shortName": "SplitLayout",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/page-layouts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-ThreeColumnGrid",
+      "shortName": "ThreeColumnGrid",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/page-layouts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-page-layouts-tsx-TwoColumnLayout",
+      "shortName": "TwoColumnLayout",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/page-layouts.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-AvatarStack",
+      "shortName": "AvatarStack",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-ChangeReviewList",
+      "shortName": "ChangeReviewList",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-ChartPanel",
+      "shortName": "ChartPanel",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-ChecklistCard",
+      "shortName": "ChecklistCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-CommentThread",
+      "shortName": "CommentThread",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-CommunicationList",
+      "shortName": "CommunicationList",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-DashboardChartSet",
+      "shortName": "DashboardChartSet",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-DealList",
+      "shortName": "DealList",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-DemoWidget",
+      "shortName": "DemoWidget",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-EntityHeader",
+      "shortName": "EntityHeader",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-MetricBar",
+      "shortName": "MetricBar",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-MiniPerformanceCard",
+      "shortName": "MiniPerformanceCard",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-NewsList",
+      "shortName": "NewsList",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-PrioritySummary",
+      "shortName": "PrioritySummary",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-ProgressSteps",
+      "shortName": "ProgressSteps",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-RelatedEntityList",
+      "shortName": "RelatedEntityList",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-ScenarioPicker",
+      "shortName": "ScenarioPicker",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-SearchResults",
+      "shortName": "SearchResults",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-TaskList",
+      "shortName": "TaskList",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-patterns-tsx-Timeline",
+      "shortName": "Timeline",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/patterns.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-AiBadge",
+      "shortName": "AiBadge",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Avatar",
+      "shortName": "Avatar",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Badge",
+      "shortName": "Badge",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Button",
+      "shortName": "Button",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-ButtonGroup",
+      "shortName": "ButtonGroup",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Checkbox",
+      "shortName": "Checkbox",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-CommandSearch",
+      "shortName": "CommandSearch",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Field",
+      "shortName": "Field",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-KebabButton",
+      "shortName": "KebabButton",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Pill",
+      "shortName": "Pill",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-PriorityBadge",
+      "shortName": "PriorityBadge",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Radio",
+      "shortName": "Radio",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-SearchField",
+      "shortName": "SearchField",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-SegmentedControl",
+      "shortName": "SegmentedControl",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-SelectControl",
+      "shortName": "SelectControl",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Spinner",
+      "shortName": "Spinner",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Status",
+      "shortName": "Status",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Tag",
+      "shortName": "Tag",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Textarea",
+      "shortName": "Textarea",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-TextInput",
+      "shortName": "TextInput",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-primitives-tsx-Toggle",
+      "shortName": "Toggle",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/primitives.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-table-tsx-DataTable",
+      "shortName": "DataTable",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/table.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-table-tsx-FundAssetsTable",
+      "shortName": "FundAssetsTable",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/components/table.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-components-templates-tsx-BaseScreenTemplate",
+      "shortName": "BaseScreenTemplate",
+      "keywords": [
+        "static",
+        "src",
+        "components"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/components/templates.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-2026-05-17-BaseScreenSidebarShellmp9ufm89-tsx-BaseScreenSidebarShellmp9ufm89",
+      "shortName": "BaseScreenSidebarShellmp9ufm89",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/2026-05-17/BaseScreenSidebarShellmp9ufm89.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-2026-05-17-DealD3174SevernyHab-tsx-DealD3174SevernyHab",
+      "shortName": "DealD3174SevernyHab",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/2026-05-17/DealD3174SevernyHab.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-2026-05-17-NewsScreenmpa9bael-tsx-NewsScreenmpa9bael",
+      "shortName": "NewsScreenmpa9bael",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/2026-05-17/NewsScreenmpa9bael.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-2026-05-17-Screenmp9u1z33-tsx-Screenmp9u1z33",
+      "shortName": "Screenmp9u1z33",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/2026-05-17/Screenmp9u1z33.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-AiAnalysisScreen-tsx-AiAnalysisScreen",
+      "shortName": "AiAnalysisScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/AiAnalysisScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-AnalystDashboardScreen-tsx-AnalystDashboardScreen",
+      "shortName": "AnalystDashboardScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "mined-draft",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/AnalystDashboardScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-AnalystFeedScreen-tsx-AnalystFeedScreen",
+      "shortName": "AnalystFeedScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/AnalystFeedScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-AssetPageScreen-tsx-AssetPageScreen",
+      "shortName": "AssetPageScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/AssetPageScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-AssetsListScreen-tsx-AssetsListScreen",
+      "shortName": "AssetsListScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/AssetsListScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-ChangesScreen-tsx-ChangesScreen",
+      "shortName": "ChangesScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/ChangesScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-CommunicationsScreen-tsx-CommunicationsScreen",
+      "shortName": "CommunicationsScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/CommunicationsScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-CreditDealPageScreen-tsx-CreditDealPageScreen",
+      "shortName": "CreditDealPageScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/CreditDealPageScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-DashboardCustom2Screen-tsx-DashboardCustom2Screen",
+      "shortName": "DashboardCustom2Screen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/DashboardCustom2Screen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-DashboardCustomScreen-tsx-DashboardCustomScreen",
+      "shortName": "DashboardCustomScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/DashboardCustomScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-DealPageScreen-tsx-DealPageScreen",
+      "shortName": "DealPageScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/DealPageScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-FundDetailScreen-tsx-FundDetailScreen",
+      "shortName": "FundDetailScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/FundDetailScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-FundsListScreen-tsx-FundsListScreen",
+      "shortName": "FundsListScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/FundsListScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-IdeaPageScreen-tsx-IdeaPageScreen",
+      "shortName": "IdeaPageScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/IdeaPageScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-investment-crm-SearchScreen-tsx-SearchScreen",
+      "shortName": "SearchScreen",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/investment-crm/SearchScreen.tsx"
+      }
+    },
+    {
+      "componentId": "static-src-screens-New-folder-NewTest01-tsx-NewTest01",
+      "shortName": "NewTest01",
+      "keywords": [
+        "static",
+        "src",
+        "screens"
+      ],
+      "status": "missing",
+      "docsRef": {
+        "sourcePath": "src/screens/New folder/NewTest01.tsx"
+      }
+    }
+  ]
+}

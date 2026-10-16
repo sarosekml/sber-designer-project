@@ -1,0 +1,54 @@
+[
+  {
+    "type": "iteration-start",
+    "iteration": 1
+  },
+  {
+    "type": "runtime-session",
+    "sessionId": "s-mock-1",
+    "captureEvent": "system.init"
+  },
+  {
+    "type": "text-delta",
+    "iteration": 1,
+    "delta": "Hello from GigaCode."
+  },
+  {
+    "type": "usage",
+    "iteration": 1,
+    "usage": {
+      "inputTokens": 42,
+      "outputTokens": 7,
+      "totalTokens": 49
+    }
+  },
+  {
+    "type": "iteration-end",
+    "iteration": 1,
+    "hadToolCalls": false,
+    "finishReason": "stop"
+  },
+  {
+    "type": "done",
+    "iterations": 1,
+    "truncated": false,
+    "hadErrors": false,
+    "stoppedAfterPermissionDeny": false,
+    "finalResponse": {
+      "text": "Hello from GigaCode.",
+      "provider": "gigacode-runtime",
+      "model": "vllm/DeepSeek-V4-Flash-262k",
+      "finishReason": "stop",
+      "usage": {
+        "inputTokens": 42,
+        "outputTokens": 7,
+        "totalTokens": 49
+      }
+    },
+    "usage": {
+      "inputTokens": 42,
+      "outputTokens": 7,
+      "totalTokens": 49
+    }
+  }
+]

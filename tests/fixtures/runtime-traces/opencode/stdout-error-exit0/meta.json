@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "runtime": "opencode",
+  "command": "opencode",
+  "argsSnapshot": ["run", "--format", "json"],
+  "exitCode": 0,
+  "durationMs": 0,
+  "notes": "Incident trace: OpenCode emits a structured error event on stdout and exits 0."
+}

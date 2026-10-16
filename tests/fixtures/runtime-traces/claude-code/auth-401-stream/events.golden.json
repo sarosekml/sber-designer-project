@@ -1,0 +1,34 @@
+[
+  {
+    "type": "iteration-start",
+    "iteration": 1
+  },
+  {
+    "type": "text-delta",
+    "iteration": 1,
+    "delta": "API Error: 401 authentication_failed: invalid x-api-key"
+  },
+  {
+    "type": "error",
+    "message": "API Error: 401 authentication_failed: invalid x-api-key"
+  },
+  {
+    "type": "iteration-end",
+    "iteration": 1,
+    "hadToolCalls": false,
+    "finishReason": "other"
+  },
+  {
+    "type": "done",
+    "iterations": 1,
+    "truncated": false,
+    "hadErrors": true,
+    "stoppedAfterPermissionDeny": false,
+    "finalResponse": {
+      "text": "API Error: 401 authentication_failed: invalid x-api-key",
+      "provider": "claude-code-runtime",
+      "model": "default",
+      "finishReason": "other"
+    }
+  }
+]

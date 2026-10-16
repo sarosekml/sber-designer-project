@@ -1,0 +1,65 @@
+import { Meta } from '@storybook/blocks';
+import { ColorList } from './ColorList';
+
+<Meta
+  title='Documentation/Theme/Colors'
+  component={ColorList}
+  subtitle='subtitle'
+  parameters={{
+    previewTabs: {
+      canvas: { hidden: true }
+    }
+  }}
+/>
+
+# Палитра проекта
+
+- [Static](#static)
+- [Active](#active)
+- [Situative](#situative)
+- [Local](#local)
+
+<hr />
+
+## Static
+
+Фоновые цвета и отображение информации
+
+<div style={{ display: 'flex',  alignItems: 'baseline', gap: '32px' }}>
+  <ColorList name='BG' />
+  <ColorList name='Border' />
+  <ColorList name='Text' />
+</div>
+
+## Active
+
+Для интерактивных элементов
+
+<div style={{ display: 'flex',  alignItems: 'baseline', gap: '32px' }}>
+  <ColorList name='Primary' />
+  <ColorList name='Secondary' />
+  <ColorList name='Tertiary' />
+</div>
+
+## Situative
+
+Для ситуаций успеха/неуспеха
+
+<div style={{ display: 'flex',  alignItems: 'baseline', flexWrap: 'wrap', gap: '32px' }}>
+  <ColorList name='Error' />
+  <ColorList name='Warning' />
+  <ColorList name='Success' />
+  <ColorList name='Info' />
+  <ColorList name='Link' />
+  <ColorList name='Disabled' />
+</div>
+
+## Local
+
+Для применения в отдельных компонентах
+
+<div style={{ display: 'flex',  alignItems: 'baseline', gap: '32px' }}>
+  <ColorList name='Status' />
+  <ColorList name='Product' />
+  <ColorList name='Rate' />
+</div>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PoC-1 demo target</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!--
+      PoC-1 fixture. Hand-written elements pretend to be the output of a
+      future Babel plugin that tags every JSX element with data-sd-loc="file:line:col".
+      The Editor's DomOverlay reads these in Design mode.
+
+      Phase 1 will replace this static page with a Docker sandbox dev-server.
+    -->
+    <header data-sd-loc="src/pages/Demo.tsx:3:2">
+      <div class="brand" data-sd-loc="src/pages/Demo.tsx:4:4">
+        <span class="logo" data-sd-loc="src/pages/Demo.tsx:5:6"></span>
+        <span data-sd-loc="src/pages/Demo.tsx:6:6">SberPay Dashboard</span>
+      </div>
+      <nav data-sd-loc="src/pages/Demo.tsx:8:4">
+        <a href="#" data-sd-loc="src/pages/Demo.tsx:9:6">Overview</a>
+        <a href="#" data-sd-loc="src/pages/Demo.tsx:10:6">Clients</a>
+        <a href="#" data-sd-loc="src/pages/Demo.tsx:11:6">Reports</a>
+      </nav>
+    </header>
+
+    <main data-sd-loc="src/pages/Demo.tsx:15:2">
+      <h1 data-sd-loc="src/pages/Demo.tsx:16:4">Client Manager Dashboard</h1>
+      <p class="subtitle" data-sd-loc="src/pages/Demo.tsx:17:4">
+        Overview of revenue, sales pipeline, and client health status.
+      </p>
+
+      <section class="cards" data-sd-loc="src/pages/Demo.tsx:21:4">
+        <article class="card" data-sd-loc="src/components/MetricCard.tsx:42:8">
+          <div class="card-label" data-sd-loc="src/components/MetricCard.tsx:43:10">Revenue</div>
+          <div class="card-value" data-sd-loc="src/components/MetricCard.tsx:44:10">₽ 48 200</div>
+          <div class="card-delta up" data-sd-loc="src/components/MetricCard.tsx:45:10">+12.4%</div>
+        </article>
+        <article class="card" data-sd-loc="src/components/MetricCard.tsx:42:8">
+          <div class="card-label" data-sd-loc="src/components/MetricCard.tsx:43:10">Active clients</div>
+          <div class="card-value" data-sd-loc="src/components/MetricCard.tsx:44:10">1 348</div>
+          <div class="card-delta down" data-sd-loc="src/components/MetricCard.tsx:45:10">−1.8%</div>
+        </article>
+        <article class="card" data-sd-loc="src/components/MetricCard.tsx:42:8">
+          <div class="card-label" data-sd-loc="src/components/MetricCard.tsx:43:10">Conversion</div>
+          <div class="card-value" data-sd-loc="src/components/MetricCard.tsx:44:10">28.3%</div>
+          <div class="card-delta up" data-sd-loc="src/components/MetricCard.tsx:45:10">+0.7%</div>
+        </article>
+      </section>
+
+      <section class="actions" data-sd-loc="src/pages/Demo.tsx:38:4">
+        <button class="btn primary" data-sd-loc="src/components/Button.tsx:18:6">Add client</button>
+        <button class="btn ghost" data-sd-loc="src/components/Button.tsx:18:6">Export</button>
+      </section>
+
+      <section class="table" data-sd-loc="src/pages/Demo.tsx:44:4">
+        <div class="row head" data-sd-loc="src/components/Table.tsx:12:8">
+          <span data-sd-loc="src/components/Table.tsx:13:10">Client</span>
+          <span data-sd-loc="src/components/Table.tsx:14:10">Revenue</span>
+          <span data-sd-loc="src/components/Table.tsx:15:10">Health</span>
+        </div>
+        <div class="row" data-sd-loc="src/components/Table.tsx:18:8">
+          <span data-sd-loc="src/components/Table.tsx:19:10">Acme Corp</span>
+          <span data-sd-loc="src/components/Table.tsx:20:10">12 500</span>
+          <span class="health ok" data-sd-loc="src/components/Table.tsx:21:10">Healthy</span>
+        </div>
+        <div class="row" data-sd-loc="src/components/Table.tsx:18:8">
+          <span data-sd-loc="src/components/Table.tsx:19:10">Globex Inc</span>
+          <span data-sd-loc="src/components/Table.tsx:20:10">8 400</span>
+          <span class="health warn" data-sd-loc="src/components/Table.tsx:21:10">Needs attention</span>
+        </div>
+        <div class="row" data-sd-loc="src/components/Table.tsx:18:8">
+          <span data-sd-loc="src/components/Table.tsx:19:10">Stark Industries</span>
+          <span data-sd-loc="src/components/Table.tsx:20:10">16 900</span>
+          <span class="health bad" data-sd-loc="src/components/Table.tsx:21:10">Critical</span>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Demonstrates Interact mode: real, working interactions inside the iframe.
+      document.querySelectorAll('button.btn').forEach((b) => {
+        b.addEventListener('click', () => {
+          const original = b.textContent;
+          b.textContent = '✓ ' + original;
+          setTimeout(() => (b.textContent = original), 700);
+        });
+      });
+    </script>
+  </body>
+</html>

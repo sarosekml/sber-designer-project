@@ -1,0 +1,140 @@
+{
+  "molecules": {
+    "modal": {
+      "surface": {
+        "bg": {
+          "value": "{palette.BG.BGPopup}",
+          "type": "color"
+        },
+        "borderRadius": {
+          "value": "8",
+          "type": "borderRadius"
+        }
+      },
+      "header": {
+        "height": {
+          "value": "64",
+          "type": "sizing"
+        },
+        "padding": {
+          "value": "20 24",
+          "type": "spacing"
+        },
+        "borderBottom": {
+          "width": {
+            "value": "1",
+            "type": "borderWidth"
+          },
+          "color": {
+            "value": "{palette.Border.BorderPrimary}",
+            "type": "color"
+          }
+        },
+        "text": {
+          "color": {
+            "value": "{palette.Text.TextPrimary}",
+            "type": "color"
+          }
+        }
+      },
+      "body": {
+        "paddingX": {
+          "value": "24",
+          "type": "spacing"
+        },
+        "paddingBottom": {
+          "value": "16",
+          "type": "spacing"
+        },
+        "paddingTop": {
+          "value": "0",
+          "type": "spacing"
+        },
+        "paddingTop.useTopPadding": {
+          "value": "16",
+          "type": "spacing"
+        }
+      },
+      "footer": {
+        "height": {
+          "value": "72",
+          "type": "sizing"
+        },
+        "padding": {
+          "value": "16",
+          "type": "spacing"
+        },
+        "borderTop": {
+          "width": {
+            "value": "1",
+            "type": "borderWidth"
+          },
+          "color": {
+            "value": "{palette.Border.BorderPrimary}",
+            "type": "color"
+          }
+        },
+        "layout": {
+          "rightOnly": {
+            "value": "flex-end",
+            "type": "other",
+            "description": "Only right-side buttons present (Pixso Mode=RightOnly)."
+          },
+          "both": {
+            "value": "space-between",
+            "type": "other",
+            "description": "Both left- and right-side button groups present (Pixso Mode=Both)."
+          }
+        }
+      },
+      "width": {
+        "columns": {
+          "2": {
+            "value": "289",
+            "type": "sizing"
+          },
+          "3": {
+            "value": "442",
+            "type": "sizing"
+          },
+          "4": {
+            "value": "595",
+            "type": "sizing"
+          },
+          "5": {
+            "value": "747",
+            "type": "sizing"
+          },
+          "6": {
+            "value": "900",
+            "type": "sizing"
+          },
+          "7": {
+            "value": "1053",
+            "type": "sizing"
+          },
+          "8": {
+            "value": "1205",
+            "type": "sizing"
+          },
+          "9": {
+            "value": "1358",
+            "type": "sizing"
+          },
+          "10": {
+            "value": "1511",
+            "type": "sizing"
+          },
+          "11": {
+            "value": "1663",
+            "type": "sizing"
+          },
+          "12": {
+            "value": "1816",
+            "type": "sizing"
+          }
+        }
+      }
+    }
+  }
+}

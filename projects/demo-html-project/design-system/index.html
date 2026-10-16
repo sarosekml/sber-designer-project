@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo Html Project3 - Design System</title>
+    <link rel="stylesheet" href="./tokens.css" />
+    <link rel="stylesheet" href="./components.css" />
+    <style>
+      .dsp-shell { box-sizing: border-box; min-height: 100vh; padding: clamp(24px, 4vw, 56px); display: grid; gap: 32px; }
+      .dsp-header { display: grid; gap: 8px; }
+      .dsp-eyebrow { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0; text-transform: uppercase; color: var(--color-accent, #14532d); }
+      .dsp-title { margin: 0; font-size: clamp(28px, 4vw, 44px); color: var(--color-text, #111827); }
+      .dsp-lead { margin: 0; color: var(--color-muted, #6b7280); }
+      .dsp-section { display: grid; gap: 12px; }
+      .dsp-section-title { margin: 0; font-size: 18px; color: var(--color-text, #111827); }
+      .dsp-swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+      .dsp-swatch { margin: 0; display: grid; gap: 6px; }
+      .dsp-swatch-chip { display: block; block-size: 56px; border-radius: var(--radius-control, 8px); border: 1px solid var(--color-border, #d1d5db); }
+      .dsp-token-name { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--color-text, #111827); }
+      .dsp-token-value { font-size: 12px; color: var(--color-muted, #6b7280); }
+      .dsp-type-list, .dsp-scale-list, .dsp-note-list, .dsp-component-grid, .dsp-reference-grid { display: grid; gap: 12px; }
+      .dsp-type-row, .dsp-scale-row { display: grid; gap: 4px; }
+      .dsp-type-sample { margin: 0; font-size: 20px; color: var(--color-text, #111827); }
+      .dsp-scale-bar { display: block; block-size: 12px; min-inline-size: 4px; background: var(--color-accent, #14532d); border-radius: 4px; }
+      .dsp-component-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+      .dsp-component { display: grid; gap: 8px; padding: 12px; border: 1px solid var(--color-border, #d1d5db); border-radius: var(--radius-control, 8px); }
+      .dsp-usage { margin: 0; overflow: auto; padding: 8px; font-size: 11px; background: var(--color-muted-surface, #f3f4f6); border-radius: 6px; }
+      .dsp-usage-source { font-size: 11px; color: var(--color-muted, #6b7280); }
+      .dsp-note h3 { margin: 0 0 4px; font-size: 14px; color: var(--color-text, #111827); }
+      .dsp-note p { margin: 0; color: var(--color-muted, #6b7280); }
+      .dsp-reference-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+      .dsp-reference { display: grid; gap: 6px; padding: 12px; color: var(--color-text, #111827); text-decoration: none; border: 1px solid var(--color-border, #d1d5db); border-radius: var(--radius-control, 8px); }
+      .dsp-reference span { overflow: hidden; color: var(--color-muted, #6b7280); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+    </style>
+  </head>
+  <body data-sd-screen-root data-sd-managed-design-system-preview>
+    <main class="dsp-shell" aria-label="Design system preview">
+    <header class="dsp-header">
+      <p class="dsp-eyebrow">HTML design system</p>
+      <h1 class="dsp-title">Demo Html Project3 Design System</h1>
+      <p class="dsp-lead">Generated preview. Edit Design.md, tokens.css, and components.css, then rebuild this page.</p>
+    </header>
+    <section class="dsp-section" aria-label="Color">
+      <h2 class="dsp-section-title">Color</h2>
+      <div class="dsp-swatch-grid">
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--bg-hint)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--bg-hint</span>
+            <span class="dsp-token-value">#283237</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--bg-mainmenu)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--bg-mainmenu</span>
+            <span class="dsp-token-value">#FEFEFE</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--bg-popup)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--bg-popup</span>
+            <span class="dsp-token-value">#FFFFFF</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--bg-tile)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--bg-tile</span>
+            <span class="dsp-token-value">#FFFFFF</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--border-dark)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--border-dark</span>
+            <span class="dsp-token-value">#6C8080</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--border-light)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--border-light</span>
+            <span class="dsp-token-value">#E1EDE7</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--border-primary)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--border-primary</span>
+            <span class="dsp-token-value">#B8CCCC</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--disabled)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--disabled</span>
+            <span class="dsp-token-value">#BEC5C8</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--disabled-border)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--disabled-border</span>
+            <span class="dsp-token-value">#E8EDED</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--elevation-1)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--elevation-1</span>
+            <span class="dsp-token-value">0 1px 2px rgba(40, 50, 55, .28)</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--elevation-2)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--elevation-2</span>
+            <span class="dsp-token-value">0 10px 30px rgba(40, 50, 55, .16)</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--elevation-3)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--elevation-3</span>
+            <span class="dsp-token-value">0 14px 38px rgba(40, 50, 55, .18)</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--elevation-4)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--elevation-4</span>
+            <span class="dsp-token-value">0 18px 48px rgba(40, 50, 55, .20)</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--elevation-5)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--elevation-5</span>
+            <span class="dsp-token-value">0 22px 58px rgba(40, 50, 55, .22)</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--error)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--error</span>
+            <span class="dsp-token-value">#E5625C</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--error-bg)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--error-bg</span>
+            <span class="dsp-token-value">#FBECEB</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--error-bg-light)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--error-bg-light</span>
+            <span class="dsp-token-value">#FCF1F1</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--error-dark)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--error-dark</span>
+            <span class="dsp-token-value">#D32F2F</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--error-light)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--error-light</span>
+            <span class="dsp-token-value">#E57373</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--info)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--info</span>
+            <span class="dsp-token-value">#1E88E5</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--info-bg)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--info-bg</span>
+            <span class="dsp-token-value">#EAF8FE</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--info-dark)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--info-dark</span>
+            <span class="dsp-token-value">#01579B</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--info-light)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--info-light</span>
+            <span class="dsp-token-value">#29B6F6</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--link)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--link</span>
+            <span class="dsp-token-value">#00AA9B</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--link-dark)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--link-dark</span>
+            <span class="dsp-token-value">#007A6D</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--link-light)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--link-light</span>
+            <span class="dsp-token-value">#B8D6D3</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--primary)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--primary</span>
+            <span class="dsp-token-value">#00AA9B</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--primary-dark)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--primary-dark</span>
+            <span class="dsp-token-value">#007A6D</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--primary-light)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--primary-light</span>
+            <span class="dsp-token-value">#58DCCC</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--secondary)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--secondary</span>
+            <span class="dsp-token-value">#B8D6D3</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--secondary-dark)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--secondary-dark</span>
+            <span class="dsp-token-value">#639994</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--secondary-light)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--secondary-light</span>
+            <span class="dsp-token-value">#CDE2E0</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--shadow-modal-form)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--shadow-modal-form</span>
+            <span class="dsp-token-value">0 24px 64px rgba(40, 50, 55, .28)</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--success)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--success</span>
+            <span class="dsp-token-value">#7CB342</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--success-bg)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--success-bg</span>
+            <span class="dsp-token-value">#E9F6DA</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--success-dark)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--success-dark</span>
+            <span class="dsp-token-value">#558B2F</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--success-light)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--success-light</span>
+            <span class="dsp-token-value">#9CCC65</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--tertiary)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--tertiary</span>
+            <span class="dsp-token-value">#E5ECEB</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--tertiary-dark)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--tertiary-dark</span>
+            <span class="dsp-token-value">#7A9994</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--tertiary-light)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--tertiary-light</span>
+            <span class="dsp-token-value">#EEF2F1</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--text-black)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--text-black</span>
+            <span class="dsp-token-value">#283237</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--text-inactive)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--text-inactive</span>
+            <span class="dsp-token-value">#AAB2B1</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--text-on-dark)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--text-on-dark</span>
+            <span class="dsp-token-value">#FFFFFF</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--text-on-tertiary)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--text-on-tertiary</span>
+            <span class="dsp-token-value">#617C7C</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--text-primary)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--text-primary</span>
+            <span class="dsp-token-value">#324844</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--text-secondary)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--text-secondary</span>
+            <span class="dsp-token-value">#6C8080</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--warning)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--warning</span>
+            <span class="dsp-token-value">#FFB300</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--warning-bg)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--warning-bg</span>
+            <span class="dsp-token-value">#FFF8E1</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--warning-dark)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--warning-dark</span>
+            <span class="dsp-token-value">#C68400</span>
+          </figcaption>
+        </figure>
+        <figure class="dsp-swatch">
+          <span class="dsp-swatch-chip" style="background: var(--warning-light)"></span>
+          <figcaption>
+            <span class="dsp-token-name">--warning-light</span>
+            <span class="dsp-token-value">#FFE54C</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="dsp-section" aria-label="Typography">
+      <h2 class="dsp-section-title">Typography</h2>
+      <div class="dsp-type-list">
+        <div class="dsp-type-row">
+          <p class="dsp-type-sample" style="font-family: var(--font-display)">The quick brown fox</p>
+          <span class="dsp-token-name">--font-display</span>
+          <span class="dsp-token-value">&quot;SB Sans Display&quot;, system-ui, sans-serif</span>
+        </div>
+        <div class="dsp-type-row">
+          <p class="dsp-type-sample" style="font-family: var(--font-screen)">The quick brown fox</p>
+          <span class="dsp-token-name">--font-screen</span>
+          <span class="dsp-token-value">&quot;SB Sans Screen&quot;, system-ui, sans-serif</span>
+        </div>
+        <div class="dsp-type-row">
+          <p class="dsp-type-sample" style="font-family: var(--font-text)">The quick brown fox</p>
+          <span class="dsp-token-name">--font-text</span>
+          <span class="dsp-token-value">&quot;SB Sans Text&quot;, system-ui, sans-serif</span>
+        </div>
+      </div>
+    </section>
+    <section class="dsp-section" aria-label="Spacing &amp; radius">
+      <h2 class="dsp-section-title">Spacing &amp; radius</h2>
+      <div class="dsp-scale-list">
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--radius-card)"></span>
+          <span class="dsp-token-name">--radius-card</span>
+          <span class="dsp-token-value">16px</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--radius-control)"></span>
+          <span class="dsp-token-name">--radius-control</span>
+          <span class="dsp-token-value">8px</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--radius-control-s)"></span>
+          <span class="dsp-token-name">--radius-control-s</span>
+          <span class="dsp-token-value">6px</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--radius-field)"></span>
+          <span class="dsp-token-name">--radius-field</span>
+          <span class="dsp-token-value">8px</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--radius-modal)"></span>
+          <span class="dsp-token-name">--radius-modal</span>
+          <span class="dsp-token-value">24px</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--radius-pill)"></span>
+          <span class="dsp-token-name">--radius-pill</span>
+          <span class="dsp-token-value">999px</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--radius-popup)"></span>
+          <span class="dsp-token-name">--radius-popup</span>
+          <span class="dsp-token-value">12px</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--radius-round)"></span>
+          <span class="dsp-token-name">--radius-round</span>
+          <span class="dsp-token-value">50%</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--weight-light)"></span>
+          <span class="dsp-token-name">--weight-light</span>
+          <span class="dsp-token-value">300</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--weight-regular)"></span>
+          <span class="dsp-token-name">--weight-regular</span>
+          <span class="dsp-token-value">400</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--weight-semibold)"></span>
+          <span class="dsp-token-name">--weight-semibold</span>
+          <span class="dsp-token-value">600</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--z-menu)"></span>
+          <span class="dsp-token-name">--z-menu</span>
+          <span class="dsp-token-value">30</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--z-modal)"></span>
+          <span class="dsp-token-name">--z-modal</span>
+          <span class="dsp-token-value">1000</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--z-modal-nested)"></span>
+          <span class="dsp-token-name">--z-modal-nested</span>
+          <span class="dsp-token-value">1010</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--z-nav)"></span>
+          <span class="dsp-token-name">--z-nav</span>
+          <span class="dsp-token-value">50</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--z-snackbar)"></span>
+          <span class="dsp-token-name">--z-snackbar</span>
+          <span class="dsp-token-value">9900</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--z-toast)"></span>
+          <span class="dsp-token-name">--z-toast</span>
+          <span class="dsp-token-value">40</span>
+        </div>
+        <div class="dsp-scale-row">
+          <span class="dsp-scale-bar" style="inline-size: var(--z-tooltip)"></span>
+          <span class="dsp-token-name">--z-tooltip</span>
+          <span class="dsp-token-value">30</span>
+        </div>
+      </div>
+    </section>
+    <section class="dsp-section" aria-label="Components">
+      <h2 class="dsp-section-title">Components</h2>
+      <div class="dsp-component-grid">
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert</span>
+          <pre class="dsp-usage"><code>&lt;div class=&quot;alert alert--info alert--s&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert--collapsed</span>
+          <div class="alert--collapsed">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert--error</span>
+          <pre class="dsp-usage"><code>&lt;div class=&quot;alert alert--error alert--s&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert--info</span>
+          <pre class="dsp-usage"><code>&lt;div class=&quot;alert alert--info alert--s&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert--m</span>
+          <div class="alert--m">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert--s</span>
+          <pre class="dsp-usage"><code>&lt;div class=&quot;alert alert--info alert--s&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert--success</span>
+          <pre class="dsp-usage"><code>&lt;div class=&quot;alert alert--success alert--s&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert--warning</span>
+          <div class="alert--warning">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert__act</span>
+          <div class="alert__act">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert__actions</span>
+          <div class="alert__actions">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert__body</span>
+          <pre class="dsp-usage"><code>&lt;div class=&quot;alert__body&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert__buttons</span>
+          <div class="alert__buttons">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert__collapse</span>
+          <div class="alert__collapse">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert__icon</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;alert__icon&quot; aria-hidden=&quot;true&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert__text</span>
+          <div class="alert__text">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.alert__title</span>
+          <pre class="dsp-usage"><code>&lt;p class=&quot;alert__title&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;av av--circular av--l&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/organisms/Entity.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av--accent</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;av av--circular av--l av--accent&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/organisms/Entity.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av--button</span>
+          <div class="av--button">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av--circular</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;av av--circular av--l&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/organisms/Entity.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av--disabled</span>
+          <div class="av--disabled">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av--l</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;av av--circular av--l&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/organisms/Entity.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av--m</span>
+          <div class="av--m">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av--rounded</span>
+          <div class="av--rounded">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av--s</span>
+          <div class="av--s">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av--xl</span>
+          <div class="av--xl">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av-group</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;av-group av-group--l&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av-group--l</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;av-group av-group--l&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av-group--m</span>
+          <div class="av-group--m">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av-group--rounded</span>
+          <div class="av-group--rounded">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av-group--s</span>
+          <div class="av-group--s">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av-group__more</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;av-group__more&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av-stack</span>
+          <div class="av-stack">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av-stack--square</span>
+          <div class="av-stack--square">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av__icon</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;av__icon&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/atoms/Avatar.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av__img</span>
+          <div class="av__img">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.av__text</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;av__text&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/atoms/Avatar.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;badge badge--xs badge--accent&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/atoms/IconButton.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--accent</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;badge badge--xs badge--accent&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/atoms/IconButton.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--animate</span>
+          <div class="badge--animate">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--bordered</span>
+          <div class="badge--bordered">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--dot</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;badge badge--dot badge--success&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/atoms/IconButton.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--error</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;badge badge--xs badge--error&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/atoms/IconButton.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--info</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;badge badge--xs badge--info&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">pages/ds-adapter-smoke.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--m</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;badge badge--m badge--accent&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--muted</span>
+          <div class="badge--muted">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--neutral</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;badge badge--m badge--neutral&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/refs/imported-index.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--s</span>
+          <div class="badge--s">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--success</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;badge badge--dot badge--success&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/atoms/IconButton.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--text</span>
+          <div class="badge--text">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--warning</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;badge badge--xs badge--warning&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">pages/ds-adapter-smoke.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--xs</span>
+          <pre class="dsp-usage"><code>&lt;span class=&quot;badge badge--xs badge--accent&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/pages/atoms/IconButton.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge--xxs</span>
+          <div class="badge--xxs">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge-anchor</span>
+          <div class="badge-anchor">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.badge-anchor--dot-tr</span>
+          <div class="badge-anchor--dot-tr">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.btn</span>
+          <pre class="dsp-usage"><code>&lt;button class=&quot;btn btn--accent btn--m&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/_template/smoke-test.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.btn--accent</span>
+          <pre class="dsp-usage"><code>&lt;button class=&quot;btn btn--accent btn--m&quot;&gt;</code></pre>
+          <span class="dsp-usage-source">design-system/_template/smoke-test.html</span>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.btn--danger</span>
+          <div class="btn--danger">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.btn--disabled</span>
+          <div class="btn--disabled">Sample</div>
+        </article>
+        <article class="dsp-component">
+          <span class="dsp-token-name">.btn--fullwidth</span>
+          <div class="btn--fullwidth">Sample</div>
+        </article>
+      </div>
+    </section>
+    <section class="dsp-section" aria-label="Reference pages">
+      <h2 class="dsp-section-title">Reference pages</h2>
+      <div class="dsp-reference-grid">
+        <a class="dsp-reference" href="./_template/Screen.html">
+          <strong>Экран — IBP</strong>
+          <span>design-system/_template/Screen.html</span>
+        </a>
+        <a class="dsp-reference" href="./_template/smoke-test.html">
+          <strong>smoke</strong>
+          <span>design-system/_template/smoke-test.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/Avatar.html">
+          <strong>Avatar — Дизайн-система</strong>
+          <span>design-system/pages/atoms/Avatar.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/Badge.html">
+          <strong>Badge — Дизайн-система</strong>
+          <span>design-system/pages/atoms/Badge.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/Buttons.html">
+          <strong>Button — Дизайн-система</strong>
+          <span>design-system/pages/atoms/Buttons.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/Checkbox.html">
+          <strong>Checkbox — Дизайн-система</strong>
+          <span>design-system/pages/atoms/Checkbox.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/Chip.html">
+          <strong>Chip — Дизайн-система</strong>
+          <span>design-system/pages/atoms/Chip.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/Divider.html">
+          <strong>Divider — Дизайн-система</strong>
+          <span>design-system/pages/atoms/Divider.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/IconButton.html">
+          <strong>IconButton — Дизайн-система</strong>
+          <span>design-system/pages/atoms/IconButton.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/Link.html">
+          <strong>Link — Дизайн-система</strong>
+          <span>design-system/pages/atoms/Link.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/ProgressBar.html">
+          <strong>ProgressBar — Дизайн-система</strong>
+          <span>design-system/pages/atoms/ProgressBar.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/Radiobutton.html">
+          <strong>Radiobutton — Дизайн-система</strong>
+          <span>design-system/pages/atoms/Radiobutton.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/atoms/Switch.html">
+          <strong>Switch — Дизайн-система</strong>
+          <span>design-system/pages/atoms/Switch.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/foundations/Colors.html">
+          <strong>Цвета — Дизайн-система</strong>
+          <span>design-system/pages/foundations/Colors.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/foundations/Elevation.html">
+          <strong>Тени (Elevation) — Дизайн-система</strong>
+          <span>design-system/pages/foundations/Elevation.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/foundations/Icons.html">
+          <strong>Icons — Дизайн-система</strong>
+          <span>design-system/pages/foundations/Icons.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/foundations/Radius.html">
+          <strong>Скругления — Дизайн-система</strong>
+          <span>design-system/pages/foundations/Radius.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/foundations/Typography.html">
+          <strong>Типографика — Дизайн-система</strong>
+          <span>design-system/pages/foundations/Typography.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/loading/Alert.html">
+          <strong>Alert — Дизайн-система</strong>
+          <span>design-system/pages/loading/Alert.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/loading/LabelHelper.html">
+          <strong>Label / Helper — Дизайн-система</strong>
+          <span>design-system/pages/loading/LabelHelper.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/Breadcrumbs.html">
+          <strong>Breadcrumbs — Дизайн-система</strong>
+          <span>design-system/pages/molecules/Breadcrumbs.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/ButtonGroup.html">
+          <strong>ButtonGroup — Дизайн-система</strong>
+          <span>design-system/pages/molecules/ButtonGroup.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/ContextMenu.html">
+          <strong>Context Menu — Дизайн-система</strong>
+          <span>design-system/pages/molecules/ContextMenu.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/InputAutocomplete.html">
+          <strong>InputAutocomplete — Дизайн-система</strong>
+          <span>design-system/pages/molecules/InputAutocomplete.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/InputDate.html">
+          <strong>InputDate — Дизайн-система</strong>
+          <span>design-system/pages/molecules/InputDate.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/InputText.html">
+          <strong>InputText — Дизайн-система</strong>
+          <span>design-system/pages/molecules/InputText.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/Pagination.html">
+          <strong>Pagination — Дизайн-система</strong>
+          <span>design-system/pages/molecules/Pagination.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/ReadOnlyField.html">
+          <strong>ReadOnlyField — Дизайн-система</strong>
+          <span>design-system/pages/molecules/ReadOnlyField.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/SegmentControl.html">
+          <strong>SegmentControl — Дизайн-система</strong>
+          <span>design-system/pages/molecules/SegmentControl.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/Select.html">
+          <strong>Select · DropdownList — Дизайн-система</strong>
+          <span>design-system/pages/molecules/Select.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/Splitter.html">
+          <strong>Splitter — Дизайн-система</strong>
+          <span>design-system/pages/molecules/Splitter.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/Tab.html">
+          <strong>Tab — Дизайн-система</strong>
+          <span>design-system/pages/molecules/Tab.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/Toast.html">
+          <strong>Toast — Дизайн-система</strong>
+          <span>design-system/pages/molecules/Toast.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/molecules/Tooltip.html">
+          <strong>Tooltip — Дизайн-система</strong>
+          <span>design-system/pages/molecules/Tooltip.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/organisms/Entity.html">
+          <strong>Entity — Дизайн-система</strong>
+          <span>design-system/pages/organisms/Entity.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/organisms/Modal.html">
+          <strong>Modal — Дизайн-система</strong>
+          <span>design-system/pages/organisms/Modal.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/organisms/Popover.html">
+          <strong>Popover — Дизайн-система</strong>
+          <span>design-system/pages/organisms/Popover.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/organisms/RiskMetric.html">
+          <strong>RiskMetric — Дизайн-система</strong>
+          <span>design-system/pages/organisms/RiskMetric.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/organisms/SnackBar.html">
+          <strong>SnackBar — Дизайн-система</strong>
+          <span>design-system/pages/organisms/SnackBar.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/organisms/TableCell.html">
+          <strong>TableCell — Дизайн-система</strong>
+          <span>design-system/pages/organisms/TableCell.html</span>
+        </a>
+        <a class="dsp-reference" href="./pages/patterns/SectionsAudit.html">
+          <strong>Аудит разделов — Дизайн-система</strong>
+          <span>design-system/pages/patterns/SectionsAudit.html</span>
+        </a>
+        <a class="dsp-reference" href="./refs/imported-index.html">
+          <strong>Дизайн-система — Обзор</strong>
+          <span>design-system/refs/imported-index.html</span>
+        </a>
+      </div>
+    </section>
+    <section class="dsp-section" aria-label="Design notes">
+      <h2 class="dsp-section-title">Design notes</h2>
+      <div class="dsp-note-list">
+        <div class="dsp-note">
+          <h3>Theme</h3>
+          <p>**Professional enterprise tooling with a calm, analytical tone.** The IBP Design System serves operational dashboards, deal pipelines, risk monitors, and data-dense work surfaces. It is not playful, not marketing-forward, and never decorat…</p>
+        </div>
+        <div class="dsp-note">
+          <h3>Color</h3>
+          <p>### 2.1 Primitive Ramps (do not use directly in product UI) | Ramp | Role | |------|------| | `--c-mgrey-*` | Pure greys — surfaces and white text | | `--c-cgrey-*` | Cool greys — text, disabled states | | `--c-swamp-*` | Cool grey-green —…</p>
+        </div>
+        <div class="dsp-note">
+          <h3>Typography</h3>
+          <p>### 3.1 Font Families | Family | Files | Weight | Usage | |--------|-------|--------|-------| | **SB Sans Display** | SBSansDisplay-Light/Regular/SemiBold.otf | 300, 400, 600 | Headings h1–h6 | | **SB Sans Text** | SBSansText-Regular/Semib…</p>
+        </div>
+        <div class="dsp-note">
+          <h3>Spacing</h3>
+          <p>### 4.1 Naming Convention Strict **BEM**: `.block__element--modifier`. Every component is namespaced with a short, memorable block name (`.btn`, `.chip`, `.badge`, `.tab`, `.inp`, `.tip`, `.modal`, `.snack`, `.entity`, `.av`, `.crumbs`, `.…</p>
+        </div>
+        <div class="dsp-note">
+          <h3>Layout</h3>
+          <p>### 5.1 Page Canvas The page background is a subtle cool gradient: ```css background: linear-gradient(180deg, #F5F7F7 0%, #F2F7F7 100%); ``` Content surfaces (cards, tiles, inputs, popups) are white (`--bg-tile: #FFFFFF`), creating a gentl…</p>
+        </div>
+        <div class="dsp-note">
+          <h3>Components</h3>
+          <p>### 6.1 Elevation System Five named levels, plus one special modal shadow: | Token | Value | Assigned to | |-------|-------|-------------| | `--elevation-1` | `0 1px 2px rgba(40,50,55,.28)` | Switch thumb | | `--elevation-2` | `0 10px 30px…</p>
+        </div>
+        <div class="dsp-note">
+          <h3>Motion</h3>
+          <p>### Do - **Use semantic token aliases** (`--text-primary`, `--primary`, `--border-light`) — never raw primitive ramp values (`--c-emerald-500`, `--c-mgrey-50`). - **Use `color-mix()` for state layers** — `color-mix(in srgb, var(--primary)…</p>
+        </div>
+        <div class="dsp-note">
+          <h3>Voice</h3>
+          <p>### 8.1 Component-Level Responsiveness - **Buttons**: icon-only buttons never stretch to full width (`.btn--fullwidth.btn--icon-only` is overridden to `width: auto`). - **Tabs**: horizontal overflow uses scrollable rows (`.tabs-scroll`) wi…</p>
+        </div>
+        <div class="dsp-note">
+          <h3>Anti-patterns</h3>
+          <p>When generating screens for this design system, follow these rules in order: 1. **Start from `_template/Screen.html`** and link `../design-system/ds.css` (the single entrypoint). 2. **Pick components by role, not by hardcoded name.** Use i…</p>
+        </div>
+      </div>
+    </section>
+    </main>
+  </body>
+</html>

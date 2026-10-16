@@ -1,0 +1,1 @@
+export { StickyTable } from './StickyTable';

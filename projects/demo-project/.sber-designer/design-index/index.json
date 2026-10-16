@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "generatedAt": 1778928628905,
+  "projectName": "demo-project-experiments",
+  "sources": {
+    "storybookCatalog": true,
+    "staticScan": false,
+    "designMd": true,
+    "componentNotes": false,
+    "lucideFallback": true
+  },
+  "counts": {
+    "components": 56,
+    "componentGroups": 7,
+    "tokens": 0,
+    "icons": 1535,
+    "examples": 130,
+    "notes": 0,
+    "diagnostics": 1
+  },
+  "fingerprint": "fef8cbe4a0dcf8e781d6800d2acab7a70acef50c18e5fb5d61ec48ce3a2a0855",
+  "artifacts": {
+    "manifest": ".sber-designer/design-index/index.json",
+    "promptSummary": ".sber-designer/design-index/prompt-summary.md",
+    "components": ".sber-designer/design-index/components.jsonl",
+    "componentGroups": ".sber-designer/design-index/component-groups.json",
+    "tokens": ".sber-designer/design-index/tokens.json",
+    "icons": ".sber-designer/design-index/icons.json",
+    "usageExamples": ".sber-designer/design-index/usage-examples.jsonl",
+    "componentNotes": ".sber-designer/design-index/component-notes.jsonl",
+    "diagnostics": ".sber-designer/design-index/diagnostics.json",
+    "fingerprints": ".sber-designer/design-index/fingerprints.json"
+  }
+}

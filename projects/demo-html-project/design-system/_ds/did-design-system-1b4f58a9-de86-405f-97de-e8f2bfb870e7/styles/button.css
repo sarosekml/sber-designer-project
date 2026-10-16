@@ -1,0 +1,153 @@
+/* =========================================================================
+   Design System — Button
+   Types:  accent · outline · transparent
+   Sizes:  m (40) · s (32) · xs (24)
+   States: default · hover · active · disabled · loading
+   Text uses the Button M/S/XS typography tokens (SB Sans Screen).
+   Requires: typography.css, colors.css
+   ========================================================================= */
+
+:root {
+  /* derived button tints (from --primary) */
+  --btn-hover-bg:  color-mix(in srgb, var(--primary) 10%, #fff);
+  --btn-active-bg: color-mix(in srgb, var(--primary) 18%, #fff);
+  --btn-pale:      color-mix(in srgb, var(--primary) 45%, #fff);
+}
+
+.btn {
+  /* layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* layout values are set per size below (defaults match size M) */
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+
+  /* type — overridden per size below */
+  font: var(--type-button-m);
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* icons (sizes match size M by default; overridden per size below) */
+.btn svg { flex: none; width: 20px; height: 20px; display: block; }
+.btn .btn__chevron { width: 16px; height: 16px; }
+
+/* ---------- sizes ----------------------------------------------------------
+   Layout values are written directly per size (not via custom properties)
+   so they stay component-internal and don't leak as design-system tokens. */
+.btn--m  { height: 40px; padding: 0 16px; gap: 8px; border-radius: 8px; font: var(--type-button-m); }
+.btn--s  { height: 32px; padding: 0 12px; gap: 6px; border-radius: 8px; font: var(--type-button-s); }
+.btn--xs { height: 24px; padding: 0 8px;  gap: 4px; border-radius: 6px; font: var(--type-button-xs); }
+
+/* per-size icon dimensions */
+.btn--m  svg { width: 20px; height: 20px; }
+.btn--s  svg { width: 18px; height: 18px; }
+.btn--xs svg { width: 16px; height: 16px; }
+.btn--m  .btn__chevron { width: 16px;   height: 16px;   }  /* 20 × .8 */
+.btn--s  .btn__chevron { width: 14.4px; height: 14.4px; }  /* 18 × .8 */
+.btn--xs .btn__chevron { width: 12.8px; height: 12.8px; }  /* 16 × .8 */
+
+/* icon-only: square-ish, side padding matches the icon↔text gap per size */
+.btn--icon-only    { gap: 0; }
+.btn--m.btn--icon-only  { padding: 0 8px; }
+.btn--s.btn--icon-only  { padding: 0 6px; }
+.btn--xs.btn--icon-only { padding: 0 4px; }
+
+/* ---------- type: ACCENT --------------------------------------------------- */
+.btn--accent {
+  background: var(--primary);
+  color: var(--text-on-dark);
+  border-color: var(--primary);
+}
+.btn--accent svg { color: var(--text-on-dark); }
+.btn--accent:hover  { background: var(--primary-dark); border-color: var(--primary-dark); }
+.btn--accent:active { background: var(--btn-pale);     border-color: var(--btn-pale); }
+
+/* ---------- type: OUTLINE -------------------------------------------------- */
+.btn--outline {
+  background: var(--bg-tile);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.btn--outline svg { color: var(--primary); }
+.btn--outline:hover  { background: var(--btn-hover-bg); }
+.btn--outline:active { background: var(--btn-active-bg); color: var(--btn-pale); border-color: var(--btn-pale); }
+.btn--outline:active svg { color: var(--btn-pale); }
+
+/* ---------- type: TRANSPARENT ---------------------------------------------- */
+.btn--transparent {
+  background: transparent;
+  color: var(--primary);
+  border-color: transparent;
+}
+.btn--transparent svg { color: var(--primary); }
+.btn--transparent:hover  { background: var(--btn-hover-bg); }
+.btn--transparent:active { background: var(--btn-active-bg); color: var(--btn-pale); }
+.btn--transparent:active svg { color: var(--btn-pale); }
+
+/* ---------- state: DISABLED ------------------------------------------------ */
+.btn:disabled,
+.btn--disabled { cursor: default; pointer-events: none; }
+
+.btn--accent:disabled,      .btn--accent.btn--disabled {
+  background: var(--disabled); border-color: var(--disabled); color: var(--text-on-dark);
+}
+.btn--accent:disabled svg,  .btn--accent.btn--disabled svg { color: var(--text-on-dark); }
+
+.btn--outline:disabled,     .btn--outline.btn--disabled {
+  background: var(--bg-tile); border-color: var(--disabled); color: var(--text-inactive);
+}
+.btn--outline:disabled svg, .btn--outline.btn--disabled svg { color: var(--text-inactive); }
+
+.btn--transparent:disabled, .btn--transparent.btn--disabled {
+  background: transparent; color: var(--text-inactive);
+}
+.btn--transparent:disabled svg, .btn--transparent.btn--disabled svg { color: var(--text-inactive); }
+
+/* ---------- modifier: FULLWIDTH -------------------------------------------- */
+.btn--fullwidth { width: 100%; }
+.btn--fullwidth.btn--icon-only { width: auto; }   /* icon-only never stretches */
+
+/* ---------- forced states (for documentation/specimens) -------------------- */
+.btn--accent.is-hover       { background: var(--primary-dark); border-color: var(--primary-dark); }
+.btn--accent.is-active      { background: var(--btn-pale); border-color: var(--btn-pale); }
+.btn--outline.is-hover      { background: var(--btn-hover-bg); }
+.btn--outline.is-active     { background: var(--btn-active-bg); color: var(--btn-pale); border-color: var(--btn-pale); }
+.btn--outline.is-active svg { color: var(--btn-pale); }
+.btn--transparent.is-hover  { background: var(--btn-hover-bg); }
+.btn--transparent.is-active { background: var(--btn-active-bg); color: var(--btn-pale); }
+.btn--transparent.is-active svg { color: var(--btn-pale); }
+
+/* ---------- state: LOADING ------------------------------------------------- */
+/* While loading the button is non-interactive (treated as disabled). */
+.btn--loading { pointer-events: none; }
+.btn__spinner {
+  flex: none;
+  width: 20px;   /* matches icon size; overridden per button size below */
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  opacity: .9;
+  animation: btn-spin .7s linear infinite;
+}
+.btn--m  .btn__spinner { width: 20px; height: 20px; }
+.btn--s  .btn__spinner { width: 18px; height: 18px; }
+.btn--xs .btn__spinner { width: 16px; height: 16px; }
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .btn__spinner { animation-duration: 1.6s; } }

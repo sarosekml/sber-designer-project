@@ -1,0 +1,49 @@
+[
+  {
+    "type": "iteration-start",
+    "iteration": 1
+  },
+  {
+    "type": "text-delta",
+    "iteration": 1,
+    "delta": "Done."
+  },
+  {
+    "type": "usage",
+    "iteration": 1,
+    "usage": {
+      "inputTokens": 10,
+      "outputTokens": 3,
+      "costUsd": 0
+    }
+  },
+  {
+    "type": "iteration-end",
+    "iteration": 1,
+    "hadToolCalls": false,
+    "finishReason": "stop"
+  },
+  {
+    "type": "done",
+    "iterations": 1,
+    "truncated": false,
+    "hadErrors": false,
+    "stoppedAfterPermissionDeny": false,
+    "finalResponse": {
+      "text": "Done.",
+      "provider": "opencode-runtime",
+      "model": "default",
+      "finishReason": "stop",
+      "usage": {
+        "inputTokens": 10,
+        "outputTokens": 3,
+        "costUsd": 0
+      }
+    },
+    "usage": {
+      "inputTokens": 10,
+      "outputTokens": 3,
+      "costUsd": 0
+    }
+  }
+]

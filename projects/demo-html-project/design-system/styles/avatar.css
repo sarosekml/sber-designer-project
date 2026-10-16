@@ -1,0 +1,133 @@
+/* =========================================================================
+   Design System — Avatar
+   A compact visual representation of a user or entity: initials (Text),
+   a fallback glyph (Icon) or a photo (Image).
+
+   Shape:  circular · rounded (squircle, radius scales with size)
+   Size:   xl (96) · l (40) · m (32) · s (24)
+   Content: text · icon · image
+   Extras: badge overlay (counter / status dot) via .badge-anchor,
+           Avatar Group (overlapping stack with «+N» overflow).
+   Requires: typography.css, colors.css  (+ badge.css for the badge overlay)
+   ========================================================================= */
+
+.av {
+  --av-size: 32px;     /* set per size modifier */
+  --av-font: 13px;     /* initials cap height  */
+  --av-icon: 18px;     /* glyph box            */
+  --av-round: var(--radius-l);    /* rounded-shape radius */
+
+  box-sizing: border-box;
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--av-size);
+  height: var(--av-size);
+  border-radius: var(--radius-circle);                 /* circular by default */
+  overflow: hidden;
+  border: none;
+  background: var(--c-swamp-100);
+  color: var(--text-on-tertiary);
+  font-family: var(--font-text), system-ui, sans-serif;
+  font-weight: var(--weight-semibold);
+  font-size: var(--av-font);
+  line-height: 1;
+  letter-spacing: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- shape --------------------------------------------------------- */
+.av--circular { border-radius: var(--radius-circle); }
+.av--rounded  { border-radius: var(--av-round); }
+
+/* ---------- sizes --------------------------------------------------------- */
+.av--xl { --av-size: 96px; --av-font: 32px; --av-icon: 48px; --av-round: var(--radius-5xl); }
+.av--l  { --av-size: 40px; --av-font: 16px; --av-icon: 22px; --av-round: var(--radius-xl); }
+.av--m  { --av-size: 32px; --av-font: 13px; --av-icon: 18px; --av-round: var(--radius-l); }
+.av--s  { --av-size: 24px; --av-font: 11px; --av-icon: 14px; --av-round: var(--radius-m);  }
+
+/* ---------- content ------------------------------------------------------- */
+.av__text { display: block; }
+.av__img  { width: 100%; height: 100%; object-fit: cover; display: block; }
+.av__icon { width: var(--av-icon); height: var(--av-icon); display: block; color: var(--text-on-tertiary); }
+.av__icon svg { width: 100%; height: 100%; display: block; }
+
+/* image-slot fills the whole avatar */
+.av image-slot { width: 100%; height: 100%; display: block; }
+
+/* ---------- tone (entity / accent fill) ----------------------------------- */
+.av--accent  { background: color-mix(in srgb, var(--primary) 14%, var(--c-mgrey-50)); color: var(--primary-dark); }
+.av--accent .av__icon { color: var(--primary-dark); }
+
+/* ---------- interactive (links to a profile) ------------------------------ */
+.av--button { cursor: pointer; padding: 0; appearance: none; -webkit-appearance: none; transition: box-shadow .15s ease, filter .15s ease; }
+.av--button:hover  { filter: brightness(.97); }
+.av--button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* ---------- disabled ------------------------------------------------------ */
+.av--disabled { opacity: .5; filter: grayscale(.3); pointer-events: none; }
+
+/* =========================================================================
+   BADGE OVERLAY — host a counter or status dot on the avatar.
+   Wrap the avatar in `.av-stack`; the badge is placed absolutely.
+   Counter sits top-right straddling the edge; status dot sits lower-right
+   on the ring. Use `.badge--bordered` so it reads against the photo.
+   ========================================================================= */
+.av-stack { position: relative; display: inline-flex; }
+.av-stack > .badge {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+/* counter — top-right corner */
+.av-stack > .badge:not(.badge--dot) { top: 0; right: 0; transform: translate(40%, -40%); }
+/* status dot — lower-right, sitting on a circular ring */
+.av-stack > .badge--dot { right: 7%; bottom: 7%; }
+/* on a rounded/square avatar the dot moves to the corner */
+.av-stack--square > .badge--dot { right: 0; bottom: 0; transform: translate(25%, 25%); }
+
+/* =========================================================================
+   AVATAR GROUP — overlapping stack with a white ring between avatars and an
+   optional «+N» overflow chip. Left avatar paints on top.
+   ========================================================================= */
+.av-group {
+  --av-overlap: 10px;          /* set per group size */
+  display: inline-flex;
+  align-items: center;
+}
+.av-group .av {
+  box-shadow: 0 0 0 2px var(--bg-tile);   /* separating ring */
+}
+.av-group .av + .av,
+.av-group .av-group__more { margin-left: calc(-1 * var(--av-overlap)); }
+
+/* «+N» overflow — neutral chip shaped like the avatars */
+.av-group__more {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 0;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-cgrey-100);
+  color: var(--text-secondary);
+  font-family: var(--font-text), system-ui, sans-serif;
+  font-weight: var(--weight-semibold);
+  border-radius: var(--radius-circle);
+  box-shadow: 0 0 0 2px var(--bg-tile);
+}
+
+/* per-size overlap + more-chip metrics (mirror .av sizes) */
+.av-group--l { --av-overlap: 12px; }
+.av-group--m { --av-overlap: 10px; }
+.av-group--s { --av-overlap: 8px; }
+.av-group--l .av-group__more { width: 40px; height: 40px; font-size: 14px; }
+.av-group--m .av-group__more { width: 32px; height: 32px; font-size: 12px; }
+.av-group--s .av-group__more { width: 24px; height: 24px; font-size: 11px; }
+.av-group--rounded .av-group__more { border-radius: var(--radius-l); }
+.av-group--rounded.av-group--l .av-group__more { border-radius: var(--radius-xl); }
+.av-group--rounded.av-group--s .av-group__more { border-radius: var(--radius-m); }

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Взаимодействие · Equitas</title>
+<link rel="stylesheet" href="design-system.css" />
+<link rel="stylesheet" href="_shell.css" />
+<style>
+.comm-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--c-border); border-radius: var(--r-xl); background: var(--c-surface); overflow: hidden; }
+.comm-row { display: grid; grid-template-columns: 40px 1fr 220px 110px 26px; gap: 12px; padding: 14px 16px; align-items: center; border-top: 1px solid var(--c-divider); cursor: pointer; }
+.comm-row:first-child { border-top: 0; }
+.comm-row:hover { background: var(--c-surface-2); }
+.comm-row.is-selected { background: var(--c-accent-soft); }
+[data-theme="dark"] .comm-row.is-selected { background: oklch(0.30 0.06 155 / 0.4); }
+.comm-row .icon { width: 32px; height: 32px; border-radius: 50%; background: var(--c-surface-2); color: var(--c-text-2); display: grid; place-items: center; flex-shrink: 0; }
+.comm-row .title { font-size: 13px; font-weight: 500; }
+.comm-row .snip { font-size: 12px; color: var(--c-text-3); margin-top: 2px; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+.comm-row .who-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--c-text-2); }
+.comm-row .when { font-size: 11.5px; color: var(--c-text-4); font-variant-numeric: tabular-nums; text-align: right; }
+.timeline { position: relative; padding-left: 22px; }
+.timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 1.5px; background: var(--c-divider); }
+.tl-item { position: relative; padding: 10px 0; }
+.tl-item::before { content: ""; position: absolute; left: -19px; top: 16px; width: 9px; height: 9px; border-radius: 50%; background: var(--c-surface); border: 2px solid var(--c-accent); }
+.tl-item.is-in::before { border-color: var(--c-info); }
+.tl-item.is-sys::before { border-color: var(--c-text-4); }
+</style></head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><div class="bm">E</div><div class="n">Equitas</div></div>
+    <nav class="crumbs-top"><a href="Screens Index.html">Главная</a><span class="sep">/</span><span class="current">Взаимодействие</span></nav>
+    <div class="spacer"></div>
+    <label class="search-top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Поиск…"/><span class="kbd">⌘K</span></label>
+    <button class="topbar-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+    <div class="avatar avatar-sm avatar-emerald" style="margin-left: 4px;">АК</div>
+  </div>
+
+  <aside class="rail">
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 3l9 6v11a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></button>
+    <button class="rail-ic is-active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11a3 3 0 1 0 6 0c0-1-1-3-3-5-2 2-3 4-3 5z"/></svg></button>
+    <button class="rail-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/></svg></button>
+  </aside>
+
+  <aside class="nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Папки</div>
+      <a href="#" class="nav-item active"><span class="n-l">Все</span><span class="num">148</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Входящие</span><span class="num">12</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Мои задачи</span><span class="num">4</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Запланировано</span><span class="num">3</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Тип</div>
+      <a href="#" class="nav-item"><span class="n-l">Встречи</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Письма</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Звонки</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Системные</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Контрагенты</div>
+      <a href="#" class="nav-item"><span class="n-l">Интеррос</span><span class="num">47</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Sigma Growth</span><span class="num">29</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Норникель</span><span class="num">18</span></a>
+      <a href="#" class="nav-item"><span class="n-l">Петровакс</span><span class="num">11</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">
+      <div class="ph-l">
+        <h1>Взаимодействие</h1>
+        <div class="sub">148 контактов · 12 новых · 4 требуют ответа</div>
+      </div>
+      <div class="ph-r">
+        <button class="btn btn-secondary btn-sm">Импорт календаря</button>
+        <button class="btn btn-primary btn-sm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Добавить контакт</button>
+      </div>
+    </div>
+
+    <div class="row-sm" style="margin-bottom: 14px;">
+      <div class="seg"><button class="is-active">Все</button><button>Встречи</button><button>Письма</button><button>Звонки</button></div>
+      <label class="search" style="min-width: 240px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Поиск по темам и людям…"/></label>
+      <button class="btn btn-ghost btn-sm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>Фильтр</button>
+      <div style="margin-left: auto;"><span class="t-caption">Показано 1–12 из 148</span></div>
+    </div>
+
+    <div class="comm-list">
+      <div class="comm-row is-selected">
+        <div class="icon" style="background: var(--c-accent-soft); color: oklch(0.40 0.12 155);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92V20a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><div class="title">Обсуждение отчётов за 1 квартал с Владимиром Потаниным</div><div class="snip">Рассмотрели результаты Норникеля, обсудили инвестплан на 2026. Договорились о follow-up по Порт Мурманск…</div></div>
+        <div class="who-row"><div class="avatar-stack"><div class="avatar avatar-xs avatar-violet">ВП</div><div class="avatar avatar-xs avatar-emerald">ПС</div></div><span>Интеррос</span></div>
+        <div class="when">вчера, 16:42</div>
+        <div><span class="badge badge-success"><span class="badge-dot"></span>Завершён</span></div>
+      </div>
+
+      <div class="comm-row">
+        <div class="icon" style="background: var(--c-info-soft); color: oklch(0.42 0.12 240);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H5.17L4 17.17z"/></svg></div>
+        <div><div class="title">Онбординг фонда Sigma Growth · документация</div><div class="snip">Отправлен пакет документов: шаблон сделки, регламент комплаенс, контакты команды…</div></div>
+        <div class="who-row"><div class="avatar-stack"><div class="avatar avatar-xs avatar-amber">ДП</div></div><span>Sigma Growth</span></div>
+        <div class="when">31 мар 2026</div>
+        <div><span class="badge badge-info"><span class="badge-dot"></span>Отправлено</span></div>
+      </div>
+
+      <div class="comm-row">
+        <div class="icon" style="background: var(--c-warning-soft); color: oklch(0.45 0.13 70);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div><div class="title">Ежемесячный дайджест · апрель 2026</div><div class="snip">Автоматическая рассылка по 12 фондам с основными метриками и изменениями…</div></div>
+        <div class="who-row"><span style="color: var(--c-text-4);">—</span><span>Система</span></div>
+        <div class="when">25 мар 2026</div>
+        <div><span class="badge badge-neutral">Системное</span></div>
+      </div>
+
+      <div class="comm-row">
+        <div class="icon" style="background: var(--c-accent-soft); color: oklch(0.40 0.12 155);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92V20a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><div class="title">Звонок с CEO Петровакс · пайплайн 2026</div><div class="snip">3 препарата в фазе III. Ожидаемое одобрение в Q3. Запросили данные для оценки…</div></div>
+        <div class="who-row"><div class="avatar-stack"><div class="avatar avatar-xs avatar-rose">АВ</div></div><span>Петровакс</span></div>
+        <div class="when">23 мар 2026</div>
+        <div><span class="badge badge-success"><span class="badge-dot"></span>Завершён</span></div>
+      </div>
+
+      <div class="comm-row">
+        <div class="icon" style="background: var(--c-info-soft); color: oklch(0.42 0.12 240);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H5.17L4 17.17z"/></svg></div>
+        <div><div class="title">Запрос документов по due-diligence Порт Мурманск</div><div class="snip">Ожидаем ответ от юр. отдела до 30 апреля. Ключевые документы: устав, акционерное соглашение, отчётность 2023–2025…</div></div>
+        <div class="who-row"><div class="avatar-stack"><div class="avatar avatar-xs avatar-blue">МП</div></div><span>Порт Мурманск</span></div>
+        <div class="when">20 мар 2026</div>
+        <div><span class="badge badge-warning"><span class="badge-dot"></span>Ожидает</span></div>
+      </div>
+
+      <div class="comm-row">
+        <div class="icon" style="background: var(--c-violet-soft); color: oklch(0.42 0.14 295);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92V20a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><div class="title">Brief AI · подготовка к комитету 02.05</div><div class="snip">Ассистент подготовил сводку по 3 открытым идеям с уверенностью &gt;80%, приложил меморандум…</div></div>
+        <div class="who-row"><span class="ai-badge">AI</span><span>Внутреннее</span></div>
+        <div class="when">19 мар 2026</div>
+        <div><span class="badge badge-violet"><span class="badge-dot"></span>Черновик</span></div>
+      </div>
+    </div>
+  </main>
+
+  <aside class="ctx">
+    <div class="ctx-head"><div class="ctx-title">Обсуждение отчётов Q1</div><button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="ctx-body">
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">Участники</div></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; gap: 8px; align-items: center;"><div class="avatar avatar-sm avatar-violet">ВП</div><div><div style="font-size: 12.5px; font-weight: 500;">Владимир Потанин</div><div class="t-micro">Бенефициар · Интеррос</div></div></div>
+          <div style="display: flex; gap: 8px; align-items: center;"><div class="avatar avatar-sm avatar-emerald">ПС</div><div><div style="font-size: 12.5px; font-weight: 500;">Пётр Семёнов</div><div class="t-micro">Фонд-менеджер</div></div></div>
+          <div style="display: flex; gap: 8px; align-items: center;"><div class="avatar avatar-sm avatar-amber">АК</div><div><div style="font-size: 12.5px; font-weight: 500;">Анна Ковалёва</div><div class="t-micro">Аналитик</div></div></div>
+        </div>
+      </div>
+
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">Ключевые темы</div></div>
+        <div class="row-sm">
+          <span class="badge badge-neutral">Норникель</span>
+          <span class="badge badge-neutral">Q1 отчёт</span>
+          <span class="badge badge-neutral">Порт Мурманск</span>
+          <span class="badge badge-neutral">Планы на 2026</span>
+        </div>
+      </div>
+
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">Действия</div><a class="title-act">+ задача</a></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label class="check"><input type="checkbox" checked/><span class="box"></span><span style="text-decoration: line-through; color: var(--c-text-3);">Прислать протокол встречи</span></label>
+          <label class="check"><input type="checkbox"/><span class="box"></span><span>Подготовить follow-up по Порт Мурманск</span></label>
+          <label class="check"><input type="checkbox"/><span class="box"></span><span>Запросить отчётность Норникеля за Q1</span></label>
+        </div>
+      </div>
+
+      <div class="ctx-section">
+        <div class="title-row"><div class="title">AI-сводка</div><span class="ai-badge">AI</span></div>
+        <p class="t-caption" style="margin: 0; line-height: 1.55;">Встреча прошла конструктивно. Главные договорённости: follow-up по сделке Порт Мурманск в течение 2 недель, запрос квартальной отчётности Норникеля. Настроение — умеренно оптимистичное, вопросов по регуляторике не поднималось.</p>
+      </div>
+    </div>
+  </aside>
+</div>
+</body></html>

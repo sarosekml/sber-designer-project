@@ -1,0 +1,27 @@
+.btn {
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn--primary {
+  background: #2da3ff;
+  color: #fff;
+}
+.btn--primary:hover {
+  background: #1f8de2;
+}
+.btn--ghost {
+  background: transparent;
+  color: #1a1a1a;
+  border-color: #d8d8d8;
+}
+.btn--ghost:hover {
+  background: #f1f1f1;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

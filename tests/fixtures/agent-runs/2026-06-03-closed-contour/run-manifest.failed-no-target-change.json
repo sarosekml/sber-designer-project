@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "runId": "run-2026-06-03T13-31-40-463-d99b2678",
+  "route": "chat-stream",
+  "user": "local-dev",
+  "provider": "opencode-runtime",
+  "model": "mlproxy/vllm/CodeAgent@sbergigacode",
+  "runtimeKind": "cli",
+  "projectName": "ibp-ui-kit",
+  "userGoal": "Apply reviewed changes",
+  "workspacePath": "/workspace/ibp-ui-kit",
+  "createdAt": 1780493500463,
+  "updatedAt": 1780493889018,
+  "completedAt": 1780493889018,
+  "status": "failed",
+  "activeScreen": {
+    "id": "screen-administration",
+    "name": "Administration-deepseek-md",
+    "kind": "story",
+    "storyId": "screens-2026-06-01-administration-deepseek-md--default",
+    "filePath": "src/stories/screens/2026-06-01/AdministrationDeepseekMd.stories.tsx",
+    "implementationFilePath": "src/screens/2026-06-01/AdministrationDeepseekMd.tsx",
+    "folder": "Dev-test",
+    "description": "Empty generated screen"
+  },
+  "assistantTaskIntent": {
+    "kind": "edit-current-screen",
+    "targetScreenId": "screen-administration"
+  },
+  "summary": "External runtime produced no changes in allowed target files: src/stories/screens/2026-06-01/AdministrationDeepseekMd.stories.tsx, src/screens/2026-06-01/AdministrationDeepseekMd.tsx.",
+  "diagnostics": {
+    "attemptId": "attempt-sanitized",
+    "attemptLogPath": "/tmp/sber-designer/agent-runs/attempt-sanitized.jsonl",
+    "debugLogPath": "/tmp/sber-designer/agent-runs/dev-run-sanitized.jsonl",
+    "runManifestPath": ".sber-designer/runs/run-2026-06-03T13-31-40-463-d99b2678/run-manifest.json"
+  }
+}

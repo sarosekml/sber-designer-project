@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breadcrumbs — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/link.css">
+<link rel="stylesheet" href="../../styles/context-menu.css">
+<link rel="stylesheet" href="../../styles/tooltip.css">
+<link rel="stylesheet" href="../../styles/breadcrumbs.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    margin: 0; font-family: var(--font-text), system-ui, sans-serif;
+    color: var(--text-primary); background: var(--bg-page); background-attachment: fixed;
+  }
+  .page { max-width: 1320px; margin: 0 auto; padding: clamp(40px,7vw,96px) clamp(24px,5vw,72px) 140px; }
+
+  /* masthead */
+  .masthead { border-bottom: 1px solid var(--border-light); padding-bottom: 30px; }
+  .masthead .meta { font: var(--type-body-xs); color: var(--text-inactive); display:flex; gap:24px; margin:0 0 22px; }
+  .masthead .meta b { color: var(--text-secondary); font: var(--type-body-xs); font-weight:600; }
+  .eyebrow { font: var(--type-button-xs); letter-spacing:.14em; text-transform:uppercase; color: var(--primary); margin:0 0 14px; }
+  .masthead h1 { font: var(--type-h1); margin:0 0 14px; color: var(--text-black); }
+  @media (max-width:600px){ .masthead h1{ font-size:40px; line-height:48px; } }
+  .masthead p.lead { font: var(--type-body-l); color: var(--text-secondary); margin:0; max-width:64ch; text-wrap:pretty; }
+
+  /* section */
+  .section { margin-top: 76px; }
+  .section > h2 { font: var(--type-h3-strong); margin:0 0 8px; color: var(--text-black); }
+  .section > p.desc { font: var(--type-body-m); color: var(--text-secondary); margin:0 0 28px; max-width:74ch; text-wrap:pretty; }
+  .section > p.desc.tight { margin-bottom:20px; }
+  .section > p.desc + p.desc { margin-top:-16px; }
+  .badge-new { display:inline-block; font: var(--type-button-xs); letter-spacing:.06em; text-transform:uppercase; color: var(--primary); background: var(--primary-bg); border:1px solid color-mix(in srgb, var(--primary) 22%, transparent); padding:3px 9px; border-radius:999px; margin-left:12px; vertical-align:middle; }
+
+  .panel { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; padding: 32px 34px; }
+  .panel + .panel { margin-top: 20px; }
+  .row { display:flex; flex-wrap:wrap; align-items:center; gap:28px; }
+
+  ul.bullets { margin: 0 0 0 2px; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  ul.bullets li { position:relative; padding-left:18px; font: var(--type-body-m); color: var(--text-secondary); }
+  ul.bullets li::before { content:""; position:absolute; left:2px; top:8px; width:5px; height:5px; border-radius:50%; background: var(--text-inactive); }
+
+  code.tok { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.86em; color: var(--primary); background: var(--primary-bg); padding:1px 6px; border-radius:5px; }
+
+  /* ---------- playground ---------- */
+  .panel.pg { padding:0; overflow:hidden; display:grid; grid-template-columns: 320px 1fr; }
+  @media (max-width:820px){ .panel.pg { grid-template-columns:1fr; } }
+  .pg__controls { padding:30px 30px; display:flex; flex-direction:column; gap:24px; border-right:1px solid var(--border-light); }
+  @media (max-width:820px){ .pg__controls { border-right:none; border-bottom:1px solid var(--border-light); } }
+  .pg__stage { padding:48px 30px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; min-height:180px;
+    background:
+      linear-gradient(var(--bg-tile),var(--bg-tile)) padding-box,
+      repeating-conic-gradient(#f2f5f5 0% 25%, #fbfcfc 0% 50%) 0 / 22px 22px; }
+  .pg__previewbox { border:1px dashed var(--border-primary); border-radius:10px; padding:16px 20px; background: var(--bg-tile); max-width:100%; overflow:hidden; }
+  .pg__caption { font: var(--type-body-xs); color: var(--text-inactive); text-align:center; }
+
+  .ctl { display:flex; flex-direction:column; gap:10px; }
+  .ctl > .lbl { font: var(--type-body-s-strong); color: var(--text-inactive); text-transform:uppercase; letter-spacing:.05em; font-size:11px; }
+
+  .toggle { display:inline-flex; align-items:center; gap:11px; padding:9px 12px; border:1px solid var(--border-light); border-radius:9px; font: var(--type-body-m); color: var(--text-primary); cursor:pointer; user-select:none; background: var(--bg-tile); transition:.12s; }
+  .toggle:hover { border-color: var(--border-primary); }
+  .toggle[aria-pressed="true"] { border-color: var(--primary); color: var(--primary); }
+  .toggle .sw-mini { width:36px; height:20px; border-radius:999px; background: var(--c-cgrey-200); position:relative; transition:.15s; flex:none; }
+  .toggle .sw-mini::after { content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.2); transition:.15s; }
+  .toggle[aria-pressed="true"] .sw-mini { background: var(--primary); }
+  .toggle[aria-pressed="true"] .sw-mini::after { transform: translateX(16px); }
+
+  .pg__code { margin-top:4px; font: var(--type-body-s); color: var(--text-inactive); }
+  .pg__code code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; color: var(--text-secondary); background: var(--bgtable-row-focus); padding:3px 7px; border-radius:6px; display:inline-block; word-break:break-all; }
+
+  /* select control */
+  .pg-select { position:relative; }
+  .pg-select select {
+    appearance:none; -webkit-appearance:none;
+    width:100%; height:40px; padding:0 38px 0 14px;
+    border:1px solid var(--border-primary); border-radius:9px;
+    background: var(--bg-tile); color: var(--text-primary);
+    font: var(--type-body-m); cursor:pointer;
+  }
+  .pg-select select:focus-visible { outline:2px solid var(--primary); outline-offset:1px; }
+  .pg-select::after {
+    content:""; position:absolute; right:15px; top:50%; width:9px; height:9px;
+    border-right:2px solid var(--text-secondary); border-bottom:2px solid var(--text-secondary);
+    transform:translateY(-65%) rotate(45deg); pointer-events:none;
+  }
+  /* range slider */
+  .pg-range { -webkit-appearance:none; appearance:none; width:100%; height:4px; border-radius:999px; background: var(--tertiary); outline:none; cursor:pointer; }
+  .pg-range::-webkit-slider-thumb { -webkit-appearance:none; width:18px; height:18px; border-radius:50%; background: var(--primary); border:2px solid #fff; box-shadow:0 1px 3px rgba(40,50,55,.3); cursor:pointer; }
+  .pg-range::-moz-range-thumb { width:18px; height:18px; border-radius:50%; background: var(--primary); border:2px solid #fff; box-shadow:0 1px 3px rgba(40,50,55,.3); cursor:pointer; }
+  .pg-range:focus-visible::-webkit-slider-thumb { outline:2px solid var(--primary); outline-offset:2px; }
+
+  /* ---------- anatomy ---------- */
+  .anat { display:grid; grid-template-columns: minmax(260px,1fr) minmax(240px,360px); gap:40px; align-items:center; }
+  @media (max-width:760px){ .anat { grid-template-columns:1fr; } }
+  .anat__stage { background: var(--tertiary-light); border:1px solid var(--border-light); border-radius:14px; padding:56px 32px; display:flex; justify-content:center; align-items:center; min-height:150px; overflow:hidden; }
+  .anat__art { position:relative; }
+  .anat__legend { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; counter-reset:a; }
+  .anat__legend li { display:flex; gap:14px; align-items:flex-start; font: var(--type-body-m); color: var(--text-primary); }
+  .anat__legend li .n { counter-increment:a; flex:none; width:24px; height:24px; border-radius:50%; background: var(--primary); color:#fff; font: var(--type-body-s-strong); display:flex; align-items:center; justify-content:center; }
+  .anat__legend li .n::before { content:counter(a); }
+  .anat__legend li .t .k { font: var(--type-body-m-strong); color: var(--text-black); }
+  .anat__legend li .t .d { font: var(--type-body-s); color: var(--text-secondary); }
+
+  /* ---------- header mock ---------- */
+  .header-mock { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:12px; padding:16px 22px; overflow:hidden; }
+
+  /* ---------- states list ---------- */
+  .state-row { display:grid; grid-template-columns: 200px minmax(0,1fr); gap:24px; align-items:center; padding:18px 0; }
+  .state-row + .state-row { border-top:1px solid var(--border-light); }
+  .state-row__label { font: var(--type-body-m-strong); color: var(--text-primary); }
+  .state-row__cap { font: var(--type-body-s); color: var(--text-inactive); margin-top:2px; }
+  .state-row__stage { min-height:24px; overflow:hidden; min-width:0; max-width:100%; }
+
+  /* ---------- do / don't ---------- */
+  .guide { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:20px; }
+  @media (max-width:720px){ .guide { grid-template-columns:1fr; } }
+  .guide-card { border:1px solid var(--border-light); border-radius:12px; overflow:hidden; background: var(--bg-tile); display:flex; flex-direction:column; }
+  .guide-card__bar { height:4px; }
+  .guide-card.bad  .guide-card__bar { background: var(--error); }
+  .guide-card.good .guide-card__bar { background: var(--success); }
+  .guide-card__tag { display:inline-flex; align-items:center; gap:7px; font: var(--type-body-s-strong); padding:14px 20px 0; }
+  .guide-card.bad  .guide-card__tag { color: var(--error-dark); }
+  .guide-card.good .guide-card__tag { color: var(--success-dark); }
+  .guide-card__tag .ic { width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; flex:none; }
+  .guide-card.bad  .guide-card__tag .ic { background: var(--error); }
+  .guide-card.good .guide-card__tag .ic { background: var(--success); }
+  .guide-card__tag .ic svg { width:12px; height:12px; }
+  .guide-card__body { padding:22px 20px; flex:1; font: var(--type-body-m); color: var(--text-primary); overflow:hidden; }
+  .guide-card__cap { padding:0 20px 20px; font: var(--type-body-xs); color: var(--text-inactive); text-wrap:pretty; }
+
+  /* ---------- reference tables ---------- */
+  .ref-table { width:100%; border-collapse:collapse; }
+  .ref-table th, .ref-table td { text-align:left; padding:16px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:middle; }
+  .ref-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .ref-table tr:last-child td { border-bottom:none; }
+  .ref-table td.num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  .ref-table .rt-tok code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; color: var(--primary); }
+
+  .color-ref { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
+  @media (max-width:760px){ .color-ref { grid-template-columns:1fr; } }
+  .cref-group { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; overflow:hidden; }
+  .cref-group > h3 { font: var(--type-h5-strong); margin:0; color: var(--text-primary); padding:18px 22px; border-bottom:1px solid var(--border-light); }
+  .cref-rows { padding:6px 0; }
+  .cref-row { display:grid; grid-template-columns: 36px 1fr auto; gap:14px; align-items:center; padding:9px 22px; }
+  .cref-row:hover { background: var(--bgtable-row-hover); }
+  .cref-sw { width:36px; height:36px; border-radius:8px; border:1px solid rgba(40,50,55,.12); position:relative; overflow:hidden; flex:none; }
+  .cref-sw .cf { position:absolute; inset:0; }
+  .cref-meta { min-width:0; }
+  .cref-meta .role { font: var(--type-body-s); color: var(--text-inactive); margin:0; }
+  .cref-meta .tname { font: var(--type-body-m-strong); color: var(--text-primary); margin:1px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; word-break:break-all; }
+  .cref-hex { font: var(--type-body-s-strong); color: var(--text-secondary); font-variant-numeric: tabular-nums; text-align:right; flex:none; }
+
+  footer.page-foot { margin-top:90px; padding-top:26px; border-top:1px solid var(--border-light);
+    font: var(--type-body-s); color: var(--text-inactive); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+
+  /* ---------- developer handoff ---------- */
+  .subhead { font: var(--type-body-m-strong); color: var(--text-black); margin:0 0 16px; }
+  .subhead.mt { margin-top: 34px; }
+  .subhead .req { font: var(--type-body-s); color: var(--text-inactive); font-weight:400; }
+  .dev-intro { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:-6px 0 22px; }
+  .dev-intro .req { font: var(--type-body-s); color: var(--text-inactive); }
+  .dev-intro code.tok { font-size:.86em; }
+  .code-panel { background: var(--c-cgrey-800); border-radius: 12px; overflow:hidden; }
+  .code-panel + .code-panel { margin-top:20px; }
+  .code-panel__head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 16px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .code-panel__name { color: rgba(255,255,255,.72); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; letter-spacing:.02em; font-weight:600; }
+  .code-panel__copy { display:inline-flex; align-items:center; gap:6px; border:0; padding:6px 11px; border-radius:7px; background: rgba(255,255,255,.08); color: rgba(255,255,255,.86); font: var(--type-body-xs); cursor:pointer; transition: background-color .12s ease; }
+  .code-panel__copy:hover { background: rgba(255,255,255,.16); }
+  .code-panel__copy svg { width:14px; height:14px; flex:none; }
+  .code-panel__copy.is-copied { background: color-mix(in srgb, var(--success) 30%, transparent); color:#fff; }
+  .code-panel pre { margin:0; padding:18px 20px; overflow-x:auto; }
+  .code-panel code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; line-height:1.65; color: rgba(255,255,255,.82); white-space:pre; }
+  .code-panel .tk-tag  { color:#79D9C9; }
+  .code-panel .tk-attr { color:#9FC1FF; }
+  .code-panel .tk-val  { color:#F2C879; }
+  .code-panel .tk-cm   { color: rgba(255,255,255,.4); font-style:italic; }
+  .dev-table { width:100%; border-collapse:collapse; }
+  .dev-table th, .dev-table td { text-align:left; padding:13px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:top; }
+  .dev-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .dev-table tr:last-child td { border-bottom:none; }
+  .dev-table code.tok { white-space:nowrap; }
+  .dev-table td.dsc { color: var(--text-secondary); font: var(--type-body-s); }
+  .dev-note { font: var(--type-body-s); color: var(--text-inactive); margin:16px 2px 0; text-wrap:pretty; }
+</style>
+  <link rel="stylesheet" href="../../styles/ds-nav.css">
+  <link rel="stylesheet" href="../../styles/ds-toc.css">
+<link rel="stylesheet" href="../../styles/pg-kit.css">
+<style>
+/* unified-template: бывшие h2-разделы, понижены до подразделов */
+.section .subsec{margin-top:48px;}
+.section .subsec>h3{font:var(--type-h4-strong);margin:0 0 8px;color:var(--text-black);}
+.section .subsec>p.desc{font:var(--type-body-m);color:var(--text-secondary);margin:0 0 24px;max-width:82ch;text-wrap:pretty;}
+.section .subsec>p.desc.tight{margin-bottom:20px;}
+.section .subsec>p.desc+p.desc{margin-top:-16px;}
+</style>
+</head>
+<body>
+<main class="page" data-screen-label="Breadcrumbs">
+
+  <header class="masthead">
+    <div class="meta"><span>Версия: <b>v1.1</b></span><span>Обновлено: <b>08.07.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Компоненты</p>
+    <h1>Breadcrumbs</h1>
+    <p class="lead">Хлебные крошки — трейл ссылок в шапке страницы, показывающий путь до текущего раздела. Состоят из ссылок <a class="link link--accent link--inline" href="../atoms/Link.html">Link</a> (Breadcrumbs_1 — родительские страницы, Breadcrumbs_2 — текущая, некликабельная) и разделителя «/». Показываются на всех страницах системы, кроме Дашборда; отступ до контента страницы — 0.</p>
+  </header>
+
+  <!-- PLAYGROUND -->
+  <section class="section" data-screen-label="Playground">
+    <h2>Конструктор</h2>
+    <p class="desc">Соберите трейл: число уровней и ширина контейнера — превью схлопывает срединные звенья в «…» и обрезает текущую крошку, когда не помещается. Размер один — S.</p>
+    <div class="panel pg">
+      <div class="pg__controls" id="pg-controls"></div>
+      <div class="pg__stage">
+        <div class="pg__previewbox"><nav aria-label="Хлебные крошки" id="pg-preview"></nav></div>
+        <p class="pg__caption" id="pg-caption"></p>
+      </div>
+    </div>
+    <p class="pg__code" id="pg-code"></p>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" data-screen-label="Usage">
+    <h2>Использование</h2>
+    <p class="desc tight">Показывайте хлебные крошки, когда нужно:</p>
+    <ul class="bullets" style="margin-bottom:26px;">
+      <li>дать понять, где находится страница в иерархии разделов, и позволить быстро вернуться на любой уровень выше;</li>
+      <li>заменить собой заголовок предыдущего уровня, когда страница вложена на 2+ уровня от корня.</li>
+    </ul>
+    <p class="desc">Крошки показываются на всех страницах системы, кроме Дашборда — там нет вышестоящего раздела, показывать нечего. Правило распространяется на любую страницу первого уровня: если у страницы нет родителя, компонент не выводится вовсе (см. «Контент»). Крошки размещаются первым элементом шапки, отступ до контента страницы — <code class="tok">0</code>.</p>
+    <div class="panel">
+      <div class="header-mock"><nav aria-label="Хлебные крошки" id="usage-crumbs"></nav></div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="section" data-screen-label="Anatomy">
+    <h2>Анатомия</h2>
+    <p class="desc">Крошки — это список ссылок (<code class="tok">Breadcrumbs_1</code>) с текущей неинтерактивной крошкой в конце (<code class="tok">Breadcrumbs_2</code>). Между звеньями — разделитель «/» того же цвета, что и родительские ссылки. Когда трейл не помещается по ширине, срединные звенья схлопываются в кликабельное «…».</p>
+    <div class="panel">
+      <div class="anat">
+        <div class="anat__stage"><div class="anat__art" id="anat-art"></div></div>
+        <ul class="anat__legend">
+          <li><span class="n"></span><span class="t"><span class="k">Родительское звено</span><span class="d"> — ссылка тона Muted (Breadcrumbs_1), обрезается многоточием при длинном названии</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Разделитель «/»</span><span class="d"> — цвет совпадает с родительскими звеньями, не читается скринридером</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Свёрнутое звено «…»</span><span class="d"> — раскрывает список скрытых страниц по клику</span></span></li>
+          <li><span class="n"></span><span class="t"><span class="k">Текущая крошка</span><span class="d"> — тон Neutral (Breadcrumbs_2), обычное начертание (как и у Breadcrumbs_1) — отличается только цветом, не кликабельна, <code class="tok">aria-current="page"</code></span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- VARIANTS (STUB) -->
+  <section class="section" data-screen-label="Variants">
+    <h2>Варианты</h2>
+    <p class="desc">Не применимо: компонент существует в единственной конфигурации, отдельных вариантов нет.</p>
+  </section>
+
+  <!-- SIZES -->
+  <section class="section" data-screen-label="Sizes">
+    <h2>Размеры</h2>
+    <p class="desc">У компонента единственный размер — <b>S</b> (<code class="tok">--type-body-s</code>, 14/16). Второго размера нет: крошки — вспомогательная навигация над заголовком страницы и не должны конкурировать с ним по весу, поэтому размер не варьируется.</p>
+    <div class="panel" style="margin-bottom:20px;"><div class="row" id="sizes-row" style="gap:40px; align-items:flex-start;"></div></div>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="ref-table" id="typo-table">
+        <thead><tr><th>Размер</th><th>Токен</th><th>Размер / интерлиньяж</th><th>Образец</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="section" data-screen-label="Content">
+    <h2>Контент</h2>
+    <p class="desc tight">Правила именования и корнер-кейсы:</p>
+    <ul class="bullets" style="margin-bottom:26px;">
+      <li>показывайте только те разделы пути, что имеют собственную страницу — служебные/технические сегменты URL в крошки не попадают;</li>
+      <li>называйте звено так же, как называется сам раздел (заголовок страницы) — не сокращайте и не переформулируйте;</li>
+      <li>текущая страница выводится текстом, без ссылки — <code class="tok">aria-current="page"</code>;</li>
+      <li>если у страницы нет родителя (страница первого уровня), компонент не показывается — крошка из одного звена не несёт смысла.<span class="badge-new">Новое</span></li>
+    </ul>
+    <div class="guide">
+      <div class="guide-card bad">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic" data-ic="bad"></span>Не так</div>
+        <div class="guide-card__body" id="content-single"></div>
+        <p class="guide-card__cap">Единственная крошка «Главная» не несёт навигационной пользы — на странице первого уровня компонент не нужен.</p>
+      </div>
+      <div class="guide-card good">
+        <div class="guide-card__bar"></div>
+        <div class="guide-card__tag"><span class="ic" data-ic="good"></span>Так</div>
+        <div class="guide-card__body" id="content-longparent"></div>
+        <p class="guide-card__cap">Длинное родительское звено обрезается многоточием (<code class="tok">title</code> показывает полное название), а не переносится на вторую строку.<span class="badge-new">Новое</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEHAVIOR (STUB) -->
+  <section class="section" data-screen-label="Behavior">
+    <h2>Поведение</h2>
+    <p class="desc">Не применимо: специфического поведения (позиционирование, анимация, адаптивность) у компонента нет.</p>
+  </section>
+
+  <!-- STATES -->
+  <section class="section" data-screen-label="States">
+    <h2>Состояния</h2>
+    <p class="desc">Кроме базового состояния из спецификации, документированы наведение/фокус на родительской ссылке, авто-схлопывание по ширине и обрезка текущей крошки — с раскрывающимся списком скрытых страниц.<span class="badge-new">Новое</span></p>
+    <div class="panel">
+      <div class="state-row">
+        <div><div class="state-row__label">Default</div><div class="state-row__cap">Все звенья помещаются, ничего не схлопнуто</div></div>
+        <div class="state-row__stage" id="stt-default"></div>
+      </div>
+      <div class="state-row">
+        <div><div class="state-row__label">Hover (на звене)</div><div class="state-row__cap">Родительская ссылка — hover = focus, как в Link</div></div>
+        <div class="state-row__stage" id="stt-hover"></div>
+      </div>
+      <div class="state-row">
+        <div><div class="state-row__label">Focus (клавиатура)</div><div class="state-row__cap">Оформлен идентично Hover — отдельной обводки нет</div></div>
+        <div class="state-row__stage" id="stt-focus"></div>
+      </div>
+      <div class="state-row">
+        <div><div class="state-row__label">Свёрнуто (Condensed)</div><div class="state-row__cap">Срединные звенья схлопнуты в «…» — контейнер уже трейла</div></div>
+        <div class="state-row__stage" id="stt-condensed"></div>
+      </div>
+      <div class="state-row">
+        <div><div class="state-row__label">«…» раскрыто<span class="badge-new">Новое</span></div><div class="state-row__cap">Клик по «…» открывает контекстное меню со списком скрытых страниц (компонент Context Menu)</div></div>
+        <div class="state-row__stage" id="stt-expanded" style="overflow:visible;"></div>
+      </div>
+      <div class="state-row">
+        <div><div class="state-row__label">Текущая крошка обрезана<span class="badge-new">Новое</span></div><div class="state-row__cap">Не помещается даже после схлопывания — многоточие + тултип с полным названием</div></div>
+        <div class="state-row__stage" id="stt-truncated"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" data-screen-label="Accessibility">
+    <h2>Доступность</h2>
+    <p class="desc">Контейнер — ориентир <code class="tok">&lt;nav aria-label="Хлебные крошки"&gt;</code> со списком <code class="tok">&lt;ol&gt;/&lt;li&gt;</code> внутри (паттерн WAI-ARIA APG для breadcrumb). Текущая страница — не ссылка и не фокусируется, помечена <code class="tok">aria-current="page"</code>. Разделитель «/» — CSS-псевдоэлемент (<code class="tok">::after</code>), поэтому не входит в дерево доступности и не зачитывается скринридером. Focus у ссылок оформлен идентично Hover — единое цветовое решение для мыши и клавиатуры, без отдельной обводки. Кнопка «…» — обычная <code class="tok">&lt;button&gt;</code> с <code class="tok">aria-haspopup</code> / <code class="tok">aria-expanded</code>, раскрывающееся контекстное меню закрывается по <code class="tok">Esc</code> и клику вне.</p>
+    <div class="panel">
+      <div class="header-mock"><nav aria-label="Хлебные крошки" id="a11y-crumbs"></nav></div>
+    </div>
+    <ul class="bullets" style="margin-top:20px;">
+      <li>Tab проходит только по кликабельным звеньям (ссылки, «…», если он есть) — текущая крошка и разделители фокус не получают;</li>
+      <li>обрезанное длинное название доступно через тултип по фокусу/наведению, а не только по hover — важно для клавиатурной навигации;</li>
+      <li>цветовой контраст Breadcrumbs_1 (<code class="tok">--text-inactive</code>) на <code class="tok">--bg-tile</code>/<code class="tok">--bg-page</code> соответствует WCAG AA для текста этого размера.</li>
+    </ul>
+  </section>
+
+  <!-- TYPOGRAPHY (STUB) -->
+  <section class="section" data-screen-label="Typography">
+    <h2>Типографика</h2>
+    <p class="desc">Раздел требует ревизии: токены типографики компонента — в redline-таблице раздела «Для разработчиков».</p>
+  </section>
+
+  <!-- COLORS -->
+  <section class="section" data-screen-label="Colors">
+    <h2>Цвета</h2>
+    <p class="desc">Компонент использует только семантические токены — те же, что определены для тонов Muted и Neutral компонента Link.</p>
+    <div class="color-ref" id="color-ref"></div>
+  </section>
+
+  <!-- DEVELOPER HANDOFF -->
+  <section class="section" data-screen-label="Dev">
+    <h2>Для разработчиков</h2>
+    <p class="desc">Хендофф-пакет: точные размеры, эталонная структура DOM, поведение и рекомендуемый API. Не привязан к стеку — берите отсюда нужное для React-реализации.</p>
+
+    <p class="subhead">Точные размеры (redline)</p>
+    <p class="desc tight">Значения измерены на живом экземпляре компонента (<code class="tok">getComputedStyle</code>), источник токенов — <code class="tok">styles/breadcrumbs.css</code>, <code class="tok">styles/link.css</code>, <code class="tok">styles/typography.css</code>.</p>
+    <div class="panel" style="padding:8px 10px; margin-bottom:34px;">
+      <table class="dev-table" id="dev-spec-table">
+        <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="dev-intro">
+      <span class="req">Подключить (если переиспользуете этот CSS напрямую):</span>
+      <code class="tok">styles/typography.css</code>
+      <code class="tok">styles/colors.css</code>
+      <code class="tok">styles/radius.css</code>
+      <code class="tok">styles/link.css</code>
+      <code class="tok">styles/breadcrumbs.css</code>
+      <span class="req">+ опционально для интерактива:</span>
+      <code class="tok">styles/context-menu.css</code>
+      <code class="tok">styles/tooltip.css</code>
+    </div>
+
+    <p class="subhead">Анатомия DOM <span class="req">— эталонная структура, имена классов условны, важны сами элементы и их роли/состояния</span></p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Разметка · HTML (эталонная реализация ДС)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-html"><span class="tk-cm">&lt;!-- обычный трейл, всё помещается --&gt;</span>
+<span class="tk-tag">&lt;nav</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Хлебные крошки"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;li</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs__item"</span><span class="tk-tag">&gt;&lt;a</span> <span class="tk-attr">class=</span><span class="tk-val">"link link--muted"</span> <span class="tk-attr">href=</span><span class="tk-val">"/"</span><span class="tk-tag">&gt;</span>Главная<span class="tk-tag">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="tk-tag">&lt;li</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs__item"</span><span class="tk-tag">&gt;&lt;a</span> <span class="tk-attr">class=</span><span class="tk-val">"link link--muted"</span> <span class="tk-attr">href=</span><span class="tk-val">"/deals"</span><span class="tk-tag">&gt;</span>Сделки<span class="tk-tag">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="tk-tag">&lt;li</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs__item crumbs__item--current"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs__current"</span> <span class="tk-attr">aria-current=</span><span class="tk-val">"page"</span><span class="tk-tag">&gt;</span>Договор №4521<span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;/li&gt;</span>
+<span class="tk-tag">&lt;/nav&gt;</span>
+
+<span class="tk-cm">&lt;!-- трейл не помещается: срединные звенья схлопнуты в «…» --&gt;</span>
+<span class="tk-tag">&lt;nav</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Хлебные крошки"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;li</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs__item"</span><span class="tk-tag">&gt;&lt;a</span> <span class="tk-attr">class=</span><span class="tk-val">"link link--muted"</span> <span class="tk-attr">href=</span><span class="tk-val">"/"</span><span class="tk-tag">&gt;</span>Главная<span class="tk-tag">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="tk-tag">&lt;li</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs__item"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs__more"</span> <span class="tk-attr">aria-haspopup=</span><span class="tk-val">"true"</span> <span class="tk-attr">aria-expanded=</span><span class="tk-val">"false"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/button&gt;</span>
+    <span class="tk-cm">&lt;!-- .menu.menu--floating (Контекстное меню), при открытии добавляется в конец &lt;body&gt; (position:fixed) --&gt;</span>
+  <span class="tk-tag">&lt;/li&gt;</span>
+  <span class="tk-tag">&lt;li</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs__item crumbs__item--current"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class=</span><span class="tk-val">"crumbs__current"</span> <span class="tk-attr">aria-current=</span><span class="tk-val">"page"</span> <span class="tk-attr">title=</span><span class="tk-val">"Полное название страницы"</span><span class="tk-tag">&gt;</span>Полное название страницы<span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;/li&gt;</span>
+<span class="tk-tag">&lt;/nav&gt;</span></code></pre>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Поведение · псевдокод (framework-agnostic)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-js"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-js"><span class="tk-cm">// 1. Рендер полного трейла: все звенья, кроме последнего, — ссылки (Breadcrumbs_1),</span>
+<span class="tk-cm">//    последнее — текст с aria-current="page" (Breadcrumbs_2).</span>
+
+<span class="tk-cm">// 2. Измерить: scrollWidth контейнера > clientWidth?</span>
+<span class="tk-cm">//    Если да и звеньев больше 2 — заменить звенья [1 .. N-2] на одно</span>
+<span class="tk-cm">//    звено-кнопку «…» (оставляя первое и текущее звено видимыми).</span>
+<span class="tk-cm">//    Измерение лучше делать в скрытом клоне той же ширины — тогда</span>
+<span class="tk-cm">//    пользователь не увидит промежуточного «полного» кадра.</span>
+
+<span class="tk-cm">// 3. Текущая крошка ВСЕГДА однострочная и обрезается многоточием по CSS</span>
+<span class="tk-cm">//    (overflow:hidden + text-overflow:ellipsis + white-space:nowrap) —</span>
+<span class="tk-cm">//    независимо от того, схлопнулись ли срединные звенья. Если это</span>
+<span class="tk-cm">//    реально обрезало текст (scrollWidth > clientWidth) — показать</span>
+<span class="tk-cm">//    полное название в тултипе по hover/focus.</span>
+
+<span class="tk-cm">// 4. Клик по «…»: открыть контекстное меню (см. Context Menu) со списком скрытых</span>
+<span class="tk-cm">//    страниц; клик по строке — переход; Esc/клик вне — закрыть.</span>
+<span class="tk-cm">//    aria-expanded кнопки синхронизируется с открыт/закрыт.</span>
+
+<span class="tk-cm">// 5. Пересчитывать схлопывание при ресайзе контейнера (ResizeObserver)</span>
+<span class="tk-cm">//    или ширины окна — не только при первом рендере.</span>
+
+<span class="tk-cm">// 6. Если у страницы нет родителей — компонент не рендерится вовсе.</span></code></pre>
+    </div>
+    <p class="dev-note">Это не готовый сниппет для вставки — алгоритм, который реализуется поверх вашего стека (рабочий референс на vanilla JS — функция <code class="tok">renderCrumbs</code> в <code class="tok">breadcrumbs.page.js</code> этой страницы).</p>
+
+    <p class="subhead mt">Рекомендуемый API компонента (React)</p>
+    <p class="desc tight">Форма пропсов — предложение, а не обязательный контракт; адаптируйте под конвенции вашей кодовой базы.</p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Breadcrumbs.types.ts</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-api"><span class="tk-attr">interface</span> BreadcrumbItem {
+  label: <span class="tk-attr">string</span>;   <span class="tk-cm">// текст звена — совпадает с заголовком страницы</span>
+  href?: <span class="tk-attr">string</span>;   <span class="tk-cm">// не указывается у последнего элемента (текущая страница)</span>
+}
+
+<span class="tk-attr">interface</span> BreadcrumbsProps {
+  items: BreadcrumbItem[];        <span class="tk-cm">// от корня к текущей странице; &lt;2 элементов → не рендерить</span>
+  onNavigate?: (href: <span class="tk-attr">string</span>) =&gt; <span class="tk-attr">void</span>; <span class="tk-cm">// клик по звену/по пункту меню «…»</span>
+  <span class="tk-cm">// единственный размер — S; size-пропа нет</span>
+}</code></pre>
+    </div>
+
+    <p class="subhead mt">Справочник классов и атрибутов</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table">
+        <thead><tr><th>Класс / атрибут</th><th>На чём</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code class="tok">.crumbs</code></td><td>nav &gt; ol</td><td class="dsc">Контейнер трейла: flex-строка, разделитель через <code class="tok">::after</code>; единственный размер — S (<code class="tok">--type-body-s</code>)</td></tr>
+          <tr><td><code class="tok">.crumbs__item</code></td><td>li</td><td class="dsc">Звено трейла; у всех, кроме последнего, генерируется разделитель «/»</td></tr>
+          <tr><td><code class="tok">.crumbs__item--current</code></td><td>li</td><td class="dsc">Звено с текущей страницей — последнее в списке</td></tr>
+          <tr><td><code class="tok">.link.link--muted</code></td><td>a</td><td class="dsc">Родительское звено — Breadcrumbs_1 (см. компонент Link)</td></tr>
+          <tr><td><code class="tok">.crumbs__current</code> + <code class="tok">aria-current="page"</code></td><td>span</td><td class="dsc">Текущая страница — Breadcrumbs_2, не ссылка, <code class="tok">--text-black</code>; начертание то же, что у Breadcrumbs_1 — отличие только в цвете</td></tr>
+          <tr><td><code class="tok">.crumbs__more</code> + <code class="tok">aria-haspopup</code> / <code class="tok">aria-expanded</code></td><td>button</td><td class="dsc">Свёрнутое звено «…»; раскрывает попап со скрытыми страницами</td></tr>
+          <tr><td><code class="tok">.menu.menu--floating.crumbs__popup</code></td><td>div</td><td class="dsc">Контекстное меню скрытых звеньев (пункты — <code class="tok">.menu__item</code>): добавляется в конец <code class="tok">&lt;body&gt;</code> с <code class="tok">position:fixed</code>, чтобы его не обрезал <code class="tok">overflow:hidden</code> трейла</td></tr>
+          <tr><td><code class="tok">.tip.tip--floating</code></td><td>span</td><td class="dsc">Тултип с полным названием обрезанной текущей крошки (см. компонент Tooltip)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · Breadcrumbs</span>
+    <span>Breadcrumbs_1 (Muted) · Breadcrumbs_2 (Neutral) — S</span>
+  </footer>
+</main>
+
+<script src="../../scripts/icons-data.js"></script>
+<script src="../../scripts/breadcrumbs.page.js"></script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+</body>
+</html>

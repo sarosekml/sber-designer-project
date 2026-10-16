@@ -1,0 +1,9 @@
+{
+  "name": "validate-design-mode-compatibility",
+  "description": "Validate generated or repaired screens against the sber-designer Design-readable contract.",
+  "command": "bun",
+  "args": ["run", "validate:design-mode"],
+  "cwd": "workspace",
+  "permission": "ask",
+  "timeoutMs": 120000
+}

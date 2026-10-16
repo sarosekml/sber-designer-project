@@ -1,0 +1,6 @@
+[ERROR] [MCP_KEYCHAIN] Failed to list secrets from keychain: session unavailable
+{"type":"system","subtype":"init","uuid":"u-1","session_id":"s-mock-2","tools":["read_file","write_file"],"mcp_servers":[],"model":"CodeChat","qwen_code_version":"26.6.31","agents":[]}
+{"type":"message","action":"tool_call","session_id":"s-mock-2","tool_call_id":"t-1","tool_name":"write_file","tool_input":{"path":"src/App.tsx","content":"export const App = () => null;\n"}}
+{"type":"message","action":"tool_result","session_id":"s-mock-2","tool_call_id":"t-1","content":"Wrote 31 bytes to src/App.tsx","is_error":false}
+{"type":"assistant","uuid":"u-2","session_id":"s-mock-2","parent_tool_use_id":null,"message":{"id":"m-1","type":"message","role":"assistant","model":"vllm/DeepSeek-V4-Flash-262k","content":[{"type":"text","text":"Created the app shell."}],"stop_reason":"end_turn"}}
+{"type":"result","subtype":"success","session_id":"s-mock-2","is_error":false,"duration_ms":4200,"num_turns":2,"result":"Created the app shell.","usage":{"input_tokens":420,"output_tokens":88,"cache_read_input_tokens":16,"total_tokens":508}}

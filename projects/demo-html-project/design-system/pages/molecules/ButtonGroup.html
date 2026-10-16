@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" -->
+<html lang="ru">
+<head>
+<script>window.__DS_ROOT = '../../';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ButtonGroup — Дизайн-система</title>
+<link rel="stylesheet" href="../../styles/typography.css">
+<link rel="stylesheet" href="../../styles/colors.css">
+<link rel="stylesheet" href="../../styles/radius.css">
+<link rel="stylesheet" href="../../styles/button.css">
+<link rel="stylesheet" href="../../styles/button-group.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    margin: 0; font-family: var(--font-text), system-ui, sans-serif;
+    color: var(--text-primary); background: var(--bg-page); background-attachment: fixed;
+  }
+  .page { max-width: 1320px; margin: 0 auto; padding: clamp(40px,7vw,96px) clamp(24px,5vw,72px) 140px; }
+
+  /* masthead */
+  .masthead { border-bottom: 1px solid var(--border-light); padding-bottom: 30px; }
+  .masthead .meta { font: var(--type-body-xs); color: var(--text-inactive); display:flex; gap:24px; margin:0 0 22px; }
+  .masthead .meta b { color: var(--text-secondary); font: var(--type-body-xs); font-weight:600; }
+  .eyebrow { font: var(--type-button-xs); letter-spacing:.14em; text-transform:uppercase; color: var(--primary); margin:0 0 14px; }
+  .masthead h1 { font: var(--type-h1); margin:0 0 14px; color: var(--text-black); }
+  @media (max-width:600px){ .masthead h1{ font-size:40px; line-height:48px; } }
+  .masthead p.lead { font: var(--type-body-l); color: var(--text-secondary); margin:0; max-width:62ch; }
+
+  /* breadcrumb back link */
+  .crumb { display:inline-flex; align-items:center; gap:7px; font: var(--type-body-s); color: var(--text-inactive); text-decoration:none; margin-bottom:20px; }
+  .crumb:hover { color: var(--primary); }
+  .crumb svg { width:16px; height:16px; }
+
+  /* section */
+  .section { margin-top: 76px; }
+  .section > h2 { font: var(--type-h3-strong); margin:0 0 8px; color: var(--text-black); display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .section > p.desc { font: var(--type-body-m); color: var(--text-secondary); margin:0 0 28px; max-width:74ch; text-wrap:pretty; }
+  .addon { font: var(--type-button-xs); letter-spacing:.06em; text-transform:uppercase; color: var(--primary); background: var(--primary-bg); padding:5px 10px; border-radius:999px; }
+
+  .panel {
+    background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px;
+    padding: 32px 34px;
+  }
+  .panel + .panel { margin-top: 18px; }
+  .row { display:flex; flex-wrap:wrap; align-items:center; gap:28px; }
+  .row + .row { margin-top: 28px; }
+
+  .blk { display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
+  .blk > .cap { font: var(--type-body-s); color: var(--text-inactive); margin:0; }
+  .blk > .cap b { font: var(--type-body-s-strong); color: var(--text-secondary); }
+
+  /* sub-heading inside a panel */
+  .subhead { font: var(--type-body-m-strong); color: var(--text-black); margin:0 0 16px; }
+  .subhead.mt { margin-top: 30px; }
+
+  code.tok { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.86em; color: var(--primary); background: var(--primary-bg); padding:1px 6px; border-radius:5px; }
+
+  /* sizes matrix */
+  .size-grid { display:grid; grid-template-columns: 64px 1fr; gap:30px 28px; align-items:center; }
+  .size-grid .sz-tag { font: var(--type-body-s-strong); color: var(--text-on-tertiary); background: var(--tertiary); padding:8px 0; border-radius:8px; text-align:center; letter-spacing:.05em; }
+  .size-grid .sz-tag span { display:block; font: var(--type-body-xs); color: var(--text-inactive); margin-top:3px; font-weight:400; }
+
+  /* states matrix */
+  .matrix { display:grid; grid-template-columns: 140px repeat(3, 1fr); gap:18px 22px; align-items:center; }
+  .matrix .col-head { font: var(--type-body-m); color: var(--text-secondary); }
+  .matrix .grouphdr { grid-column:1 / -1; font: var(--type-h6-strong); color: var(--text-black); margin-top:8px; }
+  .matrix .rowname { font: var(--type-body-m-strong); color: var(--text-primary); }
+  .matrix .cell { display:flex; }
+
+  /* spec table */
+  .spec-table { width:100%; border-collapse:collapse; }
+  .spec-table th, .spec-table td { text-align:left; padding:14px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); }
+  .spec-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .spec-table td.num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  .spec-table tr:last-child td { border-bottom:none; }
+  .spec-table code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; color: var(--primary); }
+
+  /* do / don't */
+  .guide { display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+  @media (max-width:760px){ .guide { grid-template-columns:1fr; } }
+  .guide .g { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; padding:26px 28px; }
+  .guide .g .tag { display:inline-flex; align-items:center; gap:8px; font: var(--type-body-s-strong); padding:0 0 16px; }
+  .guide .g.do .tag { color: var(--success-dark); }
+  .guide .g.dont .tag { color: var(--error-dark); }
+  .guide .g .tag svg { width:18px; height:18px; }
+  .guide .g .demo { display:flex; align-items:center; gap:16px; flex-wrap:wrap; min-height:52px; padding-bottom:18px; border-bottom:1px solid var(--border-light); margin-bottom:18px; }
+  .guide .g p { font: var(--type-body-s); color: var(--text-secondary); margin:0; text-wrap:pretty; }
+
+  /* dropdown menu (split button) */
+  .dropdown { position:relative; display:inline-flex; }
+  .dropdown__menu {
+    position:absolute; top:calc(100% + 6px); left:0; z-index:30;
+    min-width:180px; padding:6px;
+    background: var(--bg-popup); border:1px solid var(--border-light); border-radius:11px;
+    box-shadow:0 10px 30px rgba(40,50,55,.16);
+  }
+  .dropdown__menu[hidden] { display:none; }
+  .dropdown--right .dropdown__menu { left:auto; right:0; }
+  .dropdown__item {
+    display:flex; align-items:center; gap:10px; width:100%;
+    padding:9px 12px; border:none; background:transparent; border-radius:7px;
+    font: var(--type-body-m); color: var(--text-primary); cursor:pointer; text-align:left;
+  }
+  .dropdown__item svg { width:18px; height:18px; color: var(--text-secondary); flex:none; }
+  .dropdown__item:hover { background: var(--bgtable-row-hover); }
+
+  /* ---------- playground ---------- */
+  .panel.pg { padding:0; overflow:hidden; display:grid; grid-template-columns: 320px 1fr; }
+  @media (max-width:820px){ .panel.pg { grid-template-columns:1fr; } }
+  .pg__controls { padding:30px 30px; display:flex; flex-direction:column; gap:22px; border-right:1px solid var(--border-light); }
+  @media (max-width:820px){ .pg__controls { border-right:none; border-bottom:1px solid var(--border-light); } }
+  .pg__stage { padding:48px 40px; display:flex; align-items:center; justify-content:center; min-height:220px;
+    background:
+      linear-gradient(var(--bg-tile),var(--bg-tile)) padding-box,
+      repeating-conic-gradient(#f2f5f5 0% 25%, #fbfcfc 0% 50%) 0 / 22px 22px; }
+  .pg__stagebox { width:100%; max-width:520px; display:flex; align-items:center; justify-content:center; }
+
+  .ctl { display:flex; flex-direction:column; gap:10px; }
+  .ctl > .lbl { font: var(--type-body-s-strong); color: var(--text-inactive); text-transform:uppercase; letter-spacing:.05em; font-size:11px; }
+
+  .seg { display:inline-flex; background: var(--tertiary); border-radius:9px; padding:3px; gap:3px; }
+  .seg button { border:none; background:transparent; padding:7px 12px; border-radius:6px; font: var(--type-button-s); color: var(--text-secondary); cursor:pointer; transition:.12s; flex:1; }
+  .seg button:hover { color: var(--text-primary); }
+  .seg button[aria-selected="true"] { background: var(--bg-tile); color: var(--primary); box-shadow:0 1px 2px rgba(40,50,55,.10); }
+
+  .pg-select { position:relative; }
+  .pg-select select {
+    appearance:none; -webkit-appearance:none;
+    width:100%; height:40px; padding:0 38px 0 14px;
+    border:1px solid var(--border-primary); border-radius:9px;
+    background: var(--bg-tile); color: var(--text-primary);
+    font: var(--type-body-m); cursor:pointer;
+  }
+  .pg-select select:focus-visible { outline:2px solid var(--primary); outline-offset:1px; }
+  .pg-select::after {
+    content:""; position:absolute; right:15px; top:50%; width:9px; height:9px;
+    border-right:2px solid var(--text-secondary); border-bottom:2px solid var(--text-secondary);
+    transform:translateY(-65%) rotate(45deg); pointer-events:none;
+  }
+
+  .toggles { display:flex; flex-direction:column; gap:9px; }
+  .toggle { display:inline-flex; align-items:center; gap:11px; padding:9px 12px; border:1px solid var(--border-light); border-radius:9px; font: var(--type-body-m); color: var(--text-primary); cursor:pointer; user-select:none; background: var(--bg-tile); transition:.12s; }
+  .toggle:hover { border-color: var(--border-primary); }
+  .toggle[aria-pressed="true"] { border-color: var(--primary); color: var(--primary); }
+  .toggle .sw { width:36px; height:20px; border-radius:999px; background: var(--c-cgrey-200); position:relative; transition:.15s; flex:none; }
+  .toggle .sw::after { content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.2); transition:.15s; }
+  .toggle[aria-pressed="true"] .sw { background: var(--primary); }
+  .toggle[aria-pressed="true"] .sw::after { transform: translateX(16px); }
+  .toggle[aria-disabled="true"] { opacity:.4; pointer-events:none; }
+
+  .pg__code { margin-top:14px; font: var(--type-body-s); color: var(--text-inactive); }
+  .pg__code code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; color: var(--text-secondary); background: var(--bgtable-row-focus); padding:3px 7px; border-radius:6px; display:inline-block; word-break:break-all; }
+
+  footer.page-foot { margin-top:90px; padding-top:26px; border-top:1px solid var(--border-light);
+    font: var(--type-body-s); color: var(--text-inactive); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+
+  /* ---------- color reference ---------- */
+  .color-ref { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
+  @media (max-width:760px){ .color-ref { grid-template-columns:1fr; } }
+  .cref-group { background: var(--bg-tile); border:1px solid var(--border-light); border-radius:16px; overflow:hidden; }
+  .cref-group > h3 { font: var(--type-h5-strong); margin:0; color: var(--text-primary); padding:18px 22px; border-bottom:1px solid var(--border-light); }
+  .cref-rows { padding:6px 0; }
+  .cref-row { display:grid; grid-template-columns: 36px 1fr auto; gap:14px; align-items:center; padding:9px 22px; }
+  .cref-row:hover { background: var(--bgtable-row-hover); }
+  .cref-sw { width:36px; height:36px; border-radius:8px; border:1px solid rgba(40,50,55,.12); position:relative; overflow:hidden; flex:none; }
+  .cref-sw .cf { position:absolute; inset:0; }
+  .cref-meta { min-width:0; }
+  .cref-meta .role { font: var(--type-body-s); color: var(--text-inactive); margin:0; }
+  .cref-meta .tname { font: var(--type-body-m-strong); color: var(--text-primary); margin:1px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; word-break:break-all; }
+  .cref-hex { font: var(--type-body-s-strong); color: var(--text-secondary); font-variant-numeric: tabular-nums; text-align:right; flex:none; }
+
+  /* ---------- developer handoff ---------- */
+  .subhead .req { font: var(--type-body-s); color: var(--text-inactive); font-weight:400; }
+  .dev-intro { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:-6px 0 22px; }
+  .dev-intro .req { font: var(--type-body-s); color: var(--text-inactive); }
+  .dev-intro code.tok { font-size:.86em; }
+  .code-panel { background: var(--c-cgrey-800); border-radius: 12px; overflow:hidden; }
+  .code-panel + .code-panel { margin-top:20px; }
+  .code-panel__head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 16px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .code-panel__name { color: rgba(255,255,255,.72); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; letter-spacing:.02em; font-weight:600; }
+  .code-panel__copy { display:inline-flex; align-items:center; gap:6px; border:0; padding:6px 11px; border-radius:7px; background: rgba(255,255,255,.08); color: rgba(255,255,255,.86); font: var(--type-body-xs); cursor:pointer; transition: background-color .12s ease; }
+  .code-panel__copy:hover { background: rgba(255,255,255,.16); }
+  .code-panel__copy svg { width:14px; height:14px; flex:none; }
+  .code-panel__copy.is-copied { background: color-mix(in srgb, var(--success) 30%, transparent); color:#fff; }
+  .code-panel pre { margin:0; padding:18px 20px; overflow-x:auto; }
+  .code-panel code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; line-height:1.65; color: rgba(255,255,255,.82); white-space:pre; }
+  .code-panel .tk-tag  { color:#79D9C9; }
+  .code-panel .tk-attr { color:#9FC1FF; }
+  .code-panel .tk-val  { color:#F2C879; }
+  .code-panel .tk-cm   { color: rgba(255,255,255,.4); font-style:italic; }
+  .dev-table { width:100%; border-collapse:collapse; }
+  .dev-table th, .dev-table td { text-align:left; padding:13px 16px; border-bottom:1px solid var(--border-light); font: var(--type-body-m); color: var(--text-primary); vertical-align:top; }
+  .dev-table th { font: var(--type-body-s-strong); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; font-size:12px; }
+  .dev-table tr:last-child td { border-bottom:none; }
+  .dev-table code.tok { white-space:nowrap; }
+  .dev-table td.dsc { color: var(--text-secondary); font: var(--type-body-s); }
+  .dev-table td.rt-num { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  .dev-note { font: var(--type-body-s); color: var(--text-inactive); margin:16px 2px 0; text-wrap:pretty; }
+</style>
+  <link rel="stylesheet" href="../../styles/ds-nav.css">
+  <link rel="stylesheet" href="../../styles/ds-toc.css">
+<link rel="stylesheet" href="../../styles/pg-kit.css">
+<style>
+/* unified-template: бывшие h2-разделы, понижены до подразделов */
+.section .subsec{margin-top:48px;}
+.section .subsec>h3{font:var(--type-h4-strong);margin:0 0 8px;color:var(--text-black);}
+.section .subsec>p.desc{font:var(--type-body-m);color:var(--text-secondary);margin:0 0 24px;max-width:82ch;text-wrap:pretty;}
+.section .subsec>p.desc.tight{margin-bottom:20px;}
+.section .subsec>p.desc+p.desc{margin-top:-16px;}
+</style>
+</head>
+<body>
+<main class="page" data-screen-label="ButtonGroup">
+
+  <header class="masthead">
+    <a class="crumb" href="../../refs/imported-index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Дизайн-система</a>
+    <div class="meta"><span>Версия: <b>v1.0</b></span><span>Обновлено: <b>08.07.2026</b></span></div>
+    <p class="eyebrow">Дизайн-система · Компоненты</p>
+    <h1>ButtonGroup</h1>
+    <p class="lead">Объединяет связанные кнопки в единый визуальный блок с общим фоном или обводкой. Поддерживает 2–5 кнопок, типы Accent / Outline, все три размера, вариант Split&nbsp;Button и сегментированный выбор. Собирается из компонентов <b>Button</b> — кнопки наследуют свои свойства.</p>
+  </header>
+
+  <!-- PLAYGROUND -->
+  <section class="section" data-screen-label="Playground">
+    <h2>Конструктор</h2>
+    <p class="desc">Соберите группу: переключайте вариант, тип, размер, количество кнопок, ориентацию и состояние — превью обновляется мгновенно.</p>
+    <div class="panel pg">
+      <div class="pg__controls" id="pg-controls"></div>
+      <div class="pg__stage"><div class="pg__stagebox" id="pg-preview"></div></div>
+    </div>
+    <p class="pg__code" id="pg-code"></p>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" data-screen-label="Usage">
+    <h2>Использование</h2>
+    <p class="desc">ButtonGroup группирует кнопки, связанные общим контекстом или относящиеся к одному объекту: переключение режимов отображения, набор действий над записью, парные действия «Применить / Отмена». Группа делает связь между кнопками явной и экономит горизонтальное пространство.</p>
+    <div class="panel"><div class="row" id="usage-row"></div></div>
+  
+<div class="subsec" data-screen-label="Guidelines">
+    <h3>Рекомендации</h3>
+    <p class="desc">Группируйте только связанные действия. Не смешивайте типы и размеры внутри одной группы.</p>
+    <div class="guide">
+      <div class="g do">
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Делайте</span>
+        <div class="demo" id="do-demo"></div>
+        <p>Один тип, один размер, 2–5 связанных действий. Disabled — на всю группу.</p>
+      </div>
+      <div class="g dont">
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>Не делайте</span>
+        <div class="demo" id="dont-demo"></div>
+        <p>Не смешивайте типы и размеры и не блокируйте отдельную кнопку внутри группы.</p>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="section" data-screen-label="Anatomy">
+    <h2>Анатомия</h2>
+    <p class="desc">Собирается из компонентов <b>Button</b>, объединённых общим фоном (Accent) или обводкой (Outline). Соседние кнопки разделены вертикальной линией: у Accent — окрашенный шов, у Outline — общая обводка соседних кнопок. Внешние углы скруглены по радиусу кнопки, внутренние — прямые.</p>
+    <div class="panel">
+      <div class="row" style="gap:40px;">
+        <div class="blk"><p class="cap"><b>Accent</b> · общий фон, окрашенный шов</p><div id="anat-accent"></div></div>
+        <div class="blk"><p class="cap"><b>Outline</b> · общая обводка</p><div id="anat-outline"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ВАРИАНТЫ -->
+  <section class="section" data-screen-label="Variants">
+    <h2>Варианты</h2>
+    <p class="desc">Оси конфигурации компонента — каждая описана отдельным подразделом.</p>
+  
+<div class="subsec" data-screen-label="Types">
+    <h3>Типы</h3>
+    <p class="desc">Группа может содержать от двух до пяти кнопок одного типа и размера.</p>
+    <div class="panel">
+      <p class="subhead">Количество — от 2 до 5</p>
+      <div class="row" id="count-row"></div>
+      <p class="subhead mt">Со сплошным фоном (Accent) или обводкой (Outline)</p>
+      <div class="row" id="fill-row"></div>
+      <p class="subhead mt">С текстом и/или иконками</p>
+      <div class="row" id="content-row"></div>
+    </div>
+  </div>
+
+<div class="subsec" data-screen-label="SplitButton">
+    <h3>Split Button</h3>
+    <p class="desc">Отдельный вариант группы из двух кнопок: текстовой и стрелки. Клик по текстовой кнопке выполняет действие по умолчанию, клик по стрелке открывает контекстное меню с другими доступными действиями. Нажмите, чтобы открыть.</p>
+    <div class="panel">
+      <div class="row" id="split-row"></div>
+      <p class="subhead mt">Левая кнопка — с иконкой или без неё</p>
+      <div class="row" id="split-icon-row"></div>
+      <p class="subhead mt">Позиционирование меню определяется на этапе проектирования — справа или слева</p>
+      <div class="row" id="split-menu-row"></div>
+    </div>
+  </div>
+  
+<div class="subsec" data-screen-label="Orientation">
+    <h3>Ориентация <span class="addon">Расширение</span></h3>
+    <p class="desc">Помимо горизонтальной, группа поддерживает вертикальную раскладку — для компактных меню и боковых панелей, где действия выстраиваются в столбец. Скругление переносится на верхнюю и нижнюю кнопки, шов становится горизонтальным.</p>
+    <div class="panel"><div class="row" style="gap:40px; align-items:flex-start;" id="orient-row"></div></div>
+  </div>
+
+<div class="subsec" data-screen-label="Toggle">
+    <h3>Сегментированный выбор <span class="addon">Расширение</span></h3>
+    <p class="desc">Группа может работать как переключатель: кнопки сохраняют выбранное состояние, выбранный сегмент заливается акцентным цветом. Поддерживается одиночный выбор (как радиокнопки — всегда выбран ровно один) и множественный (как чекбоксы). Управляется атрибутом <code class="tok">aria-pressed</code>. Попробуйте нажать.</p>
+    <div class="panel">
+      <div class="row" style="gap:44px;">
+        <div class="blk"><p class="cap"><b>Одиночный выбор</b> · режим отображения</p><div id="toggle-single"></div></div>
+        <div class="blk"><p class="cap"><b>Множественный выбор</b> · форматирование</p><div id="toggle-multi"></div></div>
+      </div>
+    </div>
+  </div>
+
+<div class="subsec" data-screen-label="Fullwidth">
+    <h3>Fullwidth и равная ширина <span class="addon">Расширение</span></h3>
+    <p class="desc">Группа со свойством Fullwidth заполняет контейнер целиком; кнопки получают равную ширину. Удобно для нижних панелей действий в модальных окнах и на мобильных макетах.</p>
+    <div class="panel">
+      <div style="max-width:520px; display:flex; flex-direction:column; gap:18px;" id="fw-row"></div>
+    </div>
+  </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="section" data-screen-label="Sizes">
+    <h2>Размеры</h2>
+    <p class="desc">Все кнопки группы используют один размер, унаследованный от Button. Высота фиксирована, ширина зависит от контента.</p>
+    <div class="panel">
+      <div class="size-grid" id="size-grid"></div>
+    </div>
+  
+<div class="subsec" data-screen-label="Spec">
+    <h3>Спецификация</h3>
+    <p class="desc">Геометрия наследуется от Button; группа управляет только скруглением внешних углов и швом между кнопками.</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="spec-table">
+        <thead><tr><th>Параметр</th><th>Значение</th><th>Источник</th></tr></thead>
+        <tbody>
+          <tr><td>Высота кнопки</td><td class="num">40 / 32 / 24</td><td><code>--btn-h</code> (M / S / XS)</td></tr>
+          <tr><td>Радиус внешних углов</td><td class="num">8 / 8 / 6</td><td><code>--btn-radius</code></td></tr>
+          <tr><td>Радиус внутренних углов</td><td class="num">0</td><td>прямые</td></tr>
+          <tr><td>Сдвиг соседних кнопок</td><td class="num">−1</td><td>collapse общей обводки</td></tr>
+          <tr><td>Толщина шва</td><td class="num">1</td><td><code>box-shadow inset</code> / border</td></tr>
+          <tr><td>Кол-во кнопок</td><td class="num">2 – 5</td><td>правило компонента</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="section" data-screen-label="Content">
+    <h2>Контент</h2>
+    <p class="desc tight">Текстовые правила наследуются от <a class="crumb" style="display:inline; margin:0; padding:0;" href="../atoms/Buttons.html">Button</a>, но внутри группы есть дополнительные ограничения:</p>
+    <ul class="bullets" style="margin-bottom:26px;">
+      <li>текст кнопки — короткий глагол в повелительном наклонении («Сохранить», «Неделя»), без точки в конце;</li>
+      <li>держите метки одного типа сопоставимыми по длине — сильно разные по ширине кнопки делают группу визуально неровной;</li>
+      <li>не смешивайте в одной группе кнопки с текстом и чисто icon-only — выбирайте один формат для всей группы;</li>
+      <li>у каждой icon-only кнопки в группе должен быть <code class="tok">aria-label</code>, описывающий действие;</li>
+      <li>в Split Button текстовая кнопка называет действие по умолчанию, пункты меню стрелки — альтернативные действия, связанные с тем же объектом.</li>
+    </ul>
+  </section>
+
+  <!-- BEHAVIOR (STUB) -->
+  <section class="section" data-screen-label="Behavior">
+    <h2>Поведение</h2>
+    <p class="desc">Не применимо: специфического поведения (позиционирование, анимация, адаптивность) у компонента нет.</p>
+  </section>
+
+  <!-- STATES & BEHAVIOR -->
+  <section class="section" data-screen-label="States">
+    <h2>Состояния</h2>
+    <p class="desc">Кнопки внутри группы наследуют все свои свойства и ведут себя так же, как вне группы. Исключение — Outline: в группе у него <b>не меняется цвет обводки</b> на Hover / Active (иначе соседний шов «прыгал» бы).</p>
+    <div class="panel"><div class="matrix" id="states-matrix"></div></div>
+
+    <p class="subhead" style="margin:34px 0 16px;">Disabled — на всю группу целиком</p>
+    <p class="desc">Состояние Disabled распространяется на <b>всю группу</b>. В группе не может быть заблокирована только одна или часть кнопок — это нарушило бы единство блока.</p>
+    <div class="panel"><div class="row" id="disabled-row"></div></div>
+  </section>
+
+  <!-- ACCESSIBILITY (addon) -->
+  <section class="section" data-screen-label="A11y">
+    <h2>Доступность <span class="addon">Расширение</span></h2>
+    <p class="desc">Контейнер группы получает <code class="tok">role="group"</code> и осмысленный <code class="tok">aria-label</code> (например «Режим отображения»). В сегментированном выборе используется <code class="tok">aria-pressed</code> на кнопках; одиночный выбор удобно навигировать стрелками с roving&nbsp;tabindex. Split Button: текстовая кнопка — основное действие, у стрелки <code class="tok">aria-haspopup="menu"</code> и <code class="tok">aria-expanded</code>.</p>
+  </section>
+
+  <!-- TYPOGRAPHY (STUB) -->
+  <section class="section" data-screen-label="Typography">
+    <h2>Типографика</h2>
+    <p class="desc">Раздел требует ревизии: токены типографики компонента — в redline-таблице раздела «Для разработчиков».</p>
+  </section>
+
+  <!-- COLORS -->
+  <section class="section" data-screen-label="Colors">
+    <h2>Цвета</h2>
+    <p class="desc">Группа наследует цвета от <a class="crumb" style="display:inline; margin:0; padding:0;" href="../atoms/Buttons.html">Button</a> и добавляет собственные токены только для шва между кнопками.</p>
+    <div class="color-ref" id="color-ref"></div>
+  </section>
+
+  <!-- DEVELOPER HANDOFF -->
+  <section class="section" data-screen-label="Dev">
+    <h2>Для разработчиков</h2>
+    <p class="desc">Хендофф-пакет: точные размеры, эталонная структура DOM, поведение и рекомендуемый API. Не привязан к стеку — команда, которая собирает компонент на React, берёт отсюда нужное для вёрстки, не читая код этой страницы построчно.</p>
+
+    <p class="subhead">Точные размеры (redline)</p>
+    <p class="desc tight">Значения измерены на живом экземпляре компонента (<code class="tok">getComputedStyle</code>), источник — токены в <code class="tok">styles/button-group.css</code> и <code class="tok">styles/button.css</code>.</p>
+    <div class="panel" style="padding:8px 10px; margin-bottom:34px;">
+      <table class="dev-table" id="dev-spec-table">
+        <thead><tr><th>Параметр</th><th>M</th><th>S</th><th>XS</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="dev-intro">
+      <span class="req">Подключить (если переиспользуете этот CSS напрямую):</span>
+      <code class="tok">styles/typography.css</code>
+      <code class="tok">styles/colors.css</code>
+      <code class="tok">styles/radius.css</code>
+      <code class="tok">styles/button.css</code>
+      <code class="tok">styles/button-group.css</code>
+    </div>
+
+    <p class="subhead">Анатомия DOM <span class="req">— эталонная структура, имена классов условны, важны сами элементы и их роли/состояния</span></p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Разметка · HTML (эталонная реализация ДС)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-html"><span class="tk-cm">&lt;!-- горизонтальная группа Accent из кнопок Button --&gt;</span>
+<span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"btn-group btn-group--accent"</span> <span class="tk-attr">role=</span><span class="tk-val">"group"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Режим отображения"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--accent btn--m"</span><span class="tk-tag">&gt;</span>Список<span class="tk-tag">&lt;/button&gt;</span>
+  <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--accent btn--m"</span><span class="tk-tag">&gt;</span>Плитка<span class="tk-tag">&lt;/button&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span>
+
+<span class="tk-cm">&lt;!-- Split Button: основное действие + стрелка с меню --&gt;</span>
+<span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"btn-group btn-group--accent btn-group--split"</span> <span class="tk-attr">role=</span><span class="tk-val">"group"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--accent btn--m"</span><span class="tk-tag">&gt;</span>Сохранить<span class="tk-tag">&lt;/button&gt;</span>
+  <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--accent btn--m btn--icon-only"</span> <span class="tk-attr">aria-haspopup=</span><span class="tk-val">"menu"</span> <span class="tk-attr">aria-expanded=</span><span class="tk-val">"false"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/button&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"dropdown__menu"</span> <span class="tk-attr">role=</span><span class="tk-val">"menu"</span> <span class="tk-attr">hidden</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/div&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span>
+
+<span class="tk-cm">&lt;!-- Сегментированный выбор (toggle): aria-pressed на каждой кнопке --&gt;</span>
+<span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"btn-group btn-group--outline btn-group--toggle"</span> <span class="tk-attr">role=</span><span class="tk-val">"group"</span> <span class="tk-attr">aria-label=</span><span class="tk-val">"Форматирование"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--outline btn--m"</span> <span class="tk-attr">aria-pressed=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/button&gt;</span>
+  <span class="tk-tag">&lt;button</span> <span class="tk-attr">class=</span><span class="tk-val">"btn btn--outline btn--m"</span> <span class="tk-attr">aria-pressed=</span><span class="tk-val">"false"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/button&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span>
+
+<span class="tk-cm">&lt;!-- вертикальная + заблокированая --&gt;</span>
+<span class="tk-tag">&lt;div</span> <span class="tk-attr">class=</span><span class="tk-val">"btn-group btn-group--outline btn-group--vertical btn-group--disabled"</span> <span class="tk-attr">role=</span><span class="tk-val">"group"</span> <span class="tk-attr">aria-disabled=</span><span class="tk-val">"true"</span><span class="tk-tag">&gt;</span>…<span class="tk-tag">&lt;/div&gt;</span></code></pre>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">Поведение · псевдокод (framework-agnostic)</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-js"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-js"><span class="tk-cm">// 1. Кнопки внутри группы — обычные &lt;button&gt;, события click обрабатываются как обычно</span>
+
+<span class="tk-cm">// 2. Toggle / сегментированный выбор:</span>
+<span class="tk-cm">//    одиночный (radio-like) — клик по кнопке сбрасывает aria-pressed у всех соседей,</span>
+<span class="tk-cm">//    ставит true только нажатой; всегда ровно один выбранный</span>
+<span class="tk-cm">//    множественный (checkbox-like) — клик инвертирует только свой aria-pressed, независимо от соседей</span>
+
+<span class="tk-cm">// 3. Split Button:</span>
+<span class="tk-cm">//    клик по текстовой кнопке — выполняет действие по умолчанию напрямую</span>
+<span class="tk-cm">//    клик по стрелке — переключает aria-expanded и показывает/скрывает меню;</span>
+<span class="tk-cm">//    клик вне группы или Esc — закрывает меню</span>
+
+<span class="tk-cm">// 4. Disabled — только на всю группу целиком: класс .btn-group--disabled (pointer-events: none)</span>
+<span class="tk-cm">//    + aria-disabled="true" на контейнере; нельзя блокировать отдельную кнопку</span>
+
+<span class="tk-cm">// 5. Клавиатура: Tab переходит между кнопками внутри группы как обычные фокусируемые элементы</span>
+<span class="tk-cm">//    (без roving tabindex); :focus-visible — обычное поведение Button, поверх соседей (z-index)</span></code></pre>
+    </div>
+    <p class="dev-note">Это не готовый сниппет для вставки — алгоритм, который реализуется поверх вашего стека (рабочий референс на vanilla JS — функции <code class="tok">makeGroup</code> / <code class="tok">makeSplit</code> в коде этой страницы).</p>
+
+    <p class="subhead mt">Рекомендуемый API компонента (React)</p>
+    <p class="desc tight">Форма пропсов — предложение, а не обязательный контракт; адаптируйте под конвенции вашей кодовой базы.</p>
+    <div class="code-panel">
+      <div class="code-panel__head">
+        <span class="code-panel__name">ButtonGroup.types.ts</span>
+        <button type="button" class="code-panel__copy" data-copy-target="code-api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span class="copy-label">Копировать</span></button>
+      </div>
+      <pre><code id="code-api"><span class="tk-attr">type</span> BtnGroupType = <span class="tk-val">'accent'</span> | <span class="tk-val">'outline'</span> | <span class="tk-val">'transparent'</span>;
+<span class="tk-attr">type</span> BtnGroupSize = <span class="tk-val">'m'</span> | <span class="tk-val">'s'</span> | <span class="tk-val">'xs'</span>;
+
+<span class="tk-attr">interface</span> ButtonGroupProps {
+  type?: BtnGroupType;              <span class="tk-cm">// по умолчанию 'accent'</span>
+  size?: BtnGroupSize;              <span class="tk-cm">// по умолчанию 'm'</span>
+  orientation?: <span class="tk-val">'horizontal'</span> | <span class="tk-val">'vertical'</span>;
+  fullwidth?: <span class="tk-attr">boolean</span>;
+  disabled?: <span class="tk-attr">boolean</span>;              <span class="tk-cm">// блокирует всю группу, не часть</span>
+  label: <span class="tk-attr">string</span>;                    <span class="tk-cm">// aria-label контейнера (обязателен)</span>
+  children: React.ReactNode;        <span class="tk-cm">// Button[] (2–5)</span>
+}
+
+<span class="tk-attr">interface</span> SplitButtonProps {
+  type?: BtnGroupType;
+  size?: BtnGroupSize;
+  label: React.ReactNode;           <span class="tk-cm">// текст основной кнопки</span>
+  icon?: React.ReactNode;           <span class="tk-cm">// иконка слева от текста основной кнопки</span>
+  onAction(): <span class="tk-attr">void</span>;                  <span class="tk-cm">// клик по текстовой кнопке</span>
+  menuItems: { label: <span class="tk-attr">string</span>; icon?: React.ReactNode; onSelect(): <span class="tk-attr">void</span> }[];
+  menuAlign?: <span class="tk-val">'left'</span> | <span class="tk-val">'right'</span>;
+  disabled?: <span class="tk-attr">boolean</span>;
+}</code></pre>
+    </div>
+
+    <p class="subhead mt">Справочник классов и атрибутов</p>
+    <div class="panel" style="padding:8px 10px;">
+      <table class="dev-table">
+        <thead><tr><th>Класс / атрибут</th><th>На чём</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code class="tok">.btn-group</code></td><td>div</td><td class="dsc">Контейнер: <code class="tok">inline-flex</code>, кнопки-дети схлопывают радиусы и границы</td></tr>
+          <tr><td><code class="tok">.btn-group--accent / --outline / --transparent</code></td><td>div</td><td class="dsc">Тип (наследуется кнопками внутри)</td></tr>
+          <tr><td><code class="tok">.btn-group--vertical</code></td><td>div</td><td class="dsc">Столбец вместо строки; радиус переносится на верх/низ</td></tr>
+          <tr><td><code class="tok">.btn-group--fullwidth</code></td><td>div</td><td class="dsc">Заполняет контейнер; кнопки равной ширины (<code class="tok">flex:1</code>)</td></tr>
+          <tr><td><code class="tok">.btn-group--disabled</code></td><td>div</td><td class="dsc"><code class="tok">pointer-events:none</code> на всюй группе; парный <code class="tok">aria-disabled</code></td></tr>
+          <tr><td><code class="tok">.btn-group--toggle</code></td><td>div</td><td class="dsc">Сегментированный выбор; стилизует кнопки с <code class="tok">aria-pressed="true"</code></td></tr>
+          <tr><td><code class="tok">.btn-group--split</code></td><td>div</td><td class="dsc">Split Button: текстовая + icon-only стрелка</td></tr>
+          <tr><td><code class="tok">.dropdown / .dropdown__menu / .dropdown__item</code></td><td>div/button</td><td class="dsc">Контекстное меню Split Button</td></tr>
+          <tr><td><code class="tok">role="group" / aria-label</code></td><td>div</td><td class="dsc">Доступность: описывает назначение группы целиком</td></tr>
+          <tr><td><code class="tok">aria-pressed</code></td><td>button</td><td class="dsc">Состояние кнопки в сегментированном выборе</td></tr>
+          <tr><td><code class="tok">aria-haspopup / aria-expanded</code></td><td>button</td><td class="dsc">Стрелка Split Button — связь с контекстным меню</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <span>Дизайн-система · ButtonGroup</span>
+    <span>Accent · Outline — Split · Toggle · Vertical · Fullwidth</span>
+  </footer>
+</main>
+
+<script src="../../scripts/icons-data.js"></script>
+<script>
+/* ---------- icons ---------- */
+const ICONS = {
+  download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg>',
+  star:     '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 5.9 6.6.9-4.8 4.6 1.1 6.6L12 18.9 6.2 21l1.1-6.6L2.5 9.3l6.6-.9z"/></svg>',
+  plus:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  chevron:  '<svg class="btn__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+  bold:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5h7a3.5 3.5 0 0 1 0 7H7zM7 12h8a3.5 3.5 0 0 1 0 7H7z"/></svg>',
+  italic:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4h-9M14 20H5M15 4L9 20"/></svg>',
+  underline:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v6a6 6 0 0 0 12 0V4M4 21h16"/></svg>',
+  list:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>',
+  grid:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+};
+/* подставляем иконки из библиотеки ДС (bold/italic/underline — оставляем) */
+(function(){ const L=window.DS_ICONS||{}; const m={download:'download',star:'star-filled',plus:'add',list:'list-view-01',grid:'layout-grid-01'};
+  for(const k in m){ if(L[m[k]]) ICONS[k]=L[m[k]]; }
+  if(L['chevron-down']) ICONS.chevron=L['chevron-down'].replace('<svg','<svg class="btn__chevron"');
+  const setSvg=(sel,key)=>{ const el=document.querySelector(sel); if(el&&L[key]) el.outerHTML=L[key]; };
+  setSvg('.crumb svg','arrow-left'); setSvg('.g.do .tag svg','check'); setSvg('.g.dont .tag svg','close');
+})();
+
+/* ---------- single button factory ---------- */
+function makeBtn(o = {}) {
+  const { type='accent', size='m', text='Button', lead=null, trail=null,
+          chevron=false, iconOnly=null, pressed=null } = o;
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'btn btn--' + type + ' btn--' + size;
+  if (iconOnly) b.classList.add('btn--icon-only');
+  if (pressed !== null) b.setAttribute('aria-pressed', String(pressed));
+  let html = '';
+  if (iconOnly) html = ICONS[iconOnly];
+  else {
+    if (lead) html += ICONS[lead];
+    html += '<span class="btn__label">' + text + '</span>';
+    if (chevron) html += ICONS.chevron;
+    else if (trail) html += ICONS[trail];
+  }
+  b.innerHTML = html;
+  return b;
+}
+
+/* ---------- group factory ---------- */
+function makeGroup(o = {}) {
+  const { type='accent', size='m', items=[], vertical=false, fullwidth=false,
+          disabled=false, toggle=false, split=false, label=null } = o;
+  const g = document.createElement('div');
+  g.className = 'btn-group btn-group--' + type;
+  if (vertical)   g.classList.add('btn-group--vertical');
+  if (fullwidth)  g.classList.add('btn-group--fullwidth');
+  if (disabled)   g.classList.add('btn-group--disabled');
+  if (toggle)     g.classList.add('btn-group--toggle');
+  if (split)      g.classList.add('btn-group--split');
+  g.setAttribute('role', 'group');
+  if (label) g.setAttribute('aria-label', label);
+  if (disabled) g.setAttribute('aria-disabled', 'true');
+  items.forEach(it => g.appendChild(makeBtn({ type, size, ...it })));
+  return g;
+}
+
+/* ---------- dropdown for split button ---------- */
+const SPLIT_MENU = [
+  { label:'Сохранить как…', icon:'download' },
+  { label:'Создать копию',  icon:'plus' },
+  { label:'В избранное',    icon:'star' },
+];
+function makeSplit(o = {}) {
+  const { type='accent', size='m', lead=null, right=false, disabled=false, text='Button' } = o;
+  const wrap = document.createElement('div');
+  wrap.className = 'btn-group btn-group--' + type + ' btn-group--split dropdown' + (right ? ' dropdown--right' : '');
+  wrap.setAttribute('role', 'group');
+  if (disabled) wrap.classList.add('btn-group--disabled');
+
+  const main = makeBtn({ type, size, text, lead });
+  const chev = makeBtn({ type, size, iconOnly:'chevron' });
+  chev.setAttribute('aria-haspopup', 'menu');
+  chev.setAttribute('aria-expanded', 'false');
+
+  const menu = document.createElement('div');
+  menu.className = 'dropdown__menu'; menu.hidden = true; menu.setAttribute('role','menu');
+  SPLIT_MENU.forEach(it => {
+    const mi = document.createElement('button'); mi.type='button'; mi.className='dropdown__item';
+    mi.innerHTML = ICONS[it.icon] + '<span>' + it.label + '</span>';
+    mi.addEventListener('click', e => { e.stopPropagation(); close(); });
+    menu.appendChild(mi);
+  });
+  function onDoc(e){ if(!wrap.contains(e.target)) close(); }
+  function open(){ menu.hidden=false; wrap.classList.add('is-open'); chev.setAttribute('aria-expanded','true'); document.addEventListener('click', onDoc); }
+  function close(){ menu.hidden=true; wrap.classList.remove('is-open'); chev.setAttribute('aria-expanded','false'); document.removeEventListener('click', onDoc); }
+  chev.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); if(disabled) return; menu.hidden ? open() : close(); });
+
+  wrap.append(main, chev, menu);
+  return wrap;
+}
+
+/* ---------- helpers ---------- */
+function txt(n){ return Array.from({length:n}, () => ({ text:'Button' })); }
+function mount(id, node){ const el = document.getElementById(id); if(el) el.appendChild(node); }
+function mountAll(id, nodes){ const el = document.getElementById(id); nodes.forEach(n => el.appendChild(n)); }
+
+/* ---------- USAGE ---------- */
+mountAll('usage-row', [
+  makeGroup({ type:'accent', items:[{lead:'list',text:'Список'},{lead:'grid',text:'Плитка'}], label:'Режим отображения' }),
+  makeGroup({ type:'outline', items:[{text:'День'},{text:'Неделя'},{text:'Месяц'}], label:'Период' }),
+]);
+
+/* ---------- ANATOMY ---------- */
+mount('anat-accent', makeGroup({ type:'accent', items:txt(5) }));
+mount('anat-outline', makeGroup({ type:'outline', items:txt(5) }));
+
+/* ---------- TYPES: count ---------- */
+mountAll('count-row', [2,3,4,5].map(n => makeGroup({ type:'accent', items:txt(n) })));
+/* fill */
+mountAll('fill-row', [
+  makeGroup({ type:'accent', items:txt(3) }),
+  makeGroup({ type:'outline', items:txt(3) }),
+]);
+/* content */
+mountAll('content-row', [
+  makeGroup({ type:'accent', items:[{text:'Button'},{text:'Button'}] }),
+  makeGroup({ type:'accent', items:[{lead:'download',text:'Button'},{lead:'star',text:'Button'}] }),
+  makeGroup({ type:'accent', items:[{iconOnly:'download'},{iconOnly:'star'},{iconOnly:'plus'}] }),
+]);
+
+/* ---------- SPLIT ---------- */
+mountAll('split-row', [
+  makeSplit({ type:'accent' }),
+  makeSplit({ type:'outline' }),
+]);
+mountAll('split-icon-row', [
+  makeSplit({ type:'accent', lead:'download' }),
+  makeSplit({ type:'accent' }),
+]);
+mountAll('split-menu-row', [
+  makeSplit({ type:'accent', right:false }),
+  makeSplit({ type:'accent', right:true }),
+]);
+
+/* ---------- ORIENTATION ---------- */
+mountAll('orient-row', [
+  makeGroup({ type:'accent', vertical:true, items:[{lead:'download',text:'Скачать'},{lead:'star',text:'В избранное'},{lead:'plus',text:'Создать копию'}] }),
+  makeGroup({ type:'outline', vertical:true, items:[{text:'Профиль'},{text:'Настройки'},{text:'Выйти'}] }),
+]);
+
+/* ---------- TOGGLE ---------- */
+(function(){
+  // single select (radio-like): exactly one pressed
+  const single = makeGroup({ type:'outline', toggle:true, label:'Режим отображения',
+    items:[{iconOnly:'list',pressed:true},{iconOnly:'grid',pressed:false}] });
+  single.querySelectorAll('.btn').forEach(b => b.addEventListener('click', () => {
+    single.querySelectorAll('.btn').forEach(x => x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+  }));
+  mount('toggle-single', single);
+
+  // multi select (checkbox-like)
+  const multi = makeGroup({ type:'outline', toggle:true, label:'Форматирование',
+    items:[{iconOnly:'bold',pressed:true},{iconOnly:'italic',pressed:false},{iconOnly:'underline',pressed:false}] });
+  multi.querySelectorAll('.btn').forEach(b => b.addEventListener('click', () => {
+    b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true' ? 'false' : 'true');
+  }));
+  mount('toggle-multi', multi);
+})();
+
+/* ---------- FULLWIDTH ---------- */
+mountAll('fw-row', [
+  makeGroup({ type:'accent', fullwidth:true, items:[{text:'Отмена'},{text:'Применить'}] }),
+  makeGroup({ type:'outline', fullwidth:true, items:[{text:'Day'},{text:'Week'},{text:'Month'},{text:'Year'}] }),
+]);
+
+/* ---------- STATES MATRIX ---------- */
+(function(){
+  const m = document.getElementById('states-matrix');
+  ['','Default','Hover','Active'].forEach((h,i) => {
+    const d = document.createElement('div');
+    d.className = i===0 ? 'rowname' : 'col-head'; d.textContent = h; m.appendChild(d);
+  });
+  function block(type){
+    const g = document.createElement('div'); g.className='grouphdr'; g.textContent = type[0].toUpperCase()+type.slice(1); m.appendChild(g);
+    const name = document.createElement('div'); name.className='rowname'; name.textContent='Кнопка'; m.appendChild(name);
+    [null,'is-hover','is-active'].forEach(force => {
+      const cell = document.createElement('div'); cell.className='cell';
+      const grp = makeGroup({ type, items:[{text:'Button'},{text:'Button'},{text:'Button'}] });
+      if (force) grp.children[1].classList.add(force);  // middle button shows the state
+      cell.appendChild(grp); m.appendChild(cell);
+    });
+  }
+  block('accent');
+  block('outline');
+})();
+
+/* ---------- DISABLED ---------- */
+mountAll('disabled-row', [
+  makeGroup({ type:'accent', disabled:true, items:txt(3) }),
+  makeGroup({ type:'outline', disabled:true, items:txt(3) }),
+]);
+
+/* ---------- SIZES ---------- */
+(function(){
+  const grid = document.getElementById('size-grid');
+  [['M','40','m'],['S','32','s'],['XS','24','xs']].forEach(([name,h,sz]) => {
+    const tag = document.createElement('div'); tag.className='sz-tag';
+    tag.innerHTML = name + '<span>'+h+' px</span>'; grid.appendChild(tag);
+    const cell = document.createElement('div'); cell.style.display='flex'; cell.style.gap='28px'; cell.style.flexWrap='wrap'; cell.style.alignItems='center';
+    cell.appendChild(makeGroup({ type:'accent', size:sz, items:[{lead:'download',text:'Button'},{text:'Button'},{text:'Button'}] }));
+    cell.appendChild(makeSplit({ type:'outline', size:sz }));
+    grid.appendChild(cell);
+  });
+})();
+
+/* ---------- GUIDELINES ---------- */
+mount('do-demo', makeGroup({ type:'outline', items:[{text:'День'},{text:'Неделя'},{text:'Месяц'}] }));
+(function(){
+  // bad: mixed types + sizes
+  const bad = document.createElement('div'); bad.className='btn-group btn-group--accent'; bad.setAttribute('role','group');
+  bad.appendChild(makeBtn({ type:'accent', size:'m', text:'Button' }));
+  bad.appendChild(makeBtn({ type:'outline', size:'s', text:'Button' }));
+  const b3 = makeBtn({ type:'accent', size:'m', text:'Button' }); b3.disabled = true; bad.appendChild(b3);
+  mount('dont-demo', bad);
+})();
+
+/* ---------- COLORS REFERENCE ---------- */
+(function(){
+  const probe = document.createElement('span');
+  probe.style.cssText = 'position:absolute;left:-9999px;width:0;height:0;';
+  document.body.appendChild(probe);
+  function resolveHex(cssValue){
+    probe.style.backgroundColor = 'transparent';
+    probe.style.backgroundColor = cssValue;
+    const v = getComputedStyle(probe).backgroundColor;
+    let r,g,b,a=1, m=v.match(/color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/i);
+    if (m){ r=+m[1]*255; g=+m[2]*255; b=+m[3]*255; if(m[4]!==undefined) a=+m[4]; }
+    else { const n=v.match(/[\d.]+/g); if(!n) return cssValue; r=+n[0]; g=+n[1]; b=+n[2]; if(n[3]!==undefined) a=+n[3]; }
+    const hx=n=>Math.round(n).toString(16).padStart(2,'0').toUpperCase();
+    let s='#'+hx(r)+hx(g)+hx(b); if(a<1) s+=' · '+Math.round(a*100)+'%'; return s;
+  }
+  const groups = [
+    { name:'Accent', rows:[
+      ['Заливка', '--primary'],
+      ['Заливка (hover)', '--primary-dark'],
+      ['Шов между кнопками', '--btng-divider-accent'],
+      ['Шов (disabled)', '--btng-divider-disabled'],
+    ]},
+    { name:'Outline', rows:[
+      ['Обводка', '--primary'],
+      ['Текст', '--primary'],
+    ]},
+    { name:'Disabled', rows:[
+      ['Заливка / обводка', '--disabled'],
+      ['Текст (Outline/Transparent)', '--text-inactive'],
+    ]},
+    { name:'Toggle (нажато)', rows:[
+      ['Заливка', '--primary'],
+      ['Текст', '--text-on-dark'],
+    ]},
+  ];
+  const root = document.getElementById('color-ref');
+  if(!root) return;
+  root.innerHTML = groups.map(g=>`
+    <section class="cref-group">
+      <h3>${g.name}</h3>
+      <div class="cref-rows">
+        ${g.rows.map(([role,tok])=>`
+          <div class="cref-row">
+            <div class="cref-sw"><div class="cf" style="background:var(${tok});"></div></div>
+            <div class="cref-meta"><p class="role">${role}</p><p class="tname">${tok}</p></div>
+            <div class="cref-hex">${resolveHex('var('+tok+')')}</div>
+          </div>`).join('')}
+      </div>
+    </section>`).join('');
+  probe.remove();
+})();
+
+/* ---------- DEV: redline measured from live component ---------- */
+(function(){
+  const host = document.createElement('div');
+  host.style.cssText = 'position:absolute;left:-9999px;top:0;';
+  document.body.appendChild(host);
+  function measure(sz){
+    const g = makeGroup({ type:'accent', size:sz, items:[{text:'A'},{text:'B'}] });
+    host.appendChild(g);
+    const btn = g.children[0];
+    const cs = getComputedStyle(btn);
+    return { h:cs.height, rad:cs.borderTopLeftRadius, seam:getComputedStyle(g.children[1]).marginLeft };
+  }
+  const sizes = ['m','s','xs'];
+  const d = {}; sizes.forEach(sz => d[sz] = measure(sz));
+  host.remove();
+  const r = n => Math.round(n*10)/10;
+  const px = v => { const n = parseFloat(v); return isNaN(n) ? v : r(n)+' px'; };
+  const rows = [
+    ['Высота кнопки', z => px(d[z].h)],
+    ['Радиус внешних углов', z => px(d[z].rad)],
+    ['Сдвиг соседних кнопок (collapse шва)', z => px(d[z].seam)],
+  ];
+  const tb = document.querySelector('#dev-spec-table tbody');
+  if (tb) tb.innerHTML = rows.map(([label,fn]) =>
+    `<tr><td>${label}</td><td class="rt-num">${fn('m')}</td><td class="rt-num">${fn('s')}</td><td class="rt-num">${fn('xs')}</td></tr>`
+  ).join('');
+})();
+
+/* ---------- DEV: copy-to-clipboard on code panels ---------- */
+(function(){
+  document.querySelectorAll('.code-panel__copy').forEach(btn => {
+    const target = document.getElementById(btn.dataset.copyTarget);
+    if (!target) return;
+    const label = btn.querySelector('.copy-label');
+    btn.addEventListener('click', async () => {
+      const text = target.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (e2) {}
+        ta.remove();
+      }
+      btn.classList.add('is-copied');
+      const prev = label.textContent;
+      label.textContent = 'Скопировано';
+      setTimeout(() => { btn.classList.remove('is-copied'); label.textContent = prev; }, 1600);
+    });
+  });
+})();
+
+/* ---------- PLAYGROUND ---------- */
+(function(){
+  const state = {
+    variant:'standard', type:'accent', size:'m', count:3,
+    orientation:'horizontal', content:'text', state:'default', fullwidth:false,
+  };
+  const controls = document.getElementById('pg-controls');
+  const preview  = document.getElementById('pg-preview');
+  const codeEl   = document.getElementById('pg-code');
+
+  function seg(label, options, getCur, onPick){
+    const wrap=document.createElement('div'); wrap.className='ctl';
+    const l=document.createElement('div'); l.className='lbl'; l.textContent=label; wrap.appendChild(l);
+    const s=document.createElement('div'); s.className='seg';
+    options.forEach(([val,t])=>{
+      const b=document.createElement('button'); b.type='button'; b.textContent=t;
+      b.setAttribute('aria-selected', String(val===getCur()));
+      b.addEventListener('click',()=>{ onPick(val); [...s.children].forEach(c=>c.setAttribute('aria-selected', String(c===b))); render(); });
+      s.appendChild(b);
+    });
+    wrap.appendChild(s); return wrap;
+  }
+  function select(label, options, getCur, onPick){
+    const wrap=document.createElement('div'); wrap.className='ctl';
+    const l=document.createElement('div'); l.className='lbl'; l.textContent=label; wrap.appendChild(l);
+    const box=document.createElement('div'); box.className='pg-select';
+    const sel=document.createElement('select');
+    options.forEach(([val,t])=>{ const o=document.createElement('option'); o.value=val; o.textContent=t; if(String(val)===String(getCur())) o.selected=true; sel.appendChild(o); });
+    sel.addEventListener('change',()=>{ onPick(sel.value); render(); });
+    box.appendChild(sel); wrap.appendChild(box); return wrap;
+  }
+  function sw(label, key){
+    const t=document.createElement('button'); t.type='button'; t.className='toggle'; t.dataset.key=key;
+    t.setAttribute('aria-pressed', String(state[key]));
+    t.innerHTML='<span class="sw"></span><span>'+label+'</span>';
+    t.addEventListener('click',()=>{ state[key]=!state[key]; t.setAttribute('aria-pressed',String(state[key])); render(); });
+    return t;
+  }
+
+  controls.appendChild(select('Вариант', [['standard','Standard'],['split','Split Button'],['toggle','Toggle / Segmented']], ()=>state.variant, v=>state.variant=v));
+  controls.appendChild(select('Тип', [['accent','Accent'],['outline','Outline'],['transparent','Transparent']], ()=>state.type, v=>state.type=v));
+  controls.appendChild(seg('Размер', [['m','M'],['s','S'],['xs','XS']], ()=>state.size, v=>state.size=v));
+  controls.appendChild(select('Кол-во кнопок', [['2','2'],['3','3'],['4','4'],['5','5']], ()=>state.count, v=>state.count=+v));
+  controls.appendChild(seg('Ориентация', [['horizontal','Гориз.'],['vertical','Верт.']], ()=>state.orientation, v=>state.orientation=v));
+  controls.appendChild(select('Контент', [['text','Текст'],['icon-text','Иконка + текст'],['icon','Только иконки']], ()=>state.content, v=>state.content=v));
+  controls.appendChild(select('Состояние', [['default','Default'],['disabled','Disabled']], ()=>state.state, v=>state.state=v));
+
+  const compWrap=document.createElement('div'); compWrap.className='ctl';
+  const cl=document.createElement('div'); cl.className='lbl'; cl.textContent='Опции'; compWrap.appendChild(cl);
+  const toggles=document.createElement('div'); toggles.className='toggles';
+  toggles.appendChild(sw('Fullwidth','fullwidth'));
+  compWrap.appendChild(toggles); controls.appendChild(compWrap);
+
+  function buildItems(){
+    const n = state.count;
+    const arr = [];
+    for (let i=0;i<n;i++){
+      if (state.content==='icon') arr.push({ iconOnly: ['download','star','plus','list','grid'][i%5] });
+      else if (state.content==='icon-text') arr.push({ lead:['download','star','plus','list','grid'][i%5], text:'Button' });
+      else arr.push({ text:'Button' });
+    }
+    return arr;
+  }
+
+  function render(){
+    preview.innerHTML='';
+    const disabled = state.state==='disabled';
+    const vertical = state.orientation==='vertical';
+    let node, codeClasses;
+
+    if (state.variant==='split'){
+      node = makeSplit({ type:state.type, size:state.size, lead: state.content==='text' ? null : 'download', disabled });
+      if (state.fullwidth) node.classList.add('btn-group--fullwidth');
+      codeClasses = 'btn-group btn-group--'+state.type+' btn-group--split'+(state.fullwidth?' btn-group--fullwidth':'')+(disabled?' btn-group--disabled':'');
+    } else if (state.variant==='toggle'){
+      node = makeGroup({ type:'outline', size:state.size, toggle:true, vertical, disabled,
+        items: buildItems().map((it,i)=>({ ...it, pressed: i===0 })) });
+      node.querySelectorAll('.btn').forEach(b => b.addEventListener('click', ()=>{
+        node.querySelectorAll('.btn').forEach(x=>x.setAttribute('aria-pressed','false'));
+        b.setAttribute('aria-pressed','true');
+      }));
+      codeClasses = 'btn-group btn-group--outline btn-group--toggle'+(vertical?' btn-group--vertical':'')+(disabled?' btn-group--disabled':'');
+    } else {
+      node = makeGroup({ type:state.type, size:state.size, vertical, fullwidth:state.fullwidth, disabled, items:buildItems() });
+      codeClasses = 'btn-group btn-group--'+state.type+(vertical?' btn-group--vertical':'')+(state.fullwidth?' btn-group--fullwidth':'')+(disabled?' btn-group--disabled':'');
+    }
+    preview.appendChild(node);
+    codeEl.innerHTML = '<code>&lt;div class="'+codeClasses+'" role="group"&gt;</code>';
+  }
+  render();
+})();
+</script>
+<script src="../../scripts/ds-nav.js"></script>
+<script src="../../scripts/ds-toc.js"></script>
+<script src="../../scripts/pg-kit.js"></script>
+</body>
+</html>
